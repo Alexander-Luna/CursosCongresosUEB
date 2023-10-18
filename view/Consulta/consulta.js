@@ -6,17 +6,17 @@ $(document).ready(function(){
     $("#divpanel").hide();
 });
 $(document).on("click","#btnconsultar", function(){
-    var usu_dni = $("#usu_dni").val();
-    if (usu_dni.length == 0){
+    var usu_ci = $("#usu_ci").val();
+    if (usu_ci.length == 0){
         Swal.fire({
             title: 'Error!',
-            text: 'DNI Vacio',
+            text: 'ci Vacio',
             icon: 'error',
             confirmButtonText: 'Aceptar'
         })
     }else{
         
-        $.post("../../controller/usuario.php?op=consulta_dni",{usu_dni : usu_dni}, function (data) {
+        $.post("../../controller/usuario.php?op=consulta_ci",{usu_ci : usu_ci}, function (data) {
             if (data.length>0){
                 data = JSON.parse(data);
 

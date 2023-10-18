@@ -10,7 +10,7 @@
         protected function Conexion(){
             try {
                 /*TODO: Cadena de Conexion QA*/
-				$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=congresosphp","root","");
+				$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=cursoscongresosueb","root","");
                 /*TODO: Cadena de Conexion Produccion*/
 			return $conectar;
 			} catch (Exception $e) {
@@ -28,7 +28,7 @@
         /*TODO: Ruta principal del proyecto */
         public static function ruta(){
             //QA
-            return "http://localhost/congresosuebpuro/";
+            return "http://localhost/cursoscongresosueb/";
             //Produccion
             //return "http://sac.ueb.congresos.com.ec/";
         }
