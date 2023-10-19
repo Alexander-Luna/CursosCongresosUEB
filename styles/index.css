@@ -1,0 +1,314 @@
+/* Navbar */
+.nav {
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(248, 248, 248);
+    color: #000000;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo_container {
+    width: 100px;
+    height: 75px;
+}
+
+.nav_ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1em;
+    justify-content: flex-end;
+}
+
+.nav_li {
+    /* Eliminar las rayas debajo de las opciones de navegación */
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* Aumentar el tamaño de la letra de las opciones */
+.nav_li a {
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Agregar estilo al hacer hover en las opciones */
+.nav_li a:hover {
+    color: #1e90ff;
+    /* Azul oscuro al hacer hover */
+}
+
+/* Estilo para la imagen en el logo_container */
+.logo_container img {
+    max-width: 100%;
+}
+
+/*Main Container*/
+.main_container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .main_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 0;
+        width: 768;
+    }
+}
+
+/* Estilos generales */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.carousel {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    height: 600px;
+}
+
+.slide {
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 7px #666;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-hidden {
+    display: none;
+}
+
+.arrow {
+    position: absolute;
+    filter: drop-shadow(0px 0px 5px #555);
+    width: 2rem;
+    height: 2rem;
+    color: white;
+}
+
+.arrow:hover {
+    cursor: pointer;
+}
+
+.arrow-left {
+    left: 1rem;
+}
+
+.arrow-right {
+    right: 1rem;
+}
+
+.indicators {
+    display: flex;
+    position: absolute;
+    bottom: 1rem;
+}
+
+.indicator {
+    background-color: white;
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 100%;
+    border: none;
+    outline: none;
+    box-shadow: 0px 0px 5px #555;
+    margin: 0 0.2rem;
+    cursor: pointer;
+}
+
+.indicator-inactive {
+    background-color: grey;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        max-width: 768px;
+    }
+
+    .carousel {
+        width: 100%;
+        height: 400px;
+    }
+
+    .slide {
+        border-radius: 0.25rem;
+    }
+
+    .arrow {
+        display: none;
+    }
+}
+
+/* Estilos CSS para tu footer */
+#pie_pagina {
+    width: 100%;
+    background-color: rgb(248, 248, 248);
+}
+
+#grupo_1 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    padding: 45px 0px;
+}
+
+.box figure {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box figure img {
+    width: 250px;
+}
+
+.box h2 {
+    color: #000;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+.box p {
+    color: #000;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.red_social a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: #fff;
+    margin-right: 10px;
+    background-color: #0d2033;
+    transition: all 300ms ease;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    #grupo_1 {
+        width: 90%;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 30px;
+        padding: 35px 0px;
+    }
+
+    .box figure img {
+        width: 50%;
+        height: auto;
+    }
+}
+
+/* CarEvent */
+.card {
+    --bg: #f7f7f8;
+    --hover-bg: #ffffff;
+    --hover-text: #000000;
+    max-width: 35ch;
+    text-align: center;
+    background: var(--bg);
+    padding: 1.5em;
+    padding-block: 1.8em;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    transition: .3s cubic-bezier(.6, .4, 0, 1), transform .15s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.card__body {
+    color: #464853;
+    line-height: 1.5em;
+    font-size: 20px;
+}
+
+.card> :not(span) {
+    transition: .3s cubic-bezier(.6, .4, 0, 1);
+}
+
+.card>strong {
+    display: block;
+    font-size: 1.2rem;
+    letter-spacing: -.035em;
+}
+
+.card span {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--hover-text);
+    border-radius: 5px;
+    font-weight: bold;
+    top: 100%;
+    transition: all .3s cubic-bezier(.6, .4, 0, 1);
+}
+
+.card:hover span {
+    top: 0;
+    font-size: 1.2em;
+}
+
+.card:hover {
+    background: var(--hover-bg);
+}
+
+.card:hover>div,
+.card:hover>strong {
+    opacity: 0;
+}
+
+.card a {
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 100px;
+}

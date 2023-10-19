@@ -1,94 +1,116 @@
-<?php
-  /*TODO: Llamando Cadena de Conexion */
-  require_once("config/conexion.php");
-
-  if(isset($_POST["enviar"]) and $_POST["enviar"]=="si"){
-    require_once("models/Usuario.php");
-    /*TODO: Inicializando Clase */
-    $usuario = new Usuario();
-    $usuario->login();
-  }
-?>
 <!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="twitter:site" content="@themepixels">
-    <meta name="twitter:creator" content="@themepixels">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Bracket">
-    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="twitter:image" content="http://themepixels.me/bracket/img/bracket-social.png">
-    <meta property="og:url" content="http://themepixels.me/bracket">
-    <meta property="og:title" content="Bracket">
-    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta property="og:image" content="http://themepixels.me/bracket/img/bracket-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/bracket/img/bracket-social.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="600">
-    <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="author" content="ThemePixels">
-    <link href="public/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="public/lib/Ionicons/css/ionicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="public/css/bracket.css">
-    <title>EMPRESA::Acceso</title>
-  </head>
+<html lang="en">
 
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="scripts/index.js" defer></script>
+</head>
 
-    <div class="d-flex align-items-center justify-content-center bg-br-primary ht-100v">
-      <form action="" method="post">
-        <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white rounded shadow-base">
-          <!-- Capturando mensaje de error -->
-          <?php
-            if (isset($_GET["m"])){
-              switch($_GET["m"]){
-                case "1";
-                  ?>
-                    <div class="alert alert-warning" role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                      <strong class="d-block d-sm-inline-block-force">Error!</strong> Datos Incorrectos
-                    </div>
-                  <?php
-                break;
+<body>
+    <header>
+        <nav class="nav">
+            <div class="logo_container">
+                <img id="logo" src="assets/logo_ueb.png" alt="Logo">
+            </div>
+            <ul class="nav_ul">
+                <li><a class="nav_li" href="index.php">Inicio</a></li>
+                <li><a class="nav_li" href="eventos.php">Eventos</a></li>
+                <li><i class="fa-solid fa-user"></i><a class="nav_li" href="login.php"> Login</a></li>
+                <!-- <li><a class="nav_li" href="registro.php">Registrarse</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    <main class="main_container">
+        <section>
+            <div class="carousel" onmouseover="stopAutoSlide()" onmouseout="startAutoSlide()">
+                <span class="arrow arrow-left" onclick="prevSlide()">&larr;</span>
+                <div id="slides" class="slides">
+                    <!-- Las imágenes se cargarán dinámicamente desde JavaScript -->
+                </div>
+                <span class="arrow arrow-right" onclick="nextSlide()">&rarr;</span>
+                <div class="indicators" id="indicators">
+                    <!-- Los indicadores se generarán dinámicamente desde JavaScript -->
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="card">
+                <div class="icon">
+                    <img class="img" src="assets/congreso.png" alt="congresos" />
+                </div>
+                <strong>I Congreso Internacional</strong>
+                <div class="card__body">
+                    Registrate y adquiere todo el conocimiento.
+                </div>
+                <span>
+                    <a href="login.php">Registrarse</a>
+                </span>
+            </div>
 
-                case "2";
-                  ?>
-                    <div class="alert alert-warning" role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                      <strong class="d-block d-sm-inline-block-force">Error!</strong> Campos vacios
-                    </div>
-                  <?php
-                break;
-              }
-            }
-          ?>
-
-          <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">[</span> EMPRESA <span class="tx-normal">]</span></div>
-
-          <div class="tx-center mg-b-30">Certificados y Diplomas</div>
-
-          <div class="form-group">
-              <input type="text" id="usu_correo" name="usu_correo" class="form-control" placeholder="Ingrese Correo Electronico">
-          </div>
-          <div class="form-group">
-              <input type="password" id="usu_pass" name="usu_pass" class="form-control" placeholder="Ingrese Contraseña">
-          </div>
-          <input type="hidden" name="enviar" class="form-control" value="si">
-          <button type="submit" class="btn btn-info btn-block">Acceder</button>
+            <div class="card">
+                <div class="icon">
+                    <img class="img" src="assets/congreso.png" alt="congresos" />
+                </div>
+                <strong>I Curso Internacional</strong>
+                <div class="card__body">
+                    Registrate y adquiere todo el conocimiento.
+                </div>
+                <span>
+                    <a href="login.php">Registrarse</a>
+                </span>
+            </div>
+        </section>
+    </main>
+    <Footer id="pie_pagina">
+        <div id="grupo_1">
+            <div class="box">
+                <figure>
+                    <a href="#">
+                        <img src="assets/logo_ueb.png" alt="Descripción de la imagen" />
+                    </a>
+                </figure>
+            </div>
+            <div class="box">
+                <h2>CONTACTOS</h2>
+                <p>
+                    <i class="fa-solid fa-phone"></i> Tel: (593) 32206010 - 32206014
+                </p>
+                <p>
+                    <i class="fa-brands fa-whatsapp"></i> (+593) 987654321
+                </p>
+                <p>
+                    <i class="fa-solid fa-envelope"></i> ponercorreodelaueb
+                </p>
+                <p>
+                    <i class="fa-solid fa-location-dot"></i> Av. Ernesto Che Guevara s/n y Av. Gabriel Secaira
+                </p>
+            </div>
+            <div class="box">
+                <h2>SIGUENOS</h2>
+                <div class="red_social">
+                    <a href="https://facebook.com" target="_blank" rel="noreferrer">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noreferrer">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noreferrer">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCml4cc2U6oWm7jG9iayK3UA/videos" target="_blank" rel="noreferrer">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    <a href="https://whatsapp.com" target="_blank" rel="noreferrer">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-      </form>
-    </div>
+    </Footer>
+</body>
 
-    <script src="public/lib/jquery/jquery.js"></script>
-    <script src="public/lib/popper.js/popper.js"></script>
-    <script src="public/lib/bootstrap/bootstrap.js"></script>
-
-  </body>
 </html>

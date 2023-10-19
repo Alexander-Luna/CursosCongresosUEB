@@ -28,7 +28,7 @@
         /*TODO: Ruta principal del proyecto */
         public static function ruta(){
             //QA
-            return "http://localhost/congresosuebpuro/";
+            return "http://localhost/CursosCongresosUEB/";
             //Produccion
             //return "http://sac.ueb.congresos.com.ec/";
         }
