@@ -10,7 +10,7 @@
                     <input type="hidden" name="cur_id" id="cur_id"/>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label">Categoria: <span class="tx-danger">*</span></label>
+                            <label class="form-control-label">Facultad: <span class="tx-danger">*</span></label>
                             <select class="form-control select2" style="width:100%" name="cat_id" id="cat_id" data-placeholder="Seleccione">
                                 <option label="Seleccione"></option>
 

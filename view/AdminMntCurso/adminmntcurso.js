@@ -45,7 +45,7 @@ $(document).ready(function(){
         dropdownParent: $('#modalmantenimiento')
     });
 
-    combo_categoria();
+    combo_facultad();
 
     combo_instructor();
 
@@ -142,13 +142,13 @@ function imagen(cur_id){
 function nuevo(){
     $('#lbltitulo').html('Nuevo Registro');
     $('#cursos_form')[0].reset();
-    combo_categoria();
+    combo_facultad();
     combo_instructor();
     $('#modalmantenimiento').modal('show');
 }
 
-function combo_categoria(){
-    $.post("../../controller/categoria.php?op=combo", function (data) {
+function combo_facultad(){
+    $.post("../../controller/facultad.php?op=combo", function (data) {
         $('#cat_id').html(data);
     });
 }

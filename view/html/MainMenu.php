@@ -44,10 +44,10 @@
             </div>
           </a>
 
-          <a href="../AdminMntCategoria/" class="br-menu-link">
+          <a href="../AdminMntFacultad/" class="br-menu-link">
             <div class="br-menu-item">
               <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
-              <span class="menu-item-label">Mnt. Categoria</span>
+              <span class="menu-item-label">Facultad</span>
             </div>
           </a>
 

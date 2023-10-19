@@ -24,6 +24,7 @@
                         $_SESSION["usu_ape"]=$resultado["usu_ape"];
                         $_SESSION["usu_correo"]=$resultado["usu_correo"];
                         $_SESSION["rol_id"]=$resultado["rol_id"];
+                        $_SESSION["usu_aclevel"]=$resultado["usu_aclevel"];
                         /*TODO: Si todo esta correcto indexar en home */
                         header("Location:".Conectar::ruta()."view/UsuHome/");
                         exit();
@@ -52,6 +53,7 @@
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
                 tm_usuario.usu_ci,
+                tm_usuario.aclevel_id,
                 tm_instructor.inst_id,
                 tm_instructor.inst_nom,
                 tm_instructor.inst_apep,
@@ -84,6 +86,7 @@
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
                 tm_usuario.usu_ci,
+                tm_usuario.aclevel_id,
                 tm_instructor.inst_id,
                 tm_instructor.inst_nom,
                 tm_instructor.inst_apep,
@@ -117,6 +120,7 @@
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
                 tm_usuario.usu_ci,
+                tm_usuario.aclevel_id,
                 tm_instructor.inst_id,
                 tm_instructor.inst_nom,
                 tm_instructor.inst_apep,
@@ -149,6 +153,7 @@
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
+                tm_usuario.aclevel_id,
                 tm_curso.cur_img,
                 tm_instructor.inst_id,
                 tm_instructor.inst_nom,
@@ -200,7 +205,7 @@
         }
 
         /*TODO: Actualizar la informacion del perfil del usuario segun ID */
-        public function update_usuario_perfil($usu_id,$usu_nom,$usu_apep,$usu_apem,$usu_pass,$usu_sex,$usu_telf){
+        public function update_usuario_perfil($usu_id,$usu_nom,$usu_apep,$usu_apem,$usu_pass,$usu_sex,$usu_telf,$aclevel_id){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE tm_usuario 
@@ -210,7 +215,8 @@
                     usu_apem = ?,
                     usu_pass = ?,
                     usu_sex = ?,
-                    usu_telf = ?
+                    usu_telf = ?,
+                    aclevel_id = ?
                 WHERE
                     usu_id = ?";
             $sql=$conectar->prepare($sql);
@@ -221,15 +227,16 @@
             $sql->bindValue(5, $usu_sex);
             $sql->bindValue(6, $usu_telf);
             $sql->bindValue(7, $usu_id);
+            $sql->bindValue(8, $aclevel_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
 
         /*TODO: Funcion para insertar usuario */
-        public function insert_usuario($usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$usu_telf,$rol_id,$usu_ci){
+        public function insert_usuario($usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$usu_telf,$rol_id,$usu_ci,$aclevel_id){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="INSERT INTO tm_usuario (usu_id,usu_nom,usu_apep,usu_apem,usu_correo,usu_pass,usu_sex,usu_telf,rol_id,usu_ci,fech_crea, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,now(),'1');";
+            $sql="INSERT INTO tm_usuario (usu_id,usu_nom,usu_apep,usu_apem,usu_correo,usu_pass,usu_sex,usu_telf,rol_id,usu_ci,fech_crea, est,aclevel_id) VALUES (NULL,?,?,?,?,?,?,?,?,?,now(),'1',?);";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usu_nom);
             $sql->bindValue(2, $usu_apep);
@@ -240,12 +247,13 @@
             $sql->bindValue(7, $usu_telf);
             $sql->bindValue(8, $rol_id);
             $sql->bindValue(9, $usu_ci);
+            $sql->bindValue(10, $aclevel_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
 
         /*TODO: Funcion para actualizar usuario */
-        public function update_usuario($usu_id,$usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$usu_telf,$rol_id,$usu_ci){
+        public function update_usuario($usu_id,$usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$usu_telf,$rol_id,$usu_ci,$aclevel_id){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE tm_usuario
@@ -258,7 +266,8 @@
                     usu_sex = ?,
                     usu_telf = ?,
                     rol_id = ?,
-                    usu_ci = ?
+                    usu_ci = ?,
+                    aclevel_id = ?
                 WHERE
                     usu_id = ?";
             $sql=$conectar->prepare($sql);
@@ -272,11 +281,12 @@
             $sql->bindValue(8, $rol_id);
             $sql->bindValue(9, $usu_ci);
             $sql->bindValue(10, $usu_id);
+            $sql->bindValue(11, $aclevel_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
 
-        /*TODO: Eliminar cambiar de estado a la categoria */
+        /*TODO: Eliminar cambiar de estado a la facultad */
         public function delete_usuario($usu_id){
             $conectar= parent::conexion();
             parent::set_names();
@@ -291,7 +301,7 @@
             return $resultado=$sql->fetchAll();
         }
 
-        /*TODO: Listar todas las categorias */
+        /*TODO: Listar todas las facultads */
         public function get_usuario(){
             $conectar= parent::conexion();
             parent::set_names();
@@ -301,7 +311,7 @@
             return $resultado=$sql->fetchAll();
         }
 
-        /*TODO: Listar todas las categorias */
+        /*TODO: Listar todas las facultads */
         public function get_usuario_modal($cur_id){
             $conectar= parent::conexion();
             parent::set_names();

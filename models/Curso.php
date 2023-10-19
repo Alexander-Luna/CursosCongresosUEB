@@ -66,7 +66,7 @@
                 tm_curso.cur_fechfin,
                 tm_curso.cat_id,
                 tm_curso.cur_img,
-                tm_categoria.cat_nom,
+                tm_facultades.cat_nom,
                 tm_curso.inst_id,
                 tm_instructor.inst_nom,
                 tm_instructor.inst_apep,
@@ -75,7 +75,7 @@
                 tm_instructor.inst_sex,
                 tm_instructor.inst_telf
                 FROM tm_curso
-                INNER JOIN tm_categoria on tm_curso.cat_id = tm_categoria.cat_id
+                INNER JOIN tm_facultades on tm_curso.cat_id = tm_facultades.cat_id
                 INNER JOIN tm_instructor on tm_curso.inst_id = tm_instructor.inst_id
                 WHERE tm_curso.est = 1";
             $sql=$conectar->prepare($sql);

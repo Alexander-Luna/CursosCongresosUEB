@@ -5,7 +5,7 @@
                 <h6 id="lbltitulo" class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"></h6>
             </div>
             <!-- Formulario Mantenimiento -->
-            <form method="post" id="categoria_form">
+            <form method="post" id="facultad_form">
                 <div class="modal-body">
                     <input type="hidden" name="cat_id" id="cat_id"/>
 

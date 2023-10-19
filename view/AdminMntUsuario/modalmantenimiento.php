@@ -80,6 +80,16 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="form-control-label">Nivel Académico: <span class="tx-danger">*</span></label>
+                            <select class="form-control select2" style="width:100%" name="usu_sex" id="usu_sex" data-placeholder="Seleccione">
+                                <option label="Seleccione"></option>
+                                <option value="1">Doctorado</option>
+                                <option value="2">Maestria</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" name="action" value="add" class="btn btn-outline-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i class="fa fa-check"></i> Guardar</button>

@@ -106,6 +106,7 @@
                     $output["usu_telf"] = $row["usu_telf"];
                     $output["rol_id"] = $row["rol_id"];
                     $output["usu_ci"] = $row["usu_ci"];
+                    $output["aclevel_id"] = $row["aclevel_id"];
                 }
                 echo json_encode($output);
             }
@@ -125,6 +126,7 @@
                     $output["usu_telf"] = $row["usu_telf"];
                     $output["rol_id"] = $row["rol_id"];
                     $output["usu_ci"] = $row["usu_ci"];
+                    $output["aclevel_id"] = $row["aclevel_id"];
                 }
                 echo json_encode($output);
             }
@@ -138,15 +140,16 @@
                 $_POST["usu_apem"],
                 $_POST["usu_pass"],
                 $_POST["usu_sex"],
-                $_POST["usu_telf"]
+                $_POST["usu_telf"],
+                $_POST["usu_aclevel"]
             );
             break;
         /*TODO: Guardar y editar cuando se tenga el ID */
         case "guardaryeditar":
             if(empty($_POST["usu_id"])){
-                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["usu_telf"],$_POST["rol_id"],$_POST["usu_ci"]);
+                $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["usu_telf"],$_POST["rol_id"],$_POST["usu_ci"],$_POST["usu_aclevel"]);
             }else{
-                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["usu_telf"],$_POST["rol_id"],$_POST["usu_ci"]);
+                $usuario->update_usuario($_POST["usu_id"],$_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["usu_telf"],$_POST["rol_id"],$_POST["usu_ci"],$_POST["usu_aclevel"]);
             }
             break;
         /*TODO: Eliminar segun ID */
@@ -164,6 +167,7 @@
                     $sub_array[] = $row["usu_apem"];
                     $sub_array[] = $row["usu_correo"];
                     $sub_array[] = $row["usu_telf"];
+                    $sub_array[] = $row["usu_aclevel"];
                     if ($row["rol_id"]==1) {
                         $sub_array[] = "Usuario";
                     }else{
@@ -227,7 +231,7 @@
             break;
 
         case "guardar_desde_excel":
-            $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["usu_telf"],$_POST["rol_id"],$_POST["usu_ci"]);
+            $usuario->insert_usuario($_POST["usu_nom"],$_POST["usu_apep"],$_POST["usu_apem"],$_POST["usu_correo"],$_POST["usu_pass"],$_POST["usu_sex"],$_POST["usu_telf"],$_POST["rol_id"],$_POST["usu_ci"],$_POST["usu_aclevel"]);
             break;
 
     }

@@ -41,7 +41,7 @@
                 <table id="cursos_data" class="table display responsive nowrap">
                 <thead>
                     <tr>
-                    <th class="wd-15p">Categoria</th>
+                    <th class="wd-15p">Facultad</th>
                     <th class="wd-15p">Nombre</th>
                     <th class="wd-15p">Fech.Inicio</th>
                     <th class="wd-20p">Fech.Fin</th>

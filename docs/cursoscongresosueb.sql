@@ -23,7 +23,7 @@ INSERT INTO `td_curso_usuario` (`curd_id`, `cur_id`, `usu_id`, `fech_crea`, `est
 (196, 3, 4, '2023-10-17 23:16:56', 1);
 
 
-CREATE TABLE `tm_categoria` (
+CREATE TABLE `tm_facultades` (
   `cat_id` int(11) NOT NULL,
   `cat_nom` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `fech_crea` datetime DEFAULT NULL,
@@ -31,15 +31,12 @@ CREATE TABLE `tm_categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
-INSERT INTO `tm_categoria` (`cat_id`, `cat_nom`, `fech_crea`, `est`) VALUES
-(1, 'PROGRAMACIÓN', '2023-04-26 20:27:52', 1),
-(2, 'MARKETING', '2023-04-26 20:27:52', 1),
-(3, 'NEGOCIOS', '2023-04-26 20:27:52', 1),
-(4, 'EDUCACION', '2023-04-26 20:27:52', 1),
-(5, 'test categoria', '2023-08-17 20:46:37', 0),
-(6, '22222', '2023-08-17 20:47:07', 0),
-(7, '4444', '2023-08-17 20:53:12', 0),
-(8, '5555', '2023-08-17 20:53:22', 0);
+INSERT INTO `tm_facultades` (`cat_id`, `cat_nom`, `fech_crea`, `est`) VALUES
+(1, 'Facultad de Ciencias Administrativas, Gestión Empresarial e Informática', '2023-04-26 20:27:52', 1),
+(2, 'Facultad de Jurisprudencia, Ciencias Sociales y Políticas', '2023-04-26 20:27:52', 1),
+(3, 'Facultad de Ciencias de la Educación, Sociales, Filosóficas y Humanísticas', '2023-04-26 20:27:52', 1),
+(4, 'Facultad de Ciencias Agropecuarias, Recursos Naturales y del Medio Ambiente', '2023-04-26 20:27:52', 1),
+(5, 'Facultad de Ciencias de la Salud y del Ser Humano', '2023-08-17 20:46:37', 0);
 
 CREATE TABLE `tm_curso` (
   `cur_id` int(11) NOT NULL,
@@ -88,6 +85,18 @@ INSERT INTO `tm_instructor` (`inst_id`, `inst_nom`, `inst_apep`, `inst_apem`, `i
 (5, 'www', 'www', 'www', 'test@test.com', 'F', '111111', '2023-08-17 21:31:32', 0),
 (6, 'aaaa', 'aaa', 'aaaa', 'aaaa@www.com', 'F', '123123123123', '2023-08-17 21:32:55', 0);
 
+CREATE TABLE `academic_level` (
+  `aclevel_id` int(11) NOT NULL,
+  `name` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `abreviature` varchar(150) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+ALTER TABLE academic_level
+ADD PRIMARY KEY (aclevel_id);
+INSERT INTO `academic_level` (
+  `aclevel_id` ,
+  `name`,
+  `abreviature`
+)VALUES(1,"Pregrado","Est."),(2,"Maestria","MsC."),(3,"Doctorado","PhD.");
 CREATE TABLE `tm_usuario` (
   `usu_id` int(11) NOT NULL,
   `usu_nom` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
@@ -100,16 +109,16 @@ CREATE TABLE `tm_usuario` (
   `rol_id` int(11) NOT NULL,
   `usu_ci` varchar(10) DEFAULT NULL,
   `fech_crea` datetime DEFAULT NULL,
-  `est` int(11) NOT NULL
+  `est` int(11) NOT NULL,
+  `aclevel_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-CREATE TABLE `academic_level` (
-  `aclevel_id` int(11) NOT NULL,
-  `name` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `abreviature` varchar(150) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
-INSERT INTO `tm_usuario` (`usu_id`, `usu_nom`, `usu_apep`, `usu_apem`, `usu_correo`, `usu_pass`, `usu_sex`, `usu_telf`, `rol_id`, `usu_ci`, `fech_crea`, `est`, `aclevel`) VALUES
+ALTER TABLE `tm_usuario` ADD CONSTRAINT `fk_academic_level`
+FOREIGN KEY (`aclevel_id`)
+REFERENCES `academic_level`(`aclevel_id`);
+ALTER TABLE `academic_level`
+  MODIFY `aclevel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+INSERT INTO `tm_usuario` (`usu_id`, `usu_nom`, `usu_apep`, `usu_apem`, `usu_correo`, `usu_pass`, `usu_sex`, `usu_telf`, `rol_id`, `usu_ci`, `fech_crea`, `est`, `aclevel_id`) VALUES
 (1, "Alexander Paul", "Luna", "Arteaga", "aluna@mailes.ueb.edu.ec", "12345", "M", "0985726434", 2, "0202433918", "2023-04-26 20:14:08", 1,1),
 (2, "Wilson Efrain", "Paredes", "Guano", "wiparedes@mailes.ueb.edu.ec", "12345", "M", "0985726434",2, "0202433912", "2023-04-26 20:14:08", 1,1),
 (3, "USU5", "USU5", "USU5", "user@mailes.ueb.edu.ec", "12345", "F", "0985726439", 1, "0202433911", "2023-04-26 20:14:08", 1,1);
@@ -117,7 +126,7 @@ INSERT INTO `tm_usuario` (`usu_id`, `usu_nom`, `usu_apep`, `usu_apem`, `usu_corr
 ALTER TABLE `td_curso_usuario`
   ADD PRIMARY KEY (`curd_id`);
 
-ALTER TABLE `tm_categoria`
+ALTER TABLE `tm_facultades`
   ADD PRIMARY KEY (`cat_id`);
 
 ALTER TABLE `tm_curso`
@@ -132,7 +141,7 @@ ALTER TABLE `tm_usuario`
 ALTER TABLE `td_curso_usuario`
   MODIFY `curd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
-ALTER TABLE `tm_categoria`
+ALTER TABLE `tm_facultades`
   MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 ALTER TABLE `tm_curso`
