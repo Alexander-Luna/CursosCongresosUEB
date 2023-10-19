@@ -51,7 +51,7 @@
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
-                tm_usuario.usu_dni,
+                tm_usuario.usu_ci,
                 tm_instructor.inst_id,
                 tm_instructor.inst_nom,
                 tm_instructor.inst_apep,
@@ -83,7 +83,7 @@
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
-                tm_usuario.usu_dni,
+                tm_usuario.usu_ci,
                 tm_instructor.inst_id,
                 tm_instructor.inst_nom,
                 tm_instructor.inst_apep,
@@ -116,7 +116,7 @@
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
-                tm_usuario.usu_dni,
+                tm_usuario.usu_ci,
                 tm_instructor.inst_id,
                 tm_instructor.inst_nom,
                 tm_instructor.inst_apep,
@@ -188,13 +188,13 @@
             return $resultado=$sql->fetchAll();
         }
 
-        /*TODO: Mostrar los datos del usuario segun el DNI */
-        public function get_usuario_x_dni($usu_dni){
+        /*TODO: Mostrar los datos del usuario segun el ci */
+        public function get_usuario_x_ci($usu_ci){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT * FROM tm_usuario WHERE est=1 AND usu_dni=?";
+            $sql="SELECT * FROM tm_usuario WHERE est=1 AND usu_ci=?";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $usu_dni);
+            $sql->bindValue(1, $usu_ci);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
@@ -226,10 +226,10 @@
         }
 
         /*TODO: Funcion para insertar usuario */
-        public function insert_usuario($usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$usu_telf,$rol_id,$usu_dni){
+        public function insert_usuario($usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$usu_telf,$rol_id,$usu_ci){
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="INSERT INTO tm_usuario (usu_id,usu_nom,usu_apep,usu_apem,usu_correo,usu_pass,usu_sex,usu_telf,rol_id,usu_dni,fech_crea, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,now(),'1');";
+            $sql="INSERT INTO tm_usuario (usu_id,usu_nom,usu_apep,usu_apem,usu_correo,usu_pass,usu_sex,usu_telf,rol_id,usu_ci,fech_crea, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,now(),'1');";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usu_nom);
             $sql->bindValue(2, $usu_apep);
@@ -239,13 +239,13 @@
             $sql->bindValue(6, $usu_sex);
             $sql->bindValue(7, $usu_telf);
             $sql->bindValue(8, $rol_id);
-            $sql->bindValue(9, $usu_dni);
+            $sql->bindValue(9, $usu_ci);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
 
         /*TODO: Funcion para actualizar usuario */
-        public function update_usuario($usu_id,$usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$usu_telf,$rol_id,$usu_dni){
+        public function update_usuario($usu_id,$usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$usu_telf,$rol_id,$usu_ci){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE tm_usuario
@@ -258,7 +258,7 @@
                     usu_sex = ?,
                     usu_telf = ?,
                     rol_id = ?,
-                    usu_dni = ?
+                    usu_ci = ?
                 WHERE
                     usu_id = ?";
             $sql=$conectar->prepare($sql);
@@ -270,7 +270,7 @@
             $sql->bindValue(6, $usu_sex);
             $sql->bindValue(7, $usu_telf);
             $sql->bindValue(8, $rol_id);
-            $sql->bindValue(9, $usu_dni);
+            $sql->bindValue(9, $usu_ci);
             $sql->bindValue(10, $usu_id);
             $sql->execute();
             return $resultado=$sql->fetchAll();

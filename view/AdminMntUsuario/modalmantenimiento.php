@@ -75,8 +75,8 @@
 
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label">DNI: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="usu_dni" type="text" name="usu_dni" required/>
+                            <label class="form-control-label">Cédula: <span class="tx-danger">*</span></label>
+                            <input class="form-control tx-uppercase" id="usu_ci" type="text" name="usu_ci" required/>
                         </div>
                     </div>
 
