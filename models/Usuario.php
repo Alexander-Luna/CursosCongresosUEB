@@ -24,7 +24,7 @@
                         $_SESSION["usu_ape"]=$resultado["usu_ape"];
                         $_SESSION["usu_correo"]=$resultado["usu_correo"];
                         $_SESSION["rol_id"]=$resultado["rol_id"];
-                        $_SESSION["usu_aclevel"]=$resultado["usu_aclevel"];
+                        $_SESSION["aclevel_id"]=$resultado["aclevel_id"];
                         /*TODO: Si todo esta correcto indexar en home */
                         header("Location:".Conectar::ruta()."view/UsuHome/");
                         exit();

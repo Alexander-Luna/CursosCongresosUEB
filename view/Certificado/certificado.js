@@ -21,7 +21,7 @@ $(document).ready(function(){
         ctx.textAlign = "center";
         ctx.textBaseline = 'middle';
         var x = canvas.width / 2;
-        ctx.fillText(data.usu_nom+' '+ data.usu_apep+' '+data.usu_apem, x, 250);
+        ctx.fillText(data.name+' '+data.usu_nom+' '+ data.usu_apep+' '+data.usu_apem, x, 250);
 
         ctx.font = '30px Arial';
         ctx.fillText(data.cur_nom, x, 320);

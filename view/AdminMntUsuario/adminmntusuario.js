@@ -172,7 +172,8 @@ var ExcelToJSON = function() {
                         usu_sex : columns[5],
                         usu_telf :columns[6],
                         rol_id : columns[7],
-                        usu_ci :columns[8]
+                        usu_ci :columns[8],
+                        aclevel_id :columns[9]
                     }, function (data) {
                         console.log(data);
                     });

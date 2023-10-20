@@ -1,10 +1,11 @@
 <?php
-  /* Llamamos al archivo de conexion.php */
-  require_once("../../config/conexion.php");
-  if(isset($_SESSION["usu_id"])){
-?>
-<!DOCTYPE html>
-<html lang="es">
+/* Llamamos al archivo de conexion.php */
+require_once("../../config/conexion.php");
+if (isset($_SESSION["usu_id"])) {
+  ?>
+  <!DOCTYPE html>
+  <html lang="es">
+
   <head>
     <?php require_once("../html/MainHead.php"); ?>
 
@@ -53,6 +54,15 @@
                   <input class="form-control" type="text" name="usu_apem" id="usu_apem" placeholder="Apellido Materno">
                 </div>
               </div>
+              <div class="form-group mg-b-10-force">
+                <label class="form-control-label">Nivel Académico: <span class="tx-danger">*</span></label>
+                <select class="form-control select2" name="aclevel_id" id="aclevel_id" data-placeholder="Seleccione">
+                  <option label="Seleccione"></option>
+                  <option value="1">Estudiante</option>
+                  <option value="2">Maestría</option>
+                  <option value="3">Doctorado</option>
+                </select>
+              </div>
               <div class="col-lg-6">
                 <div class="form-group">
                   <label class="form-control-label">Correo Electronico: <span class="tx-danger">*</span></label>
@@ -77,7 +87,7 @@
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label class="form-control-label">Telefono: <span class="tx-danger">*</span></label>
+                  <label class="form-control-label">Teléfono: <span class="tx-danger">*</span></label>
                   <input class="form-control" type="number" name="usu_telf" id="usu_telf" placeholder="Ingrese Telefono">
                 </div>
               </div>
@@ -95,10 +105,11 @@
     <?php require_once("../html/MainJs.php"); ?>
     <script type="text/javascript" src="usuperfil.js"></script>
   </body>
-</html>
-<?php
-  }else{
-    /* Si no a iniciado sesion se redireccionada a la ventana principal */
-    header("Location:".Conectar::ruta()."view/404/");
-  }
+
+  </html>
+  <?php
+} else {
+  /* Si no a iniciado sesion se redireccionada a la ventana principal */
+  header("Location:" . Conectar::ruta() . "view/404/");
+}
 ?>

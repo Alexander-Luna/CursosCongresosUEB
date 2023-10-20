@@ -8,7 +8,7 @@
   <head>
     <?php require_once("../html/MainHead.php"); ?>
 
-    <title>Empresa::MntUsuario</title>
+    <title>Usuarios</title>
   </head>
 
   <body>
@@ -49,6 +49,7 @@
                     <th class="wd-15p">Correo</th>
                     <th class="wd-15p">Telefono</th>
                     <th class="wd-15p">Rol</th>
+                    <th class="wd-15p">Nivel Académico</th>
                     <th class="wd-10p"></th>
                     <th class="wd-10p"></th>
                     </tr>
