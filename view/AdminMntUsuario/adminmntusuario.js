@@ -100,6 +100,7 @@ function editar(usu_id){
         $('#rol_id').val(data.rol_id).trigger('change');
         $('#usu_telf').val(data.usu_telf);
         $('#usu_ci').val(data.usu_ci);
+        $('#aclevel_id').val(data.aclevel_id);
     });
     $('#lbltitulo').html('Editar Registro');
     $('#modalmantenimiento').modal('show');
@@ -133,6 +134,7 @@ function nuevo(){
     $('#usu_id').val('');
     $('#usu_sex').val('').trigger('change');
     $('#rol_id').val('').trigger('change');
+    $('#aclevel_id').val('').trigger('change');
     $('#lbltitulo').html('Nuevo Registro');
     $('#usuario_form')[0].reset();
     $('#modalmantenimiento').modal('show');
