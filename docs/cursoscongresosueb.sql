@@ -92,6 +92,8 @@ CREATE TABLE `academic_level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 ALTER TABLE academic_level
 ADD PRIMARY KEY (aclevel_id);
+ALTER TABLE `academic_level`
+  MODIFY `aclevel_id` int(11) NOT NULL AUTO_INCREMENT;
 INSERT INTO `academic_level` (
   `aclevel_id` ,
   `name`,
@@ -116,8 +118,7 @@ CREATE TABLE `tm_usuario` (
 ALTER TABLE `tm_usuario` ADD CONSTRAINT `fk_academic_level`
 FOREIGN KEY (`aclevel_id`)
 REFERENCES `academic_level`(`aclevel_id`);
-ALTER TABLE `academic_level`
-  MODIFY `aclevel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+
 INSERT INTO `tm_usuario` (`usu_id`, `usu_nom`, `usu_apep`, `usu_apem`, `usu_correo`, `usu_pass`, `usu_sex`, `usu_telf`, `rol_id`, `usu_ci`, `fech_crea`, `est`, `aclevel_id`) VALUES
 (1, "Alexander Paul", "Luna", "Arteaga", "aluna@mailes.ueb.edu.ec", "12345", "M", "0985726434", 2, "0202433918", "2023-04-26 20:14:08", 1,1),
 (2, "Wilson Efrain", "Paredes", "Guano", "wiparedes@mailes.ueb.edu.ec", "12345", "M", "0985726434",2, "0202433912", "2023-04-26 20:14:08", 1,1),
