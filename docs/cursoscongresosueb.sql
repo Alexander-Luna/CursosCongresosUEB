@@ -88,7 +88,8 @@ INSERT INTO `tm_instructor` (`inst_id`, `inst_nom`, `inst_apep`, `inst_apem`, `i
 CREATE TABLE `academic_level` (
   `aclevel_id` int(11) NOT NULL,
   `name` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `abreviature` varchar(150) COLLATE utf8_spanish_ci NOT NULL
+  `abreviature` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `est` int(11) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 ALTER TABLE academic_level
 ADD PRIMARY KEY (aclevel_id);
@@ -97,8 +98,9 @@ ALTER TABLE `academic_level`
 INSERT INTO `academic_level` (
   `aclevel_id` ,
   `name`,
-  `abreviature`
-)VALUES(1,"Pregrado","Est."),(2,"Maestria","MsC."),(3,"Doctorado","PhD.");
+  `abreviature`,
+  `est`
+)VALUES(1,"Pregrado","Est.","1"),(2,"Maestria","MsC.","1"),(3,"Doctorado","PhD.","1");
 CREATE TABLE `tm_usuario` (
   `usu_id` int(11) NOT NULL,
   `usu_nom` varchar(150) COLLATE utf8_spanish_ci NOT NULL,

@@ -6,7 +6,7 @@ class NivelAcademico extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO academic_level (name, abreviature) VALUES (?,?);";
+        $sql = "INSERT INTO academic_level (name, abreviature,est) VALUES (?,?,'1');";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $aclevel_name);
         $sql->bindValue(2, $aclevel_abreviature);
@@ -39,7 +39,7 @@ class NivelAcademico extends Conectar
                 SET
                     est = 0
                 WHERE
-                    inst_id = ?";
+                    aclevel_id = ?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $aclevel_id);
         $sql->execute();
