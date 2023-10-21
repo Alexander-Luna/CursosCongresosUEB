@@ -4,21 +4,21 @@ require_once("../config/conexion.php");
 /*TODO: Llamando a la clase */
 require_once("../models/NivelesAcademicos.php");
 /*TODO: Inicializando Clase */
-$instructor = new NivelAcademico();
+$nivel_academico = new NivelAcademico();
 
 /*TODO: Opcion de solicitud de controller */
 switch ($_GET["op"]) {
     /*TODO: Guardar y editar cuando se tenga el ID */
     case "guardaryeditar":
         if (empty($_POST["aclevel_id"])) {
-            $instructor->insert_academiclevel($_POST["aclevel_name"], $_POST["aclevel_abreviature"]);
+            $nivel_academico->insert_academiclevel($_POST["aclevel_name"], $_POST["aclevel_abreviature"]);
         } else {
-            $instructor->update_academiclevel($_POST["aclevel_id"], $_POST["aclevel_name"], $_POST["aclevel_abreviature"]);
+            $nivel_academico->update_academiclevel($_POST["aclevel_id"], $_POST["aclevel_name"], $_POST["aclevel_abreviature"]);
         }
         break;
     /*TODO: Creando Json segun el ID */
     case "mostrar":
-        $datos = $instructor->get_academiclevel_id($_POST["aclevel_id"]);
+        $datos = $nivel_academico->get_academiclevel_id($_POST["aclevel_id"]);
         if (is_array($datos) == true and count($datos) <> 0) {
             foreach ($datos as $row) {
                 $output["aclevel_id"] = $row["aclevel_id"];
@@ -30,11 +30,11 @@ switch ($_GET["op"]) {
         break;
     /*TODO: Eliminar segun ID */
     case "eliminar":
-        $instructor->delete_academiclevel($_POST["aclevel_id"]);
+        $nivel_academico->delete_academiclevel($_POST["aclevel_id"]);
         break;
     /*TODO:  Listar toda la informacion segun formato de datatable */
     case "listar":
-        $datos = $instructor->get_academiclevel();
+        $datos = $nivel_academico->get_academiclevel();
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
@@ -55,7 +55,7 @@ switch ($_GET["op"]) {
         break;
     /*TODO:  Listar toda la informacion segun formato de datatable */
     case "combo":
-        $datos = $instructor->get_academiclevel();
+        $datos = $nivel_academico->get_academiclevel();
         if (is_array($datos) == true and count($datos) > 0) {
             $html = " <option label='Seleccione'></option>";
             foreach ($datos as $row) {

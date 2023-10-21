@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label">Descripcion: <span class="tx-danger">*</span></label>
+                            <label class="form-control-label">Descripción: <span class="tx-danger">*</span></label>
                             <textarea class="form-control tx-uppercase" id="cur_descrip" type="text" name="cur_descrip" required></textarea>
                         </div>
                     </div>

@@ -71,6 +71,7 @@
                     $output["usu_nom"] = $row["usu_nom"];
                     $output["usu_apep"] = $row["usu_apep"];
                     $output["usu_apem"] = $row["usu_apem"];
+                    $output["aclevel_id"] = $row["aclevel_id"];
                     $output["inst_id"] = $row["inst_id"];
                     $output["inst_nom"] = $row["inst_nom"];
                     $output["inst_apep"] = $row["inst_apep"];

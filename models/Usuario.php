@@ -255,6 +255,7 @@
         /*TODO: Funcion para actualizar usuario */
         public function update_usuario($usu_id,$usu_nom,$usu_apep,$usu_apem,$usu_correo,$usu_pass,$usu_sex,$usu_telf,$rol_id,$usu_ci,$aclevel_id){
             $conectar= parent::conexion();
+            
             parent::set_names();
             $sql="UPDATE tm_usuario
                 SET

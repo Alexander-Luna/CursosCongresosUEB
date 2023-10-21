@@ -1,0 +1,12 @@
+
+@font-face {
+    font-family: 'bilya'; /* Nombre de la fuente personalizada */
+    src: url('../../assets/bilya.ttf') format('truetype'); /* Ruta a tu archivo de fuente */
+    /* Puedes agregar otras declaraciones de fuente como font-weight, font-style si es necesario. */
+}
+
+@font-face {
+    font-family: 'micky'; /* Nombre de la fuente personalizada */
+    src: url('../../assets/mickycaviar.ttf') format('truetype'); /* Ruta a tu archivo de fuente */
+    /* Puedes agregar otras declaraciones de fuente como font-weight, font-style si es necesario. */
+}

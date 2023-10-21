@@ -4,11 +4,12 @@ const ctx = canvas.getContext('2d');
 /* Inicializamos la imagen */
 const image = new Image();
 const imageqr = new Image();
-
-$(document).ready(function(){
+// Cargar la fuente personalizada
+const customFont = new FontFace('Micky', 'url(../../../../assets/mickycaviar.ttf)');
+$(document).ready(function () {
     var curd_id = getUrlParameter('curd_id');
 
-    $.post("../../controller/usuario.php?op=mostrar_curso_detalle", { curd_id : curd_id }, function (data) {
+    $.post("../../controller/usuario.php?op=mostrar_curso_detalle", { curd_id: curd_id }, function (data) {
         data = JSON.parse(data);
 
         /* Ruta de la Imagen */
@@ -21,21 +22,30 @@ $(document).ready(function(){
         ctx.textAlign = "center";
         ctx.textBaseline = 'middle';
         var x = canvas.width / 2;
-        ctx.fillText(data.name+' '+data.usu_nom+' '+ data.usu_apep+' '+data.usu_apem, x, 250);
-
+        // Hacer una solicitud para obtener el nombre de la tabla academic_level
+        var academicLevelName = data.aclevel_id;
+        
+       
+        $.post("../../controller/academic_level.php?op=mostrar", { aclevel_id: academicLevelName }, function (response) {
+            response = JSON.parse(response);
+            ctx.font = '30px Micky';
+            academicLevelName = response.aclevel_abreviature;
+            // Continúa con el código que necesita el nombre del nivel académico
+            ctx.fillText(academicLevelName + ' ' + data.usu_nom + ' ' + data.usu_apep + ' ' + data.usu_apem, x, 250);
+        });
         ctx.font = '30px Arial';
         ctx.fillText(data.cur_nom, x, 320);
 
         ctx.font = '18px Arial';
-        ctx.fillText(data.inst_nom+' '+ data.inst_apep+' '+data.inst_apem, x, 420);
+        ctx.fillText(data.inst_nom + ' ' + data.inst_apep + ' ' + data.inst_apem, x, 420);
         ctx.font = '15px Arial';
         ctx.fillText('Instructor', x, 450);
 
         ctx.font = '15px Arial';
-        ctx.fillText('Fecha de Inicio : '+data.cur_fechini+' / '+'Fecha de Finalización : '+data.cur_fechfin+'', x, 490);
+        ctx.fillText('Fecha de Inicio : ' + data.cur_fechini + ' / ' + 'Fecha de Finalización : ' + data.cur_fechfin + '', x, 490);
 
         /* Ruta de la Imagen */
-        imageqr.src = "../../public/qr/"+curd_id+".png";
+        imageqr.src = "../../public/qr/" + curd_id + ".png";
         /* Dimensionamos y seleccionamos imagen */
         ctx.drawImage(imageqr, 400, 500, 100, 100);
 
@@ -45,21 +55,21 @@ $(document).ready(function(){
 });
 
 /* Recarga por defecto solo 1 vez */
-window.onload = function() {
-    if(!window.location.hash) {
+window.onload = function () {
+    if (!window.location.hash) {
         window.location = window.location + '#loaded';
         window.location.reload();
     }
 }
 
-$(document).on("click","#btnpng", function(){
+$(document).on("click", "#btnpng", function () {
     let lblpng = document.createElement('a');
     lblpng.download = "Certificado.png";
     lblpng.href = canvas.toDataURL();
     lblpng.click();
 });
 
-$(document).on("click","#btnpdf", function(){
+$(document).on("click", "#btnpdf", function () {
     var imgData = canvas.toDataURL('image/png');
     var doc = new jsPDF('l', 'mm');
     doc.addImage(imgData, 'PNG', 30, 15);

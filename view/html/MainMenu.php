@@ -26,14 +26,14 @@
           <a href="../AdminMntUsuario/" class="br-menu-link">
             <div class="br-menu-item">
               <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
-              <span class="menu-item-label">Mnt. Usuario</span>
+              <span class="menu-item-label">Usuarios</span>
             </div>
           </a>
 
           <a href="../AdminMntCurso/" class="br-menu-link">
             <div class="br-menu-item">
               <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
-              <span class="menu-item-label">Mnt. Curso</span>
+              <span class="menu-item-label">Congresos</span>
             </div>
           </a>
 
@@ -72,7 +72,7 @@
     <a href="../html/Logout.php" class="br-menu-link">
       <div class="br-menu-item">
         <i class="menu-item-icon icon ion-power tx-20"></i>
-        <span class="menu-item-label">Cerrar Sesion</span>
+        <span class="menu-item-label">Cerrar Sesión</span>
       </div>
     </a>
 
