@@ -2,7 +2,7 @@
     /*TODO: Llamando a cadena de Conexion */
     require_once("../config/conexion.php");
     /*TODO: Llamando a la clase */
-    require_once("../models/facultad.php");
+    require_once("../models/Facultad.php");
     /*TODO: Inicializando Clase */
     $facultad = new facultad();
 
