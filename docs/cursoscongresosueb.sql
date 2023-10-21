@@ -91,7 +91,7 @@ CREATE TABLE `academic_level` (
   `aclevel_id` int(11) NOT NULL,
   `name` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `abreviature` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `est` int(11) NOT NULL,
+  `est` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 ALTER TABLE academic_level
 ADD PRIMARY KEY (aclevel_id);
