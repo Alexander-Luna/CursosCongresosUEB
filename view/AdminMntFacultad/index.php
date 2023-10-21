@@ -30,8 +30,8 @@
 
       <div class="br-pagebody">
         <div class="br-section-wrapper">
-            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">facultads</h6>
-            <p class="mg-b-30 tx-gray-600">Listado de facultads</p>
+            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">facultades</h6>
+            <p class="mg-b-30 tx-gray-600">Listado de facultades</p>
 
             <button class="btn btn-outline-primary" id="add_button" onclick="nuevo()"><i class="fa fa-plus-square mg-r-10"></i> Nuevo Registro</button>
 
@@ -42,8 +42,8 @@
                 <thead>
                     <tr>
                     <th class="wd-15p">Nombre</th>
-                    <th class="wd-10p"></th>
-                    <th class="wd-10p"></th>
+                    <th class="wd-10p">Editar</th>
+                    <th class="wd-10p">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>

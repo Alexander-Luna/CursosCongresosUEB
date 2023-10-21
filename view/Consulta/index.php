@@ -62,7 +62,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                   <div>
                     <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1" id="lbldatos">Listado de Cursos</h6>
-                    <p class="mg-b-0">Aqui podra visualizar los Certificados</p>
+                    <p class="mg-b-0">Aquí podrá visualizar los Certificados</p>
                   </div>
                 </div>
               </div>

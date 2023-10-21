@@ -48,8 +48,8 @@
               <div class="pd-x-30 pd-t-30 pd-b-15">
                 <div class="d-flex align-items-center justify-content-between">
                   <div>
-                    <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Top Ultimos Cursos</h6>
-                    <p class="mg-b-0">Aqui podra visualizar los ultimos 10 Certificados</p>
+                    <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1">Top Últimos Cursos</h6>
+                    <p class="mg-b-0">Aquí podrá visualizar los últimos 10 Certificados</p>
                   </div>
                 </div>
               </div>

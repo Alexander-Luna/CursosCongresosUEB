@@ -45,9 +45,9 @@
                     <th class="wd-15p">Ape.Paterno</th>
                     <th class="wd-15p">Ape.Materno</th>
                     <th class="wd-15p">Correo</th>
-                    <th class="wd-15p">Telefono</th>
-                    <th class="wd-10p"></th>
-                    <th class="wd-10p"></th>
+                    <th class="wd-15p">Teléfono</th>
+                    <th class="wd-10p">Editar</th>
+                    <th class="wd-10p">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
