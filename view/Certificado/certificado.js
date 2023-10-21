@@ -4,8 +4,15 @@ const ctx = canvas.getContext('2d');
 /* Inicializamos la imagen */
 const image = new Image();
 const imageqr = new Image();
+const imageLogo = new Image();
 // Cargar la fuente personalizada
 const customFont = new FontFace('Micky', 'url(../../../../assets/mickycaviar.ttf)');
+const x = canvas.width / 2;
+const y = canvas.height;
+
+const maxWidth = x + 200; // Ancho máximo para el texto
+const lineHeight = 30; // Espacio entre líneas
+
 $(document).ready(function () {
     var curd_id = getUrlParameter('curd_id');
 
@@ -21,33 +28,48 @@ $(document).ready(function () {
         ctx.font = '40px Arial';
         ctx.textAlign = "center";
         ctx.textBaseline = 'middle';
-        var x = canvas.width / 2;
         // Hacer una solicitud para obtener el nombre de la tabla academic_level
         var academicLevelName = data.aclevel_id;
-        
-       
+
+
         $.post("../../controller/academic_level.php?op=mostrar", { aclevel_id: academicLevelName }, function (response) {
             response = JSON.parse(response);
             ctx.font = '30px Micky';
             academicLevelName = response.aclevel_abreviature;
             // Continúa con el código que necesita el nombre del nivel académico
-            ctx.fillText(academicLevelName + ' ' + data.usu_nom + ' ' + data.usu_apep + ' ' + data.usu_apem, x, 250);
+            ctx.fillText(academicLevelName + ' ' + data.usu_nom + ' ' + data.usu_apep + ' ' + data.usu_apem, x, 300);
         });
+
         ctx.font = '30px Arial';
-        ctx.fillText(data.cur_nom, x, 320);
+        drawWrappedText(data.cur_nom, x, y / 1.9, maxWidth, lineHeight);
 
-        ctx.font = '18px Arial';
-        ctx.fillText(data.inst_nom + ' ' + data.inst_apep + ' ' + data.inst_apem, x, 420);
-        ctx.font = '15px Arial';
-        ctx.fillText('Instructor', x, 450);
 
         ctx.font = '15px Arial';
-        ctx.fillText('Fecha de Inicio : ' + data.cur_fechini + ' / ' + 'Fecha de Finalización : ' + data.cur_fechfin + '', x, 490);
+
+
+
+        var modalidad = data.modality_id;
+
+        $.post("../../controller/curso.php?op=modalidad", { modality_id: modalidad }, function (response1) {
+            response1 = JSON.parse(response1);
+            modalidad = response1.name;
+            ctx.font = '15px Arial';
+            var textToDraw = 'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + modalidad + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda, el ' + data.cur_fechfin + '';
+
+            drawWrappedText(textToDraw, x, 440, maxWidth, lineHeight);
+    
+        });
+    
+        /* Ruta de la Imagen */
+        imageLogo.src = "../../assets/logo_ueb.png";
+        /* Dimensionamos y seleccionamos imagen */
+        ctx.drawImage(imageLogo, 30, 30, 100, 80);
+
 
         /* Ruta de la Imagen */
         imageqr.src = "../../public/qr/" + curd_id + ".png";
         /* Dimensionamos y seleccionamos imagen */
-        ctx.drawImage(imageqr, 400, 500, 100, 100);
+        ctx.drawImage(imageqr, 795, 545, 95, 95);
 
         $('#cur_descrip').html(data.cur_descrip);
     });
@@ -90,3 +112,23 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+function drawWrappedText(text, x, y, maxWidth, lineHeight) {
+    const words = text.split(' ');
+    let line = '';
+
+    for (let i = 0; i < words.length; i++) {
+        const testLine = line + words[i] + ' ';
+        const metrics = ctx.measureText(testLine);
+        const testWidth = metrics.width;
+
+        if (testWidth > maxWidth) {
+            ctx.fillText(line, x, y);
+            line = words[i] + ' ';
+            y += lineHeight;
+        } else {
+            line = testLine;
+        }
+    }
+
+    ctx.fillText(line, x, y);
+}

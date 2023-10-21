@@ -153,8 +153,11 @@
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
+
                 tm_usuario.aclevel_id,
                 tm_curso.cur_img,
+                tm_curso.nhours,
+                tm_curso.modality_id,
                 tm_instructor.inst_id,
                 tm_instructor.inst_nom,
                 tm_instructor.inst_apep,

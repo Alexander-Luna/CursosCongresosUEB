@@ -17,6 +17,7 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Nombre: <span class="tx-danger">*</span></label>
@@ -27,6 +28,21 @@
                         <div class="form-group">
                             <label class="form-control-label">Descripción: <span class="tx-danger">*</span></label>
                             <textarea class="form-control tx-uppercase" id="cur_descrip" type="text" name="cur_descrip" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="form-control-label">Modalidad: <span class="tx-danger">*</span></label>
+                            <select class="form-control select2" style="width:100%" name="modality_id" id="modality_id" data-placeholder="Seleccione">
+                                <option label="Seleccione"></option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="form-control-label">Número de horas: <span class="tx-danger">*</span></label>
+                            <input class="form-control tx-uppercase" id="nhours" type="number" name="nhours" required/>
                         </div>
                     </div>
                     <div class="col-lg-12">

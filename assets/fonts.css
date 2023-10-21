@@ -10,3 +10,9 @@
     src: url('../../assets/mickycaviar.ttf') format('truetype'); /* Ruta a tu archivo de fuente */
     /* Puedes agregar otras declaraciones de fuente como font-weight, font-style si es necesario. */
 }
+.max-width-column {
+    max-width: 200px; /* Establece el ancho máximo deseado */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

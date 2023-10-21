@@ -67,6 +67,8 @@
                     $output["cur_fechini"] = $row["cur_fechini"];
                     $output["cur_fechfin"] = $row["cur_fechfin"];
                     $output["cur_img"] = $row["cur_img"];
+                    $output["nhours"] = $row["nhours"];
+                    $output["modality_id"] = $row["modality_id"];
                     $output["usu_id"] = $row["usu_id"];
                     $output["usu_nom"] = $row["usu_nom"];
                     $output["usu_apep"] = $row["usu_apep"];
@@ -168,14 +170,24 @@
                     $sub_array[] = $row["usu_apem"];
                     $sub_array[] = $row["usu_correo"];
                     $sub_array[] = $row["usu_telf"];
-                    $sub_array[] = $row["aclevel_id"];
+                  
                     if ($row["rol_id"]==1) {
                         $sub_array[] = "Usuario";
                     }else{
                         $sub_array[] = "Admin";
                     }
+                    if ($row["aclevel_id"]==1) {
+                        $sub_array[] = "Estudiante";
+                    }else  if ($row["aclevel_id"]==2) {
+                        $sub_array[] = "Magister";
+                    }else  if ($row["aclevel_id"]==3) {
+                        $sub_array[] = "Doctorado";
+                    }else{
+                        $sub_array[] = "No Definido";    
+                    }
                     $sub_array[] = '<button type="button" onClick="editar('.$row["usu_id"].');"  id="'.$row["usu_id"].'" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
                     $sub_array[] = '<button type="button" onClick="eliminar('.$row["usu_id"].');"  id="'.$row["usu_id"].'" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
+                   
                     $data[] = $sub_array;
                 }
 
