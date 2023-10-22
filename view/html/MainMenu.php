@@ -17,7 +17,7 @@
           <a href="../UsuCurso/" class="br-menu-link">
             <div class="br-menu-item">
               <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
-              <span class="menu-item-label">Mis Cursos</span>
+              <span class="menu-item-label">Mis Congresos</span>
             </div>
           </a>
         <?php
@@ -40,14 +40,14 @@
           <a href="../AdminMntInstructor/" class="br-menu-link">
             <div class="br-menu-item">
               <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
-              <span class="menu-item-label">Mnt. Instructor</span>
+              <span class="menu-item-label">Instructores</span>
             </div>
           </a>
 
           <a href="../AdminMntFacultad/" class="br-menu-link">
             <div class="br-menu-item">
               <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
-              <span class="menu-item-label">Facultad</span>
+              <span class="menu-item-label">Facultades</span>
             </div>
           </a>
 

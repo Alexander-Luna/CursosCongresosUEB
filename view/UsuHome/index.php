@@ -1,10 +1,11 @@
 <?php
-  /* Llamamos al archivo de conexion.php */
-  require_once("../../config/conexion.php");
-  if(isset($_SESSION["usu_id"])){
-?>
-<!DOCTYPE html>
-<html lang="es">
+/* Llamamos al archivo de conexion.php */
+require_once("../../config/conexion.php");
+if (isset($_SESSION["usu_id"])) {
+  ?>
+  <!DOCTYPE html>
+  <html lang="es">
+
   <head>
     <?php require_once("../html/MainHead.php"); ?>
     <title>Empresa::Home</title>
@@ -62,7 +63,8 @@
                         <th class="wd-15p">Fecha Inicio</th>
                         <th class="wd-20p">Fecha Fin</th>
                         <th class="wd-15p">Instructor</th>
-                        <th class="wd-10p"></th>
+                        <th class="wd-10p">Certificado</th>
+                        <th class="wd-10p">Asistencia</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -80,10 +82,11 @@
     <?php require_once("../html/MainJs.php"); ?>
     <script type="text/javascript" src="usuhome.js"></script>
   </body>
-</html>
-<?php
-  }else{
-    /* Si no a iniciado sesion se redireccionada a la ventana principal */
-    header("Location:".Conectar::ruta()."view/404/");
-  }
+
+  </html>
+  <?php
+} else {
+  /* Si no a iniciado sesion se redireccionada a la ventana principal */
+  header("Location:" . Conectar::ruta() . "view/404/");
+}
 ?>

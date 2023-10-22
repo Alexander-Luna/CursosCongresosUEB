@@ -40,6 +40,7 @@
         /*TODO: Mostrar todos los cursos en los cuales esta inscrito un usuario */
         public function get_cursos_x_usuario($usu_id){
             $conectar= parent::conexion();
+            
             parent::set_names();
             $sql="SELECT 
                 td_curso_usuario.curd_id,

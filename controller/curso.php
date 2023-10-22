@@ -13,7 +13,7 @@ switch ($_GET["op"]) {
         if (empty($_POST["cur_id"])) {
             $curso->insert_curso($_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["inst_id"], $_POST["modality_id"], $_POST["nhours"]);
         } else {
-            $curso->update_curso($_POST["cur_id"], $_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["inst_id"], $_POST["modality_id"], $_POST["nhours"]);
+            $curso->update_curso($_POST["cur_id"], $_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["inst_id"], $_POST["modality_id"], $_POST["nhours"], $_POST["est_asistencia"]);
         }
         break;
     /*TODO: Creando Json segun el ID */
@@ -30,22 +30,23 @@ switch ($_GET["op"]) {
                 $output["cur_fechini"] = $row["cur_fechini"];
                 $output["cur_fechfin"] = $row["cur_fechfin"];
                 $output["inst_id"] = $row["inst_id"];
+                $output["est_asistencia"] = $row["est_asistencia"];
             }
             echo json_encode($output);
         }
         break;
- /*TODO: Creando Json segun el ID */
- case "modalidad":
-    $datos = $curso->get_modalidad_id($_POST["modality_id"]);
-    if (is_array($datos) == true and count($datos) <> 0) {
-        foreach ($datos as $row) {
-            $output["modality_id"] = $row["modality_id"];
-            $output["name"] = $row["name"];
-            $output["est"] = $row["est"];
+    /*TODO: Creando Json segun el ID */
+    case "modalidad":
+        $datos = $curso->get_modalidad_id($_POST["modality_id"]);
+        if (is_array($datos) == true and count($datos) <> 0) {
+            foreach ($datos as $row) {
+                $output["modality_id"] = $row["modality_id"];
+                $output["name"] = $row["name"];
+                $output["est"] = $row["est"];
+            }
+            echo json_encode($output);
         }
-        echo json_encode($output);
-    }
-    break;
+        break;
 
 
     /*TODO: Eliminar segun ID */
@@ -66,6 +67,9 @@ switch ($_GET["op"]) {
             $sub_array[] = '<button type="button" onClick="editar(' . $row["cur_id"] . ');"  id="' . $row["cur_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["cur_id"] . ');"  id="' . $row["cur_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="imagen(' . $row["cur_id"] . ');"  id="' . $row["cur_id"] . '" class="btn btn-outline-success btn-icon"><div><i class="fa fa-file"></i></div></button>';
+            $sub_array[] = '<input type="checkbox" onClick="habilitarAsistencia(' . $row["cur_id"] . ');" name="C' . $row["cur_id"] . '" id="C' . $row["cur_id"] . '"' . ($row["est_asistencia"] == 1 ? ' checked' : '') . '>';
+
+
             $sub_array[] = $row["modality_id"];
             $sub_array[] = $row["nhours"];
             $data[] = $sub_array;
@@ -119,6 +123,14 @@ switch ($_GET["op"]) {
 
     case "update_imagen_curso":
         $curso->update_imagen_curso($_POST["curx_idx"], $_POST["cur_img"]);
+        break;
+    /*TODO: Guardar y editar cuando se tenga el ID */
+    case "asistencia":
+        $curso->insert_asistencia($_POST["curd_id"]);
+        break;
+    /*TODO: Guardar y editar cuando se tenga el ID */
+    case "habilitarAsistencia":
+        $curso->habilitar_asistencia($_POST["cur_id"], $_POST["est_asistencia"]);
         break;
 }
 ?>

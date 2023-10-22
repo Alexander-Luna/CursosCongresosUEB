@@ -53,3 +53,18 @@ function certificado(curd_id){
     console.log(curd_id);
     window.open('../Certificado/index.php?curd_id='+ curd_id +'','_blank');
 }
+function asistencia(curd_id) {
+    // Realiza una solicitud AJAX para registrar la asistencia
+    $.ajax({
+        type: 'POST',
+        url:  "../../controller/curso.php?op=asistencia", // Ruta al script PHP que contiene la función insert_asistencia
+        data: { curd_id: curd_id },
+        success: function (response) {
+            // Procesa la respuesta del servidor (si es necesario)
+            alert('Asistencia registrada con éxito');
+        },
+        error: function (e) {
+            alert('Error al registrar la asistencia '+e);
+        }
+    });
+}

@@ -29,7 +29,7 @@
       <div class="br-pagebody">
         <div class="br-section-wrapper">
           <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Listado de mis Cursos</h6>
-          <p class="mg-b-25 mg-lg-b-50">Desde aqui podra buscar sus cursos por certificado.</p>
+          <p class="mg-b-25 mg-lg-b-50">Desde aquí podrá buscar sus cursos por certificado.</p>
 
           <div class="table-wrapper">
             <table id="cursos_data" class="table display responsive nowrap">
@@ -39,7 +39,8 @@
                   <th class="wd-15p">Fecha Inicio</th>
                   <th class="wd-20p">Fecha Fin</th>
                   <th class="wd-15p">Instructor</th>
-                  <th class="wd-10p"></th>
+                  <th class="wd-10p">Certificado</th>
+                  <th class="wd-10p">Asistencia</th>
                 </tr>
               </thead>
               <tbody>

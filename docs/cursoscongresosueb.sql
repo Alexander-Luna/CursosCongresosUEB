@@ -13,6 +13,13 @@ CREATE TABLE `td_curso_usuario` (
   `fech_crea` datetime NOT NULL,
   `est` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+CREATE TABLE `td_curso_usuario_dias` (
+  `asistencia_id` int(11) NOT NULL AUTO_INCREMENT,
+  `curd_id` int(11) NOT NULL,
+  `fecha_asistencia` DATETIME NOT NULL,
+  `estado` int(1) NOT NULL,
+  PRIMARY KEY (`asistencia_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
 
@@ -23,6 +30,7 @@ INSERT INTO `td_curso_usuario` (`curd_id`, `cur_id`, `usu_id`, `fech_crea`, `est
 (4, 1, 4, '2023-10-17 23:11:34', 1),
 (5, 2, 4, '2023-10-17 23:16:50', 1),
 (6, 3, 4, '2023-10-17 23:16:56', 1);
+
 
 
 CREATE TABLE `tm_facultades` (
@@ -52,7 +60,8 @@ CREATE TABLE `tm_curso` (
   `inst_id` int(11) NOT NULL,
   `cur_img` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fech_crea` datetime DEFAULT NULL,
-  `est` int(11) NOT NULL
+  `est` int(11) NOT NULL,
+  `est_asistencia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 CREATE TABLE `modality` (
   `modality_id` int(11) NOT NULL,
@@ -68,12 +77,12 @@ INSERT INTO `modality` (
   `name`,
   `est`
 )VALUES(1,"PRESENCIAL",1),(2,"VIRTUAL",1),(3,"HIBRIDA",1);
-INSERT INTO `tm_curso` (`cur_id`, `cat_id`, `cur_nom`, `cur_descrip`, `cur_fechini`, `cur_fechfin`, `inst_id`, `cur_img`, `fech_crea`, `modality_id`, `nhours`, `est`) VALUES
-(1, 1, 'CURSO DE HTML5', 'Occaecat Lorem velit qui magna dolore culpa qui. Aliqua nostrud nisi cillum sunt consequat irure commodo qui reprehenderit in in quis. Esse pariatur amet esse sint tempor fugiat laborum consectetur exercitation anim in voluptate sunt est. Sint amet elit et id qui nisi qui. Incididunt et pariatur nostrud do dolore duis consequat non eu velit labore.', '2023-04-01', '2023-04-30', 2, '../../public/2.png', '2023-04-26 20:32:32','2','50', 1),
-(3, 2, 'PHP', 'Laborum consequat laboris incididunt ipsum ea irure enim consectetur. Mollit non in ex ut culpa elit commodo id nostrud magna voluptate amet. Aute duis ea duis nulla. Ad ipsum id reprehenderit fugiat do commodo excepteur labore ex. Tempor ex consectetur proident anim minim id ex laboris elit. Laborum do aliquip duis veniam tempor esse nisi eiusmod id elit tempor.', '2023-04-01', '2023-04-30', 2, '../../public/3.png', '2023-04-26 20:32:32','3','85', 1),
-(4, 1, 'LARAVEL y MYSQL', 'Aliqua magna eu minim irure aliqua esse esse irure irure cupidatat ex magna. Laborum pariatur velit adipisicing nisi id ex esse nisi mollit magna nostrud quis minim. Aliquip excepteur pariatur duis qui irure mollit in deserunt velit est excepteur enim reprehenderit excepteur.', '2023-04-01', '2023-04-30', 1, '../../public/4.png', '2023-04-26 20:32:32','1','120', 1),
-(5, 2, 'IV Congreso Académico Internacional (CAI IV – 2023 ) y III Congreso Internacional de Posgrado y Educación Continua (CIPEC III, 2023)', 'La Universidad Estatal de Bolívar en este año tiene el honor de planificar y presentar el IV Congreso Académico Internacional (CAI IV – 2023 ) y III Congreso Internacional de Posgrado y Educación Continua (CIPEC III, 2023), como un espacio reflexión, intercambio de experiencias y divulgación de trabajos de investigación científica y académica en los campos de la “Transformación digital e interculturalidad en la educación superior: Retos y oportunidades para la inclusión y el desarrollo regional".En este año el congreso se realizará en un formato hibrido (Presencial / Virtual) que pretende promover la investigación y difusión de los avances científicos en el área educativa, renovar y construir propuestas pedagógicas que contribuyan a seguir generando mejoras en los procesos de formación. ', '2023-10-25', '2023-10-27', 2, '../../public/1616601522.png', '2023-10-20 20:32:32','1','85', 1),
-(6, 1, 'ESTUDIO DE MERCADO', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', 1, '../../public/28629721.png', '2023-08-22 14:54:50',1,55, 1);
+INSERT INTO `tm_curso` (`cur_id`, `cat_id`, `cur_nom`, `cur_descrip`, `cur_fechini`, `cur_fechfin`, `inst_id`, `cur_img`, `fech_crea`, `modality_id`, `nhours`, `est`, `est_asistencia`) VALUES
+(1, 1, 'CURSO DE HTML5', 'Occaecat Lorem velit qui magna dolore culpa qui. Aliqua nostrud nisi cillum sunt consequat irure commodo qui reprehenderit in in quis. Esse pariatur amet esse sint tempor fugiat laborum consectetur exercitation anim in voluptate sunt est. Sint amet elit et id qui nisi qui. Incididunt et pariatur nostrud do dolore duis consequat non eu velit labore.', '2023-04-01', '2023-04-30', 2, '../../public/2.png', '2023-04-26 20:32:32','2','50', 1,0),
+(3, 2, 'PHP', 'Laborum consequat laboris incididunt ipsum ea irure enim consectetur. Mollit non in ex ut culpa elit commodo id nostrud magna voluptate amet. Aute duis ea duis nulla. Ad ipsum id reprehenderit fugiat do commodo excepteur labore ex. Tempor ex consectetur proident anim minim id ex laboris elit. Laborum do aliquip duis veniam tempor esse nisi eiusmod id elit tempor.', '2023-04-01', '2023-04-30', 2, '../../public/3.png', '2023-04-26 20:32:32','3','85', 1,0),
+(4, 1, 'LARAVEL y MYSQL', 'Aliqua magna eu minim irure aliqua esse esse irure irure cupidatat ex magna. Laborum pariatur velit adipisicing nisi id ex esse nisi mollit magna nostrud quis minim. Aliquip excepteur pariatur duis qui irure mollit in deserunt velit est excepteur enim reprehenderit excepteur.', '2023-04-01', '2023-04-30', 1, '../../public/4.png', '2023-04-26 20:32:32','1','120', 1,0),
+(5, 2, 'IV Congreso Académico Internacional (CAI IV – 2023 ) y III Congreso Internacional de Posgrado y Educación Continua (CIPEC III, 2023)', 'La Universidad Estatal de Bolívar en este año tiene el honor de planificar y presentar el IV Congreso Académico Internacional (CAI IV – 2023 ) y III Congreso Internacional de Posgrado y Educación Continua (CIPEC III, 2023), como un espacio reflexión, intercambio de experiencias y divulgación de trabajos de investigación científica y académica en los campos de la “Transformación digital e interculturalidad en la educación superior: Retos y oportunidades para la inclusión y el desarrollo regional".En este año el congreso se realizará en un formato hibrido (Presencial / Virtual) que pretende promover la investigación y difusión de los avances científicos en el área educativa, renovar y construir propuestas pedagógicas que contribuyan a seguir generando mejoras en los procesos de formación. ', '2023-10-25', '2023-10-27', 2, '../../public/1616601522.png', '2023-10-20 20:32:32','1','85', 1,1),
+(6, 1, 'ESTUDIO DE MERCADO', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', 1, '../../public/28629721.png', '2023-08-22 14:54:50',1,55, 1,1);
 
 CREATE TABLE `tm_instructor` (
   `inst_id` int(11) NOT NULL,
@@ -165,4 +174,7 @@ ALTER TABLE `tm_instructor`
   MODIFY `inst_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 ALTER TABLE `tm_usuario`
   MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `td_curso_usuario_dias` ADD CONSTRAINT `fk_asistencia`
+FOREIGN KEY (`curd_id`)
+REFERENCES `td_curso_usuario`(`curd_id`);
 COMMIT;

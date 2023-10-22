@@ -6,7 +6,7 @@ class Curso extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO tm_curso (cur_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin, inst_id,cur_img, fech_crea,modality_id,nhours, est) VALUES (NULL,?,?,?,?,?,?,?,?,'../../public/1.png', now(),'1');";
+        $sql = "INSERT INTO tm_curso (cur_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin, inst_id,cur_img, fech_crea,modality_id,nhours, est,est_asistencia) VALUES (NULL,?,?,?,?,?,?,?,?,'../../public/1.png', now(),'1',0);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $cat_id);
         $sql->bindValue(2, $cur_nom);
@@ -15,12 +15,64 @@ class Curso extends Conectar
         $sql->bindValue(5, $cur_fechfin);
         $sql->bindValue(6, $inst_id);
         $sql->bindValue(7, $modality_id);
-        $sql->bindValue(6, $nhours);
+        $sql->bindValue(8, $nhours);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
+    public function insert_asistencia($curd_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
 
-    public function update_curso($cur_id, $cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours)
+        // Primero, realiza una consulta para obtener el valor de cur_id desde td_curso_usuario
+        $sql1 = "SELECT cur_id FROM td_curso_usuario WHERE curd_id = ?";
+        $sql1 = $conectar->prepare($sql1);
+        $sql1->bindValue(1, $curd_id);
+        $sql1->execute();
+        $resultado1 = $sql1->fetch(PDO::FETCH_ASSOC);
+
+        if ($resultado1 && isset($resultado1['cur_id'])) {
+            // Luego, verifica si est_asistencia es igual a 1 en tm_curso
+            $sql2 = "SELECT est_asistencia FROM tm_curso WHERE cur_id = ? AND est_asistencia = 1";
+            $sql2 = $conectar->prepare($sql2);
+            $sql2->bindValue(1, $resultado1['cur_id']);
+            $sql2->execute();
+            $resultado2 = $sql2->fetch(PDO::FETCH_ASSOC);
+
+            if ($resultado2 && isset($resultado2['est_asistencia'])) {
+                // Si est_asistencia es igual a 1, inserta la asistencia en td_curso_usuario_dias
+                $sql3 = "INSERT INTO td_curso_usuario_dias (curd_id, fecha_asistencia, estado) VALUES (?, now(), 1)";
+                $sql3 = $conectar->prepare($sql3);
+                $sql3->bindValue(1, $curd_id);
+                $sql3->execute();
+                return true; // La asistencia se insertó con éxito
+            }
+        }
+
+        return false; // No se insertó la asistencia
+    }
+    public function habilitar_asistencia($cur_id, $est_asistencia)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+
+        $sql = "UPDATE tm_curso
+                SET
+                    est_asistencia = :est_asistencia
+                WHERE
+                    cur_id = :cur_id";
+
+        $sql = $conectar->prepare($sql);
+
+        // Vincular los valores a los marcadores de posición
+        $sql->bindParam(':est_asistencia', $est_asistencia, PDO::PARAM_INT);
+        $sql->bindParam(':cur_id', $cur_id, PDO::PARAM_INT);
+
+        // Ejecutar la consulta
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
+    }
+    public function update_curso($cur_id, $cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours, $est_asistencia)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -33,7 +85,8 @@ class Curso extends Conectar
                     cur_fechfin = ?,
                     modality_id = ?,
                     nhours = ?,
-                    inst_id = ?
+                    inst_id = ?,
+                    est_asistencia = ?
                 WHERE
                     cur_id = ?";
         $sql = $conectar->prepare($sql);
@@ -44,8 +97,9 @@ class Curso extends Conectar
         $sql->bindValue(5, $cur_fechfin);
         $sql->bindValue(6, $inst_id);
         $sql->bindValue(7, $cur_id);
-        $sql->bindValue(7, $modality_id);
-        $sql->bindValue(7, $nhours);
+        $sql->bindValue(8, $modality_id);
+        $sql->bindValue(9, $nhours);
+        $sql->bindValue(10, $est_asistencia);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
@@ -79,6 +133,7 @@ class Curso extends Conectar
                 tm_curso.cur_img,
                 tm_curso.modality_id,
                 tm_curso.nhours,
+                tm_curso.est_asistencia,
                 tm_facultades.cat_nom,
                 tm_curso.inst_id,
                 tm_instructor.inst_nom,

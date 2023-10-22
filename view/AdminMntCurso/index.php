@@ -49,6 +49,7 @@
                     <th class="wd-10p">Editar</th>
                     <th class="wd-10p">Eliminar</th>
                     <th class="wd-10p">Certificado</th>
+                    <th class="wd-10p">Asistencia</th>
                     </tr>
                 </thead>
                 <tbody>
