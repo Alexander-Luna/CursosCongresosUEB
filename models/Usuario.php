@@ -151,6 +151,7 @@ class Usuario extends Conectar
     // Consulta para obtener los registros de usuario y su recuento de asistencias
     $sql = "SELECT 
             td_curso_usuario.curd_id AS curd_id,
+            td_curso_usuario.est_aprueba,
             tm_curso.cur_id,
             tm_curso.cur_nom,
             tm_curso.cur_descrip,
