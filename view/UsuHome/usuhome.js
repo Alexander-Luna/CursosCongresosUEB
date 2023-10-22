@@ -58,18 +58,27 @@ function certificado(curd_id) {
     console.log(curd_id);
     window.open('../Certificado/index.php?curd_id=' + curd_id + '', '_blank');
 }
-function asistencia(curd_id) {
+let asistenciaRegistrada = false;
+function FuncionAsistencia(curd_id) {
+    // Verificar si la asistencia ya se ha registrado
+    if (asistenciaRegistrada) {
+        alert('La asistencia ya ha sido registrada.');
+        return;
+    }
+
     // Realiza una solicitud AJAX para registrar la asistencia
     $.ajax({
         type: 'POST',
-        url:  "../../controller/curso.php?op=asistencia", // Ruta al script PHP que contiene la función insert_asistencia
+        url: "../../controller/curso.php?op=asistencia",
         data: { curd_id: curd_id },
         success: function (response) {
             // Procesa la respuesta del servidor (si es necesario)
             alert('Asistencia registrada con éxito');
+            // Desactiva la función para futuras llamadas
+            asistenciaRegistrada = true;
         },
         error: function (e) {
-            alert('Error al registrar la asistencia '+e);
+            alert('Error al registrar la asistencia ' + e);
         }
     });
 }

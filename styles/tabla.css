@@ -1,0 +1,14 @@
+/* Estilo para todas las celdas de datos en la tabla */
+td {
+  /* Estilo para hacer ellipsis en el texto que supere el ancho máximo */
+  max-width: 100px; /* Ajusta este valor según tus necesidades */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: max-width 0.5s; /* Transición suave de la propiedad max-width */
+}
+
+/* Estilo para ampliar el ancho de la celda al hacer hover */
+td:hover {
+  max-width: none; /* Elimina la limitación del ancho máximo al hacer hover */
+}

@@ -11,6 +11,7 @@ CREATE TABLE `td_curso_usuario` (
   `cur_id` int(11) NOT NULL,
   `usu_id` int(11) NOT NULL,
   `fech_crea` datetime NOT NULL,
+  `est_aprueba` datetime NOT NULL,
   `est` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 CREATE TABLE `td_curso_usuario_dias` (
@@ -23,13 +24,13 @@ CREATE TABLE `td_curso_usuario_dias` (
 
 
 
-INSERT INTO `td_curso_usuario` (`curd_id`, `cur_id`, `usu_id`, `fech_crea`, `est`) VALUES
-(1, 1, 1, '2023-10-17 23:11:34', 1),
-(2, 1, 2, '2023-10-17 23:11:34', 1),
-(3, 1, 3, '2023-10-17 23:11:34', 1),
-(4, 1, 4, '2023-10-17 23:11:34', 1),
-(5, 2, 4, '2023-10-17 23:16:50', 1),
-(6, 3, 4, '2023-10-17 23:16:56', 1);
+INSERT INTO `td_curso_usuario` (`curd_id`, `cur_id`, `usu_id`, `fech_crea`, `est`,`est_aprueba`) VALUES
+(1, 1, 1, '2023-10-17 23:11:34', 1,0),
+(2, 1, 2, '2023-10-17 23:11:34', 1,0),
+(3, 1, 3, '2023-10-17 23:11:34', 1,0),
+(4, 1, 4, '2023-10-17 23:11:34', 1,0),
+(5, 2, 4, '2023-10-17 23:16:50', 1,0),
+(6, 3, 4, '2023-10-17 23:16:56', 1,0);
 
 
 
