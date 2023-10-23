@@ -11,9 +11,9 @@ switch ($_GET["op"]) {
     /*TODO: Guardar y editar cuando se tenga el ID */
     case "guardaryeditar":
         if (empty($_POST["cur_id"])) {
-            $curso->insert_curso($_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["inst_id"], $_POST["modality_id"], $_POST["nhours"]);
+            $curso->insert_curso($_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["inst_id"], $_POST["modality_id"], $_POST["nhours"], $_POST["portada_img"]);
         } else {
-            $curso->update_curso($_POST["cur_id"], $_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["inst_id"], $_POST["modality_id"], $_POST["nhours"], $_POST["est_asistencia"]);
+            $curso->update_curso($_POST["cur_id"], $_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["inst_id"], $_POST["modality_id"], $_POST["nhours"], $_POST["est_asistencia"], $_POST["portada_img"]);
         }
         break;
     /*TODO: Creando Json segun el ID */
@@ -25,6 +25,7 @@ switch ($_GET["op"]) {
                 $output["cat_id"] = $row["cat_id"];
                 $output["modality_id"] = $row["modality_id"];
                 $output["cur_nom"] = $row["cur_nom"];
+                $output["portada_img"] = $row["portada_img"];
                 $output["nhours"] = $row["nhours"];
                 $output["cur_descrip"] = $row["cur_descrip"];
                 $output["cur_fechini"] = $row["cur_fechini"];

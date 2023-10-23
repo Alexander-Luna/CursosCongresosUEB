@@ -2,11 +2,11 @@
 class Curso extends Conectar
 {
 
-    public function insert_curso($cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours)
+    public function insert_curso($cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours,$portada_img)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO tm_curso (cur_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin, inst_id,cur_img, fech_crea,modality_id,nhours, est,est_asistencia) VALUES (NULL,?,?,?,?,?,?,?,?,'../../public/1.png', now(),'1',0);";
+        $sql = "INSERT INTO tm_curso (cur_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin, inst_id,cur_img, fech_crea,modality_id,nhours,portada_img, est,est_asistencia) VALUES (NULL,?,?,?,?,?,?,?,?,'../../public/1.png',?, now(),'1',0);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $cat_id);
         $sql->bindValue(2, $cur_nom);
@@ -16,6 +16,7 @@ class Curso extends Conectar
         $sql->bindValue(6, $inst_id);
         $sql->bindValue(7, $modality_id);
         $sql->bindValue(8, $nhours);
+        $sql->bindValue(9, $portada_img);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
@@ -72,7 +73,7 @@ class Curso extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-    public function update_curso($cur_id, $cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours, $est_asistencia)
+    public function update_curso($cur_id, $cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours, $est_asistencia,$portada_img)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -86,6 +87,7 @@ class Curso extends Conectar
                     modality_id = ?,
                     nhours = ?,
                     inst_id = ?,
+                    portada_img = ?,
                     est_asistencia = ?
                 WHERE
                     cur_id = ?";
@@ -100,6 +102,7 @@ class Curso extends Conectar
         $sql->bindValue(8, $modality_id);
         $sql->bindValue(9, $nhours);
         $sql->bindValue(10, $est_asistencia);
+        $sql->bindValue(11, $portada_img);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
@@ -131,6 +134,7 @@ class Curso extends Conectar
                 tm_curso.cur_fechfin,
                 tm_curso.cat_id,
                 tm_curso.cur_img,
+                tm_curso.portada_img,
                 tm_curso.modality_id,
                 tm_curso.nhours,
                 tm_curso.est_asistencia,

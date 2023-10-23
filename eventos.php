@@ -16,6 +16,7 @@ $query = "SELECT
             c.cur_id,
             f.cat_nom AS facultad,
             c.cur_nom AS nombre_curso,
+            c.portada_img,
             c.cur_fechini AS fecha_inicio,
             c.cur_fechfin AS fecha_fin,
             i.inst_nom AS nombre_instructor
@@ -68,8 +69,7 @@ if (!$result) {
                         <div class="card">
                             <!-- Agrega la imagen debajo del título -->
                             <h3 class="card__title"><?php echo $row['nombre_curso']; ?></h3>
-                            <img class="card__image" src="<?php echo $row['imagen_url']; ?>" alt="<?php echo $row['nombre_curso']; ?>">
-
+                            <img class="card__image" src="<?php echo $row['portada_img']; ?>" alt="<?php echo $row['nombre_curso']; ?>">
                             <p class="card__content">Facultad: <?php echo $row['facultad']; ?></p>
                             <p class="card__content">Fecha de Inicio: <?php echo $row['fecha_inicio']; ?></p>
                             <p class="card__content">Fecha de Finalización: <?php echo $row['fecha_fin']; ?></p>
