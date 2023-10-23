@@ -1,0 +1,52 @@
+/* Establece un ancho máximo para la sección para mostrar solo 4 elementos por fila con 50px de separación */
+.container__card,
+.br-section-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilos comunes para elementos (tarjetas) */
+.container__card .element,
+.br-section-wrapper .card,
+.element {
+    width: calc(25% - 50px);
+    /* Ancho del 25% con 50px de margen a cada lado (total 100px de separación) */
+    margin: 10px;
+    /* Agrega margen vertical */
+    margin-left: 25px;
+    /* Agrega margen izquierdo de 50px */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    /* Incluye el relleno y el borde en el ancho */
+}
+
+.card__content {
+    margin: 8px 0;
+}
+
+/* Estilos de la tarjeta */
+.card {
+    display: inline-block;
+}
+
+@media (max-width: 1024px) {
+
+    .br-section-wrapper .card,
+    .element {
+        max-width: calc(33.33% - 50px);
+    }
+}
+
+@media (max-width: 768px) {
+
+    .br-section-wrapper .card,
+    .element {
+        max-width: calc(50% - 50px);
+    }
+}

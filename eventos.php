@@ -39,6 +39,7 @@ if (!$result) {
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/eventos.css">
     <script src="scripts/index.js" defer></script>
 </head>
 
@@ -56,49 +57,31 @@ if (!$result) {
             </ul>
         </nav>
     </header>
-    <div class="br-mainpanel">
+    <section class="container__card">
+        <div class="br-mainpanel">
+            <div class="br-pagebody">
+                <div class="br-section-wrapper">
+                    <?php
+                    // Asumiendo que $result es un array de resultados
+                    foreach ($result as $row) {
+                    ?>
+                        <div class="card">
+                            <!-- Agrega la imagen debajo del título -->
+                            <h3 class="card__title"><?php echo $row['nombre_curso']; ?></h3>
+                            <img class="card__image" src="<?php echo $row['imagen_url']; ?>" alt="<?php echo $row['nombre_curso']; ?>">
 
-        <div class="br-pagebody">
-            <div class="br-section-wrapper">
-                <p></p>
-
-                <div class="table-wrapper"></div>
-                <table id="cursos_data" class="table display responsive nowrap">
-                    <thead>
-                        <tr>
-                            <th class="wd-15p">Facultad</th>
-                            <th class="wd-15p">Nombre</th>
-                            <th class="wd-15p">Fech.Inicio</th>
-                            <th class="wd-20p">Fech.Fin</th>
-                            <th class="wd-15p">Instructor</th>
-                            <th class="wd-10p"></th>
-                            <th class="wd-10p"></th>
-                            <th class="wd-10p"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Itera a través de los resultados de la consulta y muestra las filas de la tabla
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>";
-                            echo "<td>" . $row['facultad'] . "</td>";
-                            echo "<td>" . $row['nombre_curso'] . "</td>";
-                            echo "<td>" . $row['fecha_inicio'] . "</td>";
-                            echo "<td>" . $row['fecha_fin'] . "</td>";
-                            echo "<td>" . $row['nombre_instructor'] . "</td>";
-                            echo "<td></td>";
-                            echo "<td></td>";
-                            echo "<td></td>";
-                            echo "</tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                            <p class="card__content">Facultad: <?php echo $row['facultad']; ?></p>
+                            <p class="card__content">Fecha de Inicio: <?php echo $row['fecha_inicio']; ?></p>
+                            <p class="card__content">Fecha de Finalización: <?php echo $row['fecha_fin']; ?></p>
+                            <p class="card__content">Instructor: <?php echo $row['nombre_instructor']; ?></p>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
             </div>
-
         </div>
-    </div>
-    </div>
+    </section>
     <Footer id="pie_pagina">
         <div id="grupo_1">
             <div class="box">
