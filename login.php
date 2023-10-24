@@ -47,7 +47,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <strong class="d-block d-sm-inline-block-force">Error!</strong> Campos vacios
+                <strong class="d-block d-sm-inline-block-force">Error!</strong> Campos vacíos
               </div>
         <?php
               break;
@@ -59,10 +59,10 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
           <img src="assets/logo_ueb.png" alt="Logo" width="250px" height="250px" style="display: block; margin: 0 auto;">
         </div>
 
-        <div class="tx-center mg-b-30">Certificados y Diplomas</div>
+        <div class="tx-center mg-b-30">Certificados</div>
 
         <div class="form-group">
-          <input type="text" id="usu_correo" name="usu_correo" class="form-control" placeholder="Ingrese Correo Electronico">
+          <input type="text" id="usu_correo" name="usu_correo" class="form-control" placeholder="Ingrese Correo Electrónico">
         </div>
         <div class="form-group">
           <input type="password" id="usu_pass" name="usu_pass" class="form-control" placeholder="Ingrese Contraseña">

@@ -18,7 +18,7 @@
         <div class="dropdown-menu dropdown-menu-header wd-200">
             <ul class="list-unstyled user-profile-nav">
             <li><a href="../UsuPerfil/"><i class="icon ion-ios-gear"></i> Perfil</a></li>
-            <li><a href="../html/Logout.php"><i class="icon ion-power"></i> Cerrar Sesion</a></li>
+            <li><a href="../html/Logout.php"><i class="icon ion-power"></i> Cerrar Sesión</a></li>
             </ul>
         </div>
         </div>

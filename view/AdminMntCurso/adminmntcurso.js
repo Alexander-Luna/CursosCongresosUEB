@@ -160,6 +160,7 @@ function combo_facultad() {
         $('#cat_id').html(data);
     });
 }
+<<<<<<< HEAD
 
 function combo_modalidad() {
     $.post("../../controller/modalidad.php?op=combo", function (data) {
@@ -174,6 +175,13 @@ function combo_modalidad() {
 }
 
 
+=======
+function combo_modalidad() {
+    $.post("../../controller/curso.php?op=combomodalidad", function (data) {
+        $('#modality_id').html(data);
+    });
+}
+>>>>>>> f019875bb62efc0cde26584dc35bc170b5e797da
 function combo_instructor() {
     $.post("../../controller/instructor.php?op=combo", function (data) {
         $('#inst_id').html(data);
