@@ -65,7 +65,7 @@ if (isset($_SESSION["usu_id"])) {
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label class="form-control-label">Correo Electronico: <span class="tx-danger">*</span></label>
+                  <label class="form-control-label">Correo Electrónico: <span class="tx-danger">*</span></label>
                   <input class="form-control" type="text" name="usu_correo" id="usu_correo" readonly>
                 </div>
               </div>

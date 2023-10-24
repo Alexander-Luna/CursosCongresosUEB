@@ -153,7 +153,11 @@ function combo_facultad() {
         $('#cat_id').html(data);
     });
 }
-
+function combo_modalidad() {
+    $.post("../../controller/curso.php?op=combomodalidad", function (data) {
+        $('#modality_id').html(data);
+    });
+}
 function combo_instructor() {
     $.post("../../controller/instructor.php?op=combo", function (data) {
         $('#inst_id').html(data);

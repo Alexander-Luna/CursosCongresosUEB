@@ -71,7 +71,6 @@ switch ($_GET["op"]) {
                 $output["cur_fechini"] = $row["cur_fechini"];
                 $output["cur_fechfin"] = $row["cur_fechfin"];
                 $output["cur_img"] = $row["cur_img"];
-                $output["portada_img"] = $row["portada_img"];
                 $output["nhours"] = $row["nhours"];
                 $output["modality_id"] = $row["modality_id"];
                 $output["usu_id"] = $row["usu_id"];

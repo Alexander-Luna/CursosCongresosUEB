@@ -2,11 +2,11 @@
 class Curso extends Conectar
 {
 
-    public function insert_curso($cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours,$portada_img)
+    public function insert_curso($cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours, $portada_img)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO tm_curso (cur_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin, inst_id,cur_img, fech_crea,modality_id,nhours,portada_img, est,est_asistencia) VALUES (NULL,?,?,?,?,?,?,?,?,'../../public/1.png',?, now(),'1',0);";
+        $sql = "INSERT INTO tm_curso (cur_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin, inst_id,cur_img, fech_crea,modality_id,nhours,portada_img, est,est_asistencia) VALUES (NULL,?,?,?,?,?,?,'../../public/1.png', now(),?,?,?,'1',0);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $cat_id);
         $sql->bindValue(2, $cur_nom);
@@ -73,7 +73,7 @@ class Curso extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-    public function update_curso($cur_id, $cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours, $est_asistencia,$portada_img)
+    public function update_curso($cur_id, $cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours, $est_asistencia, $portada_img)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -240,6 +240,15 @@ class Curso extends Conectar
             move_uploaded_file($_FILES['cur_img']['tmp_name'], $destination);
             return "../../public/" . $new_name;
         }
+    }
+    public function get_modalidad()
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT * FROM modality WHERE est = 1";
+        $sql = $conectar->prepare($sql);
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
     }
 }
 ?>

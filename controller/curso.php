@@ -69,8 +69,6 @@ switch ($_GET["op"]) {
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["cur_id"] . ');"  id="' . $row["cur_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="imagen(' . $row["cur_id"] . ');"  id="' . $row["cur_id"] . '" class="btn btn-outline-success btn-icon"><div><i class="fa fa-file"></i></div></button>';
             $sub_array[] = '<input type="checkbox" onClick="habilitarAsistencia(' . $row["cur_id"] . ');" name="C' . $row["cur_id"] . '" id="C' . $row["cur_id"] . '"' . ($row["est_asistencia"] == 1 ? ' checked' : '') . '>';
-
-
             $sub_array[] = $row["modality_id"];
             $sub_array[] = $row["nhours"];
             $data[] = $sub_array;
@@ -132,6 +130,16 @@ switch ($_GET["op"]) {
     /*TODO: Guardar y editar cuando se tenga el ID */
     case "habilitarAsistencia":
         $curso->habilitar_asistencia($_POST["cur_id"], $_POST["est_asistencia"]);
+        break;
+    case "combomodalidad":
+        $datos = $curso->get_modalidad();
+        if (is_array($datos) == true and count($datos) > 0) {
+            $html = " <option label='Seleccione'></option>";
+            foreach ($datos as $row) {
+                $html .= "<option value='" . $row['modality_id'] . "'>" . $row['name'] . "</option>";
+            }
+            echo $html;
+        }
         break;
 }
 ?>
