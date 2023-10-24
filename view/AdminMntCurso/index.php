@@ -45,10 +45,10 @@
                     <th class="wd-15p">Nombre</th>
                     <th class="wd-15p">Fecha Inicio</th>
                     <th class="wd-20p">Fecha Fin</th>
-                    <th class="wd-15p">Instructor</th>
+                    <th class="wd-15p">Portada</th>
+                    <th class="wd-10p">Certificado</th>
                     <th class="wd-10p">Editar</th>
                     <th class="wd-10p">Eliminar</th>
-                    <th class="wd-10p">Certificado</th>
                     <th class="wd-10p">Asistencia</th>
                     </tr>
                 </thead>

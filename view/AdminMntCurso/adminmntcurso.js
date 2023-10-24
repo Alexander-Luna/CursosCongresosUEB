@@ -6,8 +6,16 @@ function init() {
         guardaryeditar(e);
     });
 
+    // Manejador de evento para el envío del formulario
     $("#detalle_form").on("submit", function (e) {
-        guardaryeditarimg(e);
+        e.preventDefault(); // Evita el envío automático del formulario
+        if (isPortada === "portada") {
+            URLimg = "../../controller/curso.php?op=update_portada_curso";
+            guardaryeditarimg(e);
+        } else {
+            URLimg = "../../controller/curso.php?op=update_imagen_curso";
+            guardaryeditarimg(e);
+        }
     });
 }
 
@@ -105,7 +113,9 @@ function editar(cur_id) {
         data = JSON.parse(data);
         $('#cur_id').val(data.cur_id);
         $('#cat_id').val(data.cat_id).trigger('change');
+        $('#modality_id').val(data.modality_id).trigger('change');
         $('#cur_nom').val(data.cur_nom);
+        $('#nhours').val(data.nhours);
         $('#cur_descrip').val(data.cur_descrip);
         $('#cur_fechini').val(data.cur_fechini);
         $('#cur_fechfin').val(data.cur_fechfin);
@@ -140,12 +150,12 @@ function eliminar(cur_id) {
     });
 }
 
-
-function imagen(cur_id) {
+let isPortada = "";
+function imagen(cur_id, portada) {
+    isPortada = portada;
     $('#curx_idx').val(cur_id);
     $('#modalfile').modal('show');
 }
-
 function nuevo() {
     $('#lbltitulo').html('Nuevo Registro');
     $('#cursos_form')[0].reset();
@@ -160,28 +170,11 @@ function combo_facultad() {
         $('#cat_id').html(data);
     });
 }
-<<<<<<< HEAD
-
-function combo_modalidad() {
-    $.post("../../controller/modalidad.php?op=combo", function (data) {
-        $('#modality_id').html(data);
-        //console.log(data); // Agregar esta línea para depurar
-
-        // Eliminar el texto incorrecto "- 1" de las opciones
-        // $('#modality_id option').text(function (i, text) {
-        //     return text.replace(/ - 1$/, ''); // Elimina "- 1" al final del texto
-        // });
-    });
-}
-
-
-=======
 function combo_modalidad() {
     $.post("../../controller/curso.php?op=combomodalidad", function (data) {
         $('#modality_id').html(data);
     });
 }
->>>>>>> f019875bb62efc0cde26584dc35bc170b5e797da
 function combo_instructor() {
     $.post("../../controller/instructor.php?op=combo", function (data) {
         $('#inst_id').html(data);
@@ -211,11 +204,12 @@ function habilitarAsistencia(cur_id) {
     });
 
 }
+let URLimg = "";
 function guardaryeditarimg(e) {
     e.preventDefault();
     var formData = new FormData($("#detalle_form")[0]);
     $.ajax({
-        url: "../../controller/curso.php?op=update_imagen_curso",
+        url: URLimg,
         type: "POST",
         data: formData,
         contentType: false,

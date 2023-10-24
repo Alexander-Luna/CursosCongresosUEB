@@ -1,9 +1,9 @@
 <?php
 // Archivo de conexión a la base de datos (conexion.php)
-$host = "localhost";  // Cambia esto al nombre del servidor de tu base de datos
-$usuario = "root";  // Cambia esto a tu nombre de usuario de la base de datos
-$contrasena = "";  // Cambia esto a tu contraseña de la base de datos
-$base_de_datos = "cursoscongresosueb";  // Cambia esto al nombre de tu base de datos
+$host = "localhost"; // Cambia esto al nombre del servidor de tu base de datos
+$usuario = "root"; // Cambia esto a tu nombre de usuario de la base de datos
+$contrasena = ""; // Cambia esto a tu contraseña de la base de datos
+$base_de_datos = "cursoscongresosueb"; // Cambia esto al nombre de tu base de datos
 
 $conexion = mysqli_connect($host, $usuario, $contrasena, $base_de_datos);
 
@@ -65,17 +65,34 @@ if (!$result) {
                     <?php
                     // Asumiendo que $result es un array de resultados
                     foreach ($result as $row) {
-                    ?>
+                        ?>
+                       
+
                         <div class="card">
-                            <!-- Agrega la imagen debajo del título -->
-                            <h3 class="card__title"><?php echo $row['nombre_curso']; ?></h3>
-                            <img class="card__image" src="<?php echo $row['portada_img']; ?>" alt="<?php echo $row['nombre_curso']; ?>">
-                            <p class="card__content">Facultad: <?php echo $row['facultad']; ?></p>
-                            <p class="card__content">Fecha de Inicio: <?php echo $row['fecha_inicio']; ?></p>
-                            <p class="card__content">Fecha de Finalización: <?php echo $row['fecha_fin']; ?></p>
-                            <p class="card__content">Instructor: <?php echo $row['nombre_instructor']; ?></p>
+                            <div class="card-image">
+                            <img src="<?php echo $row['portada_img']; ?>"
+                                alt="<?php echo $row['nombre_curso']; ?>">
+                            </div>
+                            <div class="category">  <h3 class="card__title">
+                                <?php echo $row['nombre_curso']; ?>
+                            </h3> </div>
+
+                            <div class="heading">  <p class="card__content">Facultad:
+                                <?php echo $row['facultad']; ?>
+                            </p>
+                            <p class="card__content">Fecha de Inicio:
+                                <?php echo $row['fecha_inicio']; ?>
+                            </p>
+                            <p class="card__content">Fecha de Finalización:
+                                <?php echo $row['fecha_fin']; ?>
+                            </p>
+                          
+                                <div class="author"> By <span class="name">  <p class="card__content">
+                                <?php echo $row['nombre_instructor']; ?>
+                            </p></span> 4 days ago</div>
+                            </div>
                         </div>
-                    <?php
+                        <?php
                     }
                     ?>
                 </div>
@@ -118,7 +135,8 @@ if (!$result) {
                     <a href="https://twitter.com" target="_blank" rel="noreferrer">
                         <i class="fa-brands fa-twitter"></i>
                     </a>
-                    <a href="https://www.youtube.com/channel/UCml4cc2U6oWm7jG9iayK3UA/videos" target="_blank" rel="noreferrer">
+                    <a href="https://www.youtube.com/channel/UCml4cc2U6oWm7jG9iayK3UA/videos" target="_blank"
+                        rel="noreferrer">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
                     <a href="https://whatsapp.com" target="_blank" rel="noreferrer">
