@@ -8,7 +8,7 @@
                 <div class="col-lg-12">
                     <div class="form-group">
                         <label class="form-control-label"><span class="tx-danger">*</span></label>
-                        <a href="ruta_de_la_plantilla" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium" download><i class="fa fa-download"></i> Descargar Plantilla</a>
+                        <a href="../../assets/add_files/add_users.xlsx" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium" download><i class="fa fa-download"></i> Descargar Plantilla</a>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Seleccionar Plantilla: <span class="tx-danger">*</span></label>

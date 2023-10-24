@@ -1,13 +1,13 @@
 
 var usu_id = $('#usu_idx').val();
 
-function init(){
-    $("#usuario_form").on("submit",function(e){
+function init() {
+    $("#usuario_form").on("submit", function (e) {
         guardaryeditar(e);
     });
 }
 
-function guardaryeditar(e){
+function guardaryeditar(e) {
     e.preventDefault();
     var formData = new FormData($("#usuario_form")[0]);
     $.ajax({
@@ -16,7 +16,7 @@ function guardaryeditar(e){
         data: formData,
         contentType: false,
         processData: false,
-        success: function(data){
+        success: function (data) {
 
             $('#usuario_data').DataTable().ajax.reload();
             $('#modalmantenimiento').modal('hide');
@@ -31,7 +31,7 @@ function guardaryeditar(e){
     });
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
     $('#usu_sex').select2({
         dropdownParent: $('#modalmantenimiento')
     });
@@ -49,36 +49,36 @@ $(document).ready(function(){
             'excelHtml5',
             'csvHtml5',
         ],
-        "ajax":{
-            url:"../../controller/usuario.php?op=listar",
-            type:"post"
+        "ajax": {
+            url: "../../controller/usuario.php?op=listar",
+            type: "post"
         },
         "bDestroy": true,
         "responsive": true,
-        "bInfo":true,
+        "bInfo": true,
         "iDisplayLength": 10,
-        "order": [[ 0, "desc" ]],
+        "order": [[0, "desc"]],
         "language": {
-            "sProcessing":     "Procesando...",
-            "sLengthMenu":     "Mostrar _MENU_ registros",
-            "sZeroRecords":    "No se encontraron resultados",
-            "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix":    "",
-            "sSearch":         "Buscar:",
-            "sUrl":            "",
-            "sInfoThousands":  ",",
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
             "sLoadingRecords": "Cargando...",
             "oPaginate": {
-                "sFirst":    "Primero",
-                "sLast":     "Último",
-                "sNext":     "Siguiente",
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
                 "sPrevious": "Anterior"
             },
             "oAria": {
-                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         },
@@ -86,8 +86,8 @@ $(document).ready(function(){
 
 });
 
-function editar(usu_id){
-    $.post("../../controller/usuario.php?op=mostrar",{usu_id : usu_id}, function (data) {
+function editar(usu_id) {
+    $.post("../../controller/usuario.php?op=mostrar", { usu_id: usu_id }, function (data) {
         console.log(data);
         data = JSON.parse(data);
         $('#usu_id').val(data.usu_id);
@@ -106,7 +106,7 @@ function editar(usu_id){
     $('#modalmantenimiento').modal('show');
 }
 
-function eliminar(usu_id){
+function eliminar(usu_id) {
     swal.fire({
         title: "Eliminar!",
         text: "Desea Eliminar el Registro?",
@@ -116,7 +116,7 @@ function eliminar(usu_id){
         cancelButtonText: "No",
     }).then((result) => {
         if (result.value) {
-            $.post("../../controller/usuario.php?op=eliminar",{usu_id : usu_id}, function (data) {
+            $.post("../../controller/usuario.php?op=eliminar", { usu_id: usu_id }, function (data) {
                 $('#usuario_data').DataTable().ajax.reload();
 
                 Swal.fire({
@@ -130,7 +130,7 @@ function eliminar(usu_id){
     });
 }
 
-function nuevo(){
+function nuevo() {
     $('#usu_id').val('');
     $('#usu_sex').val('').trigger('change');
     $('#rol_id').val('').trigger('change');
@@ -144,17 +144,17 @@ $(document).on("click", "#btnplantilla", function () {
     $('#modalplantilla').modal('show');
 });
 
-var ExcelToJSON = function() {
-    this.parseExcel = function(file) {
+var ExcelToJSON = function () {
+    this.parseExcel = function (file) {
         var reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             var data = e.target.result;
             var workbook = XLSX.read(data, {
                 type: 'binary'
             });
             //TODO: Recorrido a todas las pestañas
-            workbook.SheetNames.forEach(function(sheetName) {
+            workbook.SheetNames.forEach(function (sheetName) {
                 // Here is your object
                 var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
                 var json_object = JSON.stringify(XL_row_object);
@@ -165,38 +165,50 @@ var ExcelToJSON = function() {
 
                     var columns = Object.values(UserList[i])
 
-                    $.post("../../controller/usuario.php?op=guardar_desde_excel",{
-                        usu_nom : columns[0],
-                        usu_apep : columns[1],
-                        usu_apem : columns[2],
-                        usu_correo : columns[3],
-                        usu_pass : columns[4],
-                        usu_sex : columns[5],
-                        usu_telf :columns[6],
-                        rol_id : columns[7],
-                        usu_ci :columns[8],
-                        aclevel_id :columns[9]
+                    $.post("../../controller/usuario.php?op=guardar_desde_excel", {
+                        usu_nom: columns[0],
+                        usu_apep: columns[1],
+                        usu_apem: columns[2],
+                        usu_correo: columns[3],
+                        usu_pass: columns[4],
+                        usu_ci: columns[4],
+                        usu_sex: columns[5],
+                        usu_telf: columns[6],
+                        rol_id: '1',
+                        aclevel_id: assignAclevelId(columns[7])
+
                     }, function (data) {
                         console.log(data);
                     });
 
                 }
                 /* TODO:Despues de subir la informacion limpiar inputfile */
-                document.getElementById("upload").value=null;
+                document.getElementById("upload").value = null;
 
                 /* TODO: Actualizar Datatable JS */
                 $('#usuario_data').DataTable().ajax.reload();
                 $('#modalplantilla').modal('hide');
             })
         };
-        reader.onerror = function(ex) {
+        reader.onerror = function (ex) {
             console.log(ex);
         };
 
         reader.readAsBinaryString(file);
     };
 };
-
+function assignAclevelId(aclevel) {
+    if (aclevel === "Estudiante") {
+        return 1;
+    } else if (aclevel === "Maestria") {
+        return 2;
+    } else if (aclevel === "Doctorado") {
+        return 3;
+    } else {
+        // Puedes manejar otros casos si es necesario
+        return null; // Otra acción por defecto o un valor específico
+    }
+}
 function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
     var xl2json = new ExcelToJSON();
