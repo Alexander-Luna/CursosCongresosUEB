@@ -69,12 +69,7 @@ if (isset($_SESSION["usu_id"])) {
                   <input class="form-control" type="text" name="usu_correo" id="usu_correo" readonly>
                 </div>
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label class="form-control-label">Contraseña: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="usu_pass" id="usu_pass" placeholder="Ingrese Contraseña">
-                </div>
-              </div>
+
               <div class="col-lg-6">
                 <div class="form-group mg-b-10-force">
                   <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
@@ -95,13 +90,19 @@ if (isset($_SESSION["usu_id"])) {
 
             <div class="form-layout-footer">
               <button class="btn btn-info" id="btnactualizar">Actualizar</button>
+              </br></br>
+              <div class="form-group">
+                <button id="btnplantilla" name="btnplantilla"
+                  class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">
+                  <i class="fa fa-key"></i> Cambiar Contraseña</button>
+              </div>
             </div>
           </div>
 
         </div>
       </div>
     </div>
-
+    <?php require_once("reset_password.php"); ?>
     <?php require_once("../html/MainJs.php"); ?>
     <script type="text/javascript" src="usuperfil.js"></script>
   </body>

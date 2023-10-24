@@ -1,7 +1,19 @@
 <?php
 class Usuario extends Conectar
 {
+
+    function encriptarPassword($password)
+    {
+        $options = [
+            'cost' => 12,
+            // Factor de trabajo recomendado para bcrypt
+        ];
+        $hash = password_hash($password, PASSWORD_BCRYPT, $options);
+        return $hash;
+    }
+
     /*TODO: Funcion para login de acceso del usuario */
+
     public function login()
     {
         $conectar = parent::conexion();
@@ -14,12 +26,25 @@ class Usuario extends Conectar
                 header("Location:" . conectar::ruta() . "index.php?m=2");
                 exit();
             } else {
-                $sql = "SELECT * FROM tm_usuario WHERE usu_correo=? and usu_pass=? and est=1";
+                $sql = "SELECT usu_pass FROM tm_usuario WHERE usu_correo=? and est=1";
                 $stmt = $conectar->prepare($sql);
                 $stmt->bindValue(1, $correo);
-                $stmt->bindValue(2, $pass);
                 $stmt->execute();
                 $resultado = $stmt->fetch();
+
+                if ($resultado) {
+                    $hashAlmacenado = $resultado['usu_pass'];
+
+                    $sql = "SELECT * FROM tm_usuario WHERE usu_correo=? and usu_pass=? and est=1";
+                    $stmt = $conectar->prepare($sql);
+                    $stmt->bindValue(1, $correo);
+                    // $stmt->bindValue(2, password_verify($pass, $hashAlmacenado));
+                    $stmt->bindValue(2, $pass);
+                    $stmt->execute();
+                    $resultado = $stmt->fetch();
+                } else {
+                    // Usuario no encontrado
+                }
                 if (is_array($resultado) and count($resultado) > 0) {
                     $_SESSION["usu_id"] = $resultado["usu_id"];
                     $_SESSION["usu_nom"] = $resultado["usu_nom"];
@@ -38,7 +63,17 @@ class Usuario extends Conectar
             }
         }
     }
-
+    public function actualizarPassword($usu_id, $usu_pass)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE tm_usuario SET usu_pass = ? WHERE usu_id = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_pass);
+        $sql->bindValue(2, $usu_id);
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
+    }
     /*TODO: Mostrar todos los cursos en los cuales esta inscrito un usuario */
     public function get_cursos_x_usuario($usu_id)
     {
@@ -82,6 +117,7 @@ class Usuario extends Conectar
         parent::set_names();
         $sql = "SELECT 
                 td_curso_usuario.curd_id,
+                 td_curso_usuario.est_aprueba,
                 tm_curso.cur_id,
                 tm_curso.cur_nom,
                 tm_curso.cur_descrip,
@@ -147,12 +183,12 @@ class Usuario extends Conectar
         return $resultado = $sql->fetchAll();
     }
     public function get_cursos_usuario_x_id_x_asistencia($cur_id)
-{
-    $conectar = parent::conexion();
-    parent::set_names();
-    
-    // Consulta para obtener los registros de usuario y su recuento de asistencias
-    $sql = "SELECT 
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+
+        // Consulta para obtener los registros de usuario y su recuento de asistencias
+        $sql = "SELECT 
             td_curso_usuario.curd_id AS curd_id,
             td_curso_usuario.est_aprueba,
             tm_curso.cur_id,
@@ -178,14 +214,14 @@ class Usuario extends Conectar
             LEFT JOIN td_curso_usuario_dias ON td_curso_usuario.curd_id = td_curso_usuario_dias.curd_id
             WHERE tm_curso.cur_id = ? AND td_curso_usuario.est = 1
             GROUP BY td_curso_usuario.curd_id";
-    
-    $sql = $conectar->prepare($sql);
-    $sql->bindValue(1, $cur_id);
-    $sql->execute();
-    $resultados_usuario = $sql->fetchAll();
-    
-    return $resultados_usuario;
-}
+
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $cur_id);
+        $sql->execute();
+        $resultados_usuario = $sql->fetchAll();
+
+        return $resultados_usuario;
+    }
 
     /*TODO: Mostrar todos los datos de un curso por su id de detalle */
     public function get_curso_x_id_detalle($curd_id)

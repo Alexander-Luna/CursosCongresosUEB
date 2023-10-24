@@ -140,9 +140,6 @@ function nuevo() {
     $('#modalmantenimiento').modal('show');
 }
 
-$(document).on("click", "#btnplantilla", function () {
-    $('#modalplantilla').modal('show');
-});
 
 var ExcelToJSON = function () {
     this.parseExcel = function (file) {
