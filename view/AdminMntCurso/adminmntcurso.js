@@ -40,12 +40,17 @@ $(document).ready(function () {
     $('#cat_id').select2({
         dropdownParent: $('#modalmantenimiento')
     });
+    $('#modality_id').select2({
+        dropdownParent: $('#modalmantenimiento')
+    });
 
     $('#inst_id').select2({
         dropdownParent: $('#modalmantenimiento')
     });
 
     combo_facultad();
+
+    combo_modalidad();
 
     combo_instructor();
 
@@ -135,6 +140,7 @@ function eliminar(cur_id) {
     });
 }
 
+
 function imagen(cur_id) {
     $('#curx_idx').val(cur_id);
     $('#modalfile').modal('show');
@@ -144,6 +150,7 @@ function nuevo() {
     $('#lbltitulo').html('Nuevo Registro');
     $('#cursos_form')[0].reset();
     combo_facultad();
+    combo_modalidad();
     combo_instructor();
     $('#modalmantenimiento').modal('show');
 }
@@ -153,6 +160,19 @@ function combo_facultad() {
         $('#cat_id').html(data);
     });
 }
+
+function combo_modalidad() {
+    $.post("../../controller/modalidad.php?op=combo", function (data) {
+        $('#modality_id').html(data);
+        //console.log(data); // Agregar esta línea para depurar
+
+        // Eliminar el texto incorrecto "- 1" de las opciones
+        // $('#modality_id option').text(function (i, text) {
+        //     return text.replace(/ - 1$/, ''); // Elimina "- 1" al final del texto
+        // });
+    });
+}
+
 
 function combo_instructor() {
     $.post("../../controller/instructor.php?op=combo", function (data) {
@@ -175,7 +195,7 @@ function habilitarAsistencia(cur_id) {
         data: { cur_id: cur_id, est_asistencia: asistencia }, // Aquí se pasan los valores de cur_id y est_asistencia
         success: function (response) {
             // Procesa la respuesta del servidor (si es necesario)
-           // alert('Asistencia registrada con éxito');
+            // alert('Asistencia registrada con éxito');
         },
         error: function (e) {
             alert('Error al registrar la asistencia ' + e);

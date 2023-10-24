@@ -7,11 +7,11 @@
             <!-- Formulario Mantenimiento -->
             <form method="post" id="cursos_form">
                 <div class="modal-body">
-                    <input type="hidden" name="cur_id" id="cur_id"/>
+                    <input type="hidden" name="cur_id" id="cur_id" />
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Facultad: <span class="tx-danger">*</span></label>
-                            <select class="form-control select2" style="width:100%" name="cat_id" id="cat_id" data-placeholder="Seleccione">
+                            <select class="form-control select2" style="width:100%" name="cat_id" id="cat_id">
                                 <option label="Seleccione"></option>
 
                             </select>
@@ -21,7 +21,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Nombre: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="cur_nom" type="text" name="cur_nom" required/>
+                            <input class="form-control tx-uppercase" id="cur_nom" type="text" name="cur_nom" required />
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -33,34 +33,33 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Modalidad: <span class="tx-danger">*</span></label>
-                            <select class="form-control select2" style="width:100%" name="modality_id" id="modality_id" data-placeholder="Seleccione">
+                            <select class="form-control select2" style="width:100%" name="modality_id" id="modality_id">
                                 <option label="Seleccione"></option>
-
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Número de horas: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="nhours" type="number" name="nhours" required/>
+                            <input class="form-control tx-uppercase" id="nhours" type="number" name="nhours" required />
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Fecha Inicio: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="cur_fechini" type="date" name="cur_fechini" required/>
+                            <input class="form-control tx-uppercase" id="cur_fechini" type="date" name="cur_fechini" required />
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Fecha Fin: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="cur_fechfin" type="date" name="cur_fechfin" required/>
+                            <input class="form-control tx-uppercase" id="cur_fechfin" type="date" name="cur_fechfin" required />
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Instructor: <span class="tx-danger">*</span></label>
-                            <select class="form-control select2" style="width:100%" name="inst_id" id="inst_id" data-placeholder="Seleccione">
+                            <select class="form-control select2" style="width:100%" name="inst_id" id="inst_id">
                                 <option label="Seleccione"></option>
 
                             </select>
