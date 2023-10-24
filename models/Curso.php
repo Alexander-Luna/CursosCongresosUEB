@@ -97,12 +97,12 @@ class Curso extends Conectar
         $sql->bindValue(3, $cur_descrip);
         $sql->bindValue(4, $cur_fechini);
         $sql->bindValue(5, $cur_fechfin);
-        $sql->bindValue(6, $inst_id);
-        $sql->bindValue(7, $cur_id);
-        $sql->bindValue(8, $modality_id);
-        $sql->bindValue(9, $nhours);
+        $sql->bindValue(6, $modality_id);
+        $sql->bindValue(7, $nhours);
+        $sql->bindValue(8, $inst_id);
+        $sql->bindValue(9, $portada_img);
         $sql->bindValue(10, $est_asistencia);
-        $sql->bindValue(11, $portada_img);
+        $sql->bindValue(11, $cur_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
@@ -230,7 +230,29 @@ class Curso extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
+public function update_portada_curso($cur_id, $portada_img)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
 
+        require_once("Curso.php");
+        $curx = new Curso();
+        $portada_img = '';
+        if ($_FILES["cur_img"]["name"] != '') {
+            $portada_img = $curx->upload_file1();
+        }
+
+        $sql = "UPDATE tm_curso
+                SET
+                    portada_img = ?
+                WHERE
+                    cur_id = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $portada_img);
+        $sql->bindValue(2, $cur_id);
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
+    }
     public function upload_file()
     {
         if (isset($_FILES["cur_img"])) {
@@ -239,6 +261,16 @@ class Curso extends Conectar
             $destination = '../public/' . $new_name;
             move_uploaded_file($_FILES['cur_img']['tmp_name'], $destination);
             return "../../public/" . $new_name;
+        }
+    }
+    public function upload_file1()
+    {
+        if (isset($_FILES["cur_img"])) {
+            $extension = explode('.', $_FILES['cur_img']['name']);
+            $new_name = rand() . '.' . $extension[1];
+            $destination = '../assets/' . $new_name;
+            move_uploaded_file($_FILES['cur_img']['tmp_name'], $destination);
+            return "assets/" . $new_name;
         }
     }
     public function get_modalidad()

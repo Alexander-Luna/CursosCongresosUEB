@@ -64,10 +64,10 @@ switch ($_GET["op"]) {
             $sub_array[] = '<a href="' . $row["cur_img"] . '" target="_blank">' . strtoupper($row["cur_nom"]) . '</a>';
             $sub_array[] = $row["cur_fechini"];
             $sub_array[] = $row["cur_fechfin"];
-            $sub_array[] = $row["inst_nom"] . " " . $row["inst_apep"] . " " . $row["inst_apem"];
+            $sub_array[] = '<button type="button" onClick="imagen(' . $row["cur_id"] . ",'portada'" . ');"  id="' . $row["cur_id"] . '" class="btn btn-outline-success btn-icon"><div><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6h96 32H424c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg></div></button>';
+            $sub_array[] = '<button type="button" onClick="imagen(' . $row["cur_id"] . ",'certificado'" . ');"  id="' . $row["cur_id"] . '" class="btn btn-outline-success btn-icon"><div><i class="fa fa-file"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="editar(' . $row["cur_id"] . ');"  id="' . $row["cur_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["cur_id"] . ');"  id="' . $row["cur_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
-            $sub_array[] = '<button type="button" onClick="imagen(' . $row["cur_id"] . ');"  id="' . $row["cur_id"] . '" class="btn btn-outline-success btn-icon"><div><i class="fa fa-file"></i></div></button>';
             $sub_array[] = '<input type="checkbox" onClick="habilitarAsistencia(' . $row["cur_id"] . ');" name="C' . $row["cur_id"] . '" id="C' . $row["cur_id"] . '"' . ($row["est_asistencia"] == 1 ? ' checked' : '') . '>';
             $sub_array[] = $row["modality_id"];
             $sub_array[] = $row["nhours"];
@@ -122,6 +122,9 @@ switch ($_GET["op"]) {
 
     case "update_imagen_curso":
         $curso->update_imagen_curso($_POST["curx_idx"], $_POST["cur_img"]);
+        break;
+    case "update_portada_curso":
+        $curso->update_portada_curso($_POST["curx_idx"], $_POST["cur_img"]);
         break;
     /*TODO: Guardar y editar cuando se tenga el ID */
     case "asistencia":
