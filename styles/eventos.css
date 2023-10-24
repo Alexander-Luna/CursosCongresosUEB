@@ -1,31 +1,61 @@
-.card {
-    width: 190px;
-    background: white;
-    padding: .4em;
-    border-radius: 6px;
+.container__card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
 }
 
-.card-image {
+.grid__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 25px;
+    /* Cambia el valor de grid-gap a 80px */
+    max-width: 100%;
+    padding: 0 1rem;
+}
+
+.cardE {
+    height: auto;
+    width: 100%;
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid rgb(169, 169, 169);
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    padding: 10px 20px;
+}
+
+.cardE-image {
     background-color: rgb(236, 236, 236);
     width: 100%;
-    height: 130px;
+    max-height: 200px;
     border-radius: 6px 6px 0 0;
 }
 
-.card-image:hover {
-    transform: scale(0.98);
+.cardE-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px 6px 0 0;
+}
+.cardE__title{
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(6, 51, 133);
+    padding: 10px 7px 0;
 }
 
 .category {
     text-transform: uppercase;
     font-size: 0.7em;
     font-weight: 600;
-    color: rgb(63, 121, 230);
+    color: rgb(6, 51, 133);
     padding: 10px 7px 0;
-}
-
-.category:hover {
-    cursor: pointer;
 }
 
 .heading {
@@ -34,14 +64,10 @@
     padding: 7px;
 }
 
-.heading:hover {
-    cursor: pointer;
-}
-
 .author {
-    color: gray;
+    color: rgb(6, 51, 133);
     font-weight: 400;
-    font-size: 11px;
+    font-size: 20px;
     padding-top: 20px;
 }
 
@@ -49,22 +75,25 @@
     font-weight: 600;
 }
 
-.name:hover {
-    cursor: pointer;
-}
+/* Media queries para hacer responsive */
+@media (max-width: 768px) {
+    .grid__container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
 
-@media (max-width: 1024px) {
-
-    .br-section-wrapper .card,
-    .element {
-        max-width: calc(33.33% - 50px);
+    .cardE {
+        width: 100%;
+        padding: 0.5rem;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
+    .grid__container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
 
-    .br-section-wrapper .card,
-    .element {
-        max-width: calc(50% - 50px);
+    .cardE {
+        width: 100%;
+        padding: 0.5rem;
     }
 }

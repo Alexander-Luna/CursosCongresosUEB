@@ -1,9 +1,9 @@
 <?php
-// Archivo de conexión a la base de datos (conexion.php)
-$host = "localhost"; // Cambia esto al nombre del servidor de tu base de datos
-$usuario = "root"; // Cambia esto a tu nombre de usuario de la base de datos
-$contrasena = ""; // Cambia esto a tu contraseña de la base de datos
-$base_de_datos = "cursoscongresosueb"; // Cambia esto al nombre de tu base de datos
+
+$host = "localhost";
+$usuario = "root";
+$contrasena = "";
+$base_de_datos = "cursoscongresosueb";
 
 $conexion = mysqli_connect($host, $usuario, $contrasena, $base_de_datos);
 
@@ -11,7 +11,6 @@ if (!$conexion) {
     die("Error en la conexión a la base de datos: " . mysqli_connect_error());
 }
 
-// Realiza una consulta SQL para obtener la información de los cursos
 $query = "SELECT
             c.cur_id,
             f.cat_nom AS facultad,
@@ -19,7 +18,8 @@ $query = "SELECT
             c.portada_img,
             c.cur_fechini AS fecha_inicio,
             c.cur_fechfin AS fecha_fin,
-            i.inst_nom AS nombre_instructor
+            i.inst_nom AS nombre_instructor,
+            i.inst_apep AS apellido_instructor
           FROM tm_curso c
           JOIN tm_facultades f ON c.cat_id = f.cat_id
           JOIN tm_instructor i ON c.inst_id = i.inst_id
@@ -29,6 +29,9 @@ $result = mysqli_query($conexion, $query);
 if (!$result) {
     die("Error al ejecutar la consulta: " . mysqli_error($conexion));
 }
+
+// Asumiendo que $result es un array de resultados
+$eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -59,47 +62,45 @@ if (!$result) {
         </nav>
     </header>
     <section class="container__card">
-        <div class="br-mainpanel">
-            <div class="br-pagebody">
-                <div class="br-section-wrapper">
-                    <?php
-                    // Asumiendo que $result es un array de resultados
-                    foreach ($result as $row) {
-                        ?>
-                       
-
-                        <div class="card">
-                            <div class="card-image">
-                            <img src="<?php echo $row['portada_img']; ?>"
-                                alt="<?php echo $row['nombre_curso']; ?>">
-                            </div>
-                            <div class="category">  <h3 class="card__title">
-                                <?php echo $row['nombre_curso']; ?>
-                            </h3> </div>
-
-                            <div class="heading">  <p class="card__content">Facultad:
-                                <?php echo $row['facultad']; ?>
-                            </p>
-                            <p class="card__content">Fecha de Inicio:
-                                <?php echo $row['fecha_inicio']; ?>
-                            </p>
-                            <p class="card__content">Fecha de Finalización:
-                                <?php echo $row['fecha_fin']; ?>
-                            </p>
-                          
-                                <div class="author"> By <span class="name">  <p class="card__content">
-                                <?php echo $row['nombre_instructor']; ?>
-                            </p></span> 4 days ago</div>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                    ?>
+        <div class="grid__container section__card">
+            <!-- Aquí irán tus tarjetas -->
+            <?php
+            // Asumiendo que $eventos es un array de resultados
+            foreach ($eventos as $evento) {
+            ?>
+                <div class="cardE">
+                    <div class="cardE-image">
+                        <img src="<?php echo $evento['portada_img']; ?>" alt="<?php echo $evento['nombre_curso']; ?>">
+                    </div>
+                    <div class="category">
+                        <h3 class="cardE__title">
+                            <?php echo $evento['nombre_curso']; ?>
+                        </h3>
+                    </div>
+                    <div class="heading">
+                        <p class="cardE__content">Facultad:
+                            <?php echo $evento['facultad']; ?>
+                        </p>
+                        <p class="cardE__content">Fecha de Inicio:
+                            <?php echo $evento['fecha_inicio']; ?>
+                        </p>
+                        <p class="cardE__content">Fecha de Finalización:
+                            <?php echo $evento['fecha_fin']; ?>
+                        </p>
+                        <div class="author"> Por <span class="name">
+                                <p class="cardE__content">
+                                    <?php echo $evento['nombre_instructor'] . ' ' . $evento['apellido_instructor']; ?>
+                                </p>
+                            </span> </div>
+                    </div>
                 </div>
-            </div>
+            <?php
+            }
+            ?>
         </div>
     </section>
-    <Footer id="pie_pagina">
+
+    <footer id="pie_pagina">
         <div id="grupo_1">
             <div class="box">
                 <figure>
@@ -132,11 +133,10 @@ if (!$result) {
                     <a href="https://instagram.com" target="_blank" rel="noreferrer">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-                    <a href="https://twitter.com" target="_blank" rel="noreferrer">
+                    <a href="https.twitter.com" target="_blank" rel="noreferrer">
                         <i class="fa-brands fa-twitter"></i>
                     </a>
-                    <a href="https://www.youtube.com/channel/UCml4cc2U6oWm7jG9iayK3UA/videos" target="_blank"
-                        rel="noreferrer">
+                    <a href="https://www.youtube.com/channel/UCml4cc2U6oWm7jG9iayK3UA/videos" target="_blank" rel="noreferrer">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
                     <a href="https://whatsapp.com" target="_blank" rel="noreferrer">
@@ -145,7 +145,7 @@ if (!$result) {
                 </div>
             </div>
         </div>
-    </Footer>
+    </footer>
     <script type="text/javascript" src="adminmntcurso.js"></script>
 </body>
 
