@@ -11,7 +11,7 @@ CREATE TABLE `td_curso_usuario` (
   `cur_id` int(11) NOT NULL,
   `usu_id` int(11) NOT NULL,
   `fech_crea` datetime NOT NULL,
-  `est_aprueba` datetime NOT NULL,
+  `est_aprueba` int(11) NOT NULL,
   `est` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 CREATE TABLE `td_curso_usuario_dias` (

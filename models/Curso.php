@@ -52,6 +52,27 @@ class Curso extends Conectar
 
         return false; // No se insertó la asistencia
     }
+    public function aprueba_curso($curd_id, $est_aprueba)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+
+        $sql = "UPDATE td_curso_usuario
+                SET
+                    est_aprueba = :est_aprueba
+                WHERE
+                    curd_id = :curd_id";
+
+        $sql = $conectar->prepare($sql);
+
+        // Vincular los valores a los marcadores de posición
+        $sql->bindParam(':est_aprueba', $est_aprueba, PDO::PARAM_INT);
+        $sql->bindParam(':curd_id', $curd_id, PDO::PARAM_INT);
+
+        // Ejecutar la consulta
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
+    }
     public function habilitar_asistencia($cur_id, $est_asistencia)
     {
         $conectar = parent::conexion();

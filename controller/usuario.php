@@ -19,7 +19,11 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["cur_fechini"];
             $sub_array[] = $row["cur_fechfin"];
             $sub_array[] = $row["inst_nom"] . " " . $row["inst_apep"];
-            $sub_array[] = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
+            if ($row["est_aprueba"] == 1) {
+                $sub_array[] = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
+            } else {
+                $sub_array[] = 'Pendiente';
+            }
             $sub_array[] = '<button type="button" onClick="FuncionAsistencia(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-calendar-check-o" aria-hidden="true"></i></div></button>';
             $data[] = $sub_array;
         }
@@ -39,12 +43,15 @@ switch ($_GET["op"]) {
         $datos = $usuario->get_cursos_x_usuario_top10($_POST["usu_id"]);
         $data = array();
         foreach ($datos as $row) {
+            $certificado = '<div>Pendiente</div>';
             $sub_array = array();
             $sub_array[] = $row["cur_nom"];
             $sub_array[] = $row["cur_fechini"];
             $sub_array[] = $row["cur_fechfin"];
-            $sub_array[] = $row["inst_nom"] . " " . $row["inst_apep"];
-            $sub_array[] = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
+            if ($row["est_aprueba"] == 1) {
+                $certificado = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
+            }
+            $sub_array[] = $certificado;
             $sub_array[] = '<button type="button" onClick="FuncionAsistencia(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-calendar-check-o" aria-hidden="true"></i></div></button>';
             $data[] = $sub_array;
         }
@@ -117,6 +124,29 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
+        case "cambiarPassword":
+            if (isset($_POST["usu_id"]) && isset($_POST["nuevaContraseña"])) {
+                // Recupera el ID de usuario y la nueva contraseña desde el formulario
+                $usu_id = $_POST["usu_id"];
+                $nuevaContraseña = $_POST["nuevaContraseña"];
+        
+                // Verifica que el usuario exista
+                $datos = $usuario->get_usuario_x_id($usu_id);
+        
+                if (is_array($datos) == true && count($datos) > 0) {
+                    // Actualiza la contraseña del usuario en la base de datos
+                    $hashNuevaContraseña =  $usuario->encriptarPassword($nuevaContraseña); // Utiliza tu función de encriptación
+                    $usuario->actualizarPassword($usu_id, $hashNuevaContraseña);
+                    echo "Contraseña actualizada con éxito";
+                } else {
+                    // Puedes emitir un mensaje de error si el usuario no existe
+                    echo "El usuario no existe";
+                }
+            } else {
+                // Puedes emitir un mensaje de error si no se proporcionaron los datos necesarios
+                echo "Faltan datos necesarios";
+            }
+            break;
     /*TODO: Mostrar informacion segun ci del usuario registrado */
     case "consulta_ci":
         $datos = $usuario->get_usuario_x_ci($_POST["usu_ci"]);

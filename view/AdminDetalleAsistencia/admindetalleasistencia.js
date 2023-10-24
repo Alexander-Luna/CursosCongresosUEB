@@ -230,4 +230,29 @@ function registrardetalle() {
     }
 }
 
+function Aprueba(curd_id) {
+    let checkbox = document.getElementById("C" + curd_id);
+    console.log(checkbox);
+    let asistencia = 0;
+    if (checkbox.checked) {
+        asistencia = 1;
+    } else {
+        asistencia = 0;
+        console.log('Aprueba no registrada para el ID ' + curd_id);
+    }
+    $.ajax({
+        type: 'POST',
+        url: "../../controller/curso.php?op=apruebacurso", // Ruta al script PHP que contiene la función insert_asistencia
+        data: { curd_id: curd_id, est_aprueba: asistencia }, // Aquí se pasan los valores de cur_id y est_asistencia
+        success: function (response) {
+            // Procesa la respuesta del servidor (si es necesario)
+            // alert('Asistencia registrada con éxito');
+        },
+        error: function (e) {
+            alert('Error al registrar la asistencia ' + e);
+        }
+    });
+
+}
+
 init();

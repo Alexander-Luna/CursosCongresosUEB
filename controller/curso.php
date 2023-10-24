@@ -134,6 +134,9 @@ switch ($_GET["op"]) {
     case "habilitarAsistencia":
         $curso->habilitar_asistencia($_POST["cur_id"], $_POST["est_asistencia"]);
         break;
+        case "apruebacurso":
+            $curso->aprueba_curso($_POST["curd_id"], $_POST["est_aprueba"]);
+            break;
     case "combomodalidad":
         $datos = $curso->get_modalidad();
         if (is_array($datos) == true and count($datos) > 0) {
