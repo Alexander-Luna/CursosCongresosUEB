@@ -1,8 +1,8 @@
-var usu_id = $('#usu_idx').val();
-$(document).on("click", "#btnplantilla", function () {
+function resetpass() {
     $('#reset_password').modal('show');
-});
+}
 
+let usu_id = $('#usu_idx').val();
 $(document).ready(function () {
     $.post("../../controller/usuario.php?op=mostrar", { usu_id: usu_id }, function (data) {
         data = JSON.parse(data);

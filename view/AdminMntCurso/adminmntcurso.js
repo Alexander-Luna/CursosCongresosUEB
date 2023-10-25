@@ -1,5 +1,5 @@
 
-var usu_id = $('#usu_idx').val();
+let usu_id = $('#usu_idx').val();
 
 function init() {
     $("#cursos_form").on("submit", function (e) {
@@ -21,7 +21,7 @@ function init() {
 
 function guardaryeditar(e) {
     e.preventDefault();
-    var formData = new FormData($("#cursos_form")[0]);
+    let formData = new FormData($("#cursos_form")[0]);
     $.ajax({
         url: "../../controller/curso.php?op=guardaryeditar",
         type: "POST",
@@ -56,7 +56,7 @@ $(document).ready(function () {
         dropdownParent: $('#modalmantenimiento')
     });
 
-    combo_facultad();
+    combo_dependencia();
 
     combo_modalidad();
 
@@ -159,14 +159,14 @@ function imagen(cur_id, portada) {
 function nuevo() {
     $('#lbltitulo').html('Nuevo Registro');
     $('#cursos_form')[0].reset();
-    combo_facultad();
+    combo_dependencia();
     combo_modalidad();
     combo_instructor();
     $('#modalmantenimiento').modal('show');
 }
 
-function combo_facultad() {
-    $.post("../../controller/facultad.php?op=combo", function (data) {
+function combo_dependencia() {
+    $.post("../../controller/dependencia.php?op=combo", function (data) {
         $('#cat_id').html(data);
     });
 }
@@ -207,7 +207,7 @@ function habilitarAsistencia(cur_id) {
 let URLimg = "";
 function guardaryeditarimg(e) {
     e.preventDefault();
-    var formData = new FormData($("#detalle_form")[0]);
+    let formData = new FormData($("#detalle_form")[0]);
     $.ajax({
         url: URLimg,
         type: "POST",

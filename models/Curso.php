@@ -159,7 +159,7 @@ class Curso extends Conectar
                 tm_curso.modality_id,
                 tm_curso.nhours,
                 tm_curso.est_asistencia,
-                tm_facultades.cat_nom,
+                tm_dependencias.cat_nom,
                 tm_curso.inst_id,
                 tm_instructor.inst_nom,
                 tm_instructor.inst_apep,
@@ -168,7 +168,7 @@ class Curso extends Conectar
                 tm_instructor.inst_sex,
                 tm_instructor.inst_telf
                 FROM tm_curso
-                INNER JOIN tm_facultades on tm_curso.cat_id = tm_facultades.cat_id
+                INNER JOIN tm_dependencias on tm_curso.cat_id = tm_dependencias.cat_id
                 INNER JOIN tm_instructor on tm_curso.inst_id = tm_instructor.inst_id
                 WHERE tm_curso.est = 1";
         $sql = $conectar->prepare($sql);

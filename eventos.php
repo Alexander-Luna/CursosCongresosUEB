@@ -13,7 +13,7 @@ if (!$conexion) {
 
 $query = "SELECT
             c.cur_id,
-            f.cat_nom AS facultad,
+            f.cat_nom AS dependencia,
             c.cur_nom AS nombre_curso,
             c.portada_img,
             c.cur_fechini AS fecha_inicio,
@@ -21,7 +21,7 @@ $query = "SELECT
             i.inst_nom AS nombre_instructor,
             i.inst_apep AS apellido_instructor
           FROM tm_curso c
-          JOIN tm_facultades f ON c.cat_id = f.cat_id
+          JOIN tm_dependenciaes f ON c.cat_id = f.cat_id
           JOIN tm_instructor i ON c.inst_id = i.inst_id
           WHERE c.est = 1"; // Solo cursos con estado 1 (activos)
 $result = mysqli_query($conexion, $query);
@@ -78,8 +78,8 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         </h3>
                     </div>
                     <div class="heading">
-                        <p class="cardE__content">Facultad:
-                            <?php echo $evento['facultad']; ?>
+                        <p class="cardE__content">Dependencia:
+                            <?php echo $evento['dependencia']; ?>
                         </p>
                         <p class="cardE__content">Fecha de Inicio:
                             <?php echo $evento['fecha_inicio']; ?>

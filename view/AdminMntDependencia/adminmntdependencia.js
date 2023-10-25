@@ -2,23 +2,23 @@
 var usu_id = $('#usu_idx').val();
 
 function init(){
-    $("#facultad_form").on("submit",function(e){
+    $("#dependencia_form").on("submit",function(e){
         guardaryeditar(e);
     });
 }
 
 function guardaryeditar(e){
     e.preventDefault();
-    var formData = new FormData($("#facultad_form")[0]);
+    var formData = new FormData($("#dependencia_form")[0]);
     $.ajax({
-        url: "../../controller/facultad.php?op=guardaryeditar",
+        url: "../../controller/dependencia.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
         processData: false,
         success: function(data){
 
-            $('#facultad_data').DataTable().ajax.reload();
+            $('#dependencia_data').DataTable().ajax.reload();
             $('#modalmantenimiento').modal('hide');
 
             Swal.fire({
@@ -33,7 +33,7 @@ function guardaryeditar(e){
 
 $(document).ready(function(){
 
-    $('#facultad_data').DataTable({
+    $('#dependencia_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -43,7 +43,7 @@ $(document).ready(function(){
             'csvHtml5',
         ],
         "ajax":{
-            url:"../../controller/facultad.php?op=listar",
+            url:"../../controller/dependencia.php?op=listar",
             type:"post"
         },
         "bDestroy": true,
@@ -80,7 +80,7 @@ $(document).ready(function(){
 });
 
 function editar(cat_id){
-    $.post("../../controller/facultad.php?op=mostrar",{cat_id : cat_id}, function (data) {
+    $.post("../../controller/dependencia.php?op=mostrar",{cat_id : cat_id}, function (data) {
         data = JSON.parse(data);
         $('#cat_id').val(data.cat_id);
         $('#cat_nom').val(data.cat_nom);
@@ -99,8 +99,8 @@ function eliminar(cat_id){
         cancelButtonText: "No",
     }).then((result) => {
         if (result.value) {
-            $.post("../../controller/facultad.php?op=eliminar",{cat_id : cat_id}, function (data) {
-                $('#facultad_data').DataTable().ajax.reload();
+            $.post("../../controller/dependencia.php?op=eliminar",{cat_id : cat_id}, function (data) {
+                $('#dependencia_data').DataTable().ajax.reload();
 
                 Swal.fire({
                     title: 'Correcto!',
@@ -116,7 +116,7 @@ function eliminar(cat_id){
 function nuevo(){
     $('#cat_id').val('');
     $('#lbltitulo').html('Nuevo Registro');
-    $('#facultad_form')[0].reset();
+    $('#dependencia_form')[0].reset();
     $('#modalmantenimiento').modal('show');
 }
 

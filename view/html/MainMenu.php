@@ -17,7 +17,7 @@
       <a href="../UsuCurso/" class="br-menu-link">
         <div class="br-menu-item">
           <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
-          <span class="menu-item-label">Mis Congresos</span>
+          <span class="menu-item-label">Mis Eventos</span>
         </div>
       </a>
       <?php
@@ -33,7 +33,7 @@
       <a href="../AdminMntCurso/" class="br-menu-link">
         <div class="br-menu-item">
           <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
-          <span class="menu-item-label">Congresos</span>
+          <span class="menu-item-label">Eventos</span>
         </div>
       </a>
 <!--
@@ -44,10 +44,10 @@
         </div>
       </a>
     -->
-      <a href="../AdminMntFacultad/" class="br-menu-link">
+      <a href="../AdminMntDependencia/" class="br-menu-link">
         <div class="br-menu-item">
           <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
-          <span class="menu-item-label">Facultades</span>
+          <span class="menu-item-label">Dependencias</span>
         </div>
       </a>
 

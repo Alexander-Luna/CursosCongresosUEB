@@ -34,7 +34,7 @@ INSERT INTO `td_curso_usuario` (`curd_id`, `cur_id`, `usu_id`, `fech_crea`, `est
 
 
 
-CREATE TABLE `tm_facultades` (
+CREATE TABLE `tm_dependencias` (
   `cat_id` int(11) NOT NULL,
   `cat_nom` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `fech_crea` datetime DEFAULT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `tm_facultades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
-INSERT INTO `tm_facultades` (`cat_id`, `cat_nom`, `fech_crea`, `est`) VALUES
+INSERT INTO `tm_dependencias` (`cat_id`, `cat_nom`, `fech_crea`, `est`) VALUES
 (1, 'Facultad de Ciencias Administrativas, Gestión Empresarial e Informática', '2023-04-26 20:27:52', 1),
 (2, 'Facultad de Jurisprudencia, Ciencias Sociales y Políticas', '2023-04-26 20:27:52', 1),
 (3, 'Facultad de Ciencias de la Educación, Sociales, Filosóficas y Humanísticas', '2023-04-26 20:27:52', 1),
@@ -151,7 +151,7 @@ INSERT INTO `tm_usuario` (`usu_id`, `usu_nom`, `usu_apep`, `usu_apem`, `usu_corr
 ALTER TABLE `td_curso_usuario`
   ADD PRIMARY KEY (`curd_id`);
 
-ALTER TABLE `tm_facultades`
+ALTER TABLE `tm_dependencias`
   ADD PRIMARY KEY (`cat_id`);
 
 ALTER TABLE `tm_curso`
@@ -166,7 +166,7 @@ ALTER TABLE `tm_usuario`
 ALTER TABLE `td_curso_usuario`
   MODIFY `curd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
-ALTER TABLE `tm_facultades`
+ALTER TABLE `tm_dependencias`
   MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 ALTER TABLE `tm_curso`

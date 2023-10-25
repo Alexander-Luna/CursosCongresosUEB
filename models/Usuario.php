@@ -381,7 +381,7 @@ class Usuario extends Conectar
         return $resultado = $sql->fetchAll();
     }
 
-    /*TODO: Eliminar cambiar de estado a la facultad */
+    /*TODO: Eliminar cambiar de estado a la dependencia */
     public function delete_usuario($usu_id)
     {
         $conectar = parent::conexion();
@@ -397,7 +397,7 @@ class Usuario extends Conectar
         return $resultado = $sql->fetchAll();
     }
 
-    /*TODO: Listar todas las facultads */
+    /*TODO: Listar todas las dependencias */
     public function get_usuario()
     {
         $conectar = parent::conexion();
@@ -408,7 +408,7 @@ class Usuario extends Conectar
         return $resultado = $sql->fetchAll();
     }
 
-    /*TODO: Listar todas las facultads */
+    /*TODO: Listar todas las dependencias */
     public function get_usuario_modal($cur_id)
     {
         $conectar = parent::conexion();

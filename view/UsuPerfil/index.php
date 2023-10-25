@@ -92,8 +92,8 @@ if (isset($_SESSION["usu_id"])) {
               <button class="btn btn-info" id="btnactualizar">Actualizar</button>
               </br></br>
               <div class="form-group">
-                <button id="btnplantilla" name="btnplantilla"
-                  class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium">
+                <button id="btnresetp" name="btnresetp"
+                  class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium" onclick="resetpass()">
                   <i class="fa fa-key"></i> Cambiar Contraseña</button>
               </div>
             </div>
