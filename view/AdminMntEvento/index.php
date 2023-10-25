@@ -66,7 +66,7 @@
     <?php require_once("modalfile.php"); ?>
 
     <?php require_once("../html/MainJs.php"); ?>
-    <script type="text/javascript" src="adminmntcurso.js"></script>
+    <script type="text/javascript" src="adminmntevento.js"></script>
   </body>
 </html>
 <?php

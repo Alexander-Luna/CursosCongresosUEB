@@ -8,7 +8,7 @@ CREATE DATABASE cursoscongresosueb;
 USE cursoscongresosueb;
 CREATE TABLE `td_curso_usuario` (
   `curd_id` int(11) NOT NULL,
-  `cur_id` int(11) NOT NULL,
+  `even_id` int(11) NOT NULL,
   `usu_id` int(11) NOT NULL,
   `fech_crea` datetime NOT NULL,
   `est_aprueba` int(11) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE `td_curso_usuario_dias` (
 
 
 
-INSERT INTO `td_curso_usuario` (`curd_id`, `cur_id`, `usu_id`, `fech_crea`, `est`,`est_aprueba`) VALUES
+INSERT INTO `td_curso_usuario` (`curd_id`, `even_id`, `usu_id`, `fech_crea`, `est`,`est_aprueba`) VALUES
 (1, 1, 1, '2023-10-17 23:11:34', 1,0),
 (2, 1, 2, '2023-10-17 23:11:34', 1,0),
 (3, 1, 3, '2023-10-17 23:11:34', 1,0),
@@ -49,8 +49,8 @@ INSERT INTO `tm_dependencias` (`cat_id`, `cat_nom`, `fech_crea`, `est`) VALUES
 (4, 'Facultad de Ciencias Agropecuarias, Recursos Naturales y del Medio Ambiente', '2023-04-26 20:27:52', 1),
 (5, 'Facultad de Ciencias de la Salud y del Ser Humano', '2023-08-17 20:46:37', 0);
 
-CREATE TABLE `tm_curso` (
-  `cur_id` int(11) NOT NULL,
+CREATE TABLE `tm_evento` (
+  `even_id` int(11) NOT NULL,
   `cat_id` int(11) NOT NULL,
   `portada_img` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   `cur_nom` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
@@ -79,7 +79,7 @@ INSERT INTO `modality` (
   `name`,
   `est`
 )VALUES(1,"PRESENCIAL",1),(2,"VIRTUAL",1),(3,"HIBRIDA",1);
-INSERT INTO `tm_curso` (`cur_id`, `cat_id`, `cur_nom`, `cur_descrip`, `cur_fechini`, `cur_fechfin`, `inst_id`, `cur_img`, `fech_crea`, `modality_id`, `nhours`, `portada_img`, `est`, `est_asistencia`) VALUES
+INSERT INTO `tm_evento` (`even_id`, `cat_id`, `cur_nom`, `cur_descrip`, `cur_fechini`, `cur_fechfin`, `inst_id`, `cur_img`, `fech_crea`, `modality_id`, `nhours`, `portada_img`, `est`, `est_asistencia`) VALUES
 (1, 1, 'CURSO DE HTML5', 'Occaecat Lorem velit qui magna dolore culpa qui. Aliqua nostrud nisi cillum sunt consequat irure commodo qui reprehenderit in in quis. Esse pariatur amet esse sint tempor fugiat laborum consectetur exercitation anim in voluptate sunt est. Sint amet elit et id qui nisi qui. Incididunt et pariatur nostrud do dolore duis consequat non eu velit labore.', '2023-04-01', '2023-04-30', 2, '../../public/2.png', '2023-04-26 20:32:32','2','50', '../../public/1616601522.png', 1,0),
 (3, 2, 'PHP', 'Laborum consequat laboris incididunt ipsum ea irure enim consectetur. Mollit non in ex ut culpa elit commodo id nostrud magna voluptate amet. Aute duis ea duis nulla. Ad ipsum id reprehenderit fugiat do commodo excepteur labore ex. Tempor ex consectetur proident anim minim id ex laboris elit. Laborum do aliquip duis veniam tempor esse nisi eiusmod id elit tempor.', '2023-04-01', '2023-04-30', 2, '../../public/3.png', '2023-04-26 20:32:32','3','85', '../../public/1616601522.png', 1,0),
 (4, 1, 'LARAVEL y MYSQL', 'Aliqua magna eu minim irure aliqua esse esse irure irure cupidatat ex magna. Laborum pariatur velit adipisicing nisi id ex esse nisi mollit magna nostrud quis minim. Aliquip excepteur pariatur duis qui irure mollit in deserunt velit est excepteur enim reprehenderit excepteur.', '2023-04-01', '2023-04-30', 1, '../../public/4.png', '2023-04-26 20:32:32','1','120', '../../public/1616601522.png', 1,0),
@@ -154,8 +154,8 @@ ALTER TABLE `td_curso_usuario`
 ALTER TABLE `tm_dependencias`
   ADD PRIMARY KEY (`cat_id`);
 
-ALTER TABLE `tm_curso`
-  ADD PRIMARY KEY (`cur_id`);
+ALTER TABLE `tm_evento`
+  ADD PRIMARY KEY (`even_id`);
 
 ALTER TABLE `tm_instructor`
   ADD PRIMARY KEY (`inst_id`);
@@ -169,8 +169,8 @@ ALTER TABLE `td_curso_usuario`
 ALTER TABLE `tm_dependencias`
   MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
-ALTER TABLE `tm_curso`
-  MODIFY `cur_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+ALTER TABLE `tm_evento`
+  MODIFY `even_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 ALTER TABLE `tm_instructor`
   MODIFY `inst_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;

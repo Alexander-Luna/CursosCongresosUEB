@@ -6,14 +6,14 @@ function init() {
 }
 
 $(document).ready(function () {
-    $('#cur_id').select2();
+    $('#even_id').select2();
 
     combo_curso();
 
     /* Obtener Id de combo curso */
-    $('#cur_id').change(function () {
-        $("#cur_id option:selected").each(function () {
-            cur_id = $(this).val();
+    $('#even_id').change(function () {
+        $("#even_id option:selected").each(function () {
+            even_id = $(this).val();
 
             /* Listado de datatable */
             $('#detalle_data').DataTable({
@@ -28,7 +28,7 @@ $(document).ready(function () {
                 "ajax": {
                     url: "../../controller/usuario.php?op=listar_cursos_usuario",
                     type: "post",
-                    data: { cur_id: cur_id },
+                    data: { even_id: even_id },
                 },
                 "bDestroy": true,
                 "responsive": true,
@@ -92,7 +92,7 @@ function eliminar(curd_id) {
 
 function combo_curso() {
     $.post("../../controller/curso.php?op=combo", function (data) {
-        $('#cur_id').html(data);
+        $('#even_id').html(data);
     });
 }
 
@@ -102,7 +102,7 @@ function certificado(curd_id) {
 }
 
 function nuevo() {
-    if ($('#cur_id').val() == '') {
+    if ($('#even_id').val() == '') {
         Swal.fire({
             title: 'Error!',
             text: 'Seleccionar Curso',
@@ -110,13 +110,13 @@ function nuevo() {
             confirmButtonText: 'Aceptar'
         })
     } else {
-        var cur_id = $('#cur_id').val();
-        listar_usuario(cur_id);
+        var even_id = $('#even_id').val();
+        listar_usuario(even_id);
         $('#modalmantenimiento').modal('show');
     }
 }
 
-function listar_usuario(cur_id) {
+function listar_usuario(even_id) {
     $('#usuario_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -129,7 +129,7 @@ function listar_usuario(cur_id) {
         "ajax": {
             url: "../../controller/usuario.php?op=listar_detalle_usuario",
             type: "post",
-            data: { cur_id: cur_id }
+            data: { even_id: even_id }
         },
         "bDestroy": true,
         "responsive": true,
@@ -194,7 +194,7 @@ function registrardetalle() {
     } else {
         /* Creando formulario */
         const formData = new FormData($("#form_detalle")[0]);
-        formData.append('cur_id', cur_id);
+        formData.append('even_id', even_id);
         formData.append('usu_id', usu_id);
 
         $.ajax({

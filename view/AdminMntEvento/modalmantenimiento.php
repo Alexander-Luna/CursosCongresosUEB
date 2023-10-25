@@ -7,7 +7,7 @@
             <!-- Formulario Mantenimiento -->
             <form method="post" id="cursos_form">
                 <div class="modal-body">
-                    <input type="hidden" name="cur_id" id="cur_id" />
+                    <input type="hidden" name="even_id" id="even_id" />
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Dependencia: <span class="tx-danger">*</span></label>

@@ -38,7 +38,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label class="form-control-label">Cursos: <span class="tx-danger">*</span></label>
-                            <select class="form-control select2" style="width:100%" name="cur_id" id="cur_id" data-placeholder="Seleccione">
+                            <select class="form-control select2" style="width:100%" name="even_id" id="even_id" data-placeholder="Seleccione">
                                 <option label="Seleccione"></option>
 
                             </select>

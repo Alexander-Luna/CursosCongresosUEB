@@ -72,7 +72,7 @@ switch ($_GET["op"]) {
         if (is_array($datos) == true and count($datos) <> 0) {
             foreach ($datos as $row) {
                 $output["curd_id"] = $row["curd_id"];
-                $output["cur_id"] = $row["cur_id"];
+                $output["even_id"] = $row["even_id"];
                 $output["cur_nom"] = $row["cur_nom"];
                 $output["cur_descrip"] = $row["cur_descrip"];
                 $output["cur_fechini"] = $row["cur_fechini"];
@@ -234,7 +234,7 @@ switch ($_GET["op"]) {
         break;
     /*TODO: Listar todos los usuarios pertenecientes a un curso */
     case "listar_cursos_usuario":
-        $datos = $usuario->get_cursos_usuario_x_id($_POST["cur_id"]);
+        $datos = $usuario->get_cursos_usuario_x_id($_POST["even_id"]);
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
@@ -257,7 +257,7 @@ switch ($_GET["op"]) {
         echo json_encode($results);
         break;
     case "listar_cursos_usuario_asistencia":
-        $datos = $usuario->get_cursos_usuario_x_id_x_asistencia($_POST["cur_id"]);
+        $datos = $usuario->get_cursos_usuario_x_id_x_asistencia($_POST["even_id"]);
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
@@ -278,7 +278,7 @@ switch ($_GET["op"]) {
         echo json_encode($results);
         break;
     case "listar_detalle_usuario":
-        $datos = $usuario->get_usuario_modal($_POST["cur_id"]);
+        $datos = $usuario->get_usuario_modal($_POST["even_id"]);
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();

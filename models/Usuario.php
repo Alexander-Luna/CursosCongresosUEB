@@ -82,12 +82,12 @@ class Usuario extends Conectar
         parent::set_names();
         $sql = "SELECT 
                 td_curso_usuario.curd_id,
-                tm_curso.cur_id,
-                tm_curso.cur_nom,
-                tm_curso.cur_descrip,
-                tm_curso.cur_fechini,
-                tm_curso.cur_fechfin,
-                tm_curso.portada_img,
+                tm_evento.even_id,
+                tm_evento.cur_nom,
+                tm_evento.cur_descrip,
+                tm_evento.cur_fechini,
+                tm_evento.cur_fechfin,
+                tm_evento.portada_img,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
@@ -99,9 +99,9 @@ class Usuario extends Conectar
                 tm_instructor.inst_apep,
                 tm_instructor.inst_apem
                 FROM td_curso_usuario INNER JOIN 
-                tm_curso ON td_curso_usuario.cur_id = tm_curso.cur_id INNER JOIN
+                tm_evento ON td_curso_usuario.even_id = tm_evento.even_id INNER JOIN
                 tm_usuario ON td_curso_usuario.usu_id = tm_usuario.usu_id INNER JOIN
-                tm_instructor ON tm_curso.inst_id = tm_instructor.inst_id
+                tm_instructor ON tm_evento.inst_id = tm_instructor.inst_id
                 WHERE 
                 td_curso_usuario.usu_id = ?";
         $sql = $conectar->prepare($sql);
@@ -118,12 +118,12 @@ class Usuario extends Conectar
         $sql = "SELECT 
                 td_curso_usuario.curd_id,
                  td_curso_usuario.est_aprueba,
-                tm_curso.cur_id,
-                tm_curso.cur_nom,
-                tm_curso.cur_descrip,
-                tm_curso.cur_fechini,
-                tm_curso.cur_fechfin,
-                tm_curso.portada_img,
+                tm_evento.even_id,
+                tm_evento.cur_nom,
+                tm_evento.cur_descrip,
+                tm_evento.cur_fechini,
+                tm_evento.cur_fechfin,
+                tm_evento.portada_img,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
@@ -135,9 +135,9 @@ class Usuario extends Conectar
                 tm_instructor.inst_apep,
                 tm_instructor.inst_apem
                 FROM td_curso_usuario INNER JOIN 
-                tm_curso ON td_curso_usuario.cur_id = tm_curso.cur_id INNER JOIN
+                tm_evento ON td_curso_usuario.even_id = tm_evento.even_id INNER JOIN
                 tm_usuario ON td_curso_usuario.usu_id = tm_usuario.usu_id INNER JOIN
-                tm_instructor ON tm_curso.inst_id = tm_instructor.inst_id
+                tm_instructor ON tm_evento.inst_id = tm_instructor.inst_id
                 WHERE 
                 td_curso_usuario.usu_id = ?
                 AND td_curso_usuario.est = 1
@@ -148,18 +148,18 @@ class Usuario extends Conectar
         return $resultado = $sql->fetchAll();
     }
 
-    public function get_cursos_usuario_x_id($cur_id)
+    public function get_cursos_usuario_x_id($even_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT 
                 td_curso_usuario.curd_id,
-                tm_curso.cur_id,
-                tm_curso.cur_nom,
-                tm_curso.cur_descrip,
-                tm_curso.cur_fechini,
-                tm_curso.cur_fechfin,
-                tm_curso.portada_img,
+                tm_evento.even_id,
+                tm_evento.cur_nom,
+                tm_evento.cur_descrip,
+                tm_evento.cur_fechini,
+                tm_evento.cur_fechfin,
+                tm_evento.portada_img,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
@@ -171,18 +171,18 @@ class Usuario extends Conectar
                 tm_instructor.inst_apep,
                 tm_instructor.inst_apem
                 FROM td_curso_usuario INNER JOIN 
-                tm_curso ON td_curso_usuario.cur_id = tm_curso.cur_id INNER JOIN
+                tm_evento ON td_curso_usuario.even_id = tm_evento.even_id INNER JOIN
                 tm_usuario ON td_curso_usuario.usu_id = tm_usuario.usu_id INNER JOIN
-                tm_instructor ON tm_curso.inst_id = tm_instructor.inst_id
+                tm_instructor ON tm_evento.inst_id = tm_instructor.inst_id
                 WHERE 
-                tm_curso.cur_id = ?
+                tm_evento.even_id = ?
                 AND td_curso_usuario.est = 1";
         $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $cur_id);
+        $sql->bindValue(1, $even_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-    public function get_cursos_usuario_x_id_x_asistencia($cur_id)
+    public function get_cursos_usuario_x_id_x_asistencia($even_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -191,11 +191,11 @@ class Usuario extends Conectar
         $sql = "SELECT 
             td_curso_usuario.curd_id AS curd_id,
             td_curso_usuario.est_aprueba,
-            tm_curso.cur_id,
-            tm_curso.cur_nom,
-            tm_curso.cur_descrip,
-            tm_curso.cur_fechini,
-            tm_curso.cur_fechfin,
+            tm_evento.even_id,
+            tm_evento.cur_nom,
+            tm_evento.cur_descrip,
+            tm_evento.cur_fechini,
+            tm_evento.cur_fechfin,
             tm_usuario.usu_id,
             tm_usuario.usu_nom,
             tm_usuario.usu_apep,
@@ -208,15 +208,15 @@ class Usuario extends Conectar
             tm_instructor.inst_apem,
             COUNT(td_curso_usuario_dias.asistencia_id) AS asistencia_count
             FROM td_curso_usuario
-            INNER JOIN tm_curso ON td_curso_usuario.cur_id = tm_curso.cur_id
+            INNER JOIN tm_evento ON td_curso_usuario.even_id = tm_evento.even_id
             INNER JOIN tm_usuario ON td_curso_usuario.usu_id = tm_usuario.usu_id
-            INNER JOIN tm_instructor ON tm_curso.inst_id = tm_instructor.inst_id
+            INNER JOIN tm_instructor ON tm_evento.inst_id = tm_instructor.inst_id
             LEFT JOIN td_curso_usuario_dias ON td_curso_usuario.curd_id = td_curso_usuario_dias.curd_id
-            WHERE tm_curso.cur_id = ? AND td_curso_usuario.est = 1
+            WHERE tm_evento.even_id = ? AND td_curso_usuario.est = 1
             GROUP BY td_curso_usuario.curd_id";
 
         $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $cur_id);
+        $sql->bindValue(1, $even_id);
         $sql->execute();
         $resultados_usuario = $sql->fetchAll();
 
@@ -230,27 +230,27 @@ class Usuario extends Conectar
         parent::set_names();
         $sql = "SELECT 
                 td_curso_usuario.curd_id,
-                tm_curso.cur_id,
-                tm_curso.cur_nom,
-                tm_curso.cur_descrip,
-                tm_curso.cur_fechini,
-                tm_curso.cur_fechfin,
+                tm_evento.even_id,
+                tm_evento.cur_nom,
+                tm_evento.cur_descrip,
+                tm_evento.cur_fechini,
+                tm_evento.cur_fechfin,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
                 tm_usuario.aclevel_id,
-                tm_curso.cur_img,
-                tm_curso.nhours,
-                tm_curso.modality_id,
+                tm_evento.cur_img,
+                tm_evento.nhours,
+                tm_evento.modality_id,
                 tm_instructor.inst_id,
                 tm_instructor.inst_nom,
                 tm_instructor.inst_apep,
                 tm_instructor.inst_apem
                 FROM td_curso_usuario INNER JOIN 
-                tm_curso ON td_curso_usuario.cur_id = tm_curso.cur_id INNER JOIN
+                tm_evento ON td_curso_usuario.even_id = tm_evento.even_id INNER JOIN
                 tm_usuario ON td_curso_usuario.usu_id = tm_usuario.usu_id INNER JOIN
-                tm_instructor ON tm_curso.inst_id = tm_instructor.inst_id
+                tm_instructor ON tm_evento.inst_id = tm_instructor.inst_id
                 WHERE 
                 td_curso_usuario.curd_id = ?";
         $sql = $conectar->prepare($sql);
@@ -409,15 +409,15 @@ class Usuario extends Conectar
     }
 
     /*TODO: Listar todas las dependencias */
-    public function get_usuario_modal($cur_id)
+    public function get_usuario_modal($even_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT * FROM tm_usuario 
                 WHERE est = 1
-                AND usu_id not in (select usu_id from td_curso_usuario where cur_id=? AND est=1)";
+                AND usu_id not in (select usu_id from td_curso_usuario where even_id=? AND est=1)";
         $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $cur_id);
+        $sql->bindValue(1, $even_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }

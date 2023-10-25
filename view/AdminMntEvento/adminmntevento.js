@@ -108,10 +108,10 @@ $(document).ready(function () {
 
 });
 
-function editar(cur_id) {
-    $.post("../../controller/curso.php?op=mostrar", { cur_id: cur_id }, function (data) {
+function editar(even_id) {
+    $.post("../../controller/curso.php?op=mostrar", { even_id: even_id }, function (data) {
         data = JSON.parse(data);
-        $('#cur_id').val(data.cur_id);
+        $('#even_id').val(data.even_id);
         $('#cat_id').val(data.cat_id).trigger('change');
         $('#modality_id').val(data.modality_id).trigger('change');
         $('#cur_nom').val(data.cur_nom);
@@ -126,7 +126,7 @@ function editar(cur_id) {
 }
 
 
-function eliminar(cur_id) {
+function eliminar(even_id) {
     swal.fire({
         title: "Eliminar!",
         text: "Desea Eliminar el Registro?",
@@ -136,7 +136,7 @@ function eliminar(cur_id) {
         cancelButtonText: "No",
     }).then((result) => {
         if (result.value) {
-            $.post("../../controller/curso.php?op=eliminar", { cur_id: cur_id }, function (data) {
+            $.post("../../controller/curso.php?op=eliminar", { even_id: even_id }, function (data) {
                 $('#cursos_data').DataTable().ajax.reload();
 
                 Swal.fire({
@@ -151,9 +151,9 @@ function eliminar(cur_id) {
 }
 
 let isPortada = "";
-function imagen(cur_id, portada) {
+function imagen(even_id, portada) {
     isPortada = portada;
-    $('#curx_idx').val(cur_id);
+    $('#curx_idx').val(even_id);
     $('#modalfile').modal('show');
 }
 function nuevo() {
@@ -180,20 +180,20 @@ function combo_instructor() {
         $('#inst_id').html(data);
     });
 }
-function habilitarAsistencia(cur_id) {
-    let checkbox = document.getElementById("C" + cur_id);
+function habilitarAsistencia(even_id) {
+    let checkbox = document.getElementById("C" + even_id);
     console.log(checkbox);
     let asistencia = 0;
     if (checkbox.checked) {
         asistencia = 1;
     } else {
         asistencia = 0;
-        console.log('Asistencia no registrada para el ID ' + cur_id);
+        console.log('Asistencia no registrada para el ID ' + even_id);
     }
     $.ajax({
         type: 'POST',
         url: "../../controller/curso.php?op=habilitarAsistencia", // Ruta al script PHP que contiene la función insert_asistencia
-        data: { cur_id: cur_id, est_asistencia: asistencia }, // Aquí se pasan los valores de cur_id y est_asistencia
+        data: { even_id: even_id, est_asistencia: asistencia }, // Aquí se pasan los valores de even_id y est_asistencia
         success: function (response) {
             // Procesa la respuesta del servidor (si es necesario)
             // alert('Asistencia registrada con éxito');

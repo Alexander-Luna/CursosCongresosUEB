@@ -14,7 +14,7 @@
     <?php
     if ($_SESSION["rol_id"] == 1) {
       ?>
-      <a href="../UsuCurso/" class="br-menu-link">
+      <a href="../UsuEvento/" class="br-menu-link">
         <div class="br-menu-item">
           <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
           <span class="menu-item-label">Mis Eventos</span>
@@ -30,7 +30,7 @@
         </div>
       </a>
 
-      <a href="../AdminMntCurso/" class="br-menu-link">
+      <a href="../AdminMntEvento/" class="br-menu-link">
         <div class="br-menu-item">
           <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
           <span class="menu-item-label">Eventos</span>
