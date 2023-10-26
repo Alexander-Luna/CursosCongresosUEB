@@ -1,22 +1,21 @@
 <?php
-class Curso extends Conectar
+class Evento extends Conectar
 {
 
-    public function insert_curso($cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours, $portada_img)
+    public function insert_evento($cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $modality_id, $nhours, $portada_img)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO tm_evento (even_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin, inst_id,cur_img, fech_crea,modality_id,nhours,portada_img, est,est_asistencia) VALUES (NULL,?,?,?,?,?,?,'../../public/1.png', now(),?,?,?,'1',0);";
+        $sql = "INSERT INTO tm_evento (even_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin,cur_img, fech_crea,modality_id,nhours,portada_img, est,est_asistencia) VALUES (NULL,?,?,?,?,?,?,'../../public/1.png', now(),?,?,?,'1',0);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $cat_id);
         $sql->bindValue(2, $cur_nom);
         $sql->bindValue(3, $cur_descrip);
         $sql->bindValue(4, $cur_fechini);
         $sql->bindValue(5, $cur_fechfin);
-        $sql->bindValue(6, $inst_id);
-        $sql->bindValue(7, $modality_id);
-        $sql->bindValue(8, $nhours);
-        $sql->bindValue(9, $portada_img);
+        $sql->bindValue(6, $modality_id);
+        $sql->bindValue(7, $nhours);
+        $sql->bindValue(8, $portada_img);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
@@ -25,8 +24,8 @@ class Curso extends Conectar
         $conectar = parent::conexion();
         parent::set_names();
 
-        // Primero, realiza una consulta para obtener el valor de even_id desde td_curso_usuario
-        $sql1 = "SELECT even_id FROM td_curso_usuario WHERE curd_id = ?";
+        // Primero, realiza una consulta para obtener el valor de even_id desde td_evento_usuario
+        $sql1 = "SELECT even_id FROM td_evento_usuario WHERE curd_id = ?";
         $sql1 = $conectar->prepare($sql1);
         $sql1->bindValue(1, $curd_id);
         $sql1->execute();
@@ -41,8 +40,8 @@ class Curso extends Conectar
             $resultado2 = $sql2->fetch(PDO::FETCH_ASSOC);
 
             if ($resultado2 && isset($resultado2['est_asistencia'])) {
-                // Si est_asistencia es igual a 1, inserta la asistencia en td_curso_usuario_dias
-                $sql3 = "INSERT INTO td_curso_usuario_dias (curd_id, fecha_asistencia, estado) VALUES (?, now(), 1)";
+                // Si est_asistencia es igual a 1, inserta la asistencia en td_evento_usuario_dias
+                $sql3 = "INSERT INTO td_evento_usuario_dias (curd_id, fecha_asistencia, estado) VALUES (?, now(), 1)";
                 $sql3 = $conectar->prepare($sql3);
                 $sql3->bindValue(1, $curd_id);
                 $sql3->execute();
@@ -52,12 +51,12 @@ class Curso extends Conectar
 
         return false; // No se insertó la asistencia
     }
-    public function aprueba_curso($curd_id, $est_aprueba)
+    public function aprueba_evento($curd_id, $est_aprueba)
     {
         $conectar = parent::conexion();
         parent::set_names();
 
-        $sql = "UPDATE td_curso_usuario
+        $sql = "UPDATE td_evento_usuario
                 SET
                     est_aprueba = :est_aprueba
                 WHERE
@@ -94,7 +93,7 @@ class Curso extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-    public function update_curso($even_id, $cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $inst_id, $modality_id, $nhours, $est_asistencia, $portada_img)
+    public function update_evento($even_id, $cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $modality_id, $nhours, $est_asistencia, $portada_img)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -107,7 +106,6 @@ class Curso extends Conectar
                     cur_fechfin = ?,
                     modality_id = ?,
                     nhours = ?,
-                    inst_id = ?,
                     portada_img = ?,
                     est_asistencia = ?
                 WHERE
@@ -120,15 +118,14 @@ class Curso extends Conectar
         $sql->bindValue(5, $cur_fechfin);
         $sql->bindValue(6, $modality_id);
         $sql->bindValue(7, $nhours);
-        $sql->bindValue(8, $inst_id);
-        $sql->bindValue(9, $portada_img);
-        $sql->bindValue(10, $est_asistencia);
-        $sql->bindValue(11, $even_id);
+        $sql->bindValue(8, $portada_img);
+        $sql->bindValue(9, $est_asistencia);
+        $sql->bindValue(10, $even_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
 
-    public function delete_curso($even_id)
+    public function delete_evento($even_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -143,7 +140,7 @@ class Curso extends Conectar
         return $resultado = $sql->fetchAll();
     }
 
-    public function get_curso()
+    public function get_evento()
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -154,22 +151,17 @@ class Curso extends Conectar
                 tm_evento.cur_fechini,
                 tm_evento.cur_fechfin,
                 tm_evento.cat_id,
+                tm_evento.eventype_id,
                 tm_evento.cur_img,
                 tm_evento.portada_img,
                 tm_evento.modality_id,
                 tm_evento.nhours,
                 tm_evento.est_asistencia,
                 tm_dependencias.cat_nom,
-                tm_evento.inst_id,
-                tm_instructor.inst_nom,
-                tm_instructor.inst_apep,
-                tm_instructor.inst_apem,
-                tm_instructor.inst_correo,
-                tm_instructor.inst_sex,
-                tm_instructor.inst_telf
+                tm_dependencias.cat_id
+           
                 FROM tm_evento
                 INNER JOIN tm_dependencias on tm_evento.cat_id = tm_dependencias.cat_id
-                INNER JOIN tm_instructor on tm_evento.inst_id = tm_instructor.inst_id
                 WHERE tm_evento.est = 1";
         $sql = $conectar->prepare($sql);
         $sql->execute();
@@ -185,7 +177,7 @@ class Curso extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-    public function get_curso_id($even_id)
+    public function get_evento_id($even_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -196,11 +188,11 @@ class Curso extends Conectar
         return $resultado = $sql->fetchAll();
     }
 
-    public function delete_curso_usuario($curd_id)
+    public function delete_evento_usuario($curd_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "UPDATE td_curso_usuario
+        $sql = "UPDATE td_evento_usuario
                 SET
                     est = 0
                 WHERE
@@ -211,12 +203,12 @@ class Curso extends Conectar
         return $resultado = $sql->fetchAll();
     }
 
-    /*TODO: Insert Curso por Usuario */
-    public function insert_curso_usuario($even_id, $usu_id)
+    /*TODO: Insert Evento por Usuario */
+    public function insert_evento_usuario($even_id, $usu_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO td_curso_usuario (curd_id,even_id,usu_id,fech_crea,est) VALUES (NULL,?,?,now(),1);";
+        $sql = "INSERT INTO td_evento_usuario (curd_id,even_id,usu_id,fech_crea,est) VALUES (NULL,?,?,now(),1);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $even_id);
         $sql->bindValue(2, $usu_id);
@@ -228,13 +220,13 @@ class Curso extends Conectar
         return $resultado = $sql1->fetch(pdo::FETCH_ASSOC);
     }
 
-    public function update_imagen_curso($even_id, $cur_img)
+    public function update_imagen_evento($even_id, $cur_img)
     {
         $conectar = parent::conexion();
         parent::set_names();
 
-        require_once("Curso.php");
-        $curx = new Curso();
+        require_once("Evento.php");
+        $curx = new Evento();
         $cur_img = '';
         if ($_FILES["cur_img"]["name"] != '') {
             $cur_img = $curx->upload_file();
@@ -251,13 +243,13 @@ class Curso extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-public function update_portada_curso($even_id, $portada_img)
+public function update_portada_evento($even_id, $portada_img)
     {
         $conectar = parent::conexion();
         parent::set_names();
 
-        require_once("Curso.php");
-        $curx = new Curso();
+        require_once("Evento.php");
+        $curx = new Evento();
         $portada_img = '';
         if ($_FILES["cur_img"]["name"] != '') {
             $portada_img = $curx->upload_file1();

@@ -9,16 +9,16 @@ $usuario = new Usuario();
 /*TODO: Opcion de solicitud de controller */
 switch ($_GET["op"]) {
 
-    /*TODO: MicroServicio para poder mostrar el listado de cursos de un usuario con certificado */
-    case "listar_cursos":
-        $datos = $usuario->get_cursos_x_usuario($_POST["usu_id"]);
+    /*TODO: MicroServicio para poder mostrar el listado de eventos de un usuario con certificado */
+    case "listar_eventos":
+        $datos = $usuario->get_eventos_x_usuario($_POST["usu_id"]);
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
             $sub_array[] = $row["cur_nom"];
             $sub_array[] = $row["cur_fechini"];
             $sub_array[] = $row["cur_fechfin"];
-            $sub_array[] = $row["inst_nom"] . " " . $row["inst_apep"];
+            $sub_array[] = $row["nhours"];
             if ($row["est_aprueba"] == 1) {
                 $sub_array[] = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
             } else {
@@ -38,9 +38,9 @@ switch ($_GET["op"]) {
 
         break;
 
-    /*TODO: MicroServicio para poder mostrar el listado de cursos de un usuario con certificado */
-    case "listar_cursos_top10":
-        $datos = $usuario->get_cursos_x_usuario_top10($_POST["usu_id"]);
+    /*TODO: MicroServicio para poder mostrar el listado de eventos de un usuario con certificado */
+    case "listar_eventos_top10":
+        $datos = $usuario->get_eventos_x_usuario_top10($_POST["usu_id"]);
         $data = array();
         foreach ($datos as $row) {
             $certificado = '<div>Pendiente</div>';
@@ -67,8 +67,8 @@ switch ($_GET["op"]) {
         break;
 
     /*TODO: Microservicio para mostar informacion del certificado con el curd_id */
-    case "mostrar_curso_detalle":
-        $datos = $usuario->get_curso_x_id_detalle($_POST["curd_id"]);
+    case "mostrar_evento_detalle":
+        $datos = $usuario->get_evento_x_id_detalle($_POST["curd_id"]);
         if (is_array($datos) == true and count($datos) <> 0) {
             foreach ($datos as $row) {
                 $output["curd_id"] = $row["curd_id"];
@@ -85,18 +85,17 @@ switch ($_GET["op"]) {
                 $output["usu_apep"] = $row["usu_apep"];
                 $output["usu_apem"] = $row["usu_apem"];
                 $output["aclevel_id"] = $row["aclevel_id"];
-                $output["inst_id"] = $row["inst_id"];
-                $output["inst_nom"] = $row["inst_nom"];
+               /* $output["inst_nom"] = $row["inst_nom"];
                 $output["inst_apep"] = $row["inst_apep"];
-                $output["inst_apem"] = $row["inst_apem"];
+                $output["inst_apem"] = $row["inst_apem"];*/
             }
 
             echo json_encode($output);
         }
         break;
-    /*TODO: Total de Cursos por usuario para el dashboard */
+    /*TODO: Total de Eventos por usuario para el dashboard */
     case "total":
-        $datos = $usuario->get_total_cursos_x_usuario($_POST["usu_id"]);
+        $datos = $usuario->get_total_eventos_x_usuario($_POST["usu_id"]);
         if (is_array($datos) == true and count($datos) > 0) {
             foreach ($datos as $row) {
                 $output["total"] = $row["total"];
@@ -232,9 +231,9 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
-    /*TODO: Listar todos los usuarios pertenecientes a un curso */
-    case "listar_cursos_usuario":
-        $datos = $usuario->get_cursos_usuario_x_id($_POST["even_id"]);
+    /*TODO: Listar todos los usuarios pertenecientes a un evento */
+    case "listar_eventos_usuario":
+        $datos = $usuario->get_eventos_usuario_x_id($_POST["even_id"]);
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
@@ -242,7 +241,12 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["usu_nom"] . " " . $row["usu_apep"] . " " . $row["usu_apem"];
             $sub_array[] = $row["cur_fechini"];
             $sub_array[] = $row["cur_fechfin"];
-            $sub_array[] = $row["inst_nom"] . " " . $row["inst_apep"];
+            if (isset($row["nhours"])) {
+                $sub_array[] = $row["nhours"];
+            } else {
+                // Si 'nhours' no está definido, puedes asignar un valor predeterminado o manejarlo según tus necesidades.
+                $sub_array[] = 'Valor Predeterminado'; // Reemplaza 'Valor Predeterminado' con lo que necesites.
+            }
             $sub_array[] = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
             $data[] = $sub_array;
@@ -256,8 +260,8 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
-    case "listar_cursos_usuario_asistencia":
-        $datos = $usuario->get_cursos_usuario_x_id_x_asistencia($_POST["even_id"]);
+    case "listar_eventos_usuario_asistencia":
+        $datos = $usuario->get_eventos_usuario_x_id_x_asistencia($_POST["even_id"]);
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
@@ -304,4 +308,3 @@ switch ($_GET["op"]) {
         break;
 
 }
-?>

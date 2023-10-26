@@ -2,23 +2,23 @@
 /*TODO: Llamando a cadena de Conexion */
 require_once("../config/conexion.php");
 /*TODO: Llamando a la clase */
-require_once("../models/Curso.php");
+require_once("../models/Evento.php");
 /*TODO: Inicializando Clase */
-$curso = new Curso();
+$evento = new Evento();
 
 /*TODO: Opcion de solicitud de controller */
 switch ($_GET["op"]) {
     /*TODO: Guardar y editar cuando se tenga el ID */
     case "guardaryeditar":
         if (empty($_POST["even_id"])) {
-            $curso->insert_curso($_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["inst_id"], $_POST["modality_id"], $_POST["nhours"], $_POST["portada_img"]);
+            $evento->insert_evento($_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["modality_id"], $_POST["nhours"], $_POST["portada_img"]);
         } else {
-            $curso->update_curso($_POST["even_id"], $_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["inst_id"], $_POST["modality_id"], $_POST["nhours"], $_POST["est_asistencia"], $_POST["portada_img"]);
+            $evento->update_evento($_POST["even_id"], $_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["modality_id"], $_POST["nhours"], $_POST["est_asistencia"], $_POST["portada_img"]);
         }
         break;
     /*TODO: Creando Json segun el ID */
     case "mostrar":
-        $datos = $curso->get_curso_id($_POST["even_id"]);
+        $datos = $evento->get_evento_id($_POST["even_id"]);
         if (is_array($datos) == true and count($datos) <> 0) {
             foreach ($datos as $row) {
                 $output["even_id"] = $row["even_id"];
@@ -30,7 +30,6 @@ switch ($_GET["op"]) {
                 $output["cur_descrip"] = $row["cur_descrip"];
                 $output["cur_fechini"] = $row["cur_fechini"];
                 $output["cur_fechfin"] = $row["cur_fechfin"];
-                $output["inst_id"] = $row["inst_id"];
                 $output["est_asistencia"] = $row["est_asistencia"];
             }
             echo json_encode($output);
@@ -38,7 +37,7 @@ switch ($_GET["op"]) {
         break;
     /*TODO: Creando Json segun el ID */
     case "modalidad":
-        $datos = $curso->get_modalidad_id($_POST["modality_id"]);
+        $datos = $evento->get_modalidad_id($_POST["modality_id"]);
         if (is_array($datos) == true and count($datos) <> 0) {
             foreach ($datos as $row) {
                 $output["modality_id"] = $row["modality_id"];
@@ -52,12 +51,13 @@ switch ($_GET["op"]) {
 
     /*TODO: Eliminar segun ID */
     case "eliminar":
-        $curso->delete_curso($_POST["even_id"]);
+        $evento->delete_evento($_POST["even_id"]);
         break;
     /*TODO:  Listar toda la informacion segun formato de datatable */
     case "listar":
-        $datos = $curso->get_curso();
+        $datos = $evento->get_evento();
         $data = array();
+       
         foreach ($datos as $row) {
             $sub_array = array();
             $sub_array[] = $row["cat_nom"];
@@ -69,9 +69,8 @@ switch ($_GET["op"]) {
             $sub_array[] = '<button type="button" onClick="editar(' . $row["even_id"] . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["even_id"] . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
             $sub_array[] = '<input type="checkbox" onClick="habilitarAsistencia(' . $row["even_id"] . ');" name="C' . $row["even_id"] . '" id="C' . $row["even_id"] . '"' . ($row["est_asistencia"] == 1 ? ' checked' : '') . '>';
-            $sub_array[] = $row["modality_id"];
-            $sub_array[] = $row["nhours"];
             $data[] = $sub_array;
+            
         }
 
         $results = array(
@@ -84,7 +83,7 @@ switch ($_GET["op"]) {
         break;
     /*TODO:  Listar toda la informacion segun formato de datatable */
     case "combo":
-        $datos = $curso->get_curso();
+        $datos = $evento->get_evento();
         if (is_array($datos) == true and count($datos) > 0) {
             $html = " <option label='Seleccione'></option>";
             foreach ($datos as $row) {
@@ -94,18 +93,18 @@ switch ($_GET["op"]) {
         }
         break;
 
-    case "eliminar_curso_usuario":
-        $curso->delete_curso_usuario($_POST["curd_id"]);
+    case "eliminar_evento_usuario":
+        $evento->delete_evento_usuario($_POST["curd_id"]);
         break;
-    /*TODO: Insetar detalle de curso usuario */
-    case "insert_curso_usuario":
+    /*TODO: Insetar detalle de evento usuario */
+    case "insert_evento_usuario":
         /*TODO: Array de usuario separado por comas */
         $datos = explode(',', $_POST['usu_id']);
         /*TODO: Registrar tantos usuarios vengan de la vista */
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
-            $idx = $curso->insert_curso_usuario($_POST["even_id"], $row);
+            $idx = $evento->insert_evento_usuario($_POST["even_id"], $row);
             $sub_array[] = $idx;
             $data[] = $sub_array;
         }
@@ -120,25 +119,25 @@ switch ($_GET["op"]) {
         QRcode::png(conectar::ruta() . "view/Certificado/index.php?curd_id=" . $_POST["curd_id"], "../public/qr/" . $_POST["curd_id"] . ".png", 'L', 32, 5);
         break;
 
-    case "update_imagen_curso":
-        $curso->update_imagen_curso($_POST["curx_idx"], $_POST["cur_img"]);
+    case "update_imagen_evento":
+        $evento->update_imagen_evento($_POST["curx_idx"], $_POST["cur_img"]);
         break;
-    case "update_portada_curso":
-        $curso->update_portada_curso($_POST["curx_idx"], $_POST["cur_img"]);
+    case "update_portada_evento":
+        $evento->update_portada_evento($_POST["curx_idx"], $_POST["cur_img"]);
         break;
     /*TODO: Guardar y editar cuando se tenga el ID */
     case "asistencia":
-        $curso->insert_asistencia($_POST["curd_id"]);
+        $evento->insert_asistencia($_POST["curd_id"]);
         break;
     /*TODO: Guardar y editar cuando se tenga el ID */
     case "habilitarAsistencia":
-        $curso->habilitar_asistencia($_POST["even_id"], $_POST["est_asistencia"]);
+        $evento->habilitar_asistencia($_POST["even_id"], $_POST["est_asistencia"]);
         break;
-        case "apruebacurso":
-            $curso->aprueba_curso($_POST["curd_id"], $_POST["est_aprueba"]);
+        case "apruebaevento":
+            $evento->aprueba_evento($_POST["curd_id"], $_POST["est_aprueba"]);
             break;
     case "combomodalidad":
-        $datos = $curso->get_modalidad();
+        $datos = $evento->get_modalidad();
         if (is_array($datos) == true and count($datos) > 0) {
             $html = " <option label='Seleccione'></option>";
             foreach ($datos as $row) {

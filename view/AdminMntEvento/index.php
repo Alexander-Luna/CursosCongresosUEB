@@ -38,7 +38,7 @@
             <p></p>
 
             <div class="table-wrapper"></div>
-                <table id="cursos_data" class="table display responsive nowrap">
+                <table id="eventos_data" class="table display responsive nowrap">
                 <thead>
                     <tr>
                     <th class="wd-15p">Dependencia</th>

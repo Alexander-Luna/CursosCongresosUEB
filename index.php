@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -55,7 +55,7 @@
                 <div class="icon">
                     <img class="img" src="assets/congreso.png" alt="congresos" />
                 </div>
-                <strong>I Curso Internacional</strong>
+                <strong>I Evento Internacional</strong>
                 <div class="card__body">
                     Registrate y adquiere todo el conocimiento.
                 </div>

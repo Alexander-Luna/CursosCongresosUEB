@@ -2,7 +2,7 @@
 let usu_id = $('#usu_idx').val();
 
 function init() {
-    $("#cursos_form").on("submit", function (e) {
+    $("#eventos_form").on("submit", function (e) {
         guardaryeditar(e);
     });
 
@@ -10,10 +10,10 @@ function init() {
     $("#detalle_form").on("submit", function (e) {
         e.preventDefault(); // Evita el envío automático del formulario
         if (isPortada === "portada") {
-            URLimg = "../../controller/curso.php?op=update_portada_curso";
+            URLimg = "../../controller/evento.php?op=update_portada_evento";
             guardaryeditarimg(e);
         } else {
-            URLimg = "../../controller/curso.php?op=update_imagen_curso";
+            URLimg = "../../controller/evento.php?op=update_imagen_evento";
             guardaryeditarimg(e);
         }
     });
@@ -21,16 +21,16 @@ function init() {
 
 function guardaryeditar(e) {
     e.preventDefault();
-    let formData = new FormData($("#cursos_form")[0]);
+    let formData = new FormData($("#eventos_form")[0]);
     $.ajax({
-        url: "../../controller/curso.php?op=guardaryeditar",
+        url: "../../controller/evento.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
         processData: false,
         success: function (data) {
             console.log(data);
-            $('#cursos_data').DataTable().ajax.reload();
+            $('#eventos_data').DataTable().ajax.reload();
             $('#modalmantenimiento').modal('hide');
 
             Swal.fire({
@@ -44,7 +44,6 @@ function guardaryeditar(e) {
 }
 
 $(document).ready(function () {
-
     $('#cat_id').select2({
         dropdownParent: $('#modalmantenimiento')
     });
@@ -52,17 +51,17 @@ $(document).ready(function () {
         dropdownParent: $('#modalmantenimiento')
     });
 
-    $('#inst_id').select2({
+  /*  $('#inst_id').select2({
         dropdownParent: $('#modalmantenimiento')
-    });
+    });*/
 
     combo_dependencia();
 
     combo_modalidad();
 
-    combo_instructor();
+   /* combo_instructor();*/
 
-    $('#cursos_data').DataTable({
+    $('#eventos_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
         dom: 'Bfrtip',
@@ -72,7 +71,7 @@ $(document).ready(function () {
             'csvHtml5',
         ],
         "ajax": {
-            url: "../../controller/curso.php?op=listar",
+            url: "../../controller/evento.php?op=listar",
             type: "post"
         },
         "bDestroy": true,
@@ -109,7 +108,7 @@ $(document).ready(function () {
 });
 
 function editar(even_id) {
-    $.post("../../controller/curso.php?op=mostrar", { even_id: even_id }, function (data) {
+    $.post("../../controller/evento.php?op=mostrar", { even_id: even_id }, function (data) {
         data = JSON.parse(data);
         $('#even_id').val(data.even_id);
         $('#cat_id').val(data.cat_id).trigger('change');
@@ -119,7 +118,7 @@ function editar(even_id) {
         $('#cur_descrip').val(data.cur_descrip);
         $('#cur_fechini').val(data.cur_fechini);
         $('#cur_fechfin').val(data.cur_fechfin);
-        $('#inst_id').val(data.inst_id).trigger('change'); 1
+      //  $('#inst_id').val(data.inst_id).trigger('change'); 1
     });
     $('#lbltitulo').html('Editar Registro');
     $('#modalmantenimiento').modal('show');
@@ -136,8 +135,8 @@ function eliminar(even_id) {
         cancelButtonText: "No",
     }).then((result) => {
         if (result.value) {
-            $.post("../../controller/curso.php?op=eliminar", { even_id: even_id }, function (data) {
-                $('#cursos_data').DataTable().ajax.reload();
+            $.post("../../controller/evento.php?op=eliminar", { even_id: even_id }, function (data) {
+                $('#eventos_data').DataTable().ajax.reload();
 
                 Swal.fire({
                     title: 'Correcto!',
@@ -158,10 +157,10 @@ function imagen(even_id, portada) {
 }
 function nuevo() {
     $('#lbltitulo').html('Nuevo Registro');
-    $('#cursos_form')[0].reset();
+    $('#eventos_form')[0].reset();
     combo_dependencia();
     combo_modalidad();
-    combo_instructor();
+  //  combo_instructor();
     $('#modalmantenimiento').modal('show');
 }
 
@@ -171,15 +170,15 @@ function combo_dependencia() {
     });
 }
 function combo_modalidad() {
-    $.post("../../controller/curso.php?op=combomodalidad", function (data) {
+    $.post("../../controller/evento.php?op=combomodalidad", function (data) {
         $('#modality_id').html(data);
     });
-}
+}/*
 function combo_instructor() {
     $.post("../../controller/instructor.php?op=combo", function (data) {
         $('#inst_id').html(data);
     });
-}
+}*/
 function habilitarAsistencia(even_id) {
     let checkbox = document.getElementById("C" + even_id);
     console.log(checkbox);
@@ -192,7 +191,7 @@ function habilitarAsistencia(even_id) {
     }
     $.ajax({
         type: 'POST',
-        url: "../../controller/curso.php?op=habilitarAsistencia", // Ruta al script PHP que contiene la función insert_asistencia
+        url: "../../controller/evento.php?op=habilitarAsistencia", // Ruta al script PHP que contiene la función insert_asistencia
         data: { even_id: even_id, est_asistencia: asistencia }, // Aquí se pasan los valores de even_id y est_asistencia
         success: function (response) {
             // Procesa la respuesta del servidor (si es necesario)
@@ -215,7 +214,7 @@ function guardaryeditarimg(e) {
         contentType: false,
         processData: false,
         success: function (datos) {
-            $('#cursos_data').DataTable().ajax.reload();
+            $('#eventos_data').DataTable().ajax.reload();
             Swal.fire({
                 title: 'Correcto!',
                 text: 'Se Actualizo Correctamente',

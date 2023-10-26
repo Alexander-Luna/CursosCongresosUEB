@@ -30,10 +30,10 @@ class Usuario extends Conectar
                 $stmt = $conectar->prepare($sql);
                 $stmt->bindValue(1, $correo);
                 $stmt->execute();
-                $resultado = $stmt->fetch();
+                $resultado1 = $stmt->fetch();
 
-                if ($resultado) {
-                    $hashAlmacenado = $resultado['usu_pass'];
+                if ($resultado1) {
+                    $hashAlmacenado = $resultado1['usu_pass'];
 
                     $sql = "SELECT * FROM tm_usuario WHERE usu_correo=? and usu_pass=? and est=1";
                     $stmt = $conectar->prepare($sql);
@@ -42,23 +42,17 @@ class Usuario extends Conectar
                     $stmt->bindValue(2, $pass);
                     $stmt->execute();
                     $resultado = $stmt->fetch();
-                } else {
-                    // Usuario no encontrado
-                }
-                if (is_array($resultado) and count($resultado) > 0) {
-                    $_SESSION["usu_id"] = $resultado["usu_id"];
-                    $_SESSION["usu_nom"] = $resultado["usu_nom"];
-                    $_SESSION["usu_ape"] = $resultado["usu_ape"];
-                    $_SESSION["usu_correo"] = $resultado["usu_correo"];
-                    $_SESSION["rol_id"] = $resultado["rol_id"];
-                    $_SESSION["aclevel_id"] = $resultado["aclevel_id"];
-                    /*TODO: Si todo esta correcto indexar en home */
-                    header("Location:" . Conectar::ruta() . "view/UsuHome/");
-                    exit();
-                } else {
-                    /*TODO: En caso no coincidan el usuario o la contraseña */
-                    header("Location:" . conectar::ruta() . "index.php?m=1");
-                    exit();
+                    if (is_array($resultado) and count($resultado) > 0) {
+                        $_SESSION["usu_id"] = $resultado["usu_id"];
+                        $_SESSION["usu_nom"] = $resultado["usu_nom"];
+                        $_SESSION["usu_ape"] = $resultado["usu_ape"];
+                        $_SESSION["usu_correo"] = $resultado["usu_correo"];
+                        $_SESSION["rol_id"] = $resultado["rol_id"];
+                        $_SESSION["aclevel_id"] = $resultado["aclevel_id"];
+                        /*TODO: Si todo esta correcto indexar en home */
+                        header("Location:" . Conectar::ruta() . "view/UsuHome/");
+                        exit();
+                    }
                 }
             }
         }
@@ -74,14 +68,14 @@ class Usuario extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-    /*TODO: Mostrar todos los cursos en los cuales esta inscrito un usuario */
-    public function get_cursos_x_usuario($usu_id)
+    /*TODO: Mostrar todos los eventos en los cuales esta inscrito un usuario */
+    public function get_eventos_x_usuario($usu_id)
     {
         $conectar = parent::conexion();
 
         parent::set_names();
         $sql = "SELECT 
-                td_curso_usuario.curd_id,
+                td_evento_usuario.curd_id,
                 tm_evento.even_id,
                 tm_evento.cur_nom,
                 tm_evento.cur_descrip,
@@ -93,31 +87,26 @@ class Usuario extends Conectar
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
                 tm_usuario.usu_ci,
-                tm_usuario.aclevel_id,
-                tm_instructor.inst_id,
-                tm_instructor.inst_nom,
-                tm_instructor.inst_apep,
-                tm_instructor.inst_apem
-                FROM td_curso_usuario INNER JOIN 
-                tm_evento ON td_curso_usuario.even_id = tm_evento.even_id INNER JOIN
-                tm_usuario ON td_curso_usuario.usu_id = tm_usuario.usu_id INNER JOIN
-                tm_instructor ON tm_evento.inst_id = tm_instructor.inst_id
+                tm_usuario.aclevel_id
+                FROM td_evento_usuario INNER JOIN 
+                tm_evento ON td_evento_usuario.even_id = tm_evento.even_id INNER JOIN
+                tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id 
                 WHERE 
-                td_curso_usuario.usu_id = ?";
+                td_evento_usuario.usu_id = ?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
 
-    /*TODO: Mostrar todos los cursos en los cuales esta inscrito un usuario */
-    public function get_cursos_x_usuario_top10($usu_id)
+    /*TODO: Mostrar todos los eventos en los cuales esta inscrito un usuario */
+    public function get_eventos_x_usuario_top10($usu_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT 
-                td_curso_usuario.curd_id,
-                 td_curso_usuario.est_aprueba,
+                td_evento_usuario.curd_id,
+                 td_evento_usuario.est_aprueba,
                 tm_evento.even_id,
                 tm_evento.cur_nom,
                 tm_evento.cur_descrip,
@@ -129,18 +118,13 @@ class Usuario extends Conectar
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
                 tm_usuario.usu_ci,
-                tm_usuario.aclevel_id,
-                tm_instructor.inst_id,
-                tm_instructor.inst_nom,
-                tm_instructor.inst_apep,
-                tm_instructor.inst_apem
-                FROM td_curso_usuario INNER JOIN 
-                tm_evento ON td_curso_usuario.even_id = tm_evento.even_id INNER JOIN
-                tm_usuario ON td_curso_usuario.usu_id = tm_usuario.usu_id INNER JOIN
-                tm_instructor ON tm_evento.inst_id = tm_instructor.inst_id
+                tm_usuario.aclevel_id
+                FROM td_evento_usuario INNER JOIN 
+                tm_evento ON td_evento_usuario.even_id = tm_evento.even_id INNER JOIN
+                tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id 
                 WHERE 
-                td_curso_usuario.usu_id = ?
-                AND td_curso_usuario.est = 1
+                td_evento_usuario.usu_id = ?
+                AND td_evento_usuario.est = 1
                 LIMIT 10";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_id);
@@ -148,12 +132,12 @@ class Usuario extends Conectar
         return $resultado = $sql->fetchAll();
     }
 
-    public function get_cursos_usuario_x_id($even_id)
+    public function get_eventos_usuario_x_id($even_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT 
-                td_curso_usuario.curd_id,
+                td_evento_usuario.curd_id,
                 tm_evento.even_id,
                 tm_evento.cur_nom,
                 tm_evento.cur_descrip,
@@ -165,32 +149,27 @@ class Usuario extends Conectar
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
                 tm_usuario.usu_ci,
-                tm_usuario.aclevel_id,
-                tm_instructor.inst_id,
-                tm_instructor.inst_nom,
-                tm_instructor.inst_apep,
-                tm_instructor.inst_apem
-                FROM td_curso_usuario INNER JOIN 
-                tm_evento ON td_curso_usuario.even_id = tm_evento.even_id INNER JOIN
-                tm_usuario ON td_curso_usuario.usu_id = tm_usuario.usu_id INNER JOIN
-                tm_instructor ON tm_evento.inst_id = tm_instructor.inst_id
+                tm_usuario.aclevel_id
+                FROM td_evento_usuario INNER JOIN 
+                tm_evento ON td_evento_usuario.even_id = tm_evento.even_id INNER JOIN
+                tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id 
                 WHERE 
                 tm_evento.even_id = ?
-                AND td_curso_usuario.est = 1";
+                AND td_evento_usuario.est = 1";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $even_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-    public function get_cursos_usuario_x_id_x_asistencia($even_id)
+    public function get_eventos_usuario_x_id_x_asistencia($even_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
 
         // Consulta para obtener los registros de usuario y su recuento de asistencias
         $sql = "SELECT 
-            td_curso_usuario.curd_id AS curd_id,
-            td_curso_usuario.est_aprueba,
+            td_evento_usuario.curd_id AS curd_id,
+            td_evento_usuario.est_aprueba,
             tm_evento.even_id,
             tm_evento.cur_nom,
             tm_evento.cur_descrip,
@@ -202,18 +181,13 @@ class Usuario extends Conectar
             tm_usuario.usu_apem,
             tm_usuario.usu_ci,
             tm_usuario.aclevel_id,
-            tm_instructor.inst_id,
-            tm_instructor.inst_nom,
-            tm_instructor.inst_apep,
-            tm_instructor.inst_apem,
-            COUNT(td_curso_usuario_dias.asistencia_id) AS asistencia_count
-            FROM td_curso_usuario
-            INNER JOIN tm_evento ON td_curso_usuario.even_id = tm_evento.even_id
-            INNER JOIN tm_usuario ON td_curso_usuario.usu_id = tm_usuario.usu_id
-            INNER JOIN tm_instructor ON tm_evento.inst_id = tm_instructor.inst_id
-            LEFT JOIN td_curso_usuario_dias ON td_curso_usuario.curd_id = td_curso_usuario_dias.curd_id
-            WHERE tm_evento.even_id = ? AND td_curso_usuario.est = 1
-            GROUP BY td_curso_usuario.curd_id";
+            COUNT(td_evento_usuario_dias.asistencia_id) AS asistencia_count
+            FROM td_evento_usuario
+            INNER JOIN tm_evento ON td_evento_usuario.even_id = tm_evento.even_id
+            INNER JOIN tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id
+            LEFT JOIN td_evento_usuario_dias ON td_evento_usuario.curd_id = td_evento_usuario_dias.curd_id
+            WHERE tm_evento.even_id = ? AND td_evento_usuario.est = 1
+            GROUP BY td_evento_usuario.curd_id";
 
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $even_id);
@@ -223,13 +197,13 @@ class Usuario extends Conectar
         return $resultados_usuario;
     }
 
-    /*TODO: Mostrar todos los datos de un curso por su id de detalle */
-    public function get_curso_x_id_detalle($curd_id)
+    /*TODO: Mostrar todos los datos de un evento por su id de detalle */
+    public function get_evento_x_id_detalle($curd_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT 
-                td_curso_usuario.curd_id,
+                td_evento_usuario.curd_id,
                 tm_evento.even_id,
                 tm_evento.cur_nom,
                 tm_evento.cur_descrip,
@@ -242,29 +216,24 @@ class Usuario extends Conectar
                 tm_usuario.aclevel_id,
                 tm_evento.cur_img,
                 tm_evento.nhours,
-                tm_evento.modality_id,
-                tm_instructor.inst_id,
-                tm_instructor.inst_nom,
-                tm_instructor.inst_apep,
-                tm_instructor.inst_apem
-                FROM td_curso_usuario INNER JOIN 
-                tm_evento ON td_curso_usuario.even_id = tm_evento.even_id INNER JOIN
-                tm_usuario ON td_curso_usuario.usu_id = tm_usuario.usu_id INNER JOIN
-                tm_instructor ON tm_evento.inst_id = tm_instructor.inst_id
+                tm_evento.modality_id
+                FROM td_evento_usuario INNER JOIN 
+                tm_evento ON td_evento_usuario.even_id = tm_evento.even_id INNER JOIN
+                tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id 
                 WHERE 
-                td_curso_usuario.curd_id = ?";
+                td_evento_usuario.curd_id = ?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $curd_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
 
-    /*TODO: Cantidad de Cursos por Usuario */
-    public function get_total_cursos_x_usuario($usu_id)
+    /*TODO: Cantidad de Eventos por Usuario */
+    public function get_total_eventos_x_usuario($usu_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT count(*) as total FROM td_curso_usuario WHERE usu_id=?";
+        $sql = "SELECT count(*) as total FROM td_evento_usuario WHERE usu_id=?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_id);
         $sql->execute();
@@ -415,7 +384,7 @@ class Usuario extends Conectar
         parent::set_names();
         $sql = "SELECT * FROM tm_usuario 
                 WHERE est = 1
-                AND usu_id not in (select usu_id from td_curso_usuario where even_id=? AND est=1)";
+                AND usu_id not in (select usu_id from td_evento_usuario where even_id=? AND est=1)";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $even_id);
         $sql->execute();
@@ -423,4 +392,3 @@ class Usuario extends Conectar
     }
 
 }
-?>

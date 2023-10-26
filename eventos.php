@@ -12,19 +12,19 @@ if (!$conexion) {
 }
 
 $query = "SELECT
-            c.cur_id,
-            f.cat_nom AS dependencia,
-            c.cur_nom AS nombre_curso,
-            c.portada_img,
-            c.cur_fechini AS fecha_inicio,
-            c.cur_fechfin AS fecha_fin,
-            i.inst_nom AS nombre_instructor,
-            i.inst_apep AS apellido_instructor
-          FROM tm_curso c
-          JOIN tm_dependenciaes f ON c.cat_id = f.cat_id
-          JOIN tm_instructor i ON c.inst_id = i.inst_id
-          WHERE c.est = 1"; // Solo cursos con estado 1 (activos)
-$result = mysqli_query($conexion, $query);
+            tm_evento.even_id,
+            tm_dependencias.cat_nom AS dependencia,
+            tm_evento.cur_nom AS nombre_evento,
+            tm_evento.portada_img,
+            tm_evento.cur_fechini AS fecha_inicio,
+            tm_evento.cur_fechfin AS fecha_fin
+          FROM tm_evento
+          JOIN tm_dependencias ON tm_evento.cat_id = tm_dependencias.cat_id
+          WHERE tm_evento.est = 1"; // Solo eventos con estado 1 (activos)
+
+
+
+$result = mysqli_query($conexion, $query); // Ejecuta la consulta
 
 if (!$result) {
     die("Error al ejecutar la consulta: " . mysqli_error($conexion));
@@ -70,11 +70,11 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
             ?>
                 <div class="cardE">
                     <div class="cardE-image">
-                        <img src="<?php echo $evento['portada_img']; ?>" alt="<?php echo $evento['nombre_curso']; ?>">
+                        <img src="<?php echo $evento['portada_img']; ?>" alt="<?php echo $evento['nombre_evento']; ?>">
                     </div>
                     <div class="category">
                         <h3 class="cardE__title">
-                            <?php echo $evento['nombre_curso']; ?>
+                            <?php echo $evento['nombre_evento']; ?>
                         </h3>
                     </div>
                     <div class="heading">
@@ -87,11 +87,7 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         <p class="cardE__content">Fecha de Finalización:
                             <?php echo $evento['fecha_fin']; ?>
                         </p>
-                        <div class="author"> Por <span class="name">
-                                <p class="cardE__content">
-                                    <?php echo $evento['nombre_instructor'] . ' ' . $evento['apellido_instructor']; ?>
-                                </p>
-                            </span> </div>
+
                     </div>
                 </div>
             <?php
@@ -146,7 +142,7 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </div>
         </div>
     </footer>
-    <script type="text/javascript" src="adminmntcurso.js"></script>
+    <script type="text/javascript" src="adminmntevento.js"></script>
 </body>
 
 </html>

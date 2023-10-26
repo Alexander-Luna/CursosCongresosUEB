@@ -8,9 +8,9 @@ function init() {
 $(document).ready(function () {
     $('#even_id').select2();
 
-    combo_curso();
+    combo_evento();
 
-    /* Obtener Id de combo curso */
+    /* Obtener Id de combo evento */
     $('#even_id').change(function () {
         $("#even_id option:selected").each(function () {
             even_id = $(this).val();
@@ -26,7 +26,7 @@ $(document).ready(function () {
                     'csvHtml5',
                 ],
                 "ajax": {
-                    url: "../../controller/usuario.php?op=listar_cursos_usuario",
+                    url: "../../controller/usuario.php?op=listar_eventos_usuario",
                     type: "post",
                     data: { even_id: even_id },
                 },
@@ -76,7 +76,7 @@ function eliminar(curd_id) {
         cancelButtonText: "No",
     }).then((result) => {
         if (result.value) {
-            $.post("../../controller/curso.php?op=eliminar_curso_usuario", { curd_id: curd_id }, function (data) {
+            $.post("../../controller/evento.php?op=eliminar_evento_usuario", { curd_id: curd_id }, function (data) {
                 $('#detalle_data').DataTable().ajax.reload();
 
                 Swal.fire({
@@ -90,8 +90,8 @@ function eliminar(curd_id) {
     });
 }
 
-function combo_curso() {
-    $.post("../../controller/curso.php?op=combo", function (data) {
+function combo_evento() {
+    $.post("../../controller/evento.php?op=combo", function (data) {
         $('#even_id').html(data);
     });
 }
@@ -105,7 +105,7 @@ function nuevo() {
     if ($('#even_id').val() == '') {
         Swal.fire({
             title: 'Error!',
-            text: 'Seleccionar Curso',
+            text: 'Seleccionar Evento',
             icon: 'error',
             confirmButtonText: 'Aceptar'
         })
@@ -198,7 +198,7 @@ function registrardetalle() {
         formData.append('usu_id', usu_id);
 
         $.ajax({
-            url: "../../controller/curso.php?op=insert_curso_usuario",
+            url: "../../controller/evento.php?op=insert_evento_usuario",
             type: "POST",
             data: formData,
             contentType: false,
@@ -211,7 +211,7 @@ function registrardetalle() {
                         console.log(i['curd_id']);
                         $.ajax({
                             type: "POST",
-                            url: "../../controller/curso.php?op=generar_qr",
+                            url: "../../controller/evento.php?op=generar_qr",
                             data: { curd_id: i['curd_id'] },
                             dataType: "json"
                         });
@@ -220,7 +220,7 @@ function registrardetalle() {
             }
         });
 
-        /* Recargar datatable de los usuarios del curso */
+        /* Recargar datatable de los usuarios del evento */
         $('#detalle_data').DataTable().ajax.reload();
 
         $('#usuario_data').DataTable().ajax.reload();

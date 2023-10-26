@@ -61,17 +61,17 @@
               <div class="pd-x-30 pd-t-30 pd-b-15">
                 <div class="d-flex align-items-center justify-content-between">
                   <div>
-                    <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1" id="lbldatos">Listado de Cursos</h6>
+                    <h6 class="tx-13 tx-uppercase tx-inverse tx-semibold tx-spacing-1" id="lbldatos">Listado de Eventos</h6>
                     <p class="mg-b-0">Aquí podrá visualizar los Certificados</p>
                   </div>
                 </div>
               </div>
               <div class="pd-x-15 pd-b-15">
                 <div class="table-wrapper">
-                  <table id="cursos_data" class="table display responsive nowrap">
+                  <table id="eventos_data" class="table display responsive nowrap">
                     <thead>
                       <tr>
-                        <th class="wd-15p">Curso</th>
+                        <th class="wd-15p">Evento</th>
                         <th class="wd-15p">Fecha Inicio</th>
                         <th class="wd-20p">Fecha Fin</th>
                         <th class="wd-15p">Instructor</th>

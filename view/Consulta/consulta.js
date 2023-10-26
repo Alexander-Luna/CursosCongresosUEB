@@ -20,9 +20,9 @@ $(document).on("click", "#btnconsultar", function () {
             if (data.length > 0) {
                 data = JSON.parse(data);
 
-                $("#lbldatos").html("Listado de Cursos : " + data.usu_apep + " " + data.usu_apem + " " + data.usu_nom);
+                $("#lbldatos").html("Listado de Eventos : " + data.usu_apep + " " + data.usu_apem + " " + data.usu_nom);
 
-                $('#cursos_data').DataTable({
+                $('#eventos_data').DataTable({
                     "aProcessing": true,
                     "aServerSide": true,
                     dom: 'Bfrtip',
@@ -32,7 +32,7 @@ $(document).on("click", "#btnconsultar", function () {
                         'csvHtml5',
                     ],
                     "ajax": {
-                        url: "../../controller/usuario.php?op=listar_cursos",
+                        url: "../../controller/usuario.php?op=listar_eventos",
                         type: "post",
                         data: { usu_id: data.usu_id },
                     },
@@ -92,23 +92,38 @@ let asistenciaRegistrada = false;
 function FuncionAsistencia(curd_id) {
     // Verificar si la asistencia ya se ha registrado
     if (asistenciaRegistrada) {
-        alert('La asistencia ya ha sido registrada.');
+        Swal.fire({
+            title: 'Correcto!',
+            text: 'La asistencia ya ha sido registrada.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        })
         return;
     }
 
     // Realiza una solicitud AJAX para registrar la asistencia
     $.ajax({
         type: 'POST',
-        url: "../../controller/curso.php?op=asistencia",
+        url: "../../controller/evento.php?op=asistencia",
         data: { curd_id: curd_id },
         success: function (response) {
             // Procesa la respuesta del servidor (si es necesario)
-            alert('Asistencia registrada con éxito');
+            Swal.fire({
+                title: 'Correcto!',
+                text: 'Se Registro Correctamente',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            })
             // Desactiva la función para futuras llamadas
             asistenciaRegistrada = true;
         },
         error: function (e) {
-            alert('Error al registrar la asistencia ' + e);
+            Swal.fire({
+                title: 'Correcto!',
+                text: 'Error al registrar asistencia',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            })
         }
     });
 }

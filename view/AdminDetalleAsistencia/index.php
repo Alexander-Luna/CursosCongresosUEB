@@ -38,7 +38,7 @@ if (isset($_SESSION["usu_id"])) {
             <div class="row">
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label class="form-control-label">Cursos: <span class="tx-danger">*</span></label>
+                  <label class="form-control-label">Eventos: <span class="tx-danger">*</span></label>
                   <select class="form-control select2" style="width:100%" name="even_id" id="even_id"
                     data-placeholder="Seleccione">
                     <option label="Seleccione"></option>
@@ -60,7 +60,7 @@ if (isset($_SESSION["usu_id"])) {
           <table id="detalle_data" class="table display responsive nowrap" width="100%">
             <thead>
               <tr>
-                <th class="wd-15p">Curso</th>
+                <th class="wd-15p">Evento</th>
                 <th class="wd-15p">Usuario</th>
                 <th class="wd-20p">Fecha Fin</th>
                 <th class="wd-10p">Asistencia</th>

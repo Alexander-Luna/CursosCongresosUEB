@@ -16,7 +16,7 @@ const lineHeight = 30; // Espacio entre líneas
 $(document).ready(function () {
     var curd_id = getUrlParameter('curd_id');
 
-    $.post("../../controller/usuario.php?op=mostrar_curso_detalle", { curd_id: curd_id }, function (data) {
+    $.post("../../controller/usuario.php?op=mostrar_evento_detalle", { curd_id: curd_id }, function (data) {
         data = JSON.parse(data);
 
         /* Ruta de la Imagen */
@@ -50,7 +50,7 @@ $(document).ready(function () {
 
         var modalidad = data.modality_id;
 
-        $.post("../../controller/curso.php?op=modalidad", { modality_id: modalidad }, function (response1) {
+        $.post("../../controller/evento.php?op=modalidad", { modality_id: modalidad }, function (response1) {
             response1 = JSON.parse(response1);
             modalidad = response1.name;
             ctx.font = '15px Arial';
