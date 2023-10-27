@@ -1,7 +1,7 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "-05:00";
 
 DROP DATABASE IF EXISTS cursoscongresosueb;
 CREATE DATABASE cursoscongresosueb;
@@ -78,7 +78,7 @@ ALTER TABLE `event_type`
   `eventype_id`,
   `name`,
   `est`
-)VALUES(1,"Curso",1),(2,"Congreso",1),(3,"Capacitación",1);
+)VALUES(1,"Congreso",1),(2,"Curso",1),(3,"Capacitación",1);
 CREATE TABLE `modality` (
   `modality_id` int(11) NOT NULL,
   `name` varchar(150) COLLATE utf8_spanish_ci NOT NULL,

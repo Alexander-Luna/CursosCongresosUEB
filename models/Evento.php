@@ -139,7 +139,16 @@ class Evento extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-
+    public function get_eventype($eventype_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT * FROM event_type WHERE eventype_id = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $eventype_id);
+        $sql->execute();
+        return $resultado = $sql->fetch(PDO::FETCH_ASSOC); // Utiliza fetch para obtener un solo resultado
+    }
     public function get_evento()
     {
         $conectar = parent::conexion();
@@ -164,6 +173,7 @@ class Evento extends Conectar
                 INNER JOIN tm_dependencias on tm_evento.cat_id = tm_dependencias.cat_id
                 WHERE tm_evento.est = 1";
         $sql = $conectar->prepare($sql);
+
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
@@ -243,7 +253,7 @@ class Evento extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-public function update_portada_evento($even_id, $portada_img)
+    public function update_portada_evento($even_id, $portada_img)
     {
         $conectar = parent::conexion();
         parent::set_names();

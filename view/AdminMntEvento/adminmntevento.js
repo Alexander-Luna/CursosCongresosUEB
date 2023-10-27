@@ -155,6 +155,14 @@ function imagen(even_id, portada) {
     $('#curx_idx').val(even_id);
     $('#modalfile').modal('show');
 }
+function ponente(even_id) {
+    // Define la URL que deseas abrir
+    var url = '../../view/AdminMntPonente/?even_id=' + even_id;
+
+    // Abre la URL en una nueva ventana o pestaña del navegador
+    window.open(url, '_blank');
+}
+
 function nuevo() {
     $('#lbltitulo').html('Nuevo Registro');
     $('#eventos_form')[0].reset();
