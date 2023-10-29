@@ -49,7 +49,6 @@ class Usuario extends Conectar
                         $_SESSION["usu_correo"] = $resultado["usu_correo"];
                         $_SESSION["rol_id"] = $resultado["rol_id"];
                         $_SESSION["aclevel_id"] = $resultado["aclevel_id"];
-                        /*TODO: Si todo esta correcto indexar en home */
                         header("Location:" . Conectar::ruta() . "view/UsuHome/");
                         exit();
                     }
@@ -216,14 +215,14 @@ class Usuario extends Conectar
                 tm_evento.cur_descrip,
                 tm_evento.cur_fechini,
                 tm_evento.cur_fechfin,
-                tm_evento.modality_id
+                tm_evento.modality_id,
                 tm_evento.nhours,
                 tm_evento.cur_img,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
-                tm_usuario.aclevel_id,
+                tm_usuario.aclevel_id
                 FROM td_evento_usuario INNER JOIN 
                 tm_evento ON td_evento_usuario.even_id = tm_evento.even_id INNER JOIN
                 tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id 

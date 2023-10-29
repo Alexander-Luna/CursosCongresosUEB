@@ -25,12 +25,25 @@ CREATE TABLE `td_evento_usuario_dias` (
 
 
 INSERT INTO `td_evento_usuario` (`curd_id`, `even_id`, `usu_id`, `fech_crea`, `est`,`est_aprueba`) VALUES
-(1, 1, 1, '2023-10-17 23:11:34', 1,0),
-(2, 1, 2, '2023-10-17 23:11:34', 1,0),
+(1, 5, 1, '2023-10-17 23:11:34', 1,0),
+(2, 5, 2, '2023-10-17 23:11:34', 1,0),
 (3, 1, 3, '2023-10-17 23:11:34', 1,0),
-(4, 1, 4, '2023-10-17 23:11:34', 1,0),
-(5, 2, 4, '2023-10-17 23:16:50', 1,0),
-(6, 3, 4, '2023-10-17 23:16:56', 1,0);
+(4, 2, 1, '2023-10-17 23:11:34', 1,0),
+(5, 3, 2, '2023-10-17 23:16:50', 1,0),
+(6, 5, 2, '2023-10-17 23:16:50', 1,0),
+(7, 1, 1, '2023-10-17 23:16:50', 1,0),
+(8, 3, 1, '2023-10-17 23:16:50', 1,0),
+(9, 4, 1, '2023-10-17 23:16:50', 1,0),
+(10, 6, 1, '2023-10-17 23:16:50', 1,0),
+(11, 7, 1, '2023-10-17 23:16:50', 1,0),
+(12, 8, 1, '2023-10-17 23:16:50', 1,0),
+(13, 9, 1, '2023-10-17 23:16:50', 1,0),
+(14, 10, 1, '2023-10-17 23:16:50', 1,0),
+(15, 11, 1, '2023-10-17 23:16:56', 1,0),
+(16, 12, 1, '2023-10-17 23:16:56', 1,0),
+(17, 13, 1, '2023-10-17 23:16:56', 1,0),
+(18, 14, 1, '2023-10-17 23:16:56', 1,0),
+(19, 15, 1, '2023-10-17 23:16:56', 1,0);
 
 
 
@@ -103,8 +116,23 @@ INSERT INTO `tm_evento` (`even_id`, `cat_id`, `cur_nom`, `cur_descrip`, `cur_fec
 (1, 1, 'CURSO DE HTML5', 'Occaecat Lorem velit qui magna dolore culpa qui. Aliqua nostrud nisi cillum sunt consequat irure commodo qui reprehenderit in in quis. Esse pariatur amet esse sint tempor fugiat laborum consectetur exercitation anim in voluptate sunt est. Sint amet elit et id qui nisi qui. Incididunt et pariatur nostrud do dolore duis consequat non eu velit labore.', '2023-04-01', '2023-04-30', '../../public/2.png', '2023-04-26 20:32:32','2','50', '../../public/1616601522.png',1, 1,0),
 (3, 2, 'PHP', 'Laborum consequat laboris incididunt ipsum ea irure enim consectetur. Mollit non in ex ut culpa elit commodo id nostrud magna voluptate amet. Aute duis ea duis nulla. Ad ipsum id reprehenderit fugiat do commodo excepteur labore ex. Tempor ex consectetur proident anim minim id ex laboris elit. Laborum do aliquip duis veniam tempor esse nisi eiusmod id elit tempor.', '2023-04-01', '2023-04-30',  '../../public/3.png', '2023-04-26 20:32:32','3','85', '../../public/1616601522.png',2, 1,0),
 (4, 1, 'LARAVEL y MYSQL', 'Aliqua magna eu minim irure aliqua esse esse irure irure cupidatat ex magna. Laborum pariatur velit adipisicing nisi id ex esse nisi mollit magna nostrud quis minim. Aliquip excepteur pariatur duis qui irure mollit in deserunt velit est excepteur enim reprehenderit excepteur.', '2023-04-01', '2023-04-30',  '../../public/4.png', '2023-04-26 20:32:32','1','120', '../../public/1616601522.png', 3,1,0),
-(5, 2, 'IV Congreso Académico Internacional (CAI IV – 2023 ) y III Congreso Internacional de Posgrado y Educación Continua (CIPEC III, 2023)', 'La Universidad Estatal de Bolívar en este año tiene el honor de planificar y presentar el IV Congreso Académico Internacional (CAI IV – 2023 ) y III Congreso Internacional de Posgrado y Educación Continua (CIPEC III, 2023), como un espacio reflexión, intercambio de experiencias y divulgación de trabajos de investigación científica y académica en los campos de la “Transformación digital e interculturalidad en la educación superior: Retos y oportunidades para la inclusión y el desarrollo regional".En este año el congreso se realizará en un formato hibrido (Presencial / Virtual) que pretende promover la investigación y difusión de los avances científicos en el área educativa, renovar y construir propuestas pedagógicas que contribuyan a seguir generando mejoras en los procesos de formación. ', '2023-10-25', '2023-10-27', '../../public/1616601522.png', '2023-10-20 20:32:32','1','85', '../../public/1616601522.png', 1,1,1),
-(6, 1, 'ESTUDIO DE MERCADO', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/28629721.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1);
+(5, 2, 'IV Congreso Académico Internacional (CAI IV – 2023 ) y III Congreso Internacional de Posgrado y Educación Continua (CIPEC III, 2023)', 'La Universidad Estatal de Bolívar en este año tiene el honor de planificar y presentar el IV Congreso Académico Internacional (CAI IV – 2023 ) y III Congreso Internacional de Posgrado y Educación Continua (CIPEC III, 2023), como un espacio reflexión, intercambio de experiencias y divulgación de trabajos de investigación científica y académica en los campos de la “Transformación digital e interculturalidad en la educación superior: Retos y oportunidades para la inclusión y el desarrollo regional".En este año el congreso se realizará en un formato hibrido (Presencial / Virtual) que pretende promover la investigación y difusión de los avances científicos en el área educativa, renovar y construir propuestas pedagógicas que contribuyan a seguir generando mejoras en los procesos de formación. ', '2023-10-25', '2023-10-27', '../../public/5.png', '2023-10-20 20:32:32','1','85', '../../public/1616601522.png', 1,1,1),
+(7, 1, 'ESTUDIO DE MERCADO 1', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(8, 1, 'ESTUDIO DE MERCADO 2', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(9, 1, 'ESTUDIO DE MERCADO 3', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(10, 1, 'ESTUDIO DE MERCADO 4', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(11, 1, 'ESTUDIO DE MERCADO 5', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(12, 1, 'ESTUDIO DE MERCADO 6', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(13, 1, 'ESTUDIO DE MERCADO 7', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(14, 1, 'ESTUDIO DE MERCADO 8', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(15, 1, 'ESTUDIO DE MERCADO 9', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(16, 1, 'ESTUDIO DE MERCADO 10', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(17, 1, 'ESTUDIO DE MERCADO 11', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(18, 1, 'ESTUDIO DE MERCADO 12', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(19, 1, 'ESTUDIO DE MERCADO 13', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(20, 1, 'ESTUDIO DE MERCADO 14', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(21, 1, 'ESTUDIO DE MERCADO 15', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
+(22, 1, 'ESTUDIO DE MERCADO 16', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1);
 CREATE TABLE `tm_ponente` (
   `ponen_id` int(11) NOT NULL,
   `even_id` int(11) NOT NULL,
