@@ -7,40 +7,40 @@
             <!-- Formulario Mantenimiento -->
             <form method="post" id="ponente_form">
                 <div class="modal-body">
-                    <input type="hidden" name="inst_id" id="inst_id"/>
-
+                    <input type="hidden" name="ponen_id" id="ponen_id" value="<?php echo $even_id; ?>"/>
+                    <input type="hidden" name="even_id" id="even_id"/>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label">Nombre: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="inst_nom" type="text" name="inst_nom" required/>
+                            <label class="form-control-label">Nombres y Apellidos: <span class="tx-danger">*</span></label>
+                            <input class="form-control tx-uppercase" id="ponen_names" type="text" name="ponen_names" required/>
                         </div>
                     </div>
 
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label">Apellido Paterno: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="inst_apep" type="text" name="inst_apep" required/>
+                            <label class="form-control-label">Titulo: <span class="tx-danger">*</span></label>
+                            <input class="form-control tx-uppercase" id="ponen_titulo" type="text" name="ponen_titulo" required/>
                         </div>
                     </div>
 
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label">Apellido Materno: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="inst_apem" type="text" name="inst_apem" required/>
+                            <label class="form-control-label">Descripción: <span class="tx-danger">*</span></label>
+                            <textarea class="form-control tx-uppercase" id="ponen_description" type="text" name="ponen_description" required></textarea>
                         </div>
                     </div>
 
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Correo: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="inst_correo" type="email" name="inst_correo" required/>
+                            <input class="form-control tx-uppercase" id="ponen_correo" type="email" name="ponen_correo" required/>
                         </div>
                     </div>
 
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
-                            <select class="form-control select2" style="width:100%" name="inst_sex" id="inst_sex" data-placeholder="Seleccione">
+                            <select class="form-control select2" style="width:100%" name="ponen_sex" id="ponen_sex" data-placeholder="Seleccione">
                                 <option label="Seleccione"></option>
                                 <option value="M">Masculino</option>
                                 <option value="F">Femenino</option>
@@ -50,11 +50,22 @@
 
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label">Telefono: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="inst_telf" type="text" name="inst_telf" required/>
+                            <label class="form-control-label">Teléfono: <span class="tx-danger">*</span></label>
+                            <input class="form-control tx-uppercase" id="ponen_telf" type="text" name="ponen_telf" required/>
                         </div>
                     </div>
-
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="form-control-label">Fecha Exposición: <span class="tx-danger">*</span></label>
+                            <input class="form-control tx-uppercase" id="ponen_fechaexpo" type="date" name="ponen_fechaexpo" required />
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="form-control-label">Hora: <span class="tx-danger">*</span></label>
+                            <input class="form-control tx-uppercase" id="ponen_time" type="time" name="ponen_time" required />
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" name="action" value="add" class="btn btn-outline-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i class="fa fa-check"></i> Guardar</button>

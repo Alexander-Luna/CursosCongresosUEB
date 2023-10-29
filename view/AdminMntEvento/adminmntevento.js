@@ -50,16 +50,19 @@ $(document).ready(function () {
     $('#modality_id').select2({
         dropdownParent: $('#modalmantenimiento')
     });
-
-  /*  $('#inst_id').select2({
+    $('#eventype_id').select2({
         dropdownParent: $('#modalmantenimiento')
-    });*/
+    });
+
+    /*  $('#inst_id').select2({
+          dropdownParent: $('#modalmantenimiento')
+      });*/
 
     combo_dependencia();
-
+    combo_tipoevento();
     combo_modalidad();
 
-   /* combo_instructor();*/
+    /* combo_instructor();*/
 
     $('#eventos_data').DataTable({
         "aProcessing": true,
@@ -113,12 +116,13 @@ function editar(even_id) {
         $('#even_id').val(data.even_id);
         $('#cat_id').val(data.cat_id).trigger('change');
         $('#modality_id').val(data.modality_id).trigger('change');
+        $('#eventype_id').val(data.eventype_id).trigger('change');
         $('#cur_nom').val(data.cur_nom);
         $('#nhours').val(data.nhours);
         $('#cur_descrip').val(data.cur_descrip);
         $('#cur_fechini').val(data.cur_fechini);
         $('#cur_fechfin').val(data.cur_fechfin);
-      //  $('#inst_id').val(data.inst_id).trigger('change'); 1
+        //  $('#inst_id').val(data.inst_id).trigger('change'); 1
     });
     $('#lbltitulo').html('Editar Registro');
     $('#modalmantenimiento').modal('show');
@@ -157,10 +161,10 @@ function imagen(even_id, portada) {
 }
 function ponente(even_id) {
     // Define la URL que deseas abrir
-    var url = '../../view/AdminMntPonente/?even_id=' + even_id;
+    let url = '../../view/AdminMntPonente/?even_id=' + even_id;
 
     // Abre la URL en una nueva ventana o pestaña del navegador
-    window.open(url, '_blank');
+    window.location.href = url;
 }
 
 function nuevo() {
@@ -168,13 +172,19 @@ function nuevo() {
     $('#eventos_form')[0].reset();
     combo_dependencia();
     combo_modalidad();
-  //  combo_instructor();
+    combo_tipoevento();
+    //  combo_instructor();
     $('#modalmantenimiento').modal('show');
 }
 
 function combo_dependencia() {
     $.post("../../controller/dependencia.php?op=combo", function (data) {
         $('#cat_id').html(data);
+    });
+}
+function combo_tipoevento() {
+    $.post("../../controller/dependencia.php?op=combotipo", function (data) {
+        $('#eventype_id').html(data);
     });
 }
 function combo_modalidad() {
@@ -211,6 +221,7 @@ function habilitarAsistencia(even_id) {
     });
 
 }
+
 let URLimg = "";
 function guardaryeditarimg(e) {
     e.preventDefault();

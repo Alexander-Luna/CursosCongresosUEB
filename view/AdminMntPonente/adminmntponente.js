@@ -1,13 +1,20 @@
 
 var usu_id = $('#usu_idx').val();
 
-function init(){
-    $("#ponente_form").on("submit",function(e){
+function init() {
+    $("#ponente_form").on("submit", function (e) {
         guardaryeditar(e);
+    });
+    $("#detalle_form").on("submit", function (e) {
+        e.preventDefault(); // Evita el envío automático del formulario
+        URLimg = "../../controller/ponente.php?op=update_imagen_ponente";
+        guardaryeditarimg(e);
     });
 }
 
-function guardaryeditar(e){
+
+
+function guardaryeditar(e) {
     e.preventDefault();
     var formData = new FormData($("#ponente_form")[0]);
     $.ajax({
@@ -16,26 +23,36 @@ function guardaryeditar(e){
         data: formData,
         contentType: false,
         processData: false,
-        success: function(data){
-
+        success: function (data) {
+            console.log("OK en la solicitud AJAX: " + data.FormData);
             $('#ponente_data').DataTable().ajax.reload();
             $('#modalmantenimiento').modal('hide');
-
             Swal.fire({
                 title: 'Correcto!',
                 text: 'Se Registro Correctamente',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
-            })
+            });
+        },
+        error: function (xhr, status, error) {
+            // Manejo de errores
+            console.log("Error en la solicitud AJAX: " + status + " - " + error);
+            Swal.fire({
+                title: 'Error!',
+                text: 'No se pudo guardar los datos. Detalles del error: ' + xhr.responseText,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
         }
     });
 }
 
-$(document).ready(function(){
-    $('#inst_sex').select2({
+
+$(document).ready(function () {
+    $('#ponen_sex').select2({
         dropdownParent: $('#modalmantenimiento')
     });
-
+    // console.log(evenId);
     $('#ponente_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -45,36 +62,36 @@ $(document).ready(function(){
             'excelHtml5',
             'csvHtml5',
         ],
-        "ajax":{
-            url:"../../controller/ponente.php?op=listar",
-            type:"post"
+        "ajax": {
+            url: "../../controller/ponente.php?op=listar&even_id=" + evenId,
+            type: "post"
         },
         "bDestroy": true,
         "responsive": true,
-        "bInfo":true,
+        "bInfo": true,
         "iDisplayLength": 10,
-        "order": [[ 0, "desc" ]],
+        "order": [[0, "desc"]],
         "language": {
-            "sProcessing":     "Procesando...",
-            "sLengthMenu":     "Mostrar _MENU_ registros",
-            "sZeroRecords":    "No se encontraron resultados",
-            "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix":    "",
-            "sSearch":         "Buscar:",
-            "sUrl":            "",
-            "sInfoThousands":  ",",
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
             "sLoadingRecords": "Cargando...",
             "oPaginate": {
-                "sFirst":    "Primero",
-                "sLast":     "Último",
-                "sNext":     "Siguiente",
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
                 "sPrevious": "Anterior"
             },
             "oAria": {
-                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         },
@@ -82,22 +99,25 @@ $(document).ready(function(){
 
 });
 
-function editar(inst_id){
-    $.post("../../controller/ponente.php?op=mostrar",{inst_id : inst_id}, function (data) {
+function editar(ponen_id) {
+    $.post("../../controller/ponente.php?op=mostrar", { ponen_id: ponen_id }, function (data) {
         data = JSON.parse(data);
-        $('#inst_id').val(data.inst_id);
-        $('#inst_nom').val(data.inst_nom);
-        $('#inst_apep').val(data.inst_apep);
-        $('#inst_apem').val(data.inst_apem);
-        $('#inst_correo').val(data.inst_correo);
-        $('#inst_sex').val(data.inst_sex).trigger('change');
-        $('#inst_telf').val(data.inst_telf);
+        $('#ponen_id').val(data.ponen_id);
+        $('#even_id').val(data.even_id);
+        $('#ponen_names').val(data.ponen_names);
+        $('#ponen_titulo').val(data.ponen_titulo);
+        $('#ponen_description').val(data.ponen_description);
+        $('#ponen_correo').val(data.ponen_correo);
+        $('#ponen_sex').val(data.ponen_sex).trigger('change');
+        $('#ponen_telf').val(data.ponen_telf);
+        $('#ponen_fechaexpo').val(data.ponen_fechaexpo);
+        $('#ponen_time').val(data.ponen_time);
     });
     $('#lbltitulo').html('Editar Registro');
     $('#modalmantenimiento').modal('show');
 }
 
-function eliminar(inst_id){
+function eliminar(ponen_id) {
     swal.fire({
         title: "Eliminar!",
         text: "Desea Eliminar el Registro?",
@@ -107,7 +127,7 @@ function eliminar(inst_id){
         cancelButtonText: "No",
     }).then((result) => {
         if (result.value) {
-            $.post("../../controller/ponente.php?op=eliminar",{inst_id : inst_id}, function (data) {
+            $.post("../../controller/ponente.php?op=eliminar", { ponen_id: ponen_id }, function (data) {
                 $('#ponente_data').DataTable().ajax.reload();
 
                 Swal.fire({
@@ -121,12 +141,39 @@ function eliminar(inst_id){
     });
 }
 
-function nuevo(){
-    $('#inst_id').val('');
-    $('#inst_sex').val('').trigger('change');
-    $('#lbltitulo').html('Nuevo Registro');
+function nuevo(even_id) {
+    $('#ponen_id').val('');
+    $('#ponen_sex').val('').trigger('change');
+    $('#lbltitulo').html('Nuevo Ponente ' + even_id);
+    $('#even_id').html(even_id);
     $('#ponente_form')[0].reset();
     $('#modalmantenimiento').modal('show');
 }
+function imagen(ponen_id) {
+    $('#curx_idx').val(ponen_id);
+    $('#modalfile').modal('show');
+}
+let URLimg = "";
+function guardaryeditarimg(e) {
+    e.preventDefault();
+    let formData = new FormData($("#detalle_form")[0]);
+    $.ajax({
+        url: URLimg,
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (datos) {
+            $('#ponente_data').DataTable().ajax.reload();
+            Swal.fire({
+                title: 'Correcto!',
+                text: 'Se Actualizo Correctamente',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            })
+            $("#modalfile").modal('hide');
 
+        }
+    });
+}
 init();

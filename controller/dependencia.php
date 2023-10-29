@@ -61,5 +61,15 @@
                 echo $html;
             }
             break;
+            case "combotipo":
+                $datos=$dependencia->get_tipoevento();
+                if(is_array($datos)==true and count($datos)>0){
+                    $html= " <option label='Seleccione'></option>";
+                    foreach($datos as $row){
+                        $html.= "<option value='".$row['eventype_id']."'>".$row['name']."</option>";
+                    }
+                    echo $html;
+                }
+                break;
     }
 ?>

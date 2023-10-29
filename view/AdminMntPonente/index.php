@@ -1,14 +1,16 @@
 <?php
-  /* Llamamos al archivo de conexion.php */
-  require_once("../../config/conexion.php");
-  if(isset($_SESSION["usu_id"])){
-?>
-<!DOCTYPE html>
-<html lang="es">
+/* Llamamos al archivo de conexion.php */
+require_once("../../config/conexion.php");
+if (isset($_SESSION["usu_id"])) {
+  $even_id = $_GET["even_id"];
+  ?>
+  <!DOCTYPE html>
+  <html lang="es">
+
   <head>
     <?php require_once("../html/MainHead.php"); ?>
 
-    <title>Empresa::MntPonente</title>
+    <title>Ponentes</title>
   </head>
 
   <body>
@@ -16,7 +18,9 @@
     <?php require_once("../html/MainMenu.php"); ?>
 
     <?php require_once("../html/MainHeader.php"); ?>
-
+    <script type="text/javascript">
+      var evenId = <?php echo $even_id; ?>;
+    </script>
     <div class="br-mainpanel">
       <div class="br-pageheader pd-y-15 pd-l-20">
         <nav class="breadcrumb pd-0 mg-0 tx-12">
@@ -30,34 +34,39 @@
 
       <div class="br-pagebody">
         <div class="br-section-wrapper">
-            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Ponente</h6>
-            <p class="mg-b-30 tx-gray-600">Listado de Ponente</p>
+          <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">
+            <?php echo $even_id ?>
+          </h6>
+          <p class="mg-b-30 tx-gray-600">Listado de Ponente</p>
 
-            <button class="btn btn-outline-primary" id="add_button" onclick="nuevo()"><i class="fa fa-plus-square mg-r-10"></i> Nuevo Registro</button>
+          <button class="btn btn-outline-primary" id="add_button" onclick="nuevo(<?php echo $even_id; ?>)"><i
+              class="fa fa-plus-square mg-r-10"></i> Nuevo Registro</button>
 
-            <p></p>
+          <p></p>
 
-            <div class="table-wrapper"></div>
-                <table id="ponente_data" class="table display responsive nowrap">
-                <thead>
-                    <tr>
-                    <th class="wd-15p">Nombre</th>
-                    <th class="wd-15p">Ape.Paterno</th>
-                    <th class="wd-15p">Ape.Materno</th>
-                    <th class="wd-15p">Correo</th>
-                    <th class="wd-15p">Teléfono</th>
-                    <th class="wd-10p">Editar</th>
-                    <th class="wd-10p">Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
+          <div class="table-wrapper"></div>
+          <table id="ponente_data" class="table display responsive nowrap">
+            <thead>
+              <tr>
+                <th class="wd-15p">Nombres</th>
+                <th class="wd-15p">Titulo</th>
+                <th class="wd-15p">Descripción</th>
+                <th class="wd-15p">Correo</th>
+                <th class="wd-15p">Teléfono</th>
+                <th class="wd-15p">Fecha Expo</th>
+                <th class="wd-10p">Imagen</th>
+                <th class="wd-10p">Editar</th>
+                <th class="wd-10p">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
 
-                </tbody>
-                </table>
-            </div>
-
+            </tbody>
+          </table>
         </div>
+
       </div>
+    </div>
     </div>
 
     <?php require_once("modalmantenimiento.php"); ?>
@@ -65,10 +74,11 @@
     <?php require_once("../html/MainJs.php"); ?>
     <script type="text/javascript" src="adminmntponente.js"></script>
   </body>
-</html>
-<?php
-  }else{
-    /* Si no a iniciado sesion se redireccionada a la ventana principal */
-    header("Location:".Conectar::ruta()."view/404/");
-  }
+
+  </html>
+  <?php
+} else {
+  /* Si no a iniciado sesion se redireccionada a la ventana principal */
+  header("Location:" . Conectar::ruta() . "view/404/");
+}
 ?>
