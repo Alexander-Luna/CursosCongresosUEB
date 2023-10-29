@@ -11,14 +11,14 @@ switch ($_GET["op"]) {
     /*TODO: Guardar y editar cuando se tenga el ID */
     case "guardaryeditar":
         if (empty($_POST["ponen_id"])) {
-            $result = $ponente->insert_ponente($_POST["even_id"], $_POST["ponen_names"], $_POST["ponen_titulo"], $_POST["ponen_description"], $_POST["ponen_correo"], $_POST["ponen_sex"], $_POST["ponen_telf"], $_POST["ponen_fechaexpo"], $_POST["ponen_time"]);
+            $result = $ponente->insert_ponente($_POST["even_id"], $_POST["usu_id"], $_POST["ponen_type"], $_POST["ponen_titulo"], $_POST["ponen_description"], $_POST["ponen_fechaexpo"], $_POST["ponen_time"]);
             if ($result) {
-                echo "Inserción exitosa"; // Puedes enviar un mensaje de éxito
+                echo "Inserción exitosa";
             } else {
-                echo "Error al guardar los datos"; // Puedes enviar un mensaje de error
+                echo "Error al guardar los datos";
             }
         } else {
-            $ponente->update_ponente($_POST["ponen_id"], $_POST["even_id"], $_POST["ponen_names"], $_POST["ponen_titulo"], $_POST["ponen_description"], $_POST["ponen_correo"], $_POST["ponen_sex"], $_POST["ponen_telf"], $_POST["ponen_fechaexpo"], $_POST["ponen_time"]);
+            $ponente->update_ponente($_POST["ponen_id"], $_POST["even_id"], $_POST["usu_id"], $_POST["ponen_type"], $_POST["ponen_titulo"], $_POST["ponen_description"], $_POST["ponen_fechaexpo"], $_POST["ponen_time"]);
         }
         break;
 
@@ -29,12 +29,13 @@ switch ($_GET["op"]) {
             foreach ($datos as $row) {
                 $output["ponen_id"] = $row["ponen_id"];
                 $output["even_id"] = $row["even_id"];
-                $output["ponen_names"] = $row["ponen_names"];
+                $output["usu_id"] = $row["usu_id"];
+                $output["ponen_type"] = $row["ponen_type"];
                 $output["ponen_titulo"] = $row["ponen_titulo"];
                 $output["ponen_description"] = $row["ponen_description"];
-                $output["ponen_correo"] = $row["ponen_correo"];
-                $output["ponen_sex"] = $row["ponen_sex"];
-                $output["ponen_telf"] = $row["ponen_telf"];
+                $output["usu_correo"] = $row["usu_correo"];
+                $output["usu_sex"] = $row["usu_sex"];
+                $output["usu_telf"] = $row["usu_telf"];
                 $output["ponen_img"] = $row["ponen_img"];
                 $output["ponen_fechaexpo"] = $row["ponen_fechaexpo"];
                 $output["ponen_time"] = $row["ponen_time"];
@@ -52,11 +53,15 @@ switch ($_GET["op"]) {
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
-            $sub_array[] = $row["ponen_names"];
+            $sub_array[] = $row["usu_nom"] . " " . $row["usu_apep"] . " " . $row["usu_apem"];
             $sub_array[] = $row["ponen_titulo"];
             $sub_array[] = $row["ponen_description"];
-            $sub_array[] = $row["ponen_correo"];
-            $sub_array[] = $row["ponen_telf"];
+            if ($row["ponen_type"] == "P") {
+                $sub_array[] = "Ponencia";
+            } else if ($row["ponen_type"] == "M") {
+                $sub_array[] = "Conferencia Magistral";
+            }
+            $sub_array[] = $row["usu_telf"];
             $sub_array[] = $row["ponen_fechaexpo"] . " " . $row["ponen_time"];
             $sub_array[] = '<button type="button" onClick="imagen(' . $row["ponen_id"] . ');"  id="' . $row["ponen_id"] . '" class="btn btn-outline-info btn-icon"><div><i class="fa fa-image"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="editar(' . $row["ponen_id"] . ');"  id="' . $row["ponen_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
@@ -78,7 +83,7 @@ switch ($_GET["op"]) {
         if (is_array($datos) == true and count($datos) > 0) {
             $html = " <option label='Seleccione'></option>";
             foreach ($datos as $row) {
-                $html .= "<option value='" . $row['ponen_id'] . "'>" . $row['ponen_names'] . " " . $row['ponen_titulo'] . " " . $row['ponen_description'] . "</option>";
+                $html .= "<option value='" . $row['ponen_id'] . "'>" . $row['usu_id'] . " " . $row['ponen_titulo'] . " " . $row['ponen_description'] . "</option>";
             }
             echo $html;
         }

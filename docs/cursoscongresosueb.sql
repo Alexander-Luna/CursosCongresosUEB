@@ -136,12 +136,10 @@ INSERT INTO `tm_evento` (`even_id`, `cat_id`, `cur_nom`, `cur_descrip`, `cur_fec
 CREATE TABLE `tm_ponente` (
   `ponen_id` int(11) NOT NULL,
   `even_id` int(11) NOT NULL,
-  `ponen_names` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `usu_id` int(11) NOT NULL,
+  `ponen_type` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
   `ponen_titulo` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
   `ponen_description` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
-  `ponen_correo` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `ponen_sex` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
-  `ponen_telf` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
   `ponen_img` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ponen_fechaexpo` date DEFAULT NULL,
   `ponen_time` time DEFAULT NULL,
@@ -227,6 +225,7 @@ ALTER TABLE `tm_instructor`
 ALTER TABLE `tm_usuario`
   ADD PRIMARY KEY (`usu_id`);
 
+
 ALTER TABLE `td_evento_usuario`
   MODIFY `curd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
@@ -242,6 +241,9 @@ ALTER TABLE `tm_instructor`
   MODIFY `ponen_id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `tm_usuario`
   MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+    ALTER TABLE `tm_ponente` ADD CONSTRAINT `fk_usu_ponen`
+FOREIGN KEY (`usu_id`)
+REFERENCES `tm_usuario`(`usu_id`);
 ALTER TABLE `td_evento_usuario_dias` ADD CONSTRAINT `fk_asistencia`
 FOREIGN KEY (`curd_id`)
 REFERENCES `td_evento_usuario`(`curd_id`);

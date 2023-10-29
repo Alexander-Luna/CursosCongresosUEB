@@ -50,9 +50,14 @@ function guardaryeditar(e) {
 
 
 $(document).ready(function () {
-    $('#ponen_sex').select2({
+    $('#ponen_type').select2({
         dropdownParent: $('#modalmantenimiento')
     });
+    
+    $('#usu_id').select2({
+        dropdownParent: $('#modalmantenimiento')
+    });
+    combo_usuario();
     ////////////////////////////////////////////
     $.ajax({
         url: "../../controller/evento.php?op=mostrar",
@@ -125,12 +130,10 @@ function editar(ponen_id) {
         data = JSON.parse(data);
         $('#ponen_id').val(data.ponen_id);
         $('#even_id').val(data.even_id);
-        $('#ponen_names').val(data.ponen_names);
         $('#ponen_titulo').val(data.ponen_titulo);
         $('#ponen_description').val(data.ponen_description);
-        $('#ponen_correo').val(data.ponen_correo);
-        $('#ponen_sex').val(data.ponen_sex).trigger('change');
-        $('#ponen_telf').val(data.ponen_telf);
+        $('#ponen_type').val(data.ponen_type).trigger('change');
+        $('#usu_id').val(data.usu_id).trigger('change');
         $('#ponen_fechaexpo').val(data.ponen_fechaexpo);
         $('#ponen_time').val(data.ponen_time);
     });
@@ -164,10 +167,12 @@ function eliminar(ponen_id) {
 
 function nuevo(even_id) {
     $('#ponen_id').val('');
-    $('#ponen_sex').val('').trigger('change');
+    $('#ponen_type').val('').trigger('change');
+    $('#usu_id').val('').trigger('change');
     $('#lbltitulo').html('Nuevo Ponente ' + even_id);
     $('#even_id').html(even_id);
     $('#ponente_form')[0].reset();
+    combo_usuario();
     $('#modalmantenimiento').modal('show');
 }
 function imagen(ponen_id) {
@@ -195,6 +200,11 @@ function guardaryeditarimg(e) {
             $("#modalfile").modal('hide');
 
         }
+    });
+}
+function combo_usuario() {
+    $.post("../../controller/usuario.php?op=combo", function (data) {
+        $('#usu_id').html(data);
     });
 }
 init();

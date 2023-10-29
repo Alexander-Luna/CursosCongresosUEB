@@ -377,7 +377,7 @@ class Usuario extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tm_usuario WHERE est = 1";
+        $sql = "SELECT * FROM tm_usuario INNER JOIN academic_level on tm_usuario.aclevel_id = academic_level.aclevel_id WHERE tm_usuario.est = 1";
         $sql = $conectar->prepare($sql);
         $sql->execute();
         return $resultado = $sql->fetchAll();

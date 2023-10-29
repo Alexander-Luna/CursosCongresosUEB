@@ -2,67 +2,61 @@
 class Ponente extends Conectar
 {
 
-    public function insert_ponente($even_id, $ponen_names, $ponen_titulo, $ponen_description, $ponen_correo, $ponen_sex, $ponen_telf, $ponen_fechaexpo, $ponen_time)
-{
-    $conectar = parent::conexion();
-    parent::set_names();
-    $sql = "INSERT INTO tm_ponente (ponen_names, ponen_titulo, ponen_description, ponen_correo, ponen_sex, ponen_telf, ponen_fechaexpo, ponen_time, even_id, fech_crea, est) VALUES (?,?,?,?,?,?,?,?,?, now(),'1')";
-    $sql = $conectar->prepare($sql);
-    $sql->bindValue(1, $ponen_names);
-    $sql->bindValue(2, $ponen_titulo);
-    $sql->bindValue(3, $ponen_description);
-    $sql->bindValue(4, $ponen_correo);
-    $sql->bindValue(5, $ponen_sex);
-    $sql->bindValue(6, $ponen_telf);
-    $sql->bindValue(7, $ponen_fechaexpo);
-    $sql->bindValue(8, $ponen_time);
-    $sql->bindValue(9, $even_id);
-
-    // Intenta ejecutar la consulta
-    try {
-        $sql->execute();
-        // Verifica si se insertaron filas (éxito)
-        if ($sql->rowCount() > 0) {
-            return true; // Inserción exitosa
-        } else {
-            return false; // No se insertaron filas (falló la inserción)
+    public function insert_ponente($even_id, $usu_id, $ponen_type, $ponen_titulo, $ponen_description, $ponen_fechaexpo, $ponen_time)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "INSERT INTO tm_ponente (usu_id, even_id,ponen_type, ponen_titulo, ponen_description, ponen_fechaexpo, ponen_time, fech_crea, est) VALUES (?,?,?,?,?,?,?, now(),'1')";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_id);
+        $sql->bindValue(2, $even_id);
+        $sql->bindValue(3, $ponen_type);
+        $sql->bindValue(4, $ponen_titulo);
+        $sql->bindValue(5, $ponen_description);
+        $sql->bindValue(6, $ponen_fechaexpo);
+        $sql->bindValue(7, $ponen_time);
+        echo '<script>console.log("asdadasdsadasd"'+$even_id . " " . $usu_id+')</script>';
+        // Intenta ejecutar la consulta
+        try {
+            $sql->execute();
+            // Verifica si se insertaron filas (éxito)
+            if ($sql->rowCount() > 0) {
+                return true; // Inserción exitosa
+            } else {
+                return false; // No se insertaron filas (falló la inserción)
+            }
+        } catch (PDOException $e) {
+            // En caso de error en la base de datos, puedes devolver un mensaje de error
+            $error_message = $e->getMessage();
+            return false;
         }
-    } catch (PDOException $e) {
-        // En caso de error en la base de datos, puedes devolver un mensaje de error
-        $error_message = $e->getMessage();
-        return false;
     }
-}
 
 
-    public function update_ponente($ponen_id, $even_id, $ponen_names, $ponen_titulo, $ponen_description, $ponen_correo, $ponen_sex, $ponen_telf, $ponen_fechaexpo, $ponen_time)
+    public function update_ponente($ponen_id, $even_id, $usu_id, $ponen_type, $ponen_titulo, $ponen_description, $ponen_fechaexpo, $ponen_time)
     {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "UPDATE tm_ponente
                 SET
-                    ponen_names = ?,
+                    usu_id = ?,
+                    even_id = ?,
+                    ponen_type = ?,
                     ponen_titulo = ?,
                     ponen_description = ?,
-                    ponen_correo = ?,
-                    ponen_sex = ?,
-                    ponen_telf = ?,
                     ponen_fechaexpo = ?,
-                    ponen_time = ?,
-                    even_id = ?
+                    ponen_time = ?
                 WHERE
                     ponen_id = ?";
         $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $ponen_names);
-        $sql->bindValue(2, $ponen_titulo);
-        $sql->bindValue(3, $ponen_description);
-        $sql->bindValue(4, $ponen_correo);
-        $sql->bindValue(5, $ponen_sex);
-        $sql->bindValue(6, $ponen_telf);
-        $sql->bindValue(7, $ponen_fechaexpo);
-        $sql->bindValue(8, $ponen_time);
-        $sql->bindValue(9, $even_id);
-        $sql->bindValue(10, $ponen_id);
+        $sql->bindValue(1, $usu_id);
+        $sql->bindValue(2, $even_id);
+        $sql->bindValue(3, $ponen_type);
+        $sql->bindValue(4, $ponen_titulo);
+        $sql->bindValue(5, $ponen_description);
+        $sql->bindValue(6, $ponen_fechaexpo);
+        $sql->bindValue(7, $ponen_time);
+        $sql->bindValue(8, $ponen_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
@@ -86,7 +80,8 @@ class Ponente extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tm_ponente WHERE est = 1 AND even_id = ?";
+        $sql = "SELECT * FROM tm_ponente AS ponen  INNER JOIN tm_usuario AS user 
+        ON user.usu_id=ponen.usu_id WHERE ponen.est = 1 AND ponen.even_id = ?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $even_id);
         $sql->execute();
@@ -97,7 +92,11 @@ class Ponente extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tm_ponente WHERE est = 1 AND ponen_id = ?";
+        $sql = "SELECT * 
+        FROM tm_ponente AS ponen 
+        INNER JOIN tm_usuario AS user 
+        ON user.usu_id=ponen.usu_id 
+        WHERE ponen.est = 1 AND ponen.ponen_id = ?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $ponen_id);
         $sql->execute();

@@ -48,7 +48,7 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["cur_nom"];
             $sub_array[] = $row["cur_fechini"];
             $sub_array[] = $row["cur_fechfin"];
-            
+
             if ($row["est_aprueba"] == 1) {
                 $certificado = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
             }
@@ -72,6 +72,7 @@ switch ($_GET["op"]) {
         $datos = $usuario->get_evento_x_id_detalle($_POST["curd_id"]);
         if (is_array($datos) == true and count($datos) <> 0) {
             foreach ($datos as $row) {
+                $output["usu_id"] = $row["usu_id"];
                 $output["curd_id"] = $row["curd_id"];
                 $output["even_id"] = $row["even_id"];
                 $output["cur_nom"] = $row["cur_nom"];
@@ -81,14 +82,13 @@ switch ($_GET["op"]) {
                 $output["cur_img"] = $row["cur_img"];
                 $output["nhours"] = $row["nhours"];
                 $output["modality_id"] = $row["modality_id"];
-                $output["usu_id"] = $row["usu_id"];
                 $output["usu_nom"] = $row["usu_nom"];
                 $output["usu_apep"] = $row["usu_apep"];
                 $output["usu_apem"] = $row["usu_apem"];
                 $output["aclevel_id"] = $row["aclevel_id"];
-               /* $output["inst_nom"] = $row["inst_nom"];
-                $output["inst_apep"] = $row["inst_apep"];
-                $output["inst_apem"] = $row["inst_apem"];*/
+                /* $output["inst_nom"] = $row["inst_nom"];
+                 $output["inst_apep"] = $row["inst_apep"];
+                 $output["inst_apem"] = $row["inst_apem"];*/
             }
 
             echo json_encode($output);
@@ -124,29 +124,29 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
-        case "cambiarPassword":
-            if (isset($_POST["usu_id"]) && isset($_POST["nuevaContraseña"])) {
-                // Recupera el ID de usuario y la nueva contraseña desde el formulario
-                $usu_id = $_POST["usu_id"];
-                $nuevaContraseña = $_POST["nuevaContraseña"];
-        
-                // Verifica que el usuario exista
-                $datos = $usuario->get_usuario_x_id($usu_id);
-        
-                if (is_array($datos) == true && count($datos) > 0) {
-                    // Actualiza la contraseña del usuario en la base de datos
-                    $hashNuevaContraseña =  $usuario->encriptarPassword($nuevaContraseña); // Utiliza tu función de encriptación
-                    $usuario->actualizarPassword($usu_id, $hashNuevaContraseña);
-                    echo "Contraseña actualizada con éxito";
-                } else {
-                    // Puedes emitir un mensaje de error si el usuario no existe
-                    echo "El usuario no existe";
-                }
+    case "cambiarPassword":
+        if (isset($_POST["usu_id"]) && isset($_POST["nuevaContraseña"])) {
+            // Recupera el ID de usuario y la nueva contraseña desde el formulario
+            $usu_id = $_POST["usu_id"];
+            $nuevaContraseña = $_POST["nuevaContraseña"];
+
+            // Verifica que el usuario exista
+            $datos = $usuario->get_usuario_x_id($usu_id);
+
+            if (is_array($datos) == true && count($datos) > 0) {
+                // Actualiza la contraseña del usuario en la base de datos
+                $hashNuevaContraseña = $usuario->encriptarPassword($nuevaContraseña); // Utiliza tu función de encriptación
+                $usuario->actualizarPassword($usu_id, $hashNuevaContraseña);
+                echo "Contraseña actualizada con éxito";
             } else {
-                // Puedes emitir un mensaje de error si no se proporcionaron los datos necesarios
-                echo "Faltan datos necesarios";
+                // Puedes emitir un mensaje de error si el usuario no existe
+                echo "El usuario no existe";
             }
-            break;
+        } else {
+            // Puedes emitir un mensaje de error si no se proporcionaron los datos necesarios
+            echo "Faltan datos necesarios";
+        }
+        break;
     /*TODO: Mostrar informacion segun ci del usuario registrado */
     case "consulta_ci":
         $datos = $usuario->get_usuario_x_ci($_POST["usu_ci"]);
@@ -306,6 +306,17 @@ switch ($_GET["op"]) {
 
     case "guardar_desde_excel":
         $usuario->insert_usuario($_POST["usu_nom"], $_POST["usu_apep"], $_POST["usu_apem"], $_POST["usu_correo"], $_POST["usu_pass"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
+        break;
+    /*TODO:  Listar toda la informacion segun formato de datatable */
+    case "combo":
+        $datos = $usuario->get_usuario();
+        if (is_array($datos) == true and count($datos) > 0) {
+            $html = " <option label='Seleccione'></option>";
+            foreach ($datos as $row) {
+                $html .= "<option value='" . $row['abreviature']." " . $row['usu_id'] . "'>" . $row['usu_nom'] . " " . $row['usu_apep'] . " " . $row['usu_apem'] . "</option>";
+            }
+            echo $html;
+        }
         break;
 
 }
