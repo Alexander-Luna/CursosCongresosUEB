@@ -53,11 +53,6 @@ $(document).ready(function () {
     $('#eventype_id').select2({
         dropdownParent: $('#modalmantenimiento')
     });
-
-    /*  $('#inst_id').select2({
-          dropdownParent: $('#modalmantenimiento')
-      });*/
-
     combo_dependencia();
     combo_tipoevento();
     combo_modalidad();

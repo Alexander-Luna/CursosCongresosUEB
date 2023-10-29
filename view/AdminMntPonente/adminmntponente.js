@@ -10,13 +10,14 @@ function init() {
         URLimg = "../../controller/ponente.php?op=update_imagen_ponente";
         guardaryeditarimg(e);
     });
+
 }
 
 
 
 function guardaryeditar(e) {
     e.preventDefault();
-    var formData = new FormData($("#ponente_form")[0]);
+    let formData = new FormData($("#ponente_form")[0]);
     $.ajax({
         url: "../../controller/ponente.php?op=guardaryeditar",
         type: "POST",
@@ -52,7 +53,27 @@ $(document).ready(function () {
     $('#ponen_sex').select2({
         dropdownParent: $('#modalmantenimiento')
     });
-    // console.log(evenId);
+    ////////////////////////////////////////////
+    $.ajax({
+        url: "../../controller/evento.php?op=mostrar",
+        type: "POST",
+        data: {
+            even_id: evenId,
+        },
+        success: function (datos) {
+            //console.log(datos);
+            let data = JSON.parse(datos);
+            if (data.hasOwnProperty("cur_nom")) {
+                $("#cur_nom").text(data.cur_nom);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("Error en la solicitud AJAX: " + status + " - " + error);
+        }
+    });
+    ///////////////////////////////////////////
+
+
     $('#ponente_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,

@@ -19,7 +19,7 @@ if (isset($_SESSION["usu_id"])) {
 
     <?php require_once("../html/MainHeader.php"); ?>
     <script type="text/javascript">
-      var evenId = <?php echo $even_id; ?>;
+      let evenId = <?php echo $even_id; ?>;
     </script>
     <div class="br-mainpanel">
       <div class="br-pageheader pd-y-15 pd-l-20">
@@ -34,10 +34,10 @@ if (isset($_SESSION["usu_id"])) {
 
       <div class="br-pagebody">
         <div class="br-section-wrapper">
-          <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">
-            <?php echo $even_id ?>
+          <h6 id="cur_nom" name="cur_nom" class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">
+           
           </h6>
-          <p class="mg-b-30 tx-gray-600">Listado de Ponente</p>
+          <p class="mg-b-30 tx-gray-600">Listado de Ponentes</p>
 
           <button class="btn btn-outline-primary" id="add_button" onclick="nuevo(<?php echo $even_id; ?>)"><i
               class="fa fa-plus-square mg-r-10"></i> Nuevo Registro</button>

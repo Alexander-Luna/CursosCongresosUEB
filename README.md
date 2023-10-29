@@ -1,4 +1,12 @@
-# PERSONAL_CertificadosDiplomas
-Proyecto de Certificados y Diplomas 
-
-AnderCode
+# Tareas por resolver
+- [] Actualización del perfil no se actualiza los datos en el perfil adecuado.
+- [] Subir imagen ponente.
+- [] Seguridades, hasheo de las contraseñas.
+- [] Desde el lado del usuario común no carga la ruta "Mis Eventos".
+- [] Desde el lado del usuario común no se puede usar los seleclist en la ruta "Perfil".
+- [] Separar la actualización de la contraseña con la actualización del perfil.
+- [] Arreglar El certificado para que se muestre de manera adecuada.
+- [] .
+- [] .
+- [] .
+- [] .

@@ -25,7 +25,6 @@ $(document).on("click", "#btnactualizar", function () {
         usu_apep: $('#usu_apep').val(),
         usu_apem: $('#usu_apem').val(),
         aclevel_id: $('#aclevel_id').val(),
-        usu_pass: $('#usu_pass').val(),
         usu_sex: $('#usu_sex').val(),
         usu_telf: $('#usu_telf').val()
     }, function (data) {

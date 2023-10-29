@@ -78,6 +78,7 @@ class Usuario extends Conectar
                 td_evento_usuario.curd_id,
                 tm_evento.even_id,
                 tm_evento.cur_nom,
+                tm_evento.nhours,
                 tm_evento.cur_descrip,
                 tm_evento.cur_fechini,
                 tm_evento.cur_fechfin,
@@ -96,7 +97,10 @@ class Usuario extends Conectar
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_id);
         $sql->execute();
-        return $resultado = $sql->fetchAll();
+        $resultado = $sql->fetchAll();
+        echo '<script> console.log($resultado);</script>';
+        
+        return $resultado;
     }
 
     /*TODO: Mostrar todos los eventos en los cuales esta inscrito un usuario */
@@ -106,9 +110,10 @@ class Usuario extends Conectar
         parent::set_names();
         $sql = "SELECT 
                 td_evento_usuario.curd_id,
-                 td_evento_usuario.est_aprueba,
+                td_evento_usuario.est_aprueba,
                 tm_evento.even_id,
                 tm_evento.cur_nom,
+                tm_evento.nhours,
                 tm_evento.cur_descrip,
                 tm_evento.cur_fechini,
                 tm_evento.cur_fechfin,
@@ -144,6 +149,7 @@ class Usuario extends Conectar
                 tm_evento.cur_fechini,
                 tm_evento.cur_fechfin,
                 tm_evento.portada_img,
+                tm_evento.nhours,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
@@ -175,6 +181,7 @@ class Usuario extends Conectar
             tm_evento.cur_descrip,
             tm_evento.cur_fechini,
             tm_evento.cur_fechfin,
+            tm_evento.nhours,
             tm_usuario.usu_id,
             tm_usuario.usu_nom,
             tm_usuario.usu_apep,
@@ -209,14 +216,14 @@ class Usuario extends Conectar
                 tm_evento.cur_descrip,
                 tm_evento.cur_fechini,
                 tm_evento.cur_fechfin,
+                tm_evento.modality_id
+                tm_evento.nhours,
+                tm_evento.cur_img,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apep,
                 tm_usuario.usu_apem,
                 tm_usuario.aclevel_id,
-                tm_evento.cur_img,
-                tm_evento.nhours,
-                tm_evento.modality_id
                 FROM td_evento_usuario INNER JOIN 
                 tm_evento ON td_evento_usuario.even_id = tm_evento.even_id INNER JOIN
                 tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id 

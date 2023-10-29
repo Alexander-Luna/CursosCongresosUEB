@@ -47,7 +47,7 @@
                                 required></textarea>
                         </div>
                     </div>
-                 
+
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Número de horas: <span class="tx-danger">*</span></label>

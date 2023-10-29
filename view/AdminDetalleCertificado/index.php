@@ -61,7 +61,7 @@
                     <th class="wd-15p">Usuario</th>
                     <th class="wd-15p">Fecha Inicio</th>
                     <th class="wd-20p">Fecha Fin</th>
-                    <th class="wd-15p">Instructor</th>
+                    <th class="wd-15p">N Horas</th>
                     <th class="wd-10p"></th>
                     <th class="wd-10p"></th>
                     </tr>
