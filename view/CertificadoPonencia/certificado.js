@@ -14,7 +14,7 @@ const maxWidth = x + 200; // Ancho máximo para el texto
 const lineHeight = 30; // Espacio entre líneas
 
 $(document).ready(function () {
-   let ponen_id = getUrlParameter('ponen_id');
+    let ponen_id = getUrlParameter('ponen_id');
 
     $.post("../../controller/ponente.php?op=mostrar_ponencia_detalle", { ponen_id: ponen_id }, function (data) {
         data = JSON.parse(data);
@@ -40,26 +40,28 @@ $(document).ready(function () {
             ctx.fillText(academicLevelName + ' ' + data.usu_nom + ' ' + data.usu_apep + ' ' + data.usu_apem, x, 300);
         });
 
-        ctx.font = '30px Arial';
-        drawWrappedText(data.cur_nom, x, y / 1.9, maxWidth, lineHeight);
+        ctx.font = '20px Arial';
 
+        var textToDraw = 'Por haber participado en calidad de ' + data.ponen_type + ' con la temática ' + data.ponen_titulo + 'en el marco del ' + data.cur_nom + ', organizado por la Universidad Estatal de Bolívar ' +
+            'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + data.modality_id + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda';
+        drawWrappedText(textToDraw, x, y / 1.9, maxWidth, lineHeight);
 
         ctx.font = '15px Arial';
 
 
 
-        var modalidad = data.modality_id;
+        // var modalidad = data.modality_id;
 
-        $.post("../../controller/evento.php?op=modalidad", { modality_id: modalidad }, function (response1) {
-            response1 = JSON.parse(response1);
-            modalidad = response1.name;
-            ctx.font = '15px Arial';
-            var textToDraw = 'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + modalidad + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda, el ' + data.cur_fechfin + '';
+        // $.post("../../controller/evento.php?op=modalidad", { modality_id: modalidad }, function (response1) {
+        //     response1 = JSON.parse(response1);
+        //     modalidad = response1.name;
+        //     ctx.font = '10px Arial';
+        //     var textToDraw = 'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + modalidad + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda';
 
-            drawWrappedText(textToDraw, x, 440, maxWidth, lineHeight);
-    
-        });
-    
+        //     drawWrappedText(textToDraw, x, 440, maxWidth, lineHeight);
+
+        // });
+
         /* Ruta de la Imagen */
         imageLogo.src = "../../assets/logo_ueb.png";
         /* Dimensionamos y seleccionamos imagen */
