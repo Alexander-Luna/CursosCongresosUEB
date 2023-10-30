@@ -18,7 +18,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
   <link href="public/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
   <link href="public/lib/Ionicons/css/ionicons.css" rel="stylesheet">
   <link rel="stylesheet" href="public/css/bracket.css">
-  <title>EMPRESA::Acceso</title>
+  <title>Acceso</title>
 </head>
 
 <body>
@@ -56,7 +56,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
         ?>
 
         <div class="signin-logo tx-center tx-28 tx-bold tx-inverse">
-          <img src="assets/logo_ueb.png" alt="Logo" width="250px" height="250px" style="display: block; margin: 0 auto;">
+          <img src="assets/logo_ueb.png" alt="Logo" width="200px" height="150px" style="display: block; margin: 0 auto;">
         </div>
 
         <div class="tx-center mg-b-30">Certificados</div>

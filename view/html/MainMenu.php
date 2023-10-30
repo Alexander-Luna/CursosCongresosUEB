@@ -1,4 +1,4 @@
-<div class="br-logo"><a href="../UsuHome/"><span>[</span>Empresa<span>]</span></a></div>
+<div class="br-logo"><a href="../UsuHome/"><span>[</span><img height="40px" width="150px" src="../../assets/logoueb.png" /><span>]</span></a></div>
 
 <div class="br-sideleft overflow-y-auto">
   <label class="sidebar-label pd-x-15 mg-t-20">Menu</label>

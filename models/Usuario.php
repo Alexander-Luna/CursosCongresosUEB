@@ -2,7 +2,7 @@
 class Usuario extends Conectar
 {
 
-    function encriptarPassword($password)
+    public function encriptarPassword($password)
     {
         $options = [
             'cost' => 12,
@@ -11,9 +11,36 @@ class Usuario extends Conectar
         $hash = password_hash($password, PASSWORD_BCRYPT, $options);
         return $hash;
     }
+    public function resetpass_usuario($usu_id, $usu_pass)
+    {
+        $conectar = parent::conexion();
 
+        parent::set_names();
+        $sql = "UPDATE tm_usuario
+                SET
+                    usu_pass = ?
+                WHERE
+                    usu_id = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_pass);
+        $sql->bindValue(2, $usu_id);
+        $sql->execute();
+        $resultado = $sql->fetchAll();
+        //echo "Entraaa " + $resultado;
+        return $resultado;
+    }
     /*TODO: Funcion para login de acceso del usuario */
-
+    public function actualizarPassword($usu_id, $usu_pass)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "UPDATE tm_usuario SET usu_pass = ? WHERE usu_id = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_pass);
+        $sql->bindValue(2, $usu_id);
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
+    }
     public function login()
     {
         $conectar = parent::conexion();
@@ -35,38 +62,33 @@ class Usuario extends Conectar
                 if ($resultado1) {
                     $hashAlmacenado = $resultado1['usu_pass'];
 
-                    $sql = "SELECT * FROM tm_usuario WHERE usu_correo=? and usu_pass=? and est=1";
-                    $stmt = $conectar->prepare($sql);
-                    $stmt->bindValue(1, $correo);
-                    // $stmt->bindValue(2, password_verify($pass, $hashAlmacenado));
-                    $stmt->bindValue(2, $pass);
-                    $stmt->execute();
-                    $resultado = $stmt->fetch();
-                    if (is_array($resultado) and count($resultado) > 0) {
-                        $_SESSION["usu_id"] = $resultado["usu_id"];
-                        $_SESSION["usu_nom"] = $resultado["usu_nom"];
-                        $_SESSION["usu_ape"] = $resultado["usu_ape"];
-                        $_SESSION["usu_correo"] = $resultado["usu_correo"];
-                        $_SESSION["rol_id"] = $resultado["rol_id"];
-                        $_SESSION["aclevel_id"] = $resultado["aclevel_id"];
-                        header("Location:" . Conectar::ruta() . "view/UsuHome/");
-                        exit();
+                    // Verifica la contraseña utilizando password_verify
+                    if (password_verify($pass, $hashAlmacenado)) {
+                        $sql = "SELECT * FROM tm_usuario WHERE usu_correo=? and est=1";
+                        $stmt = $conectar->prepare($sql);
+                        $stmt->bindValue(1, $correo);
+                        $stmt->execute();
+                        $resultado = $stmt->fetch();
+
+                        if ($resultado) {
+                            // Establece las variables de sesión
+                            $_SESSION["usu_id"] = $resultado["usu_id"];
+                            $_SESSION["usu_nom"] = $resultado["usu_nom"];
+                            $_SESSION["usu_ape"] = $resultado["usu_ape"];
+                            $_SESSION["usu_correo"] = $resultado["usu_correo"];
+                            $_SESSION["rol_id"] = $resultado["rol_id"];
+                            $_SESSION["aclevel_id"] = $resultado["aclevel_id"];
+
+                            // Redirige al usuario a la página de inicio
+                            header("Location: " . Conectar::ruta() . "view/UsuHome/");
+                            exit();
+                        }
                     }
                 }
             }
         }
     }
-    public function actualizarPassword($usu_id, $usu_pass)
-    {
-        $conectar = parent::conexion();
-        parent::set_names();
-        $sql = "UPDATE tm_usuario SET usu_pass = ? WHERE usu_id = ?";
-        $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $usu_pass);
-        $sql->bindValue(2, $usu_id);
-        $sql->execute();
-        return $resultado = $sql->fetchAll();
-    }
+
     /*TODO: Mostrar todos los eventos en los cuales esta inscrito un usuario */
     public function get_eventos_x_usuario($usu_id)
     {
@@ -98,7 +120,7 @@ class Usuario extends Conectar
         $sql->execute();
         $resultado = $sql->fetchAll();
         echo '<script> console.log($resultado);</script>';
-        
+
         return $resultado;
     }
 
@@ -271,7 +293,7 @@ class Usuario extends Conectar
     }
 
     /*TODO: Actualizar la informacion del perfil del usuario segun ID */
-    public function update_usuario_perfil($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_pass, $usu_sex, $usu_telf, $aclevel_id)
+    public function update_usuario_perfil($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_sex, $usu_telf, $usu_ci, $aclevel_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -280,9 +302,9 @@ class Usuario extends Conectar
                     usu_nom = ?,
                     usu_apep = ?,
                     usu_apem = ?,
-                    usu_pass = ?,
                     usu_sex = ?,
                     usu_telf = ?,
+                    usu_ci = ?,
                     aclevel_id = ?
                 WHERE
                     usu_id = ?";
@@ -290,38 +312,37 @@ class Usuario extends Conectar
         $sql->bindValue(1, $usu_nom);
         $sql->bindValue(2, $usu_apep);
         $sql->bindValue(3, $usu_apem);
-        $sql->bindValue(4, $usu_pass);
-        $sql->bindValue(5, $usu_sex);
-        $sql->bindValue(6, $usu_telf);
-        $sql->bindValue(7, $usu_id);
-        $sql->bindValue(8, $aclevel_id);
+        $sql->bindValue(4, $usu_sex);
+        $sql->bindValue(5, $usu_telf);
+        $sql->bindValue(6, $usu_ci);
+        $sql->bindValue(7, $aclevel_id);
+        $sql->bindValue(8, $usu_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
 
     /*TODO: Funcion para insertar usuario */
-    public function insert_usuario($usu_nom, $usu_apep, $usu_apem, $usu_correo, $usu_pass, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id)
+    public function insert_usuario($usu_nom, $usu_apep, $usu_apem, $usu_correo, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO tm_usuario (usu_id,usu_nom,usu_apep,usu_apem,usu_correo,usu_pass,usu_sex,usu_telf,rol_id,usu_ci,fech_crea, est,aclevel_id) VALUES (NULL,?,?,?,?,?,?,?,?,?,now(),'1',?);";
+        $sql = "INSERT INTO tm_usuario (usu_id,usu_nom,usu_apep,usu_apem,usu_correo,usu_sex,usu_telf,rol_id,usu_ci,aclevel_id,fech_crea, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,now(),'1');";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_nom);
         $sql->bindValue(2, $usu_apep);
         $sql->bindValue(3, $usu_apem);
         $sql->bindValue(4, $usu_correo);
-        $sql->bindValue(5, $usu_pass);
-        $sql->bindValue(6, $usu_sex);
-        $sql->bindValue(7, $usu_telf);
-        $sql->bindValue(8, $rol_id);
-        $sql->bindValue(9, $usu_ci);
-        $sql->bindValue(10, $aclevel_id);
+        $sql->bindValue(5, $usu_sex);
+        $sql->bindValue(6, $usu_telf);
+        $sql->bindValue(7, $rol_id);
+        $sql->bindValue(8, $usu_ci);
+        $sql->bindValue(9, $aclevel_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
 
     /*TODO: Funcion para actualizar usuario */
-    public function update_usuario($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_correo, $usu_pass, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id)
+    public function update_usuario($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_correo, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id)
     {
         $conectar = parent::conexion();
 
@@ -332,7 +353,6 @@ class Usuario extends Conectar
                     usu_apep = ?,
                     usu_apem = ?,
                     usu_correo = ?,
-                    usu_pass = ?,
                     usu_sex = ?,
                     usu_telf = ?,
                     rol_id = ?,
@@ -345,13 +365,12 @@ class Usuario extends Conectar
         $sql->bindValue(2, $usu_apep);
         $sql->bindValue(3, $usu_apem);
         $sql->bindValue(4, $usu_correo);
-        $sql->bindValue(5, $usu_pass);
-        $sql->bindValue(6, $usu_sex);
-        $sql->bindValue(7, $usu_telf);
-        $sql->bindValue(8, $rol_id);
-        $sql->bindValue(9, $usu_ci);
+        $sql->bindValue(5, $usu_sex);
+        $sql->bindValue(6, $usu_telf);
+        $sql->bindValue(7, $rol_id);
+        $sql->bindValue(8, $usu_ci);
+        $sql->bindValue(9, $aclevel_id);
         $sql->bindValue(10, $usu_id);
-        $sql->bindValue(11, $aclevel_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }

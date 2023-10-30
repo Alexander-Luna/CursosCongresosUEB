@@ -86,9 +86,6 @@ switch ($_GET["op"]) {
                 $output["usu_apep"] = $row["usu_apep"];
                 $output["usu_apem"] = $row["usu_apem"];
                 $output["aclevel_id"] = $row["aclevel_id"];
-                /* $output["inst_nom"] = $row["inst_nom"];
-                 $output["inst_apep"] = $row["inst_apep"];
-                 $output["inst_apem"] = $row["inst_apem"];*/
             }
 
             echo json_encode($output);
@@ -124,29 +121,7 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
-    case "cambiarPassword":
-        if (isset($_POST["usu_id"]) && isset($_POST["nuevaContraseña"])) {
-            // Recupera el ID de usuario y la nueva contraseña desde el formulario
-            $usu_id = $_POST["usu_id"];
-            $nuevaContraseña = $_POST["nuevaContraseña"];
 
-            // Verifica que el usuario exista
-            $datos = $usuario->get_usuario_x_id($usu_id);
-
-            if (is_array($datos) == true && count($datos) > 0) {
-                // Actualiza la contraseña del usuario en la base de datos
-                $hashNuevaContraseña = $usuario->encriptarPassword($nuevaContraseña); // Utiliza tu función de encriptación
-                $usuario->actualizarPassword($usu_id, $hashNuevaContraseña);
-                echo "Contraseña actualizada con éxito";
-            } else {
-                // Puedes emitir un mensaje de error si el usuario no existe
-                echo "El usuario no existe";
-            }
-        } else {
-            // Puedes emitir un mensaje de error si no se proporcionaron los datos necesarios
-            echo "Faltan datos necesarios";
-        }
-        break;
     /*TODO: Mostrar informacion segun ci del usuario registrado */
     case "consulta_ci":
         $datos = $usuario->get_usuario_x_ci($_POST["usu_ci"]);
@@ -158,7 +133,6 @@ switch ($_GET["op"]) {
                 $output["usu_apem"] = $row["usu_apem"];
                 $output["usu_correo"] = $row["usu_correo"];
                 $output["usu_sex"] = $row["usu_sex"];
-                $output["usu_pass"] = $row["usu_pass"];
                 $output["usu_telf"] = $row["usu_telf"];
                 $output["rol_id"] = $row["rol_id"];
                 $output["usu_ci"] = $row["usu_ci"];
@@ -174,18 +148,50 @@ switch ($_GET["op"]) {
             $_POST["usu_nom"],
             $_POST["usu_apep"],
             $_POST["usu_apem"],
-            $_POST["usu_pass"],
             $_POST["usu_sex"],
             $_POST["usu_telf"],
+            $_POST["usu_ci"],
             $_POST["aclevel_id"]
         );
         break;
     /*TODO: Guardar y editar cuando se tenga el ID */
     case "guardaryeditar":
         if (empty($_POST["usu_id"])) {
-            $usuario->insert_usuario($_POST["usu_nom"], $_POST["usu_apep"], $_POST["usu_apem"], $_POST["usu_correo"], $_POST["usu_pass"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
+            $usuario->insert_usuario($_POST["usu_nom"], $_POST["usu_apep"], $_POST["usu_apem"], $_POST["usu_correo"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
         } else {
-            $usuario->update_usuario($_POST["usu_id"], $_POST["usu_nom"], $_POST["usu_apep"], $_POST["usu_apem"], $_POST["usu_correo"], $_POST["usu_pass"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
+            $usuario->update_usuario($_POST["usu_id"], $_POST["usu_nom"], $_POST["usu_apep"], $_POST["usu_apem"], $_POST["usu_correo"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
+        }
+        break;
+    case "resetpass":
+        if (!empty($_POST['usu_pass1']) && !empty($_POST['usu_pass'])) {
+            if ($_POST['usu_pass1'] == $_POST['usu_pass']) {
+                $usuario->resetpass_usuario($_POST["usu_id"], $usuario->encriptarPassword($_POST["usu_pass"]));
+            } else {
+                echo 'Las Password No Coinciden';
+            }
+        } else {
+            echo 'Llene las password';
+        }
+        break;
+    case "cambiarPassword":
+        if (isset($_POST["usu_id"]) && isset($_POST["nuevaContraseña"])) {
+            // Recupera el ID de usuario y la nueva contraseña desde el formulario
+            $usu_id = $_POST["usu_id"];
+            $nuevaContraseña = $_POST["nuevaContraseña"];
+
+            // Verifica que el usuario exista
+            $datos = $usuario->get_usuario_x_id($usu_id);
+
+            if (is_array($datos) == true && count($datos) > 0) {
+                // Actualiza la contraseña del usuario en la base de datos
+                $hashNuevaContraseña = $usuario->encriptarPassword($nuevaContraseña); // Utiliza tu función de encriptación
+                $usuario->actualizarPassword($usu_id, $hashNuevaContraseña);
+                echo "Contraseña actualizada con éxito";
+            } else {
+                echo "El usuario no existe";
+            }
+        } else {
+            echo "Faltan datos necesarios";
         }
         break;
     /*TODO: Eliminar segun ID */
@@ -313,7 +319,7 @@ switch ($_GET["op"]) {
         if (is_array($datos) == true and count($datos) > 0) {
             $html = " <option label='Seleccione'></option>";
             foreach ($datos as $row) {
-                $html .= "<option value='" . $row['abreviature']." " . $row['usu_id'] . "'>" . $row['usu_nom'] . " " . $row['usu_apep'] . " " . $row['usu_apem'] . "</option>";
+                $html .= "<option value='" . $row['abreviature'] . " " . $row['usu_id'] . "'>" . $row['usu_nom'] . " " . $row['usu_apep'] . " " . $row['usu_apem'] . "</option>";
             }
             echo $html;
         }

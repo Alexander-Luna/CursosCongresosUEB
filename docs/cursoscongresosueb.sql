@@ -189,7 +189,7 @@ CREATE TABLE `tm_usuario` (
   `usu_apep` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `usu_apem` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `usu_correo` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `usu_pass` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `usu_pass` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
   `usu_sex` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
   `usu_telf` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
   `rol_id` int(11) NOT NULL,
@@ -204,9 +204,9 @@ FOREIGN KEY (`aclevel_id`)
 REFERENCES `academic_level`(`aclevel_id`);
 
 INSERT INTO `tm_usuario` (`usu_id`, `usu_nom`, `usu_apep`, `usu_apem`, `usu_correo`, `usu_pass`, `usu_sex`, `usu_telf`, `rol_id`, `usu_ci`, `fech_crea`, `est`, `aclevel_id`) VALUES
-(1, "Alexander Paul", "Luna", "Arteaga", "aluna@mailes.ueb.edu.ec", "12345", "M", "0985726434", 2, "0202433918", "2023-04-26 20:14:08", 1,1),
-(2, "Wilson Efrain", "Paredes", "Guano", "wiparedes@mailes.ueb.edu.ec", "12345", "M", "0985726434",2, "0202433912", "2023-04-26 20:14:08", 1,1),
-(3, "USU5", "USU5", "USU5", "user@mailes.ueb.edu.ec", "12345", "F", "0985726439", 1, "0202433911", "2023-04-26 20:14:08", 1,1);
+(1, "Alexander Paul", "Luna", "Arteaga", "aluna@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "M", "0985726434", 2, "0202433918", "2023-04-26 20:14:08", 1,1),
+(2, "Wilson Efrain", "Paredes", "Guano", "wiparedes@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "M", "0985726434",2, "0202433912", "2023-04-26 20:14:08", 1,1),
+(3, "USU5", "USU5", "USU5", "user@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "F", "0985726439", 1, "0202433911", "2023-04-26 20:14:08", 1,1);
 
 ALTER TABLE `td_evento_usuario`
   ADD PRIMARY KEY (`curd_id`);

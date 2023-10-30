@@ -1,5 +1,5 @@
 
-var usu_id = $('#usu_idx').val();
+let usu_id = $('#usu_idx').val();
 
 function init() {
     $("#ponente_form").on("submit", function (e) {

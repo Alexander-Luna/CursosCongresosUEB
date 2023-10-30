@@ -9,7 +9,7 @@ if (isset($_SESSION["usu_id"])) {
   <head>
     <?php require_once("../html/MainHead.php"); ?>
 
-    <title>Empresa::Perfil</title>
+    <title>Mi Perfil</title>
   </head>
 
   <body>
@@ -54,37 +54,60 @@ if (isset($_SESSION["usu_id"])) {
                   <input class="form-control" type="text" name="usu_apem" id="usu_apem" placeholder="Apellido Materno">
                 </div>
               </div>
-              <div class="form-group mg-b-10-force">
+
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Correo Electrónico: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" name="usu_correo" id="usu_correo" readonly>
+                </div>
+              </div>
+              
+              <?php
+              if ($_SESSION["rol_id"] == '2') {
+                ?>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Cédula: <span class="tx-danger">*</span></label>
+                    <input class="form-control" type="number" name="usu_ci" id="usu_ci">
+                  </div>
+                </div>
+
+                <?php
+              } else {
+                ?>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Cédula: <span class="tx-danger">*</span></label>
+                    <input class="form-control" type="number" name="usu_ci" id="usu_ci" readonly>
+                  </div>
+                </div>
+                <?php
+              }
+              ?>
+
+
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Teléfono: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="number" name="usu_telf" id="usu_telf" placeholder="Ingrese Telefono">
+                </div>
+              </div>
+              <div class="col-lg-4">
                 <label class="form-control-label">Nivel Académico: <span class="tx-danger">*</span></label>
-                <select class="form-control select2" name="aclevel_id" id="aclevel_id" data-placeholder="Seleccione">
+                <select class="form-control select2" name="aclevel_id" id="aclevel_id">
                   <option label="Seleccione"></option>
                   <option value="1">Estudiante</option>
                   <option value="2">Maestría</option>
                   <option value="3">Doctorado</option>
                 </select>
               </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label class="form-control-label">Correo Electrónico: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="usu_correo" id="usu_correo" readonly>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
-                  <select class="form-control select2" name="usu_sex" id="usu_sex" data-placeholder="Seleccione">
-                    <option label="Seleccione"></option>
-                    <option value="F">Femenino</option>
-                    <option value="M">Masculino</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label class="form-control-label">Teléfono: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="number" name="usu_telf" id="usu_telf" placeholder="Ingrese Telefono">
-                </div>
+              <div class="col-lg-4">
+                <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
+                <select class="form-control select2" name="usu_sex" id="usu_sex" placeholder="Seleccione">
+                  <option label="Seleccione"></option>
+                  <option value="F">Femenino</option>
+                  <option value="M">Masculino</option>
+                </select>
               </div>
             </div>
 
