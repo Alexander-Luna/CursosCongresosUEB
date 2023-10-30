@@ -43,7 +43,7 @@ $(document).ready(function () {
         ctx.font = '20px Arial';
 
         var textToDraw = 'Por haber participado en calidad de ' + data.ponen_type + ' con la temática ' + data.ponen_titulo + 'en el marco del ' + data.cur_nom + ', organizado por la Universidad Estatal de Bolívar ' +
-            'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + data.modality_id + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda';
+            'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + data.modality_id + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda.';
         drawWrappedText(textToDraw, x, y / 1.9, maxWidth, lineHeight);
 
         ctx.font = '15px Arial';
