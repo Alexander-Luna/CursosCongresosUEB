@@ -103,6 +103,7 @@ ALTER TABLE `modality`
 ADD PRIMARY KEY (`modality_id`);
 ALTER TABLE `modality`
   MODIFY `modality_id` int(11) NOT NULL AUTO_INCREMENT;
+
 INSERT INTO `modality` (
   `modality_id`,
   `name`,
@@ -146,26 +147,7 @@ CREATE TABLE `tm_ponente` (
   `fech_crea` datetime DEFAULT NULL,
   `est` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-CREATE TABLE `tm_instructor` (
-  `inst_id` int(11) NOT NULL,
-  `inst_nom` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `inst_apep` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `inst_apem` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `inst_correo` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `inst_sex` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
-  `inst_telf` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
-  `fech_crea` datetime DEFAULT NULL,
-  `est` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-
-INSERT INTO `tm_instructor` (`inst_id`, `inst_nom`, `inst_apep`, `inst_apem`, `inst_correo`, `inst_sex`, `inst_telf`, `fech_crea`, `est`) VALUES
-(1, 'RICARDO', 'PALMA', 'PALMA', 'RPALMA@TEST.COM.PE', 'M', '5555555', '2023-04-26 20:24:06', 1),
-(2, 'CESAR', 'VALLEJO', 'MEDRANO', 'CVALLEJO@MEDRANO.COM.PE', 'M', '5555555', '2023-04-26 20:24:06', 1),
-(3, 'asda', 'asd', 'asd', 'test@test.com', 'M', '111111', '2023-08-17 21:27:40', 0),
-(4, 'ddd', 'dd', 'ddd', 'test@test.com', 'M', '111111', '2023-08-17 21:31:26', 0),
-(5, 'www', 'www', 'www', 'test@test.com', 'F', '111111', '2023-08-17 21:31:32', 0),
-(6, 'aaaa', 'aaa', 'aaaa', 'aaaa@www.com', 'F', '123123123123', '2023-08-17 21:32:55', 0);
 
 CREATE TABLE `academic_level` (
   `aclevel_id` int(11) NOT NULL,
@@ -206,7 +188,7 @@ REFERENCES `academic_level`(`aclevel_id`);
 INSERT INTO `tm_usuario` (`usu_id`, `usu_nom`, `usu_apep`, `usu_apem`, `usu_correo`, `usu_pass`, `usu_sex`, `usu_telf`, `rol_id`, `usu_ci`, `fech_crea`, `est`, `aclevel_id`) VALUES
 (1, "Alexander Paul", "Luna", "Arteaga", "aluna@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "M", "0985726434", 2, "0202433918", "2023-04-26 20:14:08", 1,1),
 (2, "Wilson Efrain", "Paredes", "Guano", "wiparedes@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "M", "0985726434",2, "0202433912", "2023-04-26 20:14:08", 1,1),
-(3, "USU5", "USU5", "USU5", "user@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "F", "0985726439", 1, "0202433911", "2023-04-26 20:14:08", 1,1);
+(3, "Elizabeth", "Ordoñes", "Lopéz", "user@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "F", "0985726439", 1, "0202433911", "2023-04-26 20:14:08", 1,1);
 
 ALTER TABLE `td_evento_usuario`
   ADD PRIMARY KEY (`curd_id`);
@@ -217,33 +199,32 @@ ALTER TABLE `tm_dependencias`
 ALTER TABLE `tm_evento`
   ADD PRIMARY KEY (`even_id`);
 
-ALTER TABLE `tm_instructor`
-  ADD PRIMARY KEY (`inst_id`);
   ALTER TABLE `tm_ponente`
   ADD PRIMARY KEY (`ponen_id`);
 
 ALTER TABLE `tm_usuario`
-  ADD PRIMARY KEY (`usu_id`);
+ADD PRIMARY KEY (`usu_id`);
 
 
 ALTER TABLE `td_evento_usuario`
-  MODIFY `curd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+MODIFY `curd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 ALTER TABLE `tm_dependencias`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 ALTER TABLE `tm_evento`
-  MODIFY `even_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+MODIFY `even_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
-ALTER TABLE `tm_instructor`
-  MODIFY `inst_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-  ALTER TABLE `tm_ponente`
-  MODIFY `ponen_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tm_ponente`
+MODIFY `ponen_id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `tm_usuario`
   MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-    ALTER TABLE `tm_ponente` ADD CONSTRAINT `fk_usu_ponen`
+ALTER TABLE `tm_ponente` ADD CONSTRAINT `fk_usu_ponen`
 FOREIGN KEY (`usu_id`)
 REFERENCES `tm_usuario`(`usu_id`);
+ALTER TABLE `tm_evento` ADD CONSTRAINT `fk_dependencia`
+FOREIGN KEY (`cat_id`)
+REFERENCES `tm_dependencias`(`cat_id`);
 ALTER TABLE `td_evento_usuario_dias` ADD CONSTRAINT `fk_asistencia`
 FOREIGN KEY (`curd_id`)
 REFERENCES `td_evento_usuario`(`curd_id`);

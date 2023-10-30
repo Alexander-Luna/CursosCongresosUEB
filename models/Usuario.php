@@ -125,7 +125,46 @@ class Usuario extends Conectar
 
         return $resultado;
     }
+    public function get_ponencia_x_usuario($usu_id)
+    {
+        $conectar = parent::conexion();
 
+        parent::set_names();
+        $sql = "SELECT 
+                tm_ponente.ponen_id,
+                tm_ponente.ponen_type,
+                tm_ponente.ponen_fechaexpo,
+                tm_ponente.ponen_time,
+                tm_ponente.ponen_titulo,
+                tm_ponente.usu_id,
+                tm_ponente.est,
+                tm_evento.even_id,
+                tm_evento.cur_nom,
+                tm_evento.nhours,
+                tm_evento.cur_descrip,
+                tm_evento.cur_fechini,
+                tm_evento.cur_fechfin,
+                tm_evento.portada_img,
+                tm_evento.est_asistencia,
+                tm_usuario.usu_id,
+                tm_usuario.usu_nom,
+                tm_usuario.usu_apep,
+                tm_usuario.usu_apem,
+                tm_usuario.usu_ci,
+                tm_usuario.aclevel_id
+                FROM tm_ponente INNER JOIN 
+                tm_usuario ON tm_usuario.usu_id = tm_ponente.usu_id INNER JOIN
+                tm_evento ON tm_evento.even_id = tm_ponente.even_id 
+                WHERE 
+                tm_ponente.usu_id = ? AND tm_ponente.est=1";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_id);
+        $sql->execute();
+        $resultado = $sql->fetchAll();
+        //  echo '<script> console.log($resultado);</script>';
+
+        return $resultado;
+    }
     /*TODO: Mostrar todos los eventos en los cuales esta inscrito un usuario */
     public function get_eventos_x_usuario_top10($usu_id)
     {

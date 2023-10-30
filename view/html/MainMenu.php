@@ -1,4 +1,5 @@
-<div class="br-logo"><a href="../UsuHome/"><span>[</span><img height="40px" width="150px" src="../../assets/logoueb.png" /><span>]</span></a></div>
+<div class="br-logo"><a href="../UsuHome/"><span>[</span><img height="40px" width="150px"
+      src="../../assets/logoueb.png" /><span>]</span></a></div>
 
 <div class="br-sideleft overflow-y-auto">
   <label class="sidebar-label pd-x-15 mg-t-20">Menu</label>
@@ -18,6 +19,12 @@
         <div class="br-menu-item">
           <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
           <span class="menu-item-label">Mis Eventos</span>
+        </div>
+      </a>
+      <a href="../UsuPonencia/" class="br-menu-link">
+        <div class="br-menu-item">
+          <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
+          <span class="menu-item-label">Mis Ponencias</span>
         </div>
       </a>
       <?php

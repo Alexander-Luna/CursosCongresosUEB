@@ -93,5 +93,32 @@ switch ($_GET["op"]) {
     case "update_imagen_evento":
         $ponente->update_imagen_ponente($_POST["curx_idx"], $_POST["ponen_img"]);
         break;
+    case "mostrar_ponencia_detalle":
+        $datos = $ponente->get_ponencia_x_id_detalle($_POST["ponen_id"]);
+        if (is_array($datos) == true and count($datos) <> 0) {
+            foreach ($datos as $row) {
+                $output["ponen_id"] = $row["ponen_id"];
+                $output["ponen_type"] = $row["ponen_type"];
+                $output["ponen_fechaexpo"] = $row["ponen_fechaexpo"];
+                $output["ponen_time"] = $row["ponen_time"];
+                $output["ponen_titulo"] = $row["ponen_titulo"];
+                $output["usu_id"] = $row["usu_id"];
+                $output["even_id"] = $row["even_id"];
+                $output["cur_nom"] = $row["cur_nom"];
+                $output["nhours"] = $row["nhours"];
+                $output["cur_descrip"] = $row["cur_descrip"];
+                $output["cur_fechini"] = $row["cur_fechini"];
+                $output["cur_fechfin"] = $row["cur_fechfin"];
+                $output["cur_img"] = $row["cur_img"];
+                $output["modality_id"] = $row["modality_id"];
+                $output["usu_nom"] = $row["usu_nom"];
+                $output["usu_apep"] = $row["usu_apep"];
+                $output["usu_apem"] = $row["usu_apem"];
+                $output["aclevel_id"] = $row["aclevel_id"];
+            }
+
+            echo json_encode($output);
+        }
+        break;
 }
 ?>

@@ -41,7 +41,33 @@ switch ($_GET["op"]) {
         echo json_encode($results);
 
         break;
+    case "listar_ponencia":
+        $datos = $usuario->get_ponencia_x_usuario($_POST["usu_id"]);
+        $data = array();
+        foreach ($datos as $row) {
+            $sub_array = array();
+            $sub_array[] = $row["cur_nom"];
+            $sub_array[] = $row["ponen_titulo"];
+            $sub_array[] = $row["ponen_fechaexpo"];
+            $sub_array[] = $row["ponen_time"];
+            if ($row["ponen_type"] == '1') {
+                $sub_array[] = 'Ponencia';
+            } else if ($row["ponen_type"] == '2') {
+                $sub_array[] = 'Conferencia Magistral';
+            }
+            $sub_array[] = '<button type="button" onClick="certificado(' . $row["ponen_id"] . ');"  id="' . $row["ponen_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
+            $data[] = $sub_array;
+        }
 
+        $results = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        );
+        echo json_encode($results);
+
+        break;
     /*TODO: MicroServicio para poder mostrar el listado de eventos de un usuario con certificado */
     case "listar_eventos_top10":
         $datos = $usuario->get_eventos_x_usuario_top10($_POST["usu_id"]);
@@ -99,6 +125,7 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
+     
     /*TODO: Total de Eventos por usuario para el dashboard */
     case "total":
         $datos = $usuario->get_total_eventos_x_usuario($_POST["usu_id"]);
