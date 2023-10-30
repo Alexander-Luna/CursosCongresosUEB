@@ -18,9 +18,9 @@ $query = "SELECT
             tm_evento.portada_img,
             tm_evento.cur_fechini AS fecha_inicio,
             tm_evento.cur_fechfin AS fecha_fin
-          FROM tm_evento
-          JOIN tm_dependencias ON tm_evento.cat_id = tm_dependencias.cat_id
-          WHERE tm_evento.est = 1"; // Solo eventos con estado 1 (activos)
+            FROM tm_evento
+            JOIN tm_dependencias ON tm_evento.cat_id = tm_dependencias.cat_id
+            WHERE tm_evento.est = 1"; // Solo eventos con estado 1 (activos)
 
 
 
@@ -67,7 +67,7 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <?php
             // Asumiendo que $eventos es un array de resultados
             foreach ($eventos as $evento) {
-            ?>
+                ?>
                 <div class="cardE">
                     <div class="cardE-image">
                         <img src="<?php echo $evento['portada_img']; ?>" alt="<?php echo $evento['nombre_evento']; ?>">
@@ -90,7 +90,7 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
                     </div>
                 </div>
-            <?php
+                <?php
             }
             ?>
         </div>
@@ -132,7 +132,8 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <a href="https.twitter.com" target="_blank" rel="noreferrer">
                         <i class="fa-brands fa-twitter"></i>
                     </a>
-                    <a href="https://www.youtube.com/channel/UCml4cc2U6oWm7jG9iayK3UA/videos" target="_blank" rel="noreferrer">
+                    <a href="https://www.youtube.com/channel/UCml4cc2U6oWm7jG9iayK3UA/videos" target="_blank"
+                        rel="noreferrer">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
                     <a href="https://whatsapp.com" target="_blank" rel="noreferrer">

@@ -35,7 +35,7 @@ if (isset($_SESSION["usu_id"])) {
       <div class="br-pagebody">
         <div class="br-section-wrapper">
           <h6 id="cur_nom" name="cur_nom" class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">
-           
+
           </h6>
           <p class="mg-b-30 tx-gray-600">Listado de Ponentes</p>
 
@@ -51,7 +51,6 @@ if (isset($_SESSION["usu_id"])) {
                 <th class="wd-15p">Nombres</th>
                 <th class="wd-15p">Titulo</th>
                 <th class="wd-15p">Descripción</th>
-                <th class="wd-15p">Correo</th>
                 <th class="wd-15p">Teléfono</th>
                 <th class="wd-15p">Fecha Expo</th>
                 <th class="wd-10p">Imagen</th>
@@ -70,7 +69,7 @@ if (isset($_SESSION["usu_id"])) {
     </div>
 
     <?php require_once("modalmantenimiento.php"); ?>
-
+    <?php require_once("modalfile.php"); ?>
     <?php require_once("../html/MainJs.php"); ?>
     <script type="text/javascript" src="adminmntponente.js"></script>
   </body>

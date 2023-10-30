@@ -1,13 +1,13 @@
 
 let usu_id = $('#usu_idx').val();
-
+let URLimg = "";
 function init() {
     $("#ponente_form").on("submit", function (e) {
         guardaryeditar(e);
     });
     $("#detalle_form").on("submit", function (e) {
-        e.preventDefault(); // Evita el envío automático del formulario
-        URLimg = "../../controller/ponente.php?op=update_imagen_ponente";
+        e.preventDefault();
+        URLimg = "../../controller/ponente.php?op=update_imagen_evento";
         guardaryeditarimg(e);
     });
 
@@ -25,7 +25,7 @@ function guardaryeditar(e) {
         contentType: false,
         processData: false,
         success: function (data) {
-            console.log("OK en la solicitud AJAX: " + data.FormData);
+            console.log("OK en la solicitud AJAX: " + data);
             $('#ponente_data').DataTable().ajax.reload();
             $('#modalmantenimiento').modal('hide');
             Swal.fire({
@@ -53,7 +53,7 @@ $(document).ready(function () {
     $('#ponen_type').select2({
         dropdownParent: $('#modalmantenimiento')
     });
-    
+
     $('#usu_id').select2({
         dropdownParent: $('#modalmantenimiento')
     });
@@ -66,7 +66,6 @@ $(document).ready(function () {
             even_id: evenId,
         },
         success: function (datos) {
-            //console.log(datos);
             let data = JSON.parse(datos);
             if (data.hasOwnProperty("cur_nom")) {
                 $("#cur_nom").text(data.cur_nom);
@@ -169,17 +168,16 @@ function nuevo(even_id) {
     $('#ponen_id').val('');
     $('#ponen_type').val('').trigger('change');
     $('#usu_id').val('').trigger('change');
-    $('#lbltitulo').html('Nuevo Ponente ' + even_id);
+    $('#lbltitulo').html('Nuevo Ponente ');
     $('#even_id').html(even_id);
     $('#ponente_form')[0].reset();
     combo_usuario();
     $('#modalmantenimiento').modal('show');
 }
-function imagen(ponen_id) {
+function imagenG(ponen_id) {
     $('#curx_idx').val(ponen_id);
     $('#modalfile').modal('show');
 }
-let URLimg = "";
 function guardaryeditarimg(e) {
     e.preventDefault();
     let formData = new FormData($("#detalle_form")[0]);

@@ -97,10 +97,12 @@ class Usuario extends Conectar
         parent::set_names();
         $sql = "SELECT 
                 td_evento_usuario.curd_id,
+                td_evento_usuario.est_aprueba,
                 tm_evento.even_id,
                 tm_evento.cur_nom,
                 tm_evento.nhours,
                 tm_evento.cur_descrip,
+                tm_evento.est_asistencia,
                 tm_evento.cur_fechini,
                 tm_evento.cur_fechfin,
                 tm_evento.portada_img,
@@ -119,7 +121,7 @@ class Usuario extends Conectar
         $sql->bindValue(1, $usu_id);
         $sql->execute();
         $resultado = $sql->fetchAll();
-        echo '<script> console.log($resultado);</script>';
+        //  echo '<script> console.log($resultado);</script>';
 
         return $resultado;
     }
@@ -135,6 +137,7 @@ class Usuario extends Conectar
                 tm_evento.even_id,
                 tm_evento.cur_nom,
                 tm_evento.nhours,
+                tm_evento.est_asistencia,
                 tm_evento.cur_descrip,
                 tm_evento.cur_fechini,
                 tm_evento.cur_fechfin,

@@ -61,7 +61,7 @@ if (isset($_SESSION["usu_id"])) {
                   <input class="form-control" type="text" name="usu_correo" id="usu_correo" readonly>
                 </div>
               </div>
-              
+
               <?php
               if ($_SESSION["rol_id"] == '2') {
                 ?>
@@ -94,20 +94,26 @@ if (isset($_SESSION["usu_id"])) {
               </div>
               <div class="col-lg-4">
                 <label class="form-control-label">Nivel Académico: <span class="tx-danger">*</span></label>
-                <select class="form-control select2" name="aclevel_id" id="aclevel_id">
-                  <option label="Seleccione"></option>
-                  <option value="1">Estudiante</option>
-                  <option value="2">Maestría</option>
-                  <option value="3">Doctorado</option>
-                </select>
+                <div class="form-floating">
+                  <select class="form-control select1" aria-label="Floating label select example" name="aclevel_id"
+                    id="aclevel_id">
+                    <option selected>Seleccione</option>
+                    <option value="1">Estudiante</option>
+                    <option value="2">Maestría</option>
+                    <option value="3">Doctorado</option>
+                  </select>
+                </div>
               </div>
               <div class="col-lg-4">
                 <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
-                <select class="form-control select2" name="usu_sex" id="usu_sex" placeholder="Seleccione">
-                  <option label="Seleccione"></option>
-                  <option value="F">Femenino</option>
-                  <option value="M">Masculino</option>
-                </select>
+                <div class="form-floating">
+                  <select class="form-control select1" name="usu_sex" id="usu_sex"
+                    aria-label="Floating label select example">
+                    <option selected>Seleccione</option>
+                    <option value="F">Femenino</option>
+                    <option value="M">Masculino</option>
+                  </select>
+                </div>
               </div>
             </div>
 

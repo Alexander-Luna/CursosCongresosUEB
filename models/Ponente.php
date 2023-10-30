@@ -15,18 +15,14 @@ class Ponente extends Conectar
         $sql->bindValue(5, $ponen_description);
         $sql->bindValue(6, $ponen_fechaexpo);
         $sql->bindValue(7, $ponen_time);
-        echo '<script>console.log("asdadasdsadasd"'+$even_id . " " . $usu_id+')</script>';
-        // Intenta ejecutar la consulta
         try {
             $sql->execute();
-            // Verifica si se insertaron filas (éxito)
             if ($sql->rowCount() > 0) {
-                return true; // Inserción exitosa
+                return true;
             } else {
-                return false; // No se insertaron filas (falló la inserción)
+                return false; 
             }
         } catch (PDOException $e) {
-            // En caso de error en la base de datos, puedes devolver un mensaje de error
             $error_message = $e->getMessage();
             return false;
         }

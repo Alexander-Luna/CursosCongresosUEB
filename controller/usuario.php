@@ -24,7 +24,11 @@ switch ($_GET["op"]) {
             } else {
                 $sub_array[] = 'Pendiente';
             }
-            $sub_array[] = '<button type="button" onClick="FuncionAsistencia(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-calendar-check-o" aria-hidden="true"></i></div></button>';
+            if ($row["est_asistencia"] == 1) {
+                $sub_array[] = '<button type="button" onClick="FuncionAsistencia(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-calendar-check-o" aria-hidden="true"></i></div></button>';
+            } else {
+                $sub_array[] = 'Desactivado';
+            }
             $data[] = $sub_array;
         }
 
@@ -53,7 +57,11 @@ switch ($_GET["op"]) {
                 $certificado = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
             }
             $sub_array[] = $certificado;
-            $sub_array[] = '<button type="button" onClick="FuncionAsistencia(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-calendar-check-o" aria-hidden="true"></i></div></button>';
+            if ($row["est_asistencia"] == 1) {
+                $sub_array[] = '<button type="button" onClick="FuncionAsistencia(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-calendar-check-o" aria-hidden="true"></i></div></button>';
+            } else {
+                $sub_array[] = 'Desactivado';
+            }
             $data[] = $sub_array;
         }
 
@@ -276,7 +284,7 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["usu_nom"] . " " . $row["usu_apep"] . " " . $row["usu_apem"];
             $sub_array[] = $row["cur_fechfin"];
             $sub_array[] = $row["asistencia_count"];
-            $sub_array[] = '<input type="checkbox" onClick="Aprueba(' . $row["curd_id"] . ');" name="C' . $row["curd_id"] . '" id="C' . $row["curd_id"] . '"' . ($row["est_aprueba"] == 1 ? ' checked' : '') . '>';
+            $sub_array[] = '<label class="switch"><input type="checkbox" class="checkbox" onClick="Aprueba(' . $row["curd_id"] . ');" name="C' . $row["curd_id"] . '" id="C' . $row["curd_id"] . '"' . ($row["est_aprueba"] == 1 ? ' checked' : '') . '><div class="slider"></div></label>';
             $data[] = $sub_array;
         }
 
@@ -293,7 +301,7 @@ switch ($_GET["op"]) {
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
-            $sub_array[] = "<input type='checkbox' name='detallecheck[]' value='" . $row["usu_id"] . "'>";
+            $sub_array[] = '<label class="switch"><input type="checkbox" class="checkbox" name="detallecheck[]" value="' . $row["usu_id"] . '"><div class="slider"></div></label>';
             $sub_array[] = $row["usu_nom"];
             $sub_array[] = $row["usu_apep"];
             $sub_array[] = $row["usu_apem"];
@@ -319,7 +327,7 @@ switch ($_GET["op"]) {
         if (is_array($datos) == true and count($datos) > 0) {
             $html = " <option label='Seleccione'></option>";
             foreach ($datos as $row) {
-                $html .= "<option value='" . $row['abreviature'] . " " . $row['usu_id'] . "'>" . $row['usu_nom'] . " " . $row['usu_apep'] . " " . $row['usu_apem'] . "</option>";
+                $html .= "<option value='" . $row['usu_id'] . "'>" . $row['abreviature'] . " " . $row['usu_nom'] . " " . $row['usu_apep'] . " " . $row['usu_apem'] . "</option>";
             }
             echo $html;
         }

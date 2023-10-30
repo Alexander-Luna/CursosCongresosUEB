@@ -12,6 +12,7 @@ switch ($_GET["op"]) {
     case "guardaryeditar":
         if (empty($_POST["ponen_id"])) {
             $result = $ponente->insert_ponente($_POST["even_id"], $_POST["usu_id"], $_POST["ponen_type"], $_POST["ponen_titulo"], $_POST["ponen_description"], $_POST["ponen_fechaexpo"], $_POST["ponen_time"]);
+            echo $result;
             if ($result) {
                 echo "Inserción exitosa";
             } else {
@@ -53,8 +54,9 @@ switch ($_GET["op"]) {
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
+
             $sub_array[] = $row["usu_nom"] . " " . $row["usu_apep"] . " " . $row["usu_apem"];
-            $sub_array[] = $row["ponen_titulo"];
+            $sub_array[] = '<a href="' . $row["ponen_img"] . '" target="_blank">' . strtoupper(($row["ponen_titulo"])) . '</a>';
             $sub_array[] = $row["ponen_description"];
             if ($row["ponen_type"] == "P") {
                 $sub_array[] = "Ponencia";
@@ -63,7 +65,7 @@ switch ($_GET["op"]) {
             }
             $sub_array[] = $row["usu_telf"];
             $sub_array[] = $row["ponen_fechaexpo"] . " " . $row["ponen_time"];
-            $sub_array[] = '<button type="button" onClick="imagen(' . $row["ponen_id"] . ');"  id="' . $row["ponen_id"] . '" class="btn btn-outline-info btn-icon"><div><i class="fa fa-image"></i></div></button>';
+            $sub_array[] = '<button type="button" onClick="imagenG(' . $row["ponen_id"] . ');"  id="' . $row["ponen_id"] . '" class="btn btn-outline-info btn-icon"><div><i class="fa fa-image"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="editar(' . $row["ponen_id"] . ');"  id="' . $row["ponen_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["ponen_id"] . ');"  id="' . $row["ponen_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
             $data[] = $sub_array;
@@ -89,7 +91,7 @@ switch ($_GET["op"]) {
         }
         break;
     case "update_imagen_evento":
-        $evento->update_imagen_ponente($_POST["curx_idx"], $_POST["ponen_img"]);
+        $ponente->update_imagen_ponente($_POST["curx_idx"], $_POST["ponen_img"]);
         break;
 }
 ?>

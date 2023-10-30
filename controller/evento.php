@@ -80,7 +80,7 @@ switch ($_GET["op"]) {
             $sub_array[] = '<button type="button" onClick="imagen(' . $row["even_id"] . ",'certificado'" . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-success btn-icon"><div><i class="fa fa-file"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="editar(' . $row["even_id"] . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["even_id"] . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
-            $sub_array[] = '<input type="checkbox" onClick="habilitarAsistencia(' . $row["even_id"] . ');" name="C' . $row["even_id"] . '" id="C' . $row["even_id"] . '"' . ($row["est_asistencia"] == 1 ? ' checked' : '') . '>';
+            $sub_array[] = '<label class="switch"><input type="checkbox" class="checkbox" onClick="habilitarAsistencia(' . $row["even_id"] . ');" name="C' . $row["even_id"] . '" id="C' . $row["even_id"] . '"' . ($row["est_asistencia"] == 1 ? ' checked' : '') . '><div class="slider"></div></label>';
             $data[] = $sub_array;
 
         }

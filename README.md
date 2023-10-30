@@ -1,11 +1,11 @@
 # Tareas por resolver
 - [X] Actualización del perfil no se actualiza los datos en el perfil adecuado.
-- [] Subir imagen ponente.
-- [] Editar e insertar ponentes tras la modificación y vinculación a la tabla usuarios.
-- [X] Seguridades, hasheo de las contraseñas.
-- [] Desde el lado del usuario común no carga la ruta "Mis Eventos".
-- [] Desde el lado del usuario común no se puede usar los seleclist en la ruta "Perfil" en firefox en Chrome y Brave OK.
 - [X] Separar la actualización de la contraseña con la actualización del perfil.
+- [X] Seguridades, hasheo de las contraseñas.
+- [X] Subir imagen ponente.
+- [X] Desde el lado del usuario común no carga la ruta "Mis Eventos".
+- [] Editar e insertar ponentes tras la modificación y vinculación a la tabla usuarios.
+- [] Desde el lado del usuario común no se puede usar los seleclist en la ruta "Perfil" en firefox en Chrome y Brave OK.
 - [] Arreglar El certificado para que se muestre de manera adecuada.
 - [] .
 - [] .
