@@ -110,6 +110,8 @@ if (isset($_SESSION["usu_id"])) {
                     <option selected>Seleccione</option>
                     <option value="F">Femenino</option>
                     <option value="M">Masculino</option>
+
+                    
                   </select>
                 </div>
               </div>
