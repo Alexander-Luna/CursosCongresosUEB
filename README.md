@@ -5,8 +5,8 @@
 - [X] Subir imagen ponente.
 - [X] Desde el lado del usuario común no carga la ruta "Mis Eventos".
 - [X] Editar e insertar ponentes tras la modificación y vinculación a la tabla usuarios.
+- [X] Arreglar El certificado para que se muestre de manera adecuada.
 - [] Desde el lado del usuario común no se puede usar los seleclist en la ruta "Perfil" en firefox en Chrome y Brave OK.
-- [] Arreglar El certificado para que se muestre de manera adecuada.
 - [] .
 - [] .
 - [] .

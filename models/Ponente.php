@@ -20,7 +20,7 @@ class Ponente extends Conectar
             if ($sql->rowCount() > 0) {
                 return true;
             } else {
-                return false; 
+                return false;
             }
         } catch (PDOException $e) {
             $error_message = $e->getMessage();
@@ -168,6 +168,16 @@ class Ponente extends Conectar
         tm_ponente.ponen_id = ? AND tm_ponente.est=1";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $ponen_id);
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
+    }
+    public function get_total_ponencias($usu_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT count(*) as total FROM tm_ponente WHERE usu_id=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }

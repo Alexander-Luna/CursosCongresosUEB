@@ -6,6 +6,21 @@ $(document).ready(function () {
         data = JSON.parse(data);
         $('#lbltotal').html(data.total);
     });
+    $.post("../../controller/usuario.php?op=totalusuarios", function (data) {
+        //console.log(data + "Entraaa");
+        data = JSON.parse(data);
+        $('#lbltotaluser').html(data.total);
+    });
+    $.post("../../controller/ponente.php?op=totalponencia", { usu_id: usu_id }, function (data) {
+        //console.log(data + "Entraaa");
+        data = JSON.parse(data);
+        $('#lbltotalponencia').html(data.total);
+    });
+    $.post("../../controller/evento.php?op=totalasistencia", function (data) {
+        //console.log(data + "Entraaa");
+        data = JSON.parse(data);
+        $('#lbltotalasistencia').html(data.total);
+    });
 
     $('#eventos_data').DataTable({
         "aProcessing": true,

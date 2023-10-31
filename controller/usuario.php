@@ -136,6 +136,16 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
+         /*TODO: Total de Eventos por usuario para el dashboard */
+    case "totalusuarios":
+        $datos = $usuario->get_total_usuarios();
+        if (is_array($datos) == true and count($datos) > 0) {
+            foreach ($datos as $row) {
+                $output["total"] = $row["total"];
+            }
+            echo json_encode($output);
+        }
+        break;
     /*TODO: Mostrar informacion del usuario en la vista perfil */
     case "mostrar":
         $datos = $usuario->get_usuario_x_id($_POST["usu_id"]);

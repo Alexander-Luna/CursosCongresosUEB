@@ -30,27 +30,71 @@ if (isset($_SESSION["usu_id"])) {
         <!-- Resumen de total de eventos -->
         <div class="row row-sm">
           <div class="col-sm-6 col-xl-3">
-            <div class="bg-teal rounded overflow-hidden">
-              <div class="pd-25 d-flex align-items-center">
-                <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
-                <div class="mg-l-20">
-                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total de Eventos</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1" id="lbltotal"></p>
+            <a href="../UsuEvento/" class="br-menu-link">
+              <div class="bg-teal rounded overflow-hidden">
+                <div class="pd-25 d-flex align-items-center">
+                  <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Mis Eventos</p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1" id="lbltotal"></p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="col-sm-6 col-xl-3">
-            <div class="bg-success rounded overflow-hidden"> <!-- Usa la clase de Bootstrap para el color de fondo -->
-              <div class="pd-25 d-flex align-items-center">
-                <i class="icon ion-person tx-60 lh-0 tx-white op-7"></i>
-                <div class="mg-l-20">
-                  <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total de Usuarios</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1" id="lbltotal"></p>
+            <a href="../UsuPonencia/" class="br-menu-link">
+              <div class="bg-info rounded overflow-hidden"> <!-- Usa la clase de Bootstrap para el color de fondo -->
+                <div class="pd-25 d-flex align-items-center">
+                  <i class="icon ion-person tx-60 lh-0 tx-white op-7"></i>
+                  <div class="mg-l-20">
+                    <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Mis Ponencias</p>
+                    <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1" id="lbltotalponencia"></p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
+          <?php
+          if ($_SESSION["rol_id"] == 2) {
+            ?>
+            <div class="col-sm-6 col-xl-3">
+              <a href="../AdminMntUsuario/" class="br-menu-link">
+                <div class="bg-success bg-gradient rounded overflow-hidden">
+                  
+                  <div class="pd-25 d-flex align-items-center">
+                    <i class="icon ion-person-stalker tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total de Usuarios</p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1" id="lbltotaluser"></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+              <a href="../AdminMntEvento/" class="br-menu-link">
+                <div class="bg-warning bg-gradient rounded overflow-hidden">
+                  <!-- Usa la clase de Bootstrap para el color de fondo -->
+                  <div class="pd-25 d-flex align-items-center">
+                    <i class="icon ion-ios-book tx-60 lh-0 tx-white op-7"></i>
+                    <div class="mg-l-20">
+                      <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Asistencia a Eventos
+                      </p>
+                      <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1" id="lbltotalasistencia"></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+
+            <?php
+          } ?>
+
+
+
+
         </div>
 
         <!-- Resumen top 10 eventos -->
@@ -70,11 +114,11 @@ if (isset($_SESSION["usu_id"])) {
                   <table id="eventos_data" class="table display responsive nowrap">
                     <thead>
                       <tr>
-                        <th class="wd-15p">Evento</th>
-                        <th class="wd-15p">Fecha Inicio</th>
-                        <th class="wd-20p">Fecha Fin</th>
-                        <th class="wd-10p">Certificado</th>
-                        <th class="wd-10p">Asistencia</th>
+                        <th class="wd-30p">Evento</th>
+                        <th class="wd-5p">Fecha Inicio</th>
+                        <th class="wd-5p">Fecha Fin</th>
+                        <th class="wd-5p">Certificado</th>
+                        <th class="wd-5p">Asistencia</th>
                       </tr>
                     </thead>
                     <tbody>

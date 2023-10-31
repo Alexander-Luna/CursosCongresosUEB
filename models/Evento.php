@@ -308,5 +308,14 @@ class Evento extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
+    public function get_total_asistencia()
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT count(*) as total FROM tm_evento WHERE est_asistencia=1";
+        $sql = $conectar->prepare($sql);
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
+    }
 }
 ?>

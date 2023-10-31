@@ -29,5 +29,4 @@
 
 <link href="../../public/css/bracket.css" rel="stylesheet">
 <link href="../../assets/fonts.css" rel="stylesheet">
-<link href="../../styles/tabla.css" rel="stylesheet">
-<link href="../../styles/styles.css" rel="stylesheet">
+<link href="../../styles/custom.css" rel="stylesheet">

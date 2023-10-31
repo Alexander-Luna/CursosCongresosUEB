@@ -121,5 +121,14 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
+    case "totalponencia":
+        $datos = $ponente->get_total_ponencias($_POST["usu_id"]);
+        if (is_array($datos) == true and count($datos) > 0) {
+            foreach ($datos as $row) {
+                $output["total"] = $row["total"];
+            }
+            echo json_encode($output);
+        }
+        break;
 }
 ?>

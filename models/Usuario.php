@@ -309,7 +309,15 @@ class Usuario extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-
+    public function get_total_usuarios()
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT count(*) as total FROM tm_usuario";
+        $sql = $conectar->prepare($sql);
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
+    }
     /*TODO: Mostrar los datos del usuario segun el ID */
     public function get_usuario_x_id($usu_id)
     {
