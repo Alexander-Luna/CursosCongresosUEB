@@ -46,7 +46,7 @@ if (isset($_SESSION["usu_id"])) {
             <a href="../UsuPonencia/" class="br-menu-link">
               <div class="bg-info rounded overflow-hidden"> <!-- Usa la clase de Bootstrap para el color de fondo -->
                 <div class="pd-25 d-flex align-items-center">
-                  <i class="icon ion-person tx-60 lh-0 tx-white op-7"></i>
+                  <i class="icon ion-university tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
                     <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Mis Ponencias</p>
                     <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1" id="lbltotalponencia"></p>
@@ -61,7 +61,7 @@ if (isset($_SESSION["usu_id"])) {
             <div class="col-sm-6 col-xl-3">
               <a href="../AdminMntUsuario/" class="br-menu-link">
                 <div class="bg-success bg-gradient rounded overflow-hidden">
-                  
+
                   <div class="pd-25 d-flex align-items-center">
                     <i class="icon ion-person-stalker tx-60 lh-0 tx-white op-7"></i>
                     <div class="mg-l-20">

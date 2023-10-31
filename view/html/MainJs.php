@@ -20,3 +20,4 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/icono/1.3.0/icono.min.css"></script>

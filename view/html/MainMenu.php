@@ -23,7 +23,7 @@
       </a>
       <a href="../UsuPonencia/" class="br-menu-link">
         <div class="br-menu-item">
-          <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
+          <i class="icon ion-university tx-24"></i>
           <span class="menu-item-label">Mis Ponencias</span>
         </div>
       </a>
@@ -32,7 +32,7 @@
       ?>
       <a href="../AdminMntUsuario/" class="br-menu-link">
         <div class="br-menu-item">
-          <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
+          <i class="icon ion-person-stalker tx-24"></i>
           <span class="menu-item-label">Usuarios</span>
         </div>
       </a>
@@ -53,20 +53,20 @@
     -->
       <a href="../AdminMntDependencia/" class="br-menu-link">
         <div class="br-menu-item">
-          <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
+          <i class="icon ion-load-d tx-24"></i>
           <span class="menu-item-label">Dependencias</span>
         </div>
       </a>
 
       <a href="../AdminDetalleCertificado/" class="br-menu-link">
         <div class="br-menu-item">
-          <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
+          <i class="icon ion-document-text tx-24"></i>
           <span class="menu-item-label">Detalle Certificado</span>
         </div>
       </a>
       <a href="../AdminDetalleAsistencia/" class="br-menu-link">
         <div class="br-menu-item">
-          <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-24"></i>
+        <i class="icon ion-document-text tx-24"></i>
           <span class="menu-item-label">Control Asistencia</span>
         </div>
       </a>

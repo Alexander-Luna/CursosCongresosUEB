@@ -44,7 +44,7 @@
                 </div>
                 <strong>I Congreso Internacional</strong>
                 <div class="card__body">
-                    Registrate y adquiere todo el conocimiento.
+                    Regístrate y adquiere todo el conocimiento.
                 </div>
                 <span>
                     <a href="login.php">Registrarse</a>
@@ -57,7 +57,7 @@
                 </div>
                 <strong>I Evento Internacional</strong>
                 <div class="card__body">
-                    Registrate y adquiere todo el conocimiento.
+                    Regístrate y adquiere todo el conocimiento.
                 </div>
                 <span>
                     <a href="login.php">Registrarse</a>
