@@ -1,5 +1,5 @@
 function resetpass() {
-    
+
     $('#reset_password').modal('show');
 }
 
@@ -42,18 +42,18 @@ function cambiarpass(e) {
 }
 
 $(document).ready(function () {
-    $('#usu_sex').select2({
-        placeholder: 'Seleccione',
-        allowClear: true, // Permite borrar la selección
-        width: '100%',
-        minimumResultsForSearch: -1, // Puedes ajustar el ancho
-    });
-    $('#aclevel_id').select2({
-        placeholder: 'Seleccione',
-        allowClear: true, // Permite borrar la selección
-        width: '100%',
-        minimumResultsForSearch: -1, // Puedes ajustar el ancho
-    });
+    // $('#usu_sex').select2({
+    //     placeholder: 'Seleccione',
+    //     allowClear: true, // Permite borrar la selección
+    //     width: '100%',
+    //     minimumResultsForSearch: -1, // Puedes ajustar el ancho
+    // });
+    // $('#aclevel_id').select2({
+    //     placeholder: 'Seleccione',
+    //     allowClear: true, // Permite borrar la selección
+    //     width: '100%',
+    //     minimumResultsForSearch: -1, // Puedes ajustar el ancho
+    // });
 
     $.post("../../controller/usuario.php?op=mostrar", { usu_id: usu_id }, function (data) {
         data = JSON.parse(data);

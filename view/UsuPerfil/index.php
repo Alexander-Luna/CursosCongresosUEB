@@ -2,7 +2,7 @@
 /* Llamamos al archivo de conexion.php */
 require_once("../../config/conexion.php");
 if (isset($_SESSION["usu_id"])) {
-  ?>
+?>
   <!DOCTYPE html>
   <html lang="es">
 
@@ -64,7 +64,7 @@ if (isset($_SESSION["usu_id"])) {
 
               <?php
               if ($_SESSION["rol_id"] == '2') {
-                ?>
+              ?>
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">Cédula: <span class="tx-danger">*</span></label>
@@ -72,16 +72,16 @@ if (isset($_SESSION["usu_id"])) {
                   </div>
                 </div>
 
-                <?php
+              <?php
               } else {
-                ?>
+              ?>
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">Cédula: <span class="tx-danger">*</span></label>
                     <input class="form-control" type="number" name="usu_ci" id="usu_ci" readonly>
                   </div>
                 </div>
-                <?php
+              <?php
               }
               ?>
 
@@ -95,8 +95,7 @@ if (isset($_SESSION["usu_id"])) {
               <div class="col-lg-4">
                 <label class="form-control-label">Nivel Académico: <span class="tx-danger">*</span></label>
                 <div class="form-floating">
-                  <select class="form-control select1" aria-label="Floating label select example" name="aclevel_id"
-                    id="aclevel_id">
+                  <select class="form-control" aria-label="Floating label select example" name="aclevel_id" id="aclevel_id">
                     <option selected>Seleccione</option>
                     <option value="1">Estudiante</option>
                     <option value="2">Maestría</option>
@@ -107,8 +106,7 @@ if (isset($_SESSION["usu_id"])) {
               <div class="col-lg-4">
                 <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
                 <div class="form-floating">
-                  <select class="form-control select1" name="usu_sex" id="usu_sex"
-                    aria-label="Floating label select example">
+                  <select class="form-control" name="usu_sex" id="usu_sex" aria-label="Floating label select example">
                     <option selected>Seleccione</option>
                     <option value="F">Femenino</option>
                     <option value="M">Masculino</option>
@@ -121,8 +119,7 @@ if (isset($_SESSION["usu_id"])) {
               <button class="btn btn-info" id="btnactualizar">Actualizar</button>
               </br></br>
               <div class="form-group">
-                <button id="btnresetp" name="btnresetp"
-                  class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium" onclick="resetpass()">
+                <button id="btnresetp" name="btnresetp" class="btn btn-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium" onclick="resetpass()">
                   <i class="fa fa-key"></i> Cambiar Contraseña</button>
               </div>
             </div>
@@ -137,7 +134,7 @@ if (isset($_SESSION["usu_id"])) {
   </body>
 
   </html>
-  <?php
+<?php
 } else {
   /* Si no a iniciado sesion se redireccionada a la ventana principal */
   header("Location:" . Conectar::ruta() . "view/404/");
