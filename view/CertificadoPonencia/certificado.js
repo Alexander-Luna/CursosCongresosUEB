@@ -40,23 +40,38 @@ $(document).ready(function () {
             ctx.fillText(academicLevelName + ' ' + data.usu_nom + ' ' + data.usu_apep + ' ' + data.usu_apem, x, 300);
         });
 
-        ctx.font = '20px Arial';
 
-        var textToDraw = 'Por haber participado en calidad de ' + data.ponen_type + ' con la temática ' + data.ponen_titulo + 'en el marco del ' + data.cur_nom + ', organizado por la Universidad Estatal de Bolívar ' +
-            'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + data.modality_id + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda.';
+
+
+        ctx.font = '20px Arial';
+        let textToDraw = 'Por haber participado en calidad de ';
+        ctx.font = 'bold 20px Arial';
+
+        let tipoDePonencia;
+        if (data.ponen_type === '1') {
+            tipoDePonencia = "Ponencia";
+        } else if (data.ponen_type === '2') {
+            tipoDePonencia = "Ponencia Magistral";
+        } else {
+            tipoDePonencia = "No especificada";
+        }
+        textToDraw = textToDraw + ' ' + tipoDePonencia;
+        ctx.font = '20px Arial';
+        textToDraw = textToDraw + ' con la temática ' + data.ponen_titulo + ' en el marco del ' + data.cur_nom + ', organizado por la Universidad Estatal de Bolívar ' +
+            'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + data.mname + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda.';
         drawWrappedText(textToDraw, x, y / 1.9, maxWidth, lineHeight);
 
         ctx.font = '15px Arial';
 
 
 
-        // var modalidad = data.modality_id;
+        // let modalidad = data.modality_id;
 
         // $.post("../../controller/evento.php?op=modalidad", { modality_id: modalidad }, function (response1) {
         //     response1 = JSON.parse(response1);
         //     modalidad = response1.name;
         //     ctx.font = '10px Arial';
-        //     var textToDraw = 'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + modalidad + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda';
+        //     let textToDraw = 'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + modalidad + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda';
 
         //     drawWrappedText(textToDraw, x, 440, maxWidth, lineHeight);
 
@@ -94,14 +109,14 @@ $(document).on("click", "#btnpng", function () {
 });
 
 $(document).on("click", "#btnpdf", function () {
-    var imgData = canvas.toDataURL('image/png');
-    var doc = new jsPDF('l', 'mm');
+    let imgData = canvas.toDataURL('image/png');
+    let doc = new jsPDF('l', 'mm');
     doc.addImage(imgData, 'PNG', 30, 15);
     doc.save('Certificado.pdf');
 });
 
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+let getUrlParameter = function getUrlParameter(sParam) {
+    let sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
         sParameterName,
         i;

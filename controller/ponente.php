@@ -111,6 +111,7 @@ switch ($_GET["op"]) {
                 $output["cur_fechfin"] = $row["cur_fechfin"];
                 $output["cur_img"] = $row["cur_img"];
                 $output["modality_id"] = $row["modality_id"];
+                $output["mname"] = $row["mname"];
                 $output["usu_nom"] = $row["usu_nom"];
                 $output["usu_apep"] = $row["usu_apep"];
                 $output["usu_apem"] = $row["usu_apem"];

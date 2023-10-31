@@ -346,7 +346,7 @@ switch ($_GET["op"]) {
         break;
 
     case "guardar_desde_excel":
-        $usuario->insert_usuario($_POST["usu_nom"], $_POST["usu_apep"], $_POST["usu_apem"], $_POST["usu_correo"], $_POST["usu_pass"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
+        $usuario->insert_usuario($_POST["usu_nom"], $_POST["usu_apep"], $_POST["usu_apem"], $_POST["usu_correo"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
         break;
     /*TODO:  Listar toda la informacion segun formato de datatable */
     case "combo":
