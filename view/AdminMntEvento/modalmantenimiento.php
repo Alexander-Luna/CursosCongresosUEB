@@ -37,7 +37,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Nombre: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="cur_nom" type="text" name="cur_nom" required />
+                            <input class="form-control" id="cur_nom" type="text" name="cur_nom" required />
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -51,20 +51,20 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Número de horas: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="nhours" type="number" name="nhours" required />
+                            <input class="form-control" id="nhours" type="number" name="nhours" required />
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Fecha Inicio: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="cur_fechini" type="date" name="cur_fechini"
+                            <input class="form-control" id="cur_fechini" type="date" name="cur_fechini"
                                 required />
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Fecha Fin: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="cur_fechfin" type="date" name="cur_fechfin"
+                            <input class="form-control" id="cur_fechfin" type="date" name="cur_fechfin"
                                 required />
                         </div>
                     </div>

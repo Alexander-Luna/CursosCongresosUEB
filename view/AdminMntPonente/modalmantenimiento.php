@@ -33,7 +33,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Titulo: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="ponen_titulo" type="text" name="ponen_titulo"
+                            <input class="form-control" id="ponen_titulo" type="text" name="ponen_titulo"
                                 required />
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Descripción: <span class="tx-danger">*</span></label>
-                            <textarea class="form-control tx-uppercase" id="ponen_description" type="text"
+                            <textarea class="form-control" id="ponen_description" type="text"
                                 name="ponen_description" required></textarea>
                         </div>
                     </div>
@@ -50,14 +50,14 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Fecha Exposición: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="ponen_fechaexpo" type="date"
+                            <input class="form-control" id="ponen_fechaexpo" type="date"
                                 name="ponen_fechaexpo" required />
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Hora: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="ponen_time" type="time" name="ponen_time"
+                            <input class="form-control" id="ponen_time" type="time" name="ponen_time"
                                 required />
                         </div>
                     </div>

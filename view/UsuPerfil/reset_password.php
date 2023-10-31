@@ -11,7 +11,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Nueva Contraseña: <span class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="usu_pass1" type="text" name="usu_pass1"
+                            <input class="form-control tx-uppercase" id="usu_pass1" type="password" name="usu_pass1"
                                 required />
                         </div>
                     </div>
@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <label class="form-control-label">Confirmar Contraseña: <span
                                     class="tx-danger">*</span></label>
-                            <input class="form-control tx-uppercase" id="usu_pass" type="text" name="usu_pass"
+                            <input class="form-control" id="usu_pass" type="password" name="usu_pass"
                                 required />
                         </div>
                     </div>
