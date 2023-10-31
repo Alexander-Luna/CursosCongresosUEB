@@ -154,6 +154,7 @@ class Ponente extends Conectar
         tm_evento.portada_img,
         tm_evento.est_asistencia,
         tm_usuario.usu_id,
+        modality.name AS mname,
         tm_usuario.usu_nom,
         tm_usuario.usu_apep,
         tm_usuario.usu_apem,
@@ -162,6 +163,7 @@ class Ponente extends Conectar
         FROM tm_ponente INNER JOIN 
         tm_usuario ON tm_usuario.usu_id = tm_ponente.usu_id INNER JOIN
         tm_evento ON tm_evento.even_id = tm_ponente.even_id 
+        INNER JOIN modality ON tm_evento.modality_id = modality.modality_id 
         WHERE 
         tm_ponente.ponen_id = ? AND tm_ponente.est=1";
         $sql = $conectar->prepare($sql);

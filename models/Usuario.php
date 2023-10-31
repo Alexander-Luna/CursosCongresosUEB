@@ -368,7 +368,7 @@ class Usuario extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO tm_usuario (usu_id,usu_nom,usu_apep,usu_apem,usu_correo,usu_sex,usu_telf,rol_id,usu_ci,aclevel_id,fech_crea, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,now(),'1');";
+        $sql = "INSERT INTO tm_usuario (usu_id,usu_nom,usu_apep,usu_apem,usu_correo,usu_sex,usu_telf,rol_id,usu_ci,usu_pass,aclevel_id,fech_crea, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,?,now(),'1');";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_nom);
         $sql->bindValue(2, $usu_apep);
@@ -378,7 +378,8 @@ class Usuario extends Conectar
         $sql->bindValue(6, $usu_telf);
         $sql->bindValue(7, $rol_id);
         $sql->bindValue(8, $usu_ci);
-        $sql->bindValue(9, $aclevel_id);
+        $sql->bindValue(9, $this->encriptarPassword($usu_ci));
+        $sql->bindValue(10, $aclevel_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
