@@ -2,11 +2,12 @@
 class Evento extends Conectar
 {
 
-    public function insert_evento($cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $modality_id, $nhours, $portada_img, $eventype_id)
+    public function insert_evento($cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $modality_id, $nhours, $eventype_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO tm_evento (even_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin,cur_img, fech_crea,modality_id,nhours,portada_img,eventype_id, est,est_asistencia) VALUES (NULL,?,?,?,?,?,?,'../../public/1.png', now(),?,?,?,?,'1',0);";
+        $sql = "INSERT INTO tm_evento (even_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin,cur_img, fech_crea,modality_id,nhours,eventype_id, est,est_asistencia)
+         VALUES (NULL,?,?,?,?,?,'../../public/1.png', now(),?,?,?,'1',0);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $cat_id);
         $sql->bindValue(2, $cur_nom);
@@ -15,8 +16,7 @@ class Evento extends Conectar
         $sql->bindValue(5, $cur_fechfin);
         $sql->bindValue(6, $modality_id);
         $sql->bindValue(7, $nhours);
-        $sql->bindValue(8, $portada_img);
-        $sql->bindValue(9, $eventype_id);
+        $sql->bindValue(8, $eventype_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
@@ -94,7 +94,7 @@ class Evento extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-    public function update_evento($even_id, $cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $modality_id, $nhours, $est_asistencia, $portada_img, $eventype_id)
+    public function update_evento($even_id, $cat_id, $cur_nom, $cur_descrip, $cur_fechini, $cur_fechfin, $modality_id, $nhours, $eventype_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -107,9 +107,7 @@ class Evento extends Conectar
                     cur_fechfin = ?,
                     modality_id = ?,
                     nhours = ?,
-                    eventype_id = ?,
-                    portada_img = ?,
-                    est_asistencia = ?
+                    eventype_id = ?
                 WHERE
                     even_id = ?";
         $sql = $conectar->prepare($sql);
@@ -120,10 +118,8 @@ class Evento extends Conectar
         $sql->bindValue(5, $cur_fechfin);
         $sql->bindValue(6, $modality_id);
         $sql->bindValue(7, $nhours);
-        $sql->bindValue(8, $portada_img);
-        $sql->bindValue(9, $eventype_id);
-        $sql->bindValue(10, $est_asistencia);
-        $sql->bindValue(11, $even_id);
+        $sql->bindValue(8, $eventype_id);
+        $sql->bindValue(9, $even_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
@@ -170,8 +166,7 @@ class Evento extends Conectar
                 tm_evento.nhours,
                 tm_evento.est_asistencia,
                 tm_dependencias.cat_nom,
-                tm_dependencias.cat_id
-           
+                tm_dependencias.cat_id  
                 FROM tm_evento
                 INNER JOIN tm_dependencias on tm_evento.cat_id = tm_dependencias.cat_id
                 WHERE tm_evento.est = 1";

@@ -34,8 +34,7 @@ class Conectar
         //QA
 
         return "http://localhost/CursosCongresosUEB/";
-
-        //return "https://5e4a-181-199-63-159.ngrok-free.app/cursoscongresosueb/";
+        //return "https://fa83-181-199-63-159.ngrok-free.app/cursoscongresosueb/";
 
         //return "http://sac.ueb.congresos.com.ec/";
     }
