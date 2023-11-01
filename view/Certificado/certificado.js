@@ -13,6 +13,16 @@ const y = canvas.height;
 const maxWidth = x + 200; // Ancho máximo para el texto
 const lineHeight = 30; // Espacio entre líneas
 
+// Define la función para generar el código QR
+function generateQRCode(text, elementId) {
+    const qrcode = new QRCode(elementId, {
+        text: text,
+        width: 128,
+        height: 128,
+    });
+}
+
+
 $(document).ready(function () {
     var curd_id = getUrlParameter('curd_id');
 
@@ -57,9 +67,9 @@ $(document).ready(function () {
             var textToDraw = 'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + modalidad + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda, el ' + data.cur_fechfin + '';
 
             drawWrappedText(textToDraw, x, 440, maxWidth, lineHeight);
-    
+
         });
-    
+
         /* Ruta de la Imagen */
         imageLogo.src = "../../assets/logo_ueb.png";
         /* Dimensionamos y seleccionamos imagen */
@@ -72,6 +82,16 @@ $(document).ready(function () {
         ctx.drawImage(imageqr, 795, 545, 95, 95);
 
         $('#cur_descrip').html(data.cur_descrip);
+
+        usu_nom = data.usu_nom;
+        usu_ci = data.usu_ci;
+        cur_nom = data.cur_nom;
+
+        // Genera el contenido para el código QR
+        const qrContent = `Certificado otorgado a ${usu_nom}, con número de cédula ${usu_ci}, por participar en el ${cur_nom}`;
+
+        // Llama a la función generateQRCode para generar el código QR
+        generateQRCode(qrContent, "qrcode");
     });
 
 });

@@ -13,6 +13,7 @@ const y = canvas.height;
 const maxWidth = x + 200; // Ancho máximo para el texto
 const lineHeight = 30; // Espacio entre líneas
 
+
 $(document).ready(function () {
     let ponen_id = getUrlParameter('ponen_id');
 
@@ -64,19 +65,6 @@ $(document).ready(function () {
         ctx.font = '15px Arial';
 
 
-
-        // let modalidad = data.modality_id;
-
-        // $.post("../../controller/evento.php?op=modalidad", { modality_id: modalidad }, function (response1) {
-        //     response1 = JSON.parse(response1);
-        //     modalidad = response1.name;
-        //     ctx.font = '10px Arial';
-        //     let textToDraw = 'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + modalidad + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda';
-
-        //     drawWrappedText(textToDraw, x, 440, maxWidth, lineHeight);
-
-        // });
-
         /* Ruta de la Imagen */
         imageLogo.src = "../../assets/logo_ueb.png";
         /* Dimensionamos y seleccionamos imagen */
@@ -89,9 +77,37 @@ $(document).ready(function () {
         ctx.drawImage(imageqr, 795, 545, 95, 95);
 
         $('#cur_descrip').html(data.cur_descrip);
+
+
+
+
+       // ponen_id = getUrlParameter('ponen_id');
+        usu_nom = data.usu_nom;
+        usu_ci = data.usu_ci;
+        cur_nom = data.cur_nom;
+
+        // Genera el contenido para el código QR
+        const qrContent = `Certificado otorgado a ${usu_nom}, con numero de cedula ${usu_ci} ,por participar en el ${cur_nom}`;
+
+        // Llama a la función generateQRCode pasando el contenido del código QR
+        generateQRCode(qrContent, "qrcode");
+
+
     });
 
+
+
 });
+
+//funcion para generar certificados
+
+function generateQRCode(text, elementId) {
+    const qrcode = new QRCode(document.getElementById(elementId), {
+        text: text,
+        width: 128, // Ancho del código QR
+        height: 128, // Altura del código QR
+    });
+}
 
 /* Recarga por defecto solo 1 vez */
 window.onload = function () {

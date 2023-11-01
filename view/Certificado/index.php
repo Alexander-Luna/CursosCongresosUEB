@@ -4,6 +4,8 @@
 <head>
   <?php require_once("../html/MainHead.php"); ?>
   <title>Certificado</title>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
 </head>
 
 <body class="pos-relative">
