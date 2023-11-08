@@ -42,19 +42,6 @@ function cambiarpass(e) {
 }
 
 $(document).ready(function () {
-    // $('#usu_sex').select2({
-    //     placeholder: 'Seleccione',
-    //     allowClear: true, // Permite borrar la selección
-    //     width: '100%',
-    //     minimumResultsForSearch: -1, // Puedes ajustar el ancho
-    // });
-    // $('#aclevel_id').select2({
-    //     placeholder: 'Seleccione',
-    //     allowClear: true, // Permite borrar la selección
-    //     width: '100%',
-    //     minimumResultsForSearch: -1, // Puedes ajustar el ancho
-    // });
-
     $.post("../../controller/usuario.php?op=mostrar", { usu_id: usu_id }, function (data) {
         data = JSON.parse(data);
         $('#usu_nom').val(data.usu_nom);
@@ -66,6 +53,11 @@ $(document).ready(function () {
         $('#usu_telf').val(data.usu_telf);
         $('#aclevel_id').val(data.aclevel_id).trigger("change");
         $('#usu_sex').val(data.usu_sex).trigger("change");
+        facultad_id = data.facultad_id;
+        combo_facultad();
+        combo_carrera();
+        $('#facultad_id').val(data.facultad_id).trigger("change");
+        $('#carrera_id').val(data.carrera_id).trigger("change");
     });
 });
 
@@ -80,7 +72,9 @@ $(document).on("click", "#btnactualizar", function () {
         aclevel_id: $('#aclevel_id').val(),
         usu_ci: $('#usu_ci').val(),
         usu_sex: $('#usu_sex').val(),
-        usu_telf: $('#usu_telf').val()
+        usu_telf: $('#usu_telf').val(),
+        carrera_id: $('#carrera_id').val(),
+        facultad_id: $('#facultad_id').val()
     }, function (data) {
     });
 
@@ -91,4 +85,16 @@ $(document).on("click", "#btnactualizar", function () {
         confirmButtonText: 'Aceptar'
     })
 });
+let facultad_id = '';
+function combo_facultad() {
+    $.post("../../controller/facultad.php?op=combo", function (data) {
+        $('#facultad_id').html(data);
+    });
+}
+
+function combo_carrera() {
+    $.post("../../controller/carrera.php?op=combo", function (data) {
+        $('#carrera_id').html(data);
+    });
+}
 init();

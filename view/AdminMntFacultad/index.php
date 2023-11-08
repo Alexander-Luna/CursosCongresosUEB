@@ -43,10 +43,10 @@ if (isset($_SESSION["usu_id"])) {
           <table id="facultad_data" class="table display responsive nowrap">
             <thead>
               <tr>
-                <th class="wd-15p">Nombre</th>
-                <th class="wd-15p">Carreras</th>
-                <th class="wd-10p">Editar</th>
-                <th class="wd-10p">Eliminar</th>
+                <th class="wd-25p">Nombre</th>
+                <th class="wd-5p">Carreras</th>
+                <th class="wd-5p">Editar</th>
+                <th class="wd-5p">Eliminar</th>
               </tr>
             </thead>
             <tbody>

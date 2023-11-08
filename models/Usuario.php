@@ -343,7 +343,7 @@ class Usuario extends Conectar
     }
 
     /*TODO: Actualizar la informacion del perfil del usuario segun ID */
-    public function update_usuario_perfil($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_sex, $usu_telf, $usu_ci, $aclevel_id)
+    public function update_usuario_perfil($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_sex, $usu_telf, $usu_ci, $aclevel_id,$facultad_id,$carrera_id,$otra_carrera)
     {
         $conectar = parent::conexion();
         parent::set_names();
@@ -355,6 +355,9 @@ class Usuario extends Conectar
                     usu_sex = ?,
                     usu_telf = ?,
                     usu_ci = ?,
+                    facultad_id = ?,
+                    carrera_id = ?,
+                    usu_otracarrera = ?,
                     aclevel_id = ?
                 WHERE
                     usu_id = ?";
@@ -365,8 +368,11 @@ class Usuario extends Conectar
         $sql->bindValue(4, $usu_sex);
         $sql->bindValue(5, $usu_telf);
         $sql->bindValue(6, $usu_ci);
-        $sql->bindValue(7, $aclevel_id);
-        $sql->bindValue(8, $usu_id);
+        $sql->bindValue(7, $facultad_id);
+        $sql->bindValue(8, $carrera_id);
+        $sql->bindValue(9, $otra_carrera);
+        $sql->bindValue(10, $aclevel_id);
+        $sql->bindValue(11, $usu_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
