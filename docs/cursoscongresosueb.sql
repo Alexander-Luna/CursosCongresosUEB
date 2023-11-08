@@ -165,6 +165,32 @@ INSERT INTO `academic_level` (
   `abreviature`,
   `est`
 )VALUES(1,"Pregrado","Est.","1"),(2,"Maestria","MsC.","1"),(3,"Doctorado","PhD.","1");
+
+
+CREATE TABLE `tm_facultad` (
+  `facultad_id` int(11) NOT NULL,
+  `name` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `fech_crea` datetime DEFAULT NULL,
+  `est` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+ALTER TABLE tm_facultad
+ADD PRIMARY KEY (facultad_id);
+ALTER TABLE `tm_facultad`
+  MODIFY `facultad_id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `tm_carrera` (
+  `carrera_id` int(11) NOT NULL,
+  `name` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `facultad_id` int(2) DEFAULT NULL,
+  `fech_crea` datetime DEFAULT NULL,
+  `est` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+ALTER TABLE tm_carrera
+ADD PRIMARY KEY (carrera_id);
+ALTER TABLE `tm_carrera`
+  MODIFY `carrera_id` int(11) NOT NULL AUTO_INCREMENT;
+
+
 CREATE TABLE `tm_usuario` (
   `usu_id` int(11) NOT NULL,
   `usu_nom` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
@@ -176,6 +202,9 @@ CREATE TABLE `tm_usuario` (
   `usu_telf` varchar(12) COLLATE utf8_spanish_ci NOT NULL,
   `rol_id` int(11) NOT NULL,
   `usu_ci` varchar(10) DEFAULT NULL,
+  `carrera_id` int(2) DEFAULT NULL,
+  `facultad_id` int(2) DEFAULT NULL,
+  `usu_otracarrera` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fech_crea` datetime DEFAULT NULL,
   `est` int(11) NOT NULL,
   `aclevel_id` int(11) NOT NULL
@@ -184,6 +213,15 @@ CREATE TABLE `tm_usuario` (
 ALTER TABLE `tm_usuario` ADD CONSTRAINT `fk_academic_level`
 FOREIGN KEY (`aclevel_id`)
 REFERENCES `academic_level`(`aclevel_id`);
+ALTER TABLE `tm_usuario` ADD CONSTRAINT `fk_faculty`
+FOREIGN KEY (`facultad_id`)
+REFERENCES `tm_facultad`(`facultad_id`);
+ALTER TABLE `tm_usuario` ADD CONSTRAINT `fk_carrera`
+FOREIGN KEY (`carrera_id`)
+REFERENCES `tm_carrera`(`carrera_id`);
+ALTER TABLE `tm_carrera` ADD CONSTRAINT `fk_carrera_facultad`
+FOREIGN KEY (`facultad_id`)
+REFERENCES `tm_facultad`(`facultad_id`);
 
 INSERT INTO `tm_usuario` (`usu_id`, `usu_nom`, `usu_apep`, `usu_apem`, `usu_correo`, `usu_pass`, `usu_sex`, `usu_telf`, `rol_id`, `usu_ci`, `fech_crea`, `est`, `aclevel_id`) VALUES
 (1, "Alexander Paul", "Luna", "Arteaga", "aluna@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "M", "0985726434", 2, "0202433918", "2023-04-26 20:14:08", 1,1),

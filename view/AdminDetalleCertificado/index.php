@@ -2,14 +2,14 @@
 /* Llamamos al archivo de conexion.php */
 require_once("../../config/conexion.php");
 if (isset($_SESSION["usu_id"])) {
-?>
+  ?>
   <!DOCTYPE html>
   <html lang="es">
 
   <head>
     <?php require_once("../html/MainHead.php"); ?>
 
-    <title>Empresa::Detalle Certificado</title>
+    <title>Detalle Certificado</title>
   </head>
 
   <body>
@@ -47,14 +47,17 @@ if (isset($_SESSION["usu_id"])) {
               </div>
               <div class="col-lg-4">
                 <label class="form-control-label">&nbsp;</label>
-                <button class="btn btn-outline-primary form-control" id="add_button" onclick="nuevo()"><i class="fa fa-plus-square mg-r-10"></i> Agregar Usuarios</button>
+                <button class="btn btn-outline-primary form-control" id="add_button" onclick="nuevo()"><i
+                    class="fa fa-plus-square mg-r-10"></i> Agregar Usuarios</button>
               </div>
             </div>
+
           </div>
 
           <p></p>
 
           <div class="table-wrapper"></div>
+          
           <table id="detalle_data" class="table display responsive nowrap" width="100%">
             <thead>
               <tr>
@@ -84,7 +87,7 @@ if (isset($_SESSION["usu_id"])) {
   </body>
 
   </html>
-<?php
+  <?php
 } else {
   /* Si no a iniciado sesion se redireccionada a la ventana principal */
   header("Location:" . Conectar::ruta() . "view/404/");

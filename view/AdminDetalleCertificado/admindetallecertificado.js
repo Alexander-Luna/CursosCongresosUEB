@@ -24,6 +24,7 @@ $(document).ready(function () {
                     'copyHtml5',
                     'excelHtml5',
                     'csvHtml5',
+                    
                 ],
                 "ajax": {
                     url: "../../controller/usuario.php?op=listar_eventos_usuario",

@@ -57,7 +57,12 @@
           <span class="menu-item-label">Dependencias</span>
         </div>
       </a>
-
+      <a href="../AdminMntFacultad/" class="br-menu-link">
+        <div class="br-menu-item">
+          <i class="icon ion-load-d tx-24"></i>
+          <span class="menu-item-label">Facultades</span>
+        </div>
+      </a>
       <a href="../AdminDetalleCertificado/" class="br-menu-link">
         <div class="br-menu-item">
           <i class="icon ion-document-text tx-24"></i>
