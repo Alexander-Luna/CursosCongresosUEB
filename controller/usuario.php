@@ -161,6 +161,9 @@ switch ($_GET["op"]) {
                 $output["usu_telf"] = $row["usu_telf"];
                 $output["rol_id"] = $row["rol_id"];
                 $output["usu_ci"] = $row["usu_ci"];
+                $output["facultad_id"] = $row["facultad_id"];
+                $output["carrera_id"] = $row["carrera_id"];
+                $output["usu_otracarrera"] = $row["usu_otracarrera"];
                 $output["aclevel_id"] = $row["aclevel_id"];
             }
             echo json_encode($output);
@@ -181,6 +184,9 @@ switch ($_GET["op"]) {
                 $output["usu_telf"] = $row["usu_telf"];
                 $output["rol_id"] = $row["rol_id"];
                 $output["usu_ci"] = $row["usu_ci"];
+                $output["facultad_id"] = $row["facultad_id"];
+                $output["carrera_id"] = $row["carrera_id"];
+                $output["usu_otracarrera"] = $row["usu_otracarrera"];
                 $output["aclevel_id"] = $row["aclevel_id"];
             }
             echo json_encode($output);
@@ -196,7 +202,10 @@ switch ($_GET["op"]) {
             $_POST["usu_sex"],
             $_POST["usu_telf"],
             $_POST["usu_ci"],
-            $_POST["aclevel_id"]
+            $_POST["aclevel_id"],
+            $_POST["usu_facultad"],
+            $_POST["usu_carrera"],
+            $_POST["usu_otracarrera"]
         );
         break;
     /*TODO: Guardar y editar cuando se tenga el ID */
@@ -271,7 +280,7 @@ switch ($_GET["op"]) {
             }
             $sub_array[] = '<button type="button" onClick="editar(' . $row["usu_id"] . ');"  id="' . $row["usu_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["usu_id"] . ');"  id="' . $row["usu_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
-
+            $sub_array[] = $row["usu_ci"];
             $data[] = $sub_array;
         }
 

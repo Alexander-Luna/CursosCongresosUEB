@@ -50,13 +50,6 @@
 
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label">Password: <span class="tx-danger">*</span></label>
-                            <input class="form-control" id="usu_pass" type="text" name="usu_pass" required />
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class="form-group">
                             <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
                             <select class="form-control select2" style="width:100%" name="usu_sex" id="usu_sex">
                                 <option label="Seleccione"></option>

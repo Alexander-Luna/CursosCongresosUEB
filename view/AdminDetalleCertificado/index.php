@@ -36,7 +36,7 @@ if (isset($_SESSION["usu_id"])) {
 
           <div class="form-layout">
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-6">
                 <div class="form-group">
                   <label class="form-control-label">Eventos: <span class="tx-danger">*</span></label>
                   <select class="form-control select2" style="width:100%" name="even_id" id="even_id">
@@ -45,10 +45,14 @@ if (isset($_SESSION["usu_id"])) {
                   </select>
                 </div>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <label class="form-control-label">&nbsp;</label>
                 <button class="btn btn-outline-primary form-control" id="add_button" onclick="nuevo()"><i
-                    class="fa fa-plus-square mg-r-10"></i> Agregar Usuarios</button>
+                    class="fa fa-plus-square mg-r-10"></i> Seleccionar Usuarios</button>
+              </div>
+              <div class="col-lg-3">
+                <label class="form-control-label">&nbsp;</label>
+                <button class="btn btn-outline-success form-control" id="add_button1" onclick="nuevoExcel()"><i class="icon ion-android-upload"></i>   Agregar Usuarios</button>
               </div>
             </div>
 
@@ -81,7 +85,7 @@ if (isset($_SESSION["usu_id"])) {
     </div>
 
     <?php require_once("modalmantenimiento.php"); ?>
-
+    <?php require_once("modalplantilla.php"); ?>
     <?php require_once("../html/MainJs.php"); ?>
     <script type="text/javascript" src="admindetallecertificado.js"></script>
   </body>

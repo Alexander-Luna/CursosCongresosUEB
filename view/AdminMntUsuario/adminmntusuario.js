@@ -95,7 +95,6 @@ function editar(usu_id) {
         $('#usu_apep').val(data.usu_apep);
         $('#usu_apem').val(data.usu_apem);
         $('#usu_correo').val(data.usu_correo);
-        $('#usu_pass').val(data.usu_pass);
         $('#usu_sex').val(data.usu_sex).trigger('change');
         $('#rol_id').val(data.rol_id).trigger('change');
         $('#usu_telf').val(data.usu_telf);

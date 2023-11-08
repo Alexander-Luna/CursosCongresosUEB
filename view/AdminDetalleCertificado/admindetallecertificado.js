@@ -24,7 +24,7 @@ $(document).ready(function () {
                     'copyHtml5',
                     'excelHtml5',
                     'csvHtml5',
-                    
+
                 ],
                 "ajax": {
                     url: "../../controller/usuario.php?op=listar_eventos_usuario",
@@ -111,12 +111,11 @@ function nuevo() {
             confirmButtonText: 'Aceptar'
         })
     } else {
-        var even_id = $('#even_id').val();
+        let even_id = $('#even_id').val();
         listar_usuario(even_id);
         $('#modalmantenimiento').modal('show');
     }
 }
-
 function listar_usuario(even_id) {
     $('#usuario_data').DataTable({
         "aProcessing": true,
@@ -231,4 +230,18 @@ function registrardetalle() {
     }
 }
 
+function nuevoExcel() {
+    if ($('#even_id').val() == '') {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Seleccionar Evento',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        })
+    } else {
+        let even_id = $('#even_id').val();
+        listar_usuario(even_id);
+        $('#modalplantilla').modal('show');
+    }
+}
 init();
