@@ -68,7 +68,7 @@ if (isset($_SESSION["usu_id"])) {
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">Cédula: <span class="tx-danger">*</span></label>
-                    <input class="form-control" type="number" name="usu_ci" id="usu_ci">
+                    <input class="form-control" type="text" name="usu_ci" id="usu_ci">
                   </div>
                 </div>
 
@@ -78,7 +78,7 @@ if (isset($_SESSION["usu_id"])) {
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">Cédula: <span class="tx-danger">*</span></label>
-                    <input class="form-control" type="number" name="usu_ci" id="usu_ci" readonly>
+                    <input class="form-control" type="text" name="usu_ci" id="usu_ci" readonly>
                   </div>
                 </div>
                 <?php
@@ -87,7 +87,7 @@ if (isset($_SESSION["usu_id"])) {
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Teléfono: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="number" name="usu_telf" id="usu_telf" placeholder="Ingrese Telefono">
+                  <input class="form-control" type="text" name="usu_telf" id="usu_telf" placeholder="Ingrese Teléfono">
                 </div>
               </div>
               <div class="col-lg-4">
@@ -118,7 +118,7 @@ if (isset($_SESSION["usu_id"])) {
                 <div class="form-floating">
                   <select class="form-control" name="carrera_id" id="carrera_id"
                     aria-label="Floating label select example">
-                    <option value="0" selected>Seleccione</option>
+                    <option value="0">Seleccione</option>
                   </select>
                 </div>
               </div>
@@ -170,4 +170,3 @@ if (isset($_SESSION["usu_id"])) {
   header("Location:" . Conectar::ruta() . "view/404/");
 }
 ?>
-

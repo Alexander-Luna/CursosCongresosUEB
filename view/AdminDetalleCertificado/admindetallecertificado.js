@@ -288,6 +288,13 @@ let ExcelToJSON = function () {
                         console.log(data);
                     });
                 }
+                Swal.fire({
+                    title: 'Correcto!',
+                    text: 'Usuarios Agregados Correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                })
+
                 /* TODO:Despues de subir la informacion limpiar inputfile */
                 document.getElementById("upload").value = null;
 

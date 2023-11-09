@@ -59,7 +59,7 @@
       </a>
       <a href="../AdminMntFacultad/" class="br-menu-link">
         <div class="br-menu-item">
-          <i class="icon ion-load-d tx-24"></i>
+        <i class="icon ion-university tx-24"></i>
           <span class="menu-item-label">Facultades</span>
         </div>
       </a>
@@ -71,7 +71,7 @@
       </a>
       <a href="../AdminDetalleAsistencia/" class="br-menu-link">
         <div class="br-menu-item">
-        <i class="icon ion-document-text tx-24"></i>
+        <i class="icon ion-lightbulb tx-24"></i>
           <span class="menu-item-label">Control Asistencia</span>
         </div>
       </a>

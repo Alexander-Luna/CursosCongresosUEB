@@ -211,7 +211,7 @@ function habilitarAsistencia(even_id) {
             // alert('Asistencia registrada con éxito');
         },
         error: function (e) {
-            alert('Error al registrar la asistencia ' + e);
+            console.log('Error al registrar la asistencia ' + e);
         }
     });
 

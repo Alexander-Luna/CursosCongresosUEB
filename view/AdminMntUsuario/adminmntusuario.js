@@ -32,6 +32,12 @@ function guardaryeditar(e) {
 }
 
 $(document).ready(function () {
+    bloqueaNumeros(document.getElementById('usu_apep'));
+    bloqueaNumeros(document.getElementById('usu_apem'));
+    bloqueaNumeros(document.getElementById('usu_nom'));
+    bloqueaLetrascaracteres(document.getElementById('usu_ci'));
+    bloqueaLetrascaracteres(document.getElementById('usu_telf'));
+
     $('#usu_sex').select2({
         dropdownParent: $('#modalmantenimiento')
     });
@@ -178,8 +184,14 @@ let ExcelToJSON = function () {
                     }, function (data) {
                         console.log(data);
                     });
-                    
+
                 }
+                Swal.fire({
+                    title: 'Correcto!',
+                    text: 'Usuarios Agregados Correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                })
                 /* TODO:Despues de subir la informacion limpiar inputfile */
                 document.getElementById("upload").value = null;
 

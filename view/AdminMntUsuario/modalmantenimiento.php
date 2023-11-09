@@ -51,7 +51,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
-                            <select class="form-control select2" style="width:100%" name="usu_sex" id="usu_sex">
+                            <select class="form-control" name="usu_sex" id="usu_sex">
                                 <option label="Seleccione"></option>
                                 <option value="M">Masculino</option>
                                 <option value="F">Femenino</option>
@@ -69,10 +69,10 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Rol: <span class="tx-danger">*</span></label>
-                            <select class="form-control select2" style="width:100%" name="rol_id" id="rol_id">
+                            <select class="form-control" name="rol_id" id="rol_id">
                                 <option label="Seleccione"></option>
                                 <option value="1">Usuario</option>
-                                <option value="2">Admin</option>
+                                <option value="2">Administrador</option>
                             </select>
                         </div>
                     </div>
@@ -85,8 +85,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="action" value="add" class="btn btn-outline-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i class="fa fa-check"></i> Guardar</button>
-                    <button type="reset" class="btn btn-outline-secondary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium" aria-label="Close" aria-hidden="true" data-dismiss="modal"><i class="fa fa-close"></i> Cancelar</button>
+                    <button type="submit" name="action" value="add"
+                        class="btn btn-outline-primary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"><i
+                            class="fa fa-check"></i> Guardar</button>
+                    <button type="reset"
+                        class="btn btn-outline-secondary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"
+                        aria-label="Close" aria-hidden="true" data-dismiss="modal"><i class="fa fa-close"></i>
+                        Cancelar</button>
                 </div>
             </form>
         </div>

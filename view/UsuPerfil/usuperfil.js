@@ -41,9 +41,19 @@ function cambiarpass(e) {
     });
 }
 $(document).ready(function () {
+    bloqueaNumeros(document.getElementById('usu_apep'));
+    bloqueaNumeros(document.getElementById('usu_apem'));
+    bloqueaNumeros(document.getElementById('usu_nom'));
+    bloqueaLetrascaracteres(document.getElementById('usu_ci'));
+    bloqueaLetrascaracteres(document.getElementById('usu_telf'));
+
+
+    combo_facultad();
+    cargarCarrera();
     $.post("../../controller/usuario.php?op=mostrar", { usu_id: usu_id }, function (data) {
         data = JSON.parse(data);
         facultad_id = data.facultad_id;
+
         $('#usu_nom').val(data.usu_nom);
         $('#usu_apep').val(data.usu_apep);
         $('#usu_apem').val(data.usu_apem);
@@ -53,12 +63,17 @@ $(document).ready(function () {
         $('#usu_telf').val(data.usu_telf);
         $('#aclevel_id').val(data.aclevel_id).trigger("change");
         $('#usu_sex').val(data.usu_sex).trigger("change");
-        $('#usu_otracarrera').val(data.usu_otracarrera);
-        $('#facultad_id').val(data.facultad_id).trigger("change");
-        $('#carrera_id').val(data.carrera_id).trigger("change");
-        combo_facultad();
-        mostrarOcultarCarrera();
+        console.log(data.usu_otracarrera + " " + data.facultad_id + " " + data.carrera_id);
 
+        if (data.usu_otracarrera != null) {
+            $('#usu_otracarrera').val(data.usu_otracarrera);
+        }
+        if (data.facultad_id != null) {
+            $('#facultad_id').val(data.facultad_id).trigger("change");
+        }
+        if (data.carrera_id != null) {
+            $('#carrera_id').val(data.carrera_id).trigger("change");
+        }
     });
 });
 
@@ -91,12 +106,17 @@ let facultad_id = '';
 function combo_facultad() {
     $.post("../../controller/facultad.php?op=combo", function (data) {
         $('#facultad_id').html(data);
+
     });
 }
 
 let selectedFacultad = "";
 
-
+function cargarCarrera() {
+    $.post("../../controller/carrera.php?op=combo", { facultad: facultad_id }, function (data) {
+        $('#carrera_id').html(data);
+    });
+}
 function mostrarOcultarCarrera() {
     let facultadSelect = document.getElementById("facultad_id");
     let carreraDiv = document.getElementById("divCarrera");
