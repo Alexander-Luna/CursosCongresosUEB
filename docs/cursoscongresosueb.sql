@@ -177,6 +177,19 @@ ALTER TABLE tm_facultad
 ADD PRIMARY KEY (facultad_id);
 ALTER TABLE `tm_facultad`
   MODIFY `facultad_id` int(11) NOT NULL AUTO_INCREMENT;
+INSERT INTO `tm_facultad` (
+  `facultad_id`,
+  `name`,
+  `fech_crea`,
+  `est`
+) VALUES
+("1", "Facultad de Ciencias Administrativas, Gestión Empresarial e Informática", "2023-11-07 23:16:53", "1"),
+("2", "Facultad de Ciencias Agropecuarias, Recursos Naturales y del Medio Ambiente", "2023-11-07 23:16:53", "1"),
+("3", "Facultad de Jurisprudencia, Ciencias Sociales y Políticas", "2023-11-07 23:16:53", "1"),
+("4", "Facultad de Ciencias de la Salud y del Ser Humano", "2023-11-07 23:16:53", "1"),
+("5", "Facultad de Ciencias de la Educación, Sociales, Filosóficas y Humanísticas", "2023-11-07 23:16:53", "1"),
+("6", "Extensión Universitaria de San Miguel", "2023-11-07 23:16:53", "1"),
+("7", "Otros", "2023-11-07 23:16:53", "1");
 
 CREATE TABLE `tm_carrera` (
   `carrera_id` int(11) NOT NULL,
@@ -189,6 +202,37 @@ ALTER TABLE tm_carrera
 ADD PRIMARY KEY (carrera_id);
 ALTER TABLE `tm_carrera`
   MODIFY `carrera_id` int(11) NOT NULL AUTO_INCREMENT;
+INSERT INTO `tm_carrera` (
+  `carrera_id`,
+  `name`,
+  `facultad_id`,
+  `est`
+) VALUES
+("1", "Administración de Empresas", "1", "1"),
+("2", "Comunicación", "1", "1"),
+("3", "Contabilidad y Auditoría", "1", "1"),
+("4", "Mercadotecnia", "1", "1"),
+("5", "Software", "1", "1"),
+("6", "Turismo", "1", "1"),
+("7", "Gestión del Talento Humano", "6", "1"),
+("8", "Agroindustria", "2", "1"),
+("9", "Agronomía", "2", "1"),
+("10", "Medicina Veterinaria", "2", "1"),
+("11", "Educación Básica", "5", "1"),
+("12", "Educación Inicial", "5", "1"),
+("13", "Educación Intercultural Bilingüe", "5", "1"),
+("14", "Pedagogía de las Ciencias Experimentales - Informática", "5", "1"),
+("15", "Pedagogía de las Ciencias Experimentales - Matemática y la Física", "5", "1"),
+("16", "Derecho", "3", "1"),
+("17", "Sociología", "3", "1"),
+("18", "Enfermería", "4", "1"),
+("19", "Gestión del Riesgo", "4", "1"),
+("20", "Terapia Física", "4", "1"),
+("21", "Emprendimiento e Innovación Social", "1", "1"),
+("22", "Tecnologías de la Información", "1", "1"),
+("23", "Marketing Digital", "1", "1");
+
+
 
 
 CREATE TABLE `tm_usuario` (
@@ -213,6 +257,8 @@ CREATE TABLE `tm_usuario` (
 ALTER TABLE `tm_usuario` ADD CONSTRAINT `fk_academic_level`
 FOREIGN KEY (`aclevel_id`)
 REFERENCES `academic_level`(`aclevel_id`);
+ALTER TABLE `tm_usuario`
+ADD CONSTRAINT `cedula_unica` UNIQUE (`usu_ci`);
 ALTER TABLE `tm_usuario` ADD CONSTRAINT `fk_faculty`
 FOREIGN KEY (`facultad_id`)
 REFERENCES `tm_facultad`(`facultad_id`);

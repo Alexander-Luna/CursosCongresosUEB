@@ -178,7 +178,7 @@ let ExcelToJSON = function () {
                     }, function (data) {
                         console.log(data);
                     });
-
+                    
                 }
                 /* TODO:Despues de subir la informacion limpiar inputfile */
                 document.getElementById("upload").value = null;

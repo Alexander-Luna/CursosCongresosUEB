@@ -227,7 +227,38 @@ class Evento extends Conectar
         $sql1->execute();
         return $resultado = $sql1->fetch(pdo::FETCH_ASSOC);
     }
+    public function insert_evento_usuario_excel($even_id, $usu_ci)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
 
+        // Buscar el usuario en la tabla tm_usuario
+        $sql = "SELECT usu_id FROM tm_usuario WHERE est = 1 AND usu_ci = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_ci);
+        $sql->execute();
+        $usuario = $sql->fetch(PDO::FETCH_ASSOC);
+
+        if (!$usuario) {
+            // El usuario no se encontró, puedes manejar el error o mostrar un mensaje
+            return false;
+        }
+
+        // Insertar el registro en la tabla td_evento_usuario
+        $sql = "INSERT INTO td_evento_usuario (curd_id, even_id, usu_id, fech_crea, est) VALUES (NULL, ?, ?, now(), 1)";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $even_id);
+        $sql->bindValue(2, $usuario['usu_id']);
+        $sql->execute();
+
+        // Obtener el último ID insertado
+        $sql1 = "SELECT LAST_INSERT_ID() AS 'curd_id'";
+        $sql1 = $conectar->prepare($sql1);
+        $sql1->execute();
+        $resultado = $sql1->fetch(PDO::FETCH_ASSOC);
+
+        return $resultado['curd_id'];
+    }
     public function update_imagen_evento($even_id, $cur_img)
     {
         $conectar = parent::conexion();
@@ -311,6 +342,19 @@ class Evento extends Conectar
         $sql = $conectar->prepare($sql);
         $sql->execute();
         return $resultado = $sql->fetchAll();
+    }
+    public function existe_usuario_evento($usu_ci, $even_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT COUNT(*) as count FROM td_evento_usuario INNER JOIN tm_usuario ON tm_usuario.usu_id=td_evento_usuario.usu_id WHERE tm_usuario.usu_ci=? AND td_evento_usuario.even_id=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_ci);
+        $sql->bindValue(2, $even_id);
+        $sql->execute();
+        $resultado = $sql->fetch(PDO::FETCH_ASSOC);
+
+        return $resultado['count'] > 0;
     }
 }
 ?>

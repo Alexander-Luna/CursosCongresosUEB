@@ -84,8 +84,6 @@ if (isset($_SESSION["usu_id"])) {
                 <?php
               }
               ?>
-
-
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Teléfono: <span class="tx-danger">*</span></label>
@@ -109,22 +107,30 @@ if (isset($_SESSION["usu_id"])) {
                 <label class="form-control-label">Facultad: </label>
                 <div class="form-floating">
                   <select class="form-control" name="facultad_id" id="facultad_id"
-                    aria-label="Floating label select example">
+                    aria-label="Floating label select example" onchange="mostrarOcultarCarrera()">
                     <option selected>Seleccione</option>
-
                   </select>
                 </div>
               </div>
-              <div class="col-lg-4">
+
+              <div class="col-lg-4" id="divCarrera" style="display: none;">
                 <label class="form-control-label">Carrera: </label>
                 <div class="form-floating">
                   <select class="form-control" name="carrera_id" id="carrera_id"
                     aria-label="Floating label select example">
-                    <option selected>Seleccione</option>
-
+                    <option value="0" selected>Seleccione</option>
                   </select>
                 </div>
               </div>
+
+              <div class="col-lg-4" id="divOtraCarrera" style="display: none;">
+                <div class="form-group">
+                  <label class="form-control-label">Escriba su Organización: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" name="usu_otracarrera" id="usu_otracarrera">
+
+                </div>
+              </div>
+
               <div class="col-lg-4">
                 <label class="form-control-label">Sexo: <span class="tx-danger">*</span></label>
                 <div class="form-floating">
@@ -164,3 +170,4 @@ if (isset($_SESSION["usu_id"])) {
   header("Location:" . Conectar::ruta() . "view/404/");
 }
 ?>
+

@@ -36,7 +36,9 @@ if (isset($_SESSION["usu_id"])) {
 
       <div class="br-pagebody">
         <div class="br-section-wrapper">
-          <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">carreras</h6>
+          <h6 id="name" name="name" class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">
+
+          </h6>
           <p class="mg-b-30 tx-gray-600">Listado de carreras</p>
 
           <button class="btn btn-outline-primary" id="add_button" onclick="nuevo(<?php echo $facultad_id; ?>)"><i

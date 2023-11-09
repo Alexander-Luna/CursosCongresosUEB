@@ -35,7 +35,7 @@ switch ($_GET["op"]) {
     /*TODO:  Listar toda la informacion segun formato de datatable */
     case "listar":
         $datos = $carrera->get_carrera($_GET["facultad"]);
-      //  echo $datos . " ENTRAAA";
+        //  echo $datos . " ENTRAAA";
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
@@ -55,21 +55,11 @@ switch ($_GET["op"]) {
         break;
     /*TODO:  Listar toda la informacion segun formato de datatable */
     case "combo":
-        $datos = $carrera->get_carrera($facultad_id);
+        $datos = $carrera->get_carrera($_POST["facultad"]);
         if (is_array($datos) == true and count($datos) > 0) {
             $html = " <option label='Seleccione'></option>";
             foreach ($datos as $row) {
                 $html .= "<option value='" . $row['carrera_id'] . "'>" . $row['name'] . "</option>";
-            }
-            echo $html;
-        }
-        break;
-    case "combotipo":
-        $datos = $carrera->get_tipoevento();
-        if (is_array($datos) == true and count($datos) > 0) {
-            $html = " <option label='Seleccione'></option>";
-            foreach ($datos as $row) {
-                $html .= "<option value='" . $row['eventype_id'] . "'>" . $row['name'] . "</option>";
             }
             echo $html;
         }

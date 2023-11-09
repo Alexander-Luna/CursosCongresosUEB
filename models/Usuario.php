@@ -323,7 +323,8 @@ class Usuario extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM tm_usuario WHERE est=1 AND usu_id=?";
+        $sql = "SELECT tm_usuario.*, CASE WHEN tm_facultad.facultad_id IS NOT NULL THEN tm_facultad.name ELSE tm_usuario.usu_otracarrera END AS facultad_nombre, CASE WHEN tm_carrera.carrera_id IS NOT NULL THEN tm_carrera.name ELSE NULL END AS carrera_nombre FROM tm_usuario LEFT JOIN tm_facultad ON tm_facultad.facultad_id = tm_usuario.facultad_id LEFT JOIN tm_carrera ON tm_carrera.carrera_id = tm_usuario.carrera_id WHERE tm_usuario.est = 1 AND tm_usuario.usu_id = ?";
+
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_id);
         $sql->execute();
@@ -341,9 +342,20 @@ class Usuario extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
+    public function existe_usuario($usu_ci)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT COUNT(*) as count FROM tm_usuario WHERE est=1 AND usu_ci=?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $usu_ci);
+        $sql->execute();
+        $resultado = $sql->fetch(PDO::FETCH_ASSOC);
 
+        return $resultado['count'] > 0;
+    }
     /*TODO: Actualizar la informacion del perfil del usuario segun ID */
-    public function update_usuario_perfil($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_sex, $usu_telf, $usu_ci, $aclevel_id,$facultad_id,$carrera_id,$otra_carrera)
+    public function update_usuario_perfil($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_sex, $usu_telf, $usu_ci, $aclevel_id, $facultad_id, $carrera_id, $otra_carrera)
     {
         $conectar = parent::conexion();
         parent::set_names();

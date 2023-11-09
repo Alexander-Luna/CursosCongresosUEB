@@ -15,6 +15,8 @@
 <script src="../../public/datatables/buttons.html5.min.js"></script>
 <script src="../../public/datatables/buttons.colVis.min.js"></script>
 <script src="../../public/datatables/jszip.min.js"></script>
+<script src="../../public/js/excel/jszip.js"></script>
+<script src="../../public/js/excel/xlsx.js"></script>
 
 <script src="../../public/lib/select2/js/select2.min.js"></script>
 

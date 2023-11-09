@@ -36,6 +36,31 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
+    case "guardar_desde_excel":
+        $usu_ci = $_POST["usu_ci"];
+        $even_id = $_POST["even_id"];
+
+        if (!$evento->existe_usuario_evento($usu_ci, $even_id)) {
+            $evento->insert_evento_usuario_excel($even_id, $usu_ci);
+        } else {
+           // echo "El usuario ya esta registrado en este evento.";
+        }
+        break;
+    case "insert_evento_usuario":
+        /*TODO: Array de usuario separado por comas */
+        $datos = explode(',', $_POST['usu_id']);
+        /*TODO: Registrar tantos usuarios vengan de la vista */
+        $data = array();
+        foreach ($datos as $row) {
+            $sub_array = array();
+            $idx = $evento->insert_evento_usuario($_POST["even_id"], $row);
+            $sub_array[] = $idx;
+            $data[] = $sub_array;
+        }
+
+        echo json_encode($data);
+        break;
+
     /*TODO: Creando Json segun el ID */
     case "modalidad":
         $datos = $evento->get_modalidad_id($_POST["modality_id"]);
@@ -109,20 +134,7 @@ switch ($_GET["op"]) {
         $evento->delete_evento_usuario($_POST["curd_id"]);
         break;
     /*TODO: Insetar detalle de evento usuario */
-    case "insert_evento_usuario":
-        /*TODO: Array de usuario separado por comas */
-        $datos = explode(',', $_POST['usu_id']);
-        /*TODO: Registrar tantos usuarios vengan de la vista */
-        $data = array();
-        foreach ($datos as $row) {
-            $sub_array = array();
-            $idx = $evento->insert_evento_usuario($_POST["even_id"], $row);
-            $sub_array[] = $idx;
-            $data[] = $sub_array;
-        }
 
-        echo json_encode($data);
-        break;
 
     case "generar_qr":
         require 'phpqrcode/qrlib.php';
@@ -158,15 +170,15 @@ switch ($_GET["op"]) {
             echo $html;
         }
         break;
-        case "totalasistencia":
-            $datos = $evento->get_total_asistencia();
-            if (is_array($datos) == true and count($datos) > 0) {
-                foreach ($datos as $row) {
-                    $output["total"] = $row["total"];
-                }
-                echo json_encode($output);
+    case "totalasistencia":
+        $datos = $evento->get_total_asistencia();
+        if (is_array($datos) == true and count($datos) > 0) {
+            foreach ($datos as $row) {
+                $output["total"] = $row["total"];
             }
-            break;
-        
+            echo json_encode($output);
+        }
+        break;
+
 }
 ?>

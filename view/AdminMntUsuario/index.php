@@ -53,8 +53,8 @@ if (isset($_SESSION["usu_id"])) {
                 <th class="wd-15p">Teléfono</th>
                 <th class="wd-15p">Rol</th>
                 <th class="wd-15p">Nivel Académico</th>
-                <th class="wd-10p">Editar</th>
-                <th class="wd-10p">Eliminar</th>
+                <th class="wd-5p">Editar</th>
+                <th class="wd-5p">Eliminar</th>
               </tr>
             </thead>
             <tbody>
@@ -72,8 +72,7 @@ if (isset($_SESSION["usu_id"])) {
 
     <?php require_once("../html/MainJs.php"); ?>
     <script type="text/javascript" src="adminmntusuario.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+
   </body>
 
   </html>

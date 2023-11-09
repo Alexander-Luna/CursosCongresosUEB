@@ -40,10 +40,10 @@ function cambiarpass(e) {
         }
     });
 }
-
 $(document).ready(function () {
     $.post("../../controller/usuario.php?op=mostrar", { usu_id: usu_id }, function (data) {
         data = JSON.parse(data);
+        facultad_id = data.facultad_id;
         $('#usu_nom').val(data.usu_nom);
         $('#usu_apep').val(data.usu_apep);
         $('#usu_apem').val(data.usu_apem);
@@ -53,11 +53,12 @@ $(document).ready(function () {
         $('#usu_telf').val(data.usu_telf);
         $('#aclevel_id').val(data.aclevel_id).trigger("change");
         $('#usu_sex').val(data.usu_sex).trigger("change");
-        facultad_id = data.facultad_id;
-        combo_facultad();
-        combo_carrera();
+        $('#usu_otracarrera').val(data.usu_otracarrera);
         $('#facultad_id').val(data.facultad_id).trigger("change");
         $('#carrera_id').val(data.carrera_id).trigger("change");
+        combo_facultad();
+        mostrarOcultarCarrera();
+
     });
 });
 
@@ -73,8 +74,9 @@ $(document).on("click", "#btnactualizar", function () {
         usu_ci: $('#usu_ci').val(),
         usu_sex: $('#usu_sex').val(),
         usu_telf: $('#usu_telf').val(),
-        carrera_id: $('#carrera_id').val(),
-        facultad_id: $('#facultad_id').val()
+        usu_carrera: $('#carrera_id').val(),
+        usu_facultad: $('#facultad_id').val(),
+        usu_otracarrera: $('#usu_otracarrera').val()
     }, function (data) {
     });
 
@@ -92,9 +94,24 @@ function combo_facultad() {
     });
 }
 
-function combo_carrera() {
-    $.post("../../controller/carrera.php?op=combo", function (data) {
+let selectedFacultad = "";
+
+
+function mostrarOcultarCarrera() {
+    let facultadSelect = document.getElementById("facultad_id");
+    let carreraDiv = document.getElementById("divCarrera");
+    let otraCarreraDiv = document.getElementById("divOtraCarrera");
+    selectedFacultad = facultadSelect.value;
+    $.post("../../controller/carrera.php?op=combo", { facultad: selectedFacultad }, function (data) {
         $('#carrera_id').html(data);
     });
+    if (selectedFacultad === "7") {
+        carreraDiv.style.display = "none";
+        otraCarreraDiv.style.display = "block";
+    } else {
+        carreraDiv.style.display = "block";
+        otraCarreraDiv.style.display = "none";
+    }
+
 }
 init();

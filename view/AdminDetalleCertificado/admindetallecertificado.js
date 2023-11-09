@@ -163,10 +163,7 @@ function listar_usuario(even_id) {
     });
 }
 function seleccionartodos() {
-    // Obtener todas las casillas de verificación de usuarios en la tabla
-    var checkboxes = document.querySelectorAll('#usuario_data tbody input[type="checkbox"]');
-
-    // Iterar a través de las casillas de verificación y marcarlas
+    let checkboxes = document.querySelectorAll('#usuario_data tbody input[type="checkbox"]');
     checkboxes.forEach(function (checkbox) {
         checkbox.checked = true;
     });
@@ -174,7 +171,7 @@ function seleccionartodos() {
 
 function registrardetalle() {
     table = $('#usuario_data').DataTable();
-    var usu_id = [];
+    let usu_id = [];
 
     table.rows().every(function (rowIdx, tableLoop, rowLoop) {
         cell1 = table.cell({ row: rowIdx, column: 0 }).node();
@@ -241,7 +238,94 @@ function nuevoExcel() {
     } else {
         let even_id = $('#even_id').val();
         listar_usuario(even_id);
+
+
         $('#modalplantilla').modal('show');
     }
 }
+
+let ExcelToJSON = function () {
+    this.parseExcel = function (file) {
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+            let data = e.target.result;
+            let workbook = XLSX.read(data, {
+                type: 'binary'
+            });
+            //TODO: Recorrido a todas las pestañas
+            workbook.SheetNames.forEach(function (sheetName) {
+                // Here is your object
+                let XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                let json_object = JSON.stringify(XL_row_object);
+                UserList = JSON.parse(json_object);
+
+                console.log(UserList)
+                for (i = 0; i < UserList.length; i++) {
+
+                    let columns = Object.values(UserList[i])
+
+                    $.post("../../controller/usuario.php?op=guardar_desde_excel", {
+                        usu_nom: columns[0],
+                        usu_apep: columns[1],
+                        usu_apem: columns[2],
+                        usu_correo: columns[3],
+                        usu_pass: columns[4],
+                        usu_ci: columns[4],
+                        usu_sex: columns[5],
+                        usu_telf: columns[6],
+                        rol_id: '1',
+                        aclevel_id: assignAclevelId(columns[7])
+
+                    }, function (data) {
+                        console.log(data);
+                    });
+                    $.post("../../controller/evento.php?op=guardar_desde_excel", {
+                        usu_ci: columns[4],
+                        even_id: even_id
+                    }, function (data) {
+
+                        console.log(data);
+                    });
+                }
+                /* TODO:Despues de subir la informacion limpiar inputfile */
+                document.getElementById("upload").value = null;
+
+                /* TODO: Actualizar Datatable JS */
+                $('#detalle_data').DataTable().ajax.reload();
+                $('#modalplantilla').modal('hide');
+            })
+        };
+        reader.onerror = function (ex) {
+            console.log(ex);
+        };
+
+        reader.readAsBinaryString(file);
+    };
+};
+function assignAclevelId(aclevel) {
+    if (aclevel === "Estudiante") {
+        return 1;
+    } else if (aclevel === "Maestria") {
+        return 2;
+    } else if (aclevel === "Doctorado") {
+        return 3;
+    } else {
+        // Puedes manejar otros casos si es necesario
+        return null; // Otra acción por defecto o un valor específico
+    }
+}
+function handleFileSelect(evt) {
+    let files = evt.target.files; // FileList object
+    let xl2json = new ExcelToJSON();
+    xl2json.parseExcel(files[0]);
+}
+
+document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+
+
+
+
+
+
 init();

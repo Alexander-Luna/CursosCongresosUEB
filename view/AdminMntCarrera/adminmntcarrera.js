@@ -7,33 +7,59 @@ function init() {
     });
 }
 
-function guardaryeditar(e) {
+async function guardaryeditar(e) {
     e.preventDefault();
-    var formData = new FormData($("#carrera_form")[0]);
-    $.ajax({
-        url: "../../controller/carrera.php?op=guardaryeditar",
-        type: "POST",
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (data) {
 
-            $('#carrera_data').DataTable().ajax.reload();
-            $('#modalmantenimiento').modal('hide');
+    try {
+        // Create an instance of FormData from the formulario element
+        let formData = new FormData(document.getElementById('carrera_form'));
 
-            Swal.fire({
-                title: 'Correcto!',
-                text: 'Se Registro Correctamente',
-                icon: 'success',
-                confirmButtonText: 'Aceptar'
-            })
-        }
-    });
+        // Make an asynchronous POST request to the 'carrera.php?op=guardaryeditar' endpoint
+        fetch('../../controller/carrera.php?op=guardaryeditar', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json())
+            .then(data => {
+                // Reload the data table to reflect the updated information
+                $('#carrera_data').DataTable().ajax.reload();
+
+                // Hide the maintenance modal
+                $('#modalmantenimiento').modal('hide');
+
+                // Display a success message using SweetAlert
+                Swal.fire({
+                    title: 'Correcto!',
+                    text: 'Se Registro Correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            });
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 $(document).ready(function () {
     $('#facultad_id').select2();
     combo_facultad();
+    $.ajax({
+        url: "../../controller/facultad.php?op=mostrar",
+        type: "POST",
+        data: {
+            facultad_id: facultadId,
+        },
+        success: function (datos) {
+            let data = JSON.parse(datos);
+            if (data.hasOwnProperty("name")) {
+                $("#name").text(data.name);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("Error en la solicitud AJAX: " + status + " - " + error);
+        }
+    });
+
+
     $('#carrera_data').DataTable({
         "aProcessing": true,
         "aServerSide": true,
@@ -115,13 +141,25 @@ function eliminar(carrera_id) {
 }
 
 function nuevo(facultad_id) {
-    combo_facultad();
-    $('#carrera_id').val('');
-    console.log(facultad_id + " Entraaa ");
-    $('#facultad_id').val(facultad_id).trigger('change');
-    $('#lbltitulo').html('Nueva Carrera');
-    $('#carrera_form')[0].reset();
-    $('#modalmantenimiento').modal('show');
+
+    if (facultad_id == '') {
+        Swal.fire({
+            title: 'Error!',
+            text: 'No Existe la Facultad Evento',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        })
+    } else {
+        combo_facultad();
+        $('#carrera_id').val('');
+        console.log(facultad_id + " Entraaa ");
+        $('#facultad_id').val(facultad_id).trigger('change');
+        $('#lbltitulo').html('Nueva Carrera');
+        $('#carrera_form')[0].reset();
+        $('#modalmantenimiento').modal('show');
+    }
+
+
 }
 
 function combo_facultad() {

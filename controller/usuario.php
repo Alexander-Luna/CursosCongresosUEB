@@ -125,7 +125,7 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
-     
+
     /*TODO: Total de Eventos por usuario para el dashboard */
     case "total":
         $datos = $usuario->get_total_eventos_x_usuario($_POST["usu_id"]);
@@ -136,7 +136,7 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
-         /*TODO: Total de Eventos por usuario para el dashboard */
+    /*TODO: Total de Eventos por usuario para el dashboard */
     case "totalusuarios":
         $datos = $usuario->get_total_usuarios();
         if (is_array($datos) == true and count($datos) > 0) {
@@ -194,6 +194,11 @@ switch ($_GET["op"]) {
         break;
     /*TODO: Actualizar datos de perfil */
     case "update_perfil":
+        if ($_POST["usu_facultad"] == 7) {
+            $_POST["usu_carrera"] = null;
+        } else {
+            $_POST["usu_otracarrera"] = null;
+        }
         $usuario->update_usuario_perfil(
             $_POST["usu_id"],
             $_POST["usu_nom"],
@@ -365,7 +370,23 @@ switch ($_GET["op"]) {
         break;
 
     case "guardar_desde_excel":
-        $usuario->insert_usuario($_POST["usu_nom"], $_POST["usu_apep"], $_POST["usu_apem"], $_POST["usu_correo"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
+        $usu_nom = $_POST["usu_nom"];
+        $usu_apep = $_POST["usu_apep"];
+        $usu_apem = $_POST["usu_apem"];
+        $usu_correo = $_POST["usu_correo"];
+        $usu_sex = $_POST["usu_sex"];
+        $usu_telf = $_POST["usu_telf"];
+        $rol_id = $_POST["rol_id"];
+        $usu_ci = $_POST["usu_ci"];
+        $aclevel_id = $_POST["aclevel_id"];
+
+        // Verificar si el usuario ya existe en la base de datos
+        if (!$usuario->existe_usuario($usu_ci)) {
+            // Si el usuario no existe, insertarlo
+            $usuario->insert_usuario($usu_nom, $usu_apep, $usu_apem, $usu_correo, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id);
+        } else {
+            //   echo "El usuario ya existe en la base de datos.";
+        }
         break;
     /*TODO:  Listar toda la informacion segun formato de datatable */
     case "combo":
