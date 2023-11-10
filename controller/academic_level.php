@@ -59,7 +59,7 @@ switch ($_GET["op"]) {
         if (is_array($datos) == true and count($datos) > 0) {
             $html = " <option label='Seleccione'></option>";
             foreach ($datos as $row) {
-                $html .= "<option value='" . $row['aclevel_id'] . "'>" . $row['name'] . " " . $row['abreviature'] . "</option>";
+                $html .= "<option value='" . $row['aclevel_id'] . "'>" . $row['name'] . "</option>";
             }
             echo $html;
         }

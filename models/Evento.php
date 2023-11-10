@@ -158,7 +158,6 @@ class Evento extends Conectar
                 tm_evento.cur_descrip,
                 tm_evento.cur_fechini,
                 tm_evento.cur_fechfin,
-                tm_evento.cat_id,
                 tm_evento.eventype_id,
                 tm_evento.cur_img,
                 tm_evento.portada_img,
@@ -168,7 +167,7 @@ class Evento extends Conectar
                 tm_dependencias.cat_nom,
                 tm_dependencias.cat_id  
                 FROM tm_evento
-                INNER JOIN tm_dependencias on tm_evento.cat_id = tm_dependencias.cat_id
+                INNER JOIN tm_dependencias on tm_evento.cat_id = tm_dependencias.cat_id 
                 WHERE tm_evento.est = 1";
         $sql = $conectar->prepare($sql);
 
@@ -183,7 +182,7 @@ class Evento extends Conectar
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $modality_id);
         $sql->execute();
-        return $resultado = $sql->fetchAll();
+        return $resultado = $sql->fetch(PDO::FETCH_ASSOC);
     }
     public function get_evento_id($even_id)
     {
@@ -334,6 +333,7 @@ class Evento extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
+
     public function get_total_asistencia()
     {
         $conectar = parent::conexion();

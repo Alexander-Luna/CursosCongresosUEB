@@ -45,14 +45,20 @@ if (isset($_SESSION["usu_id"])) {
                   </select>
                 </div>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-2">
                 <label class="form-control-label">&nbsp;</label>
                 <button class="btn btn-outline-primary form-control" id="add_button" onclick="nuevo()"><i
-                    class="fa fa-plus-square mg-r-10"></i> Seleccionar Usuarios</button>
+                    class="fa fa-plus-square mg-r-10"></i> Agregar Usuarios</button>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-2">
                 <label class="form-control-label">&nbsp;</label>
-                <button class="btn btn-outline-success form-control" id="add_button1" onclick="nuevoExcel()"><i class="icon ion-android-upload"></i>   Agregar Usuarios</button>
+                <button class="btn btn-outline-success form-control" id="add_button1" onclick="nuevoExcel()"><i
+                    class="icon ion-android-upload"></i> Subir Usuarios</button>
+              </div>
+              <div class="col-lg-2">
+                <label class="form-control-label">&nbsp;</label>
+                <button class="btn btn-outline-danger form-control" id="add_button2" onclick="descargaMasiva()">
+                  <i class="icon ion-android-download"></i> Certificados</button>
               </div>
             </div>
 
@@ -61,17 +67,28 @@ if (isset($_SESSION["usu_id"])) {
           <p></p>
 
           <div class="table-wrapper"></div>
-          
+
           <table id="detalle_data" class="table display responsive nowrap" width="100%">
             <thead>
               <tr>
+
+
+
                 <th class="wd-15p">Evento</th>
                 <th class="wd-15p">Usuario</th>
                 <th class="wd-15p">Fecha Inicio</th>
                 <th class="wd-20p">Fecha Fin</th>
                 <th class="wd-15p">N Horas</th>
-                <th class="wd-10p"></th>
-                <th class="wd-10p"></th>
+                <th class="wd-5p">Certificado</th>
+                <th class="wd-5p">Eliminar</th>
+
+                <th class="wd-0p hidden-column">Facultad</th>
+                <th class="wd-0p hidden-column">Carrera</th>
+                <th class="wd-0p hidden-column">Correo</th>
+                <th class="wd-0p hidden-column">Cédula</th>
+                <th class="wd-0p hidden-column">Teléfono</th>
+                <th class="wd-0p hidden-column">Estado</th>
+
               </tr>
             </thead>
             <tbody>

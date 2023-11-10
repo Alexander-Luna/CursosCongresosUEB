@@ -18,9 +18,8 @@
 <script src="../../public/js/excel/jszip.js"></script>
 <script src="../../public/js/excel/xlsx.js"></script>
 <script src="../../public/js/restricciones.js"></script>
+<script src="../../public/js/jspdf.es.js"></script>
 
 <script src="../../public/lib/select2/js/select2.min.js"></script>
-
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/icono/1.3.0/icono.min.css"></script>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>

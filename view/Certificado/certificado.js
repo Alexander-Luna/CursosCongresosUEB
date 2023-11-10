@@ -24,7 +24,7 @@ function generateQRCode(text, elementId) {
 
 
 $(document).ready(function () {
-    var curd_id = getUrlParameter('curd_id');
+    let curd_id = getUrlParameter('curd_id');
 
     $.post("../../controller/usuario.php?op=mostrar_evento_detalle", { curd_id: curd_id }, function (data) {
         data = JSON.parse(data);
@@ -39,7 +39,7 @@ $(document).ready(function () {
         ctx.textAlign = "center";
         ctx.textBaseline = 'middle';
         // Hacer una solicitud para obtener el nombre de la tabla academic_level
-        var academicLevelName = data.aclevel_id;
+        let academicLevelName = data.aclevel_id;
 
 
         $.post("../../controller/academic_level.php?op=mostrar", { aclevel_id: academicLevelName }, function (response) {
@@ -58,13 +58,13 @@ $(document).ready(function () {
 
 
 
-        var modalidad = data.modality_id;
+        let modalidad = data.modality_id;
 
         $.post("../../controller/evento.php?op=modalidad", { modality_id: modalidad }, function (response1) {
             response1 = JSON.parse(response1);
             modalidad = response1.name;
             ctx.font = '15px Arial';
-            var textToDraw = 'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + modalidad + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda, el ' + data.cur_fechfin + '';
+            let textToDraw = 'Desarrollado desde el ' + data.cur_fechini + ' al ' + data.cur_fechfin + ', modalidad ' + modalidad + ', con una duración de ' + data.nhours + ' horas. Dado en la ciudad de Guaranda, el ' + data.cur_fechfin + '';
 
             drawWrappedText(textToDraw, x, 440, maxWidth, lineHeight);
 
@@ -112,14 +112,15 @@ $(document).on("click", "#btnpng", function () {
 });
 
 $(document).on("click", "#btnpdf", function () {
-    var imgData = canvas.toDataURL('image/png');
-    var doc = new jsPDF('l', 'mm');
+    let imgData = canvas.toDataURL('image/png');
+    let doc = new jsPDF('l', 'mm');
     doc.addImage(imgData, 'PNG', 30, 15);
     doc.save('Certificado.pdf');
+
 });
 
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+let getUrlParameter = function getUrlParameter(sParam) {
+    let sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
         sParameterName,
         i;

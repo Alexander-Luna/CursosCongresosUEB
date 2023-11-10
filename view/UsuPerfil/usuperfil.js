@@ -47,13 +47,12 @@ $(document).ready(function () {
     bloqueaLetrascaracteres(document.getElementById('usu_ci'));
     bloqueaLetrascaracteres(document.getElementById('usu_telf'));
 
-
+    combo_nacademico();
     combo_facultad();
-    cargarCarrera();
+
     $.post("../../controller/usuario.php?op=mostrar", { usu_id: usu_id }, function (data) {
         data = JSON.parse(data);
         facultad_id = data.facultad_id;
-
         $('#usu_nom').val(data.usu_nom);
         $('#usu_apep').val(data.usu_apep);
         $('#usu_apem').val(data.usu_apem);
@@ -65,15 +64,18 @@ $(document).ready(function () {
         $('#usu_sex').val(data.usu_sex).trigger("change");
         console.log(data.usu_otracarrera + " " + data.facultad_id + " " + data.carrera_id);
 
-        if (data.usu_otracarrera != null) {
-            $('#usu_otracarrera').val(data.usu_otracarrera);
-        }
+
         if (data.facultad_id != null) {
             $('#facultad_id').val(data.facultad_id).trigger("change");
+            if (data.carrera_id != null) {
+                combo_carrera(data.facultad_id);
+                $('#carrera_id').val(data.carrera_id).trigger("change");
+            }
+            if (data.facultad_id == 7) {
+                $('#usu_otracarrera').val(data.usu_otracarrera);
+            }
         }
-        if (data.carrera_id != null) {
-            $('#carrera_id').val(data.carrera_id).trigger("change");
-        }
+
     });
 });
 
@@ -109,10 +111,14 @@ function combo_facultad() {
 
     });
 }
+function combo_nacademico() {
+    $.post("../../controller/academic_level.php?op=combo", function (data) {
+        $('#aclevel_id').html(data);
 
-let selectedFacultad = "";
+    });
+}
 
-function cargarCarrera() {
+function combo_carrera(facultad_id) {
     $.post("../../controller/carrera.php?op=combo", { facultad: facultad_id }, function (data) {
         $('#carrera_id').html(data);
     });
@@ -121,10 +127,8 @@ function mostrarOcultarCarrera() {
     let facultadSelect = document.getElementById("facultad_id");
     let carreraDiv = document.getElementById("divCarrera");
     let otraCarreraDiv = document.getElementById("divOtraCarrera");
-    selectedFacultad = facultadSelect.value;
-    $.post("../../controller/carrera.php?op=combo", { facultad: selectedFacultad }, function (data) {
-        $('#carrera_id').html(data);
-    });
+    let selectedFacultad = facultadSelect.value;
+    combo_carrera(selectedFacultad);
     if (selectedFacultad === "7") {
         carreraDiv.style.display = "none";
         otraCarreraDiv.style.display = "block";

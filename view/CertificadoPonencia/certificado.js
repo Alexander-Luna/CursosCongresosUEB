@@ -81,7 +81,7 @@ $(document).ready(function () {
 
 
 
-       // ponen_id = getUrlParameter('ponen_id');
+        // ponen_id = getUrlParameter('ponen_id');
         usu_nom = data.usu_nom;
         usu_ci = data.usu_ci;
         cur_nom = data.cur_nom;

@@ -157,7 +157,7 @@ switch ($_GET["op"]) {
                 $output["usu_apem"] = $row["usu_apem"];
                 $output["usu_correo"] = $row["usu_correo"];
                 $output["usu_sex"] = $row["usu_sex"];
-                $output["usu_pass"] = $row["usu_pass"];
+            
                 $output["usu_telf"] = $row["usu_telf"];
                 $output["rol_id"] = $row["rol_id"];
                 $output["usu_ci"] = $row["usu_ci"];
@@ -263,9 +263,9 @@ switch ($_GET["op"]) {
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
+            $sub_array[] = $row["usu_ci"];
             $sub_array[] = $row["usu_nom"];
-            $sub_array[] = $row["usu_apep"];
-            $sub_array[] = $row["usu_apem"];
+            $sub_array[] = $row["usu_apep"] . " " . $row["usu_apem"];
             $sub_array[] = $row["usu_correo"];
             $sub_array[] = $row["usu_telf"];
 
@@ -285,7 +285,9 @@ switch ($_GET["op"]) {
             }
             $sub_array[] = '<button type="button" onClick="editar(' . $row["usu_id"] . ');"  id="' . $row["usu_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["usu_id"] . ');"  id="' . $row["usu_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
-            $sub_array[] = $row["usu_ci"];
+
+
+
             $data[] = $sub_array;
         }
 
@@ -297,12 +299,37 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
+    case "listar_eventos_usuario_excel":
+        $datos = $usuario->get_eventos_usuario_x_id($_POST["even_id"]);
+        $data = array();
+        foreach ($datos as $row) {
+            $sub_array = array();
+            $sub_array[] = $row["cur_nom"];
+            $sub_array[] = $row["usu_nom"];
+            $sub_array[] = $row["usu_ci"];
+            $sub_array[] = $row["usu_apep"] . " " . $row["usu_apem"];
+            $sub_array[] = $row["cur_fechini"];
+            $sub_array[] = $row["cur_fechfin"];
+            if (isset($row["nhours"])) {
+                $sub_array[] = $row["nhours"];
+            } else {
+                $sub_array[] = 'Valor Predeterminado';
+            }
+            $data[] = $sub_array;
+        }
+
+        // Devuelve los datos como un array JSON
+        echo json_encode($data);
+        break;
     /*TODO: Listar todos los usuarios pertenecientes a un evento */
     case "listar_eventos_usuario":
         $datos = $usuario->get_eventos_usuario_x_id($_POST["even_id"]);
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
+
+
+
             $sub_array[] = $row["cur_nom"];
             $sub_array[] = $row["usu_nom"] . " " . $row["usu_apep"] . " " . $row["usu_apem"];
             $sub_array[] = $row["cur_fechini"];
@@ -315,6 +342,28 @@ switch ($_GET["op"]) {
             }
             $sub_array[] = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
+
+
+
+
+            // Agregar columnas adicionales con la clase CSS 'hidden-column' para ocultarlas inicialmente
+            $sub_array[] = '<span class="wd-0p hidden-column">' . $row["facultad"] . '</span>';
+
+            if ($row["facultad"] == null || $row["facultad"] == 7) {
+                $sub_array[] = '<span class="wd-0p hidden-column">' . $row["usu_otracarrera"] . '</span>';
+            } else {
+                $sub_array[] = '<span class="wd-0p hidden-column">' . $row["carrera"] . '</span>';
+            }
+
+            $sub_array[] = '<span class="wd-0p hidden-column">' . $row["usu_correo"] . '</span>';
+            $sub_array[] = '<span class="wd-0p hidden-column">' . " " . $row["usu_ci"] . '</span>';
+            $sub_array[] = '<span class="wd-0p hidden-column">' . " " . $row["usu_telf"] . '</span>';
+
+            if ($row["est_aprueba"] == 1) {
+                $sub_array[] = '<span class="wd-0p hidden-column">' . "Aprobado" . '</span>';
+            } else {
+                $sub_array[] = '<span class="wd-0p hidden-column">' . "Reprobado" . '</span>';
+            }
             $data[] = $sub_array;
         }
 

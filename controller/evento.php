@@ -43,7 +43,7 @@ switch ($_GET["op"]) {
         if (!$evento->existe_usuario_evento($usu_ci, $even_id)) {
             $evento->insert_evento_usuario_excel($even_id, $usu_ci);
         } else {
-           // echo "El usuario ya esta registrado en este evento.";
+            // echo "El usuario ya esta registrado en este evento.";
         }
         break;
     case "insert_evento_usuario":
@@ -106,6 +106,12 @@ switch ($_GET["op"]) {
             $sub_array[] = '<button type="button" onClick="editar(' . $row["even_id"] . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["even_id"] . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
             $sub_array[] = '<label class="switch"><input type="checkbox" class="checkbox" onClick="habilitarAsistencia(' . $row["even_id"] . ');" name="C' . $row["even_id"] . '" id="C' . $row["even_id"] . '"' . ($row["est_asistencia"] == 1 ? ' checked' : '') . '><div class="slider"></div></label>';
+
+            $modality = $evento->get_modalidad_id($row["modality_id"]);
+
+            $sub_array[] = '<span class="wd-0p hidden-column">' . $row["nhours"] . '</span>';
+            $sub_array[] = '<span class="wd-0p hidden-column">' . $modality['name'] . '</span>';
+
             $data[] = $sub_array;
 
         }

@@ -7,7 +7,6 @@
 
   ?>
   <title>Certificado</title>
-  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </head>
 
 <body class="pos-relative">
@@ -34,7 +33,6 @@
   </div>
 
   <?php require_once("../html/MainJs.php"); ?>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
   <script type="text/javascript" src="certificado.js"></script>
 </body>
 

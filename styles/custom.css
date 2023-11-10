@@ -62,3 +62,7 @@ td:hover {
 }
 
 
+.hidden-column {
+    display: none;
+    width: 0;
+}

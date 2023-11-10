@@ -1,10 +1,11 @@
 <?php
-  /* Llamamos al archivo de conexion.php */
-  require_once("../../config/conexion.php");
-  if(isset($_SESSION["usu_id"])){
-?>
-<!DOCTYPE html>
-<html lang="es">
+/* Llamamos al archivo de conexion.php */
+require_once("../../config/conexion.php");
+if (isset($_SESSION["usu_id"])) {
+  ?>
+  <!DOCTYPE html>
+  <html lang="es">
+
   <head>
     <?php require_once("../html/MainHead.php"); ?>
 
@@ -30,38 +31,41 @@
 
       <div class="br-pagebody">
         <div class="br-section-wrapper">
-            <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Eventos</h6>
-            <p class="mg-b-30 tx-gray-600">Listado de Eventos</p>
+          <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Eventos</h6>
+          <p class="mg-b-30 tx-gray-600">Listado de Eventos</p>
 
-            <button class="btn btn-outline-primary" id="add_button" onclick="nuevo()"><i class="fa fa-plus-square mg-r-10"></i> Nuevo Registro</button>
+          <button class="btn btn-outline-primary" id="add_button" onclick="nuevo()"><i
+              class="fa fa-plus-square mg-r-10"></i> Nuevo Registro</button>
 
-            <p></p>
+          <p></p>
 
-            <div class="table-wrapper"></div>
-                <table id="eventos_data" class="table display responsive nowrap">
-                <thead>
-                    <tr>
-                    <th class="wd-15p">Dependencia</th>
-                    <th class="wd-15p">Nombre</th>
-                    <th class="wd-15p">Tipo</th>
-                    <th class="wd-15p">Ponentes</th>
-                    <th class="wd-15p">Fecha Inicio</th>
-                    <th class="wd-20p">Fecha Fin</th>
-                    <th class="wd-15p">Portada</th>
-                    <th class="wd-10p">Certificado</th>
-                    <th class="wd-10p">Editar</th>
-                    <th class="wd-10p">Eliminar</th>
-                    <th class="wd-10p">Asistencia</th>
-                    </tr>
-                </thead>
-                <tbody>
+          <div class="table-wrapper"></div>
+          <table id="eventos_data" class="table display responsive nowrap">
+            <thead>
+              <tr>
+                <th class="wd-15p">Dependencia</th>
+                <th class="wd-15p">Nombre</th>
+                <th class="wd-15p">Tipo</th>
+                <th class="wd-15p">Ponentes</th>
+                <th class="wd-15p">Fecha Inicio</th>
+                <th class="wd-15p">Fecha Fin</th>
+                <th class="wd-5p">Portada</th>
+                <th class="wd-5p">Certificado</th>
+                <th class="wd-5p">Editar</th>
+                <th class="wd-5p">Eliminar</th>
+                <th class="wd-10p">Asistencia</th>
+                <th class="wd-0p hidden-column">N Horas</th>
+                <th class="wd-0p hidden-column">Modalidad</th>
+              </tr>
+            </thead>
+            <tbody>
 
-                </tbody>
-                </table>
-            </div>
-
+            </tbody>
+          </table>
         </div>
+
       </div>
+    </div>
     </div>
 
     <?php require_once("modalmantenimiento.php"); ?>
@@ -70,10 +74,11 @@
     <?php require_once("../html/MainJs.php"); ?>
     <script type="text/javascript" src="adminmntevento.js"></script>
   </body>
-</html>
-<?php
-  }else{
-    /* Si no a iniciado sesion se redireccionada a la ventana principal */
-    header("Location:".Conectar::ruta()."view/404/");
-  }
+
+  </html>
+  <?php
+} else {
+  /* Si no a iniciado sesion se redireccionada a la ventana principal */
+  header("Location:" . Conectar::ruta() . "view/404/");
+}
 ?>

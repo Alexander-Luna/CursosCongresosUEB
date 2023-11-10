@@ -205,26 +205,36 @@ class Usuario extends Conectar
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT 
-                td_evento_usuario.curd_id,
-                tm_evento.even_id,
-                tm_evento.cur_nom,
-                tm_evento.cur_descrip,
-                tm_evento.cur_fechini,
-                tm_evento.cur_fechfin,
-                tm_evento.portada_img,
-                tm_evento.nhours,
-                tm_usuario.usu_id,
-                tm_usuario.usu_nom,
-                tm_usuario.usu_apep,
-                tm_usuario.usu_apem,
-                tm_usuario.usu_ci,
-                tm_usuario.aclevel_id
-                FROM td_evento_usuario INNER JOIN 
-                tm_evento ON td_evento_usuario.even_id = tm_evento.even_id INNER JOIN
-                tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id 
-                WHERE 
-                tm_evento.even_id = ?
-                AND td_evento_usuario.est = 1";
+        td_evento_usuario.curd_id,
+        td_evento_usuario.est_aprueba,
+        tm_evento.even_id,
+        tm_evento.cur_nom,
+        tm_evento.cur_descrip,
+        tm_evento.cur_fechini,
+        tm_evento.cur_fechfin,
+        tm_evento.portada_img,
+        tm_evento.nhours,
+        tm_usuario.usu_id,
+        tm_usuario.usu_correo,
+        tm_usuario.facultad_id,
+        tm_usuario.carrera_id,
+        tm_usuario.usu_otracarrera,
+        tm_usuario.usu_nom,
+        tm_usuario.usu_telf,
+        tm_usuario.usu_apep,
+        tm_usuario.usu_apem,
+        tm_usuario.usu_ci,
+        tm_usuario.aclevel_id,
+        tm_facultad.name AS facultad,
+        tm_carrera.name AS carrera
+    FROM td_evento_usuario
+    INNER JOIN tm_evento ON td_evento_usuario.even_id = tm_evento.even_id
+    INNER JOIN tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id
+    LEFT JOIN tm_facultad ON tm_usuario.facultad_id = tm_facultad.facultad_id
+    LEFT JOIN tm_carrera ON tm_usuario.carrera_id = tm_carrera.carrera_id
+    WHERE 
+        tm_evento.even_id = ?
+        AND td_evento_usuario.est = 1";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $even_id);
         $sql->execute();
@@ -323,11 +333,18 @@ class Usuario extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT tm_usuario.*, CASE WHEN tm_facultad.facultad_id IS NOT NULL THEN tm_facultad.name ELSE tm_usuario.usu_otracarrera END AS facultad_nombre, CASE WHEN tm_carrera.carrera_id IS NOT NULL THEN tm_carrera.name ELSE NULL END AS carrera_nombre FROM tm_usuario LEFT JOIN tm_facultad ON tm_facultad.facultad_id = tm_usuario.facultad_id LEFT JOIN tm_carrera ON tm_carrera.carrera_id = tm_usuario.carrera_id WHERE tm_usuario.est = 1 AND tm_usuario.usu_id = ?";
+        $sql = "SELECT tm_usuario.*, CASE WHEN tm_facultad.facultad_id IS NOT NULL THEN tm_facultad.name 
+        ELSE tm_usuario.usu_otracarrera END AS facultad_nombre, CASE WHEN tm_carrera.carrera_id IS NOT NULL 
+        THEN tm_carrera.name ELSE NULL END AS carrera_nombre FROM tm_usuario 
+        LEFT JOIN tm_facultad ON tm_facultad.facultad_id = tm_usuario.facultad_id 
+        LEFT JOIN tm_carrera ON tm_carrera.carrera_id = tm_usuario.carrera_id 
+        WHERE tm_usuario.est = 1 AND tm_usuario.usu_id = ?";
+
 
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_id);
         $sql->execute();
+
         return $resultado = $sql->fetchAll();
     }
 

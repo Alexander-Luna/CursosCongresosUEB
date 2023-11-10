@@ -22,7 +22,26 @@ $(document).ready(function () {
                 dom: 'Bfrtip',
                 buttons: [
                     'copyHtml5',
-                    'excelHtml5',
+                    'excelHtml5'/*{
+                        text: 'Exportar a Excel',
+                        action: function (e, dt, button, config) {
+                            $.ajax({
+                                url: "../../controller/usuario.php?op=listar_eventos_usuario_excel",
+                                type: "post",
+                                data: { even_id: even_id },
+                                success: function (data) {
+                                    // Convertir el array a un objeto JSON
+                                    const json = JSON.stringify(data);
+                    
+                                    // Crear un archivo Excel con el objeto JSON
+                                    const blob = new Blob([json], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                    
+                                    // Guardar el archivo Excel
+                                    saveAs(blob, 'data.xlsx');
+                                }
+                            });
+                        }
+                    }*/,
                     'csvHtml5',
 
                 ],
@@ -238,12 +257,45 @@ function nuevoExcel() {
     } else {
         let even_id = $('#even_id').val();
         listar_usuario(even_id);
-
-
         $('#modalplantilla').modal('show');
     }
 }
+function descargaMasiva() {
+    if ($('#even_id').val() == '') {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Seleccionar Evento',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        })
+    } else {
+        descargarCertificado("SEMINARIO 1", "ALEXANDER LUNA", "2023-12-12", "2024-01-01", "50");
+    }
+}
 
+function descargarCertificado(evento, usuario, fechaInicio, fechaFin, nHoras) {
+    // Obtener la imagen del certificado
+    //const imagen = `https://www.example.com/imagenes/certificados/${evento}.jpg`;
+
+    // Crear un objeto PDF
+    const pdf = new PDF();
+
+    // Agregar el encabezado del PDF
+    pdf.addHeader({
+        título: "Certificado de finalización",
+        subtítulo: `Evento: ${evento}`,
+        usuario: usuario,
+        fechaInicio: fechaInicio,
+        fechaFin: fechaFin,
+        nHoras: nHoras,
+    });
+
+    // Agregar la imagen del certificado
+   // pdf.addImage(imagen);
+
+    // Guardar el PDF
+    pdf.saveAs("certificado.pdf");
+}
 let ExcelToJSON = function () {
     this.parseExcel = function (file) {
         let reader = new FileReader();
@@ -260,7 +312,7 @@ let ExcelToJSON = function () {
                 let json_object = JSON.stringify(XL_row_object);
                 UserList = JSON.parse(json_object);
 
-                console.log(UserList)
+                // console.log(UserList)
                 for (i = 0; i < UserList.length; i++) {
 
                     let columns = Object.values(UserList[i])
@@ -278,22 +330,15 @@ let ExcelToJSON = function () {
                         aclevel_id: assignAclevelId(columns[7])
 
                     }, function (data) {
-                        console.log(data);
+
                     });
                     $.post("../../controller/evento.php?op=guardar_desde_excel", {
                         usu_ci: columns[4],
                         even_id: even_id
                     }, function (data) {
 
-                        console.log(data);
                     });
                 }
-                Swal.fire({
-                    title: 'Correcto!',
-                    text: 'Usuarios Agregados Correctamente',
-                    icon: 'success',
-                    confirmButtonText: 'Aceptar'
-                })
 
                 /* TODO:Despues de subir la informacion limpiar inputfile */
                 document.getElementById("upload").value = null;
@@ -329,7 +374,6 @@ function handleFileSelect(evt) {
 }
 
 document.getElementById('upload').addEventListener('change', handleFileSelect, false);
-
 
 
 

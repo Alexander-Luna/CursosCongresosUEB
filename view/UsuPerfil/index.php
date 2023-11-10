@@ -96,9 +96,7 @@ if (isset($_SESSION["usu_id"])) {
                   <select class="form-control" aria-label="Floating label select example" name="aclevel_id"
                     id="aclevel_id">
                     <option selected>Seleccione</option>
-                    <option value="1">Estudiante</option>
-                    <option value="2">Maestría</option>
-                    <option value="3">Doctorado</option>
+                  
                   </select>
                 </div>
               </div>
@@ -118,7 +116,7 @@ if (isset($_SESSION["usu_id"])) {
                 <div class="form-floating">
                   <select class="form-control" name="carrera_id" id="carrera_id"
                     aria-label="Floating label select example">
-                    <option value="0">Seleccione</option>
+                    <option selected>Seleccione</option>
                   </select>
                 </div>
               </div>
