@@ -156,8 +156,7 @@ class Ponente extends Conectar
         tm_usuario.usu_id,
         modality.name AS mname,
         tm_usuario.usu_nom,
-        tm_usuario.usu_apep,
-        tm_usuario.usu_apem,
+        tm_usuario.usu_apellidos,
         tm_usuario.usu_ci,
         tm_usuario.aclevel_id
         FROM tm_ponente INNER JOIN 

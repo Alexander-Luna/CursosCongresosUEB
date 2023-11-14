@@ -44,17 +44,11 @@ if (isset($_SESSION["usu_id"])) {
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
-                  <label class="form-control-label">Apellido Paterno: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="usu_apep" id="usu_apep" placeholder="Apellido Paterno">
+                  <label class="form-control-label">Apellidos: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" name="usu_apellidos" id="usu_apellidos"
+                    placeholder="Apellido Paterno">
                 </div>
               </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Apellido Materno: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="usu_apem" id="usu_apem" placeholder="Apellido Materno">
-                </div>
-              </div>
-
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label">Correo Electrónico: <span class="tx-danger">*</span></label>
@@ -96,7 +90,7 @@ if (isset($_SESSION["usu_id"])) {
                   <select class="form-control" aria-label="Floating label select example" name="aclevel_id"
                     id="aclevel_id">
                     <option selected>Seleccione</option>
-                  
+
                   </select>
                 </div>
               </div>
@@ -111,7 +105,7 @@ if (isset($_SESSION["usu_id"])) {
                 </div>
               </div>
 
-              <div class="col-lg-4" id="divCarrera" style="display: none;">
+              <div class="col-lg-4" id="divCarrera" style="display: block;">
                 <label class="form-control-label">Carrera: </label>
                 <div class="form-floating">
                   <select class="form-control" name="carrera_id" id="carrera_id"

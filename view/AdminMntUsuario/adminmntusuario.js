@@ -32,8 +32,7 @@ function guardaryeditar(e) {
 }
 
 $(document).ready(function () {
-    bloqueaNumeros(document.getElementById('usu_apep'));
-    bloqueaNumeros(document.getElementById('usu_apem'));
+    bloqueaNumeros(document.getElementById('usu_apellidos'));
     bloqueaNumeros(document.getElementById('usu_nom'));
     bloqueaLetrascaracteres(document.getElementById('usu_ci'));
     bloqueaLetrascaracteres(document.getElementById('usu_telf'));
@@ -98,8 +97,7 @@ function editar(usu_id) {
         data = JSON.parse(data);
         $('#usu_id').val(data.usu_id);
         $('#usu_nom').val(data.usu_nom);
-        $('#usu_apep').val(data.usu_apep);
-        $('#usu_apem').val(data.usu_apem);
+        $('#usu_apellidos').val(data.usu_apellidos);
         $('#usu_correo').val(data.usu_correo);
         $('#usu_sex').val(data.usu_sex).trigger('change');
         $('#rol_id').val(data.rol_id).trigger('change');
@@ -171,15 +169,13 @@ let ExcelToJSON = function () {
 
                     $.post("../../controller/usuario.php?op=guardar_desde_excel", {
                         usu_nom: columns[0],
-                        usu_apep: columns[1],
-                        usu_apem: columns[2],
-                        usu_correo: columns[3],
-                        usu_pass: columns[4],
-                        usu_ci: columns[4],
-                        usu_sex: columns[5],
-                        usu_telf: columns[6],
+                        usu_apellidos: columns[1],
+                        usu_correo: columns[2],
+                        usu_ci: columns[3],
+                        usu_sex: columns[4],
+                        usu_telf: columns[5],
                         rol_id: '1',
-                        aclevel_id: assignAclevelId(columns[7])
+                        aclevel_id: assignAclevelId(columns[6])
 
                     }, function (data) {
                         console.log(data);

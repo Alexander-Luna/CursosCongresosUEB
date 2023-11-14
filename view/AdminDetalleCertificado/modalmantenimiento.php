@@ -11,8 +11,7 @@
                         <tr>
                             <th class="wd-10p"></th>
                             <th class="wd-15p">Nombre</th>
-                            <th class="wd-15p">Ape.Paterno</th>
-                            <th class="wd-15p">Ape.Materno</th>
+                            <th class="wd-15p">Apellidos</th>
                             <th class="wd-15p">Correo</th>
                         </tr>
                     </thead>

@@ -7,7 +7,7 @@ class Evento extends Conectar
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "INSERT INTO tm_evento (even_id, cat_id, cur_nom, cur_descrip, cur_fechini, cur_fechfin,cur_img, fech_crea,modality_id,nhours,eventype_id, est,est_asistencia)
-         VALUES (NULL,?,?,?,?,?,'../../public/1.png', now(),?,?,?,'1',0);";
+        VALUES (NULL,?,?,?,?,?,'../../public/1.png', now(),?,?,?,'1',0);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $cat_id);
         $sql->bindValue(2, $cur_nom);
@@ -231,13 +231,11 @@ class Evento extends Conectar
         $conectar = parent::conexion();
         parent::set_names();
 
-        // Buscar el usuario en la tabla tm_usuario
         $sql = "SELECT usu_id FROM tm_usuario WHERE est = 1 AND usu_ci = ?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_ci);
         $sql->execute();
         $usuario = $sql->fetch(PDO::FETCH_ASSOC);
-
         if (!$usuario) {
             // El usuario no se encontró, puedes manejar el error o mostrar un mensaje
             return false;

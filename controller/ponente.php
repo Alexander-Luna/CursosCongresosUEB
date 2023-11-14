@@ -55,7 +55,7 @@ switch ($_GET["op"]) {
         foreach ($datos as $row) {
             $sub_array = array();
 
-            $sub_array[] = $row["usu_nom"] . " " . $row["usu_apep"] . " " . $row["usu_apem"];
+            $sub_array[] = $row["usu_nom"] . " " . $row["usu_apellidos"];
             $sub_array[] = '<a href="' . $row["ponen_img"] . '" target="_blank">' . strtoupper(($row["ponen_titulo"])) . '</a>';
             $sub_array[] = $row["ponen_description"];
             if ($row["ponen_type"] == "P") {
@@ -113,8 +113,7 @@ switch ($_GET["op"]) {
                 $output["modality_id"] = $row["modality_id"];
                 $output["mname"] = $row["mname"];
                 $output["usu_nom"] = $row["usu_nom"];
-                $output["usu_apep"] = $row["usu_apep"];
-                $output["usu_apem"] = $row["usu_apem"];
+                $output["usu_apellidos"] = $row["usu_apellidos"];
                 $output["aclevel_id"] = $row["aclevel_id"];
             }
 

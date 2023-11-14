@@ -238,8 +238,7 @@ INSERT INTO `tm_carrera` (
 CREATE TABLE `tm_usuario` (
   `usu_id` int(11) NOT NULL,
   `usu_nom` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `usu_apep` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `usu_apem` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `usu_apellidos` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `usu_correo` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `usu_pass` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
   `usu_sex` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
@@ -269,10 +268,10 @@ ALTER TABLE `tm_carrera` ADD CONSTRAINT `fk_carrera_facultad`
 FOREIGN KEY (`facultad_id`)
 REFERENCES `tm_facultad`(`facultad_id`);
 
-INSERT INTO `tm_usuario` (`usu_id`, `usu_nom`, `usu_apep`, `usu_apem`, `usu_correo`, `usu_pass`, `usu_sex`, `usu_telf`, `rol_id`, `usu_ci`, `fech_crea`, `est`, `aclevel_id`) VALUES
-(1, "Alexander Paul", "Luna", "Arteaga", "aluna@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "M", "0985726434", 2, "0202433918", "2023-04-26 20:14:08", 1,1),
-(2, "Wilson Efrain", "Paredes", "Guano", "wiparedes@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "M", "0985726434",2, "0202433912", "2023-04-26 20:14:08", 1,1),
-(3, "Elizabeth", "Ordoñes", "Lopéz", "user@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "F", "0985726439", 1, "0202433911", "2023-04-26 20:14:08", 1,1);
+INSERT INTO `tm_usuario` (`usu_id`, `usu_nom`, `usu_apellidos`, `usu_correo`, `usu_pass`, `usu_sex`, `usu_telf`, `rol_id`, `usu_ci`, `fech_crea`, `est`, `aclevel_id`) VALUES
+(1, "Alexander Paul", "Luna Arteaga", "aluna@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "M", "0985726434", 2, "0202433918", "2023-04-26 20:14:08", 1,1),
+(2, "Wilson Efrain", "Paredes Guano", "wiparedes@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "M", "0985726434",2, "0202433912", "2023-04-26 20:14:08", 1,1),
+(3, "Elizabeth", "Ordoñes Lopéz", "user@mailes.ueb.edu.ec", "$2y$12$FjIlFJY8cjkukOflkT87QO0Lhys8a7niQ7VO2XpXzKGvkPx5OVHNG", "F", "0985726439", 1, "0202433911", "2023-04-26 20:14:08", 1,1);
 
 ALTER TABLE `td_evento_usuario`
   ADD PRIMARY KEY (`curd_id`);

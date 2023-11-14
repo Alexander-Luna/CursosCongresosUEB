@@ -53,13 +53,13 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
-    /*TODO:  Listar toda la informacion segun formato de datatable */
     case "combo":
-        $datos = $carrera->get_carrera($_POST["facultad"]);
+        $datos = $carrera->get_carreras();
         if (is_array($datos) == true and count($datos) > 0) {
             $html = " <option label='Seleccione'></option>";
             foreach ($datos as $row) {
-                $html .= "<option value='" . $row['carrera_id'] . "'>" . $row['name'] . "</option>";
+                $html .= "<option value='" . $row['carrera_id'] . "' data-facultad-id='" . $row['facultad_id'] . "'>" . $row['name'] . "</option>";
+
             }
             echo $html;
         }

@@ -20,7 +20,7 @@ $(document).on("click", "#btnconsultar", function () {
             if (data.length > 0) {
                 data = JSON.parse(data);
 
-                $("#lbldatos").html("Listado de Eventos : " + data.usu_apep + " " + data.usu_apem + " " + data.usu_nom);
+                $("#lbldatos").html("Listado de Eventos : " + data.usu_apellidos  + " " + data.usu_nom);
 
                 $('#eventos_data').DataTable({
                     "aProcessing": true,

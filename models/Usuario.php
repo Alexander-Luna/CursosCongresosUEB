@@ -108,8 +108,7 @@ class Usuario extends Conectar
                 tm_evento.portada_img,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
-                tm_usuario.usu_apep,
-                tm_usuario.usu_apem,
+                tm_usuario.usu_apellidos,
                 tm_usuario.usu_ci,
                 tm_usuario.aclevel_id
                 FROM td_evento_usuario INNER JOIN 
@@ -148,8 +147,7 @@ class Usuario extends Conectar
                 tm_evento.est_asistencia,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
-                tm_usuario.usu_apep,
-                tm_usuario.usu_apem,
+                tm_usuario.usu_apellidos,
                 tm_usuario.usu_ci,
                 tm_usuario.aclevel_id
                 FROM tm_ponente INNER JOIN 
@@ -183,8 +181,7 @@ class Usuario extends Conectar
                 tm_evento.portada_img,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
-                tm_usuario.usu_apep,
-                tm_usuario.usu_apem,
+                tm_usuario.usu_apellidos,
                 tm_usuario.usu_ci,
                 tm_usuario.aclevel_id
                 FROM td_evento_usuario INNER JOIN 
@@ -221,8 +218,7 @@ class Usuario extends Conectar
         tm_usuario.usu_otracarrera,
         tm_usuario.usu_nom,
         tm_usuario.usu_telf,
-        tm_usuario.usu_apep,
-        tm_usuario.usu_apem,
+        tm_usuario.usu_apellidos,
         tm_usuario.usu_ci,
         tm_usuario.aclevel_id,
         tm_facultad.name AS facultad,
@@ -257,8 +253,7 @@ class Usuario extends Conectar
             tm_evento.nhours,
             tm_usuario.usu_id,
             tm_usuario.usu_nom,
-            tm_usuario.usu_apep,
-            tm_usuario.usu_apem,
+            tm_usuario.usu_apellidos,
             tm_usuario.usu_ci,
             tm_usuario.aclevel_id,
             COUNT(td_evento_usuario_dias.asistencia_id) AS asistencia_count
@@ -294,8 +289,7 @@ class Usuario extends Conectar
                 tm_evento.cur_img,
                 tm_usuario.usu_id,
                 tm_usuario.usu_nom,
-                tm_usuario.usu_apep,
-                tm_usuario.usu_apem,
+                tm_usuario.usu_apellidos,
                 tm_usuario.aclevel_id
                 FROM td_evento_usuario INNER JOIN 
                 tm_evento ON td_evento_usuario.even_id = tm_evento.even_id INNER JOIN
@@ -372,15 +366,14 @@ class Usuario extends Conectar
         return $resultado['count'] > 0;
     }
     /*TODO: Actualizar la informacion del perfil del usuario segun ID */
-    public function update_usuario_perfil($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_sex, $usu_telf, $usu_ci, $aclevel_id, $facultad_id, $carrera_id, $otra_carrera)
+    public function update_usuario_perfil($usu_id, $usu_nom, $usu_apellidos, $usu_sex, $usu_telf, $usu_ci, $aclevel_id, $facultad_id, $carrera_id, $otra_carrera)
     {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "UPDATE tm_usuario 
                 SET
                     usu_nom = ?,
-                    usu_apep = ?,
-                    usu_apem = ?,
+                    usu_apellidos = ?,
                     usu_sex = ?,
                     usu_telf = ?,
                     usu_ci = ?,
@@ -392,43 +385,41 @@ class Usuario extends Conectar
                     usu_id = ?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_nom);
-        $sql->bindValue(2, $usu_apep);
-        $sql->bindValue(3, $usu_apem);
-        $sql->bindValue(4, $usu_sex);
-        $sql->bindValue(5, $usu_telf);
-        $sql->bindValue(6, $usu_ci);
-        $sql->bindValue(7, $facultad_id);
-        $sql->bindValue(8, $carrera_id);
-        $sql->bindValue(9, $otra_carrera);
-        $sql->bindValue(10, $aclevel_id);
-        $sql->bindValue(11, $usu_id);
+        $sql->bindValue(2, $usu_apellidos);
+        $sql->bindValue(3, $usu_sex);
+        $sql->bindValue(4, $usu_telf);
+        $sql->bindValue(5, $usu_ci);
+        $sql->bindValue(6, $facultad_id);
+        $sql->bindValue(7, $carrera_id);
+        $sql->bindValue(8, $otra_carrera);
+        $sql->bindValue(9, $aclevel_id);
+        $sql->bindValue(10, $usu_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
 
     /*TODO: Funcion para insertar usuario */
-    public function insert_usuario($usu_nom, $usu_apep, $usu_apem, $usu_correo, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id)
+    public function insert_usuario($usu_nom, $usu_apellidos, $usu_correo, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id)
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO tm_usuario (usu_id,usu_nom,usu_apep,usu_apem,usu_correo,usu_sex,usu_telf,rol_id,usu_ci,usu_pass,aclevel_id,fech_crea, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,?,now(),'1');";
+        $sql = "INSERT INTO tm_usuario (usu_id,usu_nom,usu_apellidos,usu_correo,usu_sex,usu_telf,rol_id,usu_ci,usu_pass,aclevel_id,fech_crea, est) VALUES (NULL,?,?,?,?,?,?,?,?,?,now(),'1');";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_nom);
-        $sql->bindValue(2, $usu_apep);
-        $sql->bindValue(3, $usu_apem);
-        $sql->bindValue(4, $usu_correo);
-        $sql->bindValue(5, $usu_sex);
-        $sql->bindValue(6, $usu_telf);
-        $sql->bindValue(7, $rol_id);
-        $sql->bindValue(8, $usu_ci);
-        $sql->bindValue(9, $this->encriptarPassword($usu_ci));
-        $sql->bindValue(10, $aclevel_id);
+        $sql->bindValue(2, $usu_apellidos);
+        $sql->bindValue(3, $usu_correo);
+        $sql->bindValue(4, $usu_sex);
+        $sql->bindValue(5, $usu_telf);
+        $sql->bindValue(6, $rol_id);
+        $sql->bindValue(7, $usu_ci);
+        $sql->bindValue(8, $this->encriptarPassword($usu_ci));
+        $sql->bindValue(9, $aclevel_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
 
     /*TODO: Funcion para actualizar usuario */
-    public function update_usuario($usu_id, $usu_nom, $usu_apep, $usu_apem, $usu_correo, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id)
+    public function update_usuario($usu_id, $usu_nom, $usu_apellidos, $usu_correo, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id)
     {
         $conectar = parent::conexion();
 
@@ -436,8 +427,7 @@ class Usuario extends Conectar
         $sql = "UPDATE tm_usuario
                 SET
                     usu_nom = ?,
-                    usu_apep = ?,
-                    usu_apem = ?,
+                    usu_apellidos = ?,
                     usu_correo = ?,
                     usu_sex = ?,
                     usu_telf = ?,
@@ -448,15 +438,14 @@ class Usuario extends Conectar
                     usu_id = ?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $usu_nom);
-        $sql->bindValue(2, $usu_apep);
-        $sql->bindValue(3, $usu_apem);
-        $sql->bindValue(4, $usu_correo);
-        $sql->bindValue(5, $usu_sex);
-        $sql->bindValue(6, $usu_telf);
-        $sql->bindValue(7, $rol_id);
-        $sql->bindValue(8, $usu_ci);
-        $sql->bindValue(9, $aclevel_id);
-        $sql->bindValue(10, $usu_id);
+        $sql->bindValue(2, $usu_apellidos);
+        $sql->bindValue(3, $usu_correo);
+        $sql->bindValue(4, $usu_sex);
+        $sql->bindValue(5, $usu_telf);
+        $sql->bindValue(6, $rol_id);
+        $sql->bindValue(7, $usu_ci);
+        $sql->bindValue(8, $aclevel_id);
+        $sql->bindValue(9, $usu_id);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }

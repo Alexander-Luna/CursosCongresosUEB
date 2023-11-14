@@ -1,39 +1,88 @@
-<!DOCTYPE html>
-<html lang="es" class="pos-relative">
+<?php
+require_once('../../public/lib/tcpdf/tcpdf.php');
 
-<head>
-  <?php require_once("../html/MainHead.php"); ?>
-  <title>Certificado</title>
-  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+function certificate_print_text($pdf, $x, $y, $align, $font = 'freeserif', $style, $size = 10, $text, $width = 0)
+{
+    $pdf->setFont($font, $style, $size);
+    $pdf->SetXY($x, $y);
+    $pdf->writeHTMLCell($width, 0, '', '', $text, 0, 0, 0, true, $align);
+}
 
-</head>
+$pdf = new TCPDF('L', 'mm', 'A4', true, 'UTF-8', false);
 
-<body class="pos-relative">
+$pdf->SetCreator(PDF_CREATOR);
+$pdf->SetTitle("My Awesome Certificate");
+$pdf->SetProtection(array('modify'));
+$pdf->setPrintHeader(false);
+$pdf->setPrintFooter(false);
+$pdf->SetAutoPageBreak(false, 0);
+$pdf->AddPage();
+$pdf->SetMargins(0, 0, 0, true); // Set margins to 0
 
-  <div class="ht-100v d-flex align-items-center justify-content-center">
-    <div class="wd-lg-70p wd-xl-50p tx-center pd-x-40">
-      <h1 class="tx-100 tx-xs-140 tx-normal tx-inverse tx-roboto mg-b-0">
-        <br />
-        <canvas id="canvas" height="650px" width="900px" class="img-fluid" alt="Responsive image"></canvas>
+$backgroundImage = realpath("../../public/5.png");
 
-      </h1>
-      <div class="form-layout-footer">
-        <button class="btn btn-outline-info" id="btnpng"><i class="fa fa-send mg-r-10"></i> PNG</button>
-        <button class="btn btn-outline-success" id="btnpdf"><i class="fa fa-send mg-r-10"></i> PDF</button>
-      </div>
-      <br>
-      <p class="tx-16 mg-b-30 text-justify" id="cur_descrip">
+// Si la imagen existe, redimensionarla para que quepa en la página
+if (file_exists($backgroundImage)) {
+    $image = imagecreatefrompng($backgroundImage);
+    $width = imagesx($image);
+    $height = imagesy($image);
 
-      </p>
+    // Si el ancho de la imagen es menor que el ancho de la página, redimensionarla
+    if ($width < 210) {
+        $ratio = 210 / $width;
+        $resizedImage = imagecreatetruecolor(210, round($height * $ratio));
+        imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, 210, round($height * $ratio), imagesx($image), imagesy($image));
+        imagedestroy($image);
+        $image = $resizedImage;
+    }
 
-      <div id="qrcode"></div>
+    // Agregar la imagen redimensionada al PDF
+    $pdf->Image($image, 0, 0, '', '', '', true);
+    imagedestroy($image);
+}
 
-    </div>
-  </div>
+$x = 10;
+$y = 40;
 
-  <?php require_once("../html/MainJs.php"); ?>
-  <script type="text/javascript" src="certificado.js"></script>
-</body>
+$sealx = 150;
+$sealy = 220;
+$seal = realpath("../../public/5.png");
 
-</html>
-*/
+$sigx = 30;
+$sigy = 230;
+$sig = realpath("../../public/img/logo.png");
+
+$custx = 30;
+$custy = 230;
+
+$wmarkx = 26;
+$wmarky = 58;
+$wmarkw = 158;
+$wmarkh = 170;
+$sig = realpath("../../public/img/screen.png");
+
+$brdrx = 0;
+$brdry = 0;
+$brdrw = 210;
+$brdrh = 297;
+$codey = 250;
+
+
+$fontsans = 'helvetica';
+$fontserif = 'times';
+
+// Add text
+$pdf->SetTextColor(0, 0, 120);
+certificate_print_text($pdf, $x, $y, 'C', $fontsans, '', 30, "Certificate of Awesomeness");
+$pdf->SetTextColor(0, 0, 0);
+certificate_print_text($pdf, $x, $y + 20, 'C', $fontserif, '', 20, "This is to certify that");
+certificate_print_text($pdf, $x, $y + 36, 'C', $fontsans, '', 30, "JOHN CENA");
+certificate_print_text($pdf, $x, $y + 55, 'C', $fontsans, '', 20, "has successfully been declared awesome in");
+certificate_print_text($pdf, $x, $y + 72, 'C', $fontsans, '', 20, "the Butt of Many Jokes");
+certificate_print_text($pdf, $x, $y + 92, 'C', $fontsans, '', 14,  "13th June 1992");
+certificate_print_text($pdf, $x, $y + 102, 'C', $fontserif, '', 10, "With a grade of 12%");
+certificate_print_text($pdf, $x, $y + 112, 'C', $fontserif, '', 10, "Earning him a E- :(");
+certificate_print_text($pdf, $x, $y + 122, 'C', $fontserif, '', 10, "In only 206 hours. Yep. 206.");
+
+header("Content-Type: application/pdf");
+echo $pdf->Output('', 'S');

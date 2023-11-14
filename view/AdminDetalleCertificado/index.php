@@ -81,7 +81,6 @@ if (isset($_SESSION["usu_id"])) {
                 <th class="wd-15p">N Horas</th>
                 <th class="wd-5p">Certificado</th>
                 <th class="wd-5p">Eliminar</th>
-
                 <th class="wd-0p hidden-column">Facultad</th>
                 <th class="wd-0p hidden-column">Carrera</th>
                 <th class="wd-0p hidden-column">Correo</th>

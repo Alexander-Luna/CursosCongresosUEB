@@ -117,8 +117,7 @@ switch ($_GET["op"]) {
                 $output["nhours"] = $row["nhours"];
                 $output["modality_id"] = $row["modality_id"];
                 $output["usu_nom"] = $row["usu_nom"];
-                $output["usu_apep"] = $row["usu_apep"];
-                $output["usu_apem"] = $row["usu_apem"];
+                $output["usu_apellidos"] = $row["usu_apellidos"];
                 $output["aclevel_id"] = $row["aclevel_id"];
             }
 
@@ -153,11 +152,9 @@ switch ($_GET["op"]) {
             foreach ($datos as $row) {
                 $output["usu_id"] = $row["usu_id"];
                 $output["usu_nom"] = $row["usu_nom"];
-                $output["usu_apep"] = $row["usu_apep"];
-                $output["usu_apem"] = $row["usu_apem"];
+                $output["usu_apellidos"] = $row["usu_apellidos"];
                 $output["usu_correo"] = $row["usu_correo"];
                 $output["usu_sex"] = $row["usu_sex"];
-            
                 $output["usu_telf"] = $row["usu_telf"];
                 $output["rol_id"] = $row["rol_id"];
                 $output["usu_ci"] = $row["usu_ci"];
@@ -177,8 +174,7 @@ switch ($_GET["op"]) {
             foreach ($datos as $row) {
                 $output["usu_id"] = $row["usu_id"];
                 $output["usu_nom"] = $row["usu_nom"];
-                $output["usu_apep"] = $row["usu_apep"];
-                $output["usu_apem"] = $row["usu_apem"];
+                $output["usu_apellidos"] = $row["usu_apellidos"];
                 $output["usu_correo"] = $row["usu_correo"];
                 $output["usu_sex"] = $row["usu_sex"];
                 $output["usu_telf"] = $row["usu_telf"];
@@ -202,8 +198,7 @@ switch ($_GET["op"]) {
         $usuario->update_usuario_perfil(
             $_POST["usu_id"],
             $_POST["usu_nom"],
-            $_POST["usu_apep"],
-            $_POST["usu_apem"],
+            $_POST["usu_apellidos"],
             $_POST["usu_sex"],
             $_POST["usu_telf"],
             $_POST["usu_ci"],
@@ -216,9 +211,9 @@ switch ($_GET["op"]) {
     /*TODO: Guardar y editar cuando se tenga el ID */
     case "guardaryeditar":
         if (empty($_POST["usu_id"])) {
-            $usuario->insert_usuario($_POST["usu_nom"], $_POST["usu_apep"], $_POST["usu_apem"], $_POST["usu_correo"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
+            $usuario->insert_usuario($_POST["usu_nom"], $_POST["usu_apellidos"], $_POST["usu_correo"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
         } else {
-            $usuario->update_usuario($_POST["usu_id"], $_POST["usu_nom"], $_POST["usu_apep"], $_POST["usu_apem"], $_POST["usu_correo"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
+            $usuario->update_usuario($_POST["usu_id"], $_POST["usu_nom"], $_POST["usu_apellidos"], $_POST["usu_correo"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
         }
         break;
     case "resetpass":
@@ -234,15 +229,10 @@ switch ($_GET["op"]) {
         break;
     case "cambiarPassword":
         if (isset($_POST["usu_id"]) && isset($_POST["nuevaContraseña"])) {
-            // Recupera el ID de usuario y la nueva contraseña desde el formulario
             $usu_id = $_POST["usu_id"];
             $nuevaContraseña = $_POST["nuevaContraseña"];
-
-            // Verifica que el usuario exista
             $datos = $usuario->get_usuario_x_id($usu_id);
-
             if (is_array($datos) == true && count($datos) > 0) {
-                // Actualiza la contraseña del usuario en la base de datos
                 $hashNuevaContraseña = $usuario->encriptarPassword($nuevaContraseña); // Utiliza tu función de encriptación
                 $usuario->actualizarPassword($usu_id, $hashNuevaContraseña);
                 echo "Contraseña actualizada con éxito";
@@ -265,7 +255,7 @@ switch ($_GET["op"]) {
             $sub_array = array();
             $sub_array[] = $row["usu_ci"];
             $sub_array[] = $row["usu_nom"];
-            $sub_array[] = $row["usu_apep"] . " " . $row["usu_apem"];
+            $sub_array[] = $row["usu_apellidos"];
             $sub_array[] = $row["usu_correo"];
             $sub_array[] = $row["usu_telf"];
 
@@ -307,7 +297,7 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["cur_nom"];
             $sub_array[] = $row["usu_nom"];
             $sub_array[] = $row["usu_ci"];
-            $sub_array[] = $row["usu_apep"] . " " . $row["usu_apem"];
+            $sub_array[] = $row["usu_apellidos"];
             $sub_array[] = $row["cur_fechini"];
             $sub_array[] = $row["cur_fechfin"];
             if (isset($row["nhours"])) {
@@ -331,7 +321,7 @@ switch ($_GET["op"]) {
 
 
             $sub_array[] = $row["cur_nom"];
-            $sub_array[] = $row["usu_nom"] . " " . $row["usu_apep"] . " " . $row["usu_apem"];
+            $sub_array[] = $row["usu_nom"] . " " . $row["usu_apellidos"];
             $sub_array[] = $row["cur_fechini"];
             $sub_array[] = $row["cur_fechfin"];
             if (isset($row["nhours"])) {
@@ -342,9 +332,6 @@ switch ($_GET["op"]) {
             }
             $sub_array[] = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
-
-
-
 
             // Agregar columnas adicionales con la clase CSS 'hidden-column' para ocultarlas inicialmente
             $sub_array[] = '<span class="wd-0p hidden-column">' . $row["facultad"] . '</span>';
@@ -381,7 +368,7 @@ switch ($_GET["op"]) {
         foreach ($datos as $row) {
             $sub_array = array();
             $sub_array[] = $row["cur_nom"];
-            $sub_array[] = $row["usu_nom"] . " " . $row["usu_apep"] . " " . $row["usu_apem"];
+            $sub_array[] = $row["usu_nom"] . " " . $row["usu_apellidos"];
             $sub_array[] = $row["cur_fechfin"];
             $sub_array[] = $row["asistencia_count"];
             $sub_array[] = '<label class="switch"><input type="checkbox" class="checkbox" onClick="Aprueba(' . $row["curd_id"] . ');" name="C' . $row["curd_id"] . '" id="C' . $row["curd_id"] . '"' . ($row["est_aprueba"] == 1 ? ' checked' : '') . '><div class="slider"></div></label>';
@@ -403,8 +390,7 @@ switch ($_GET["op"]) {
             $sub_array = array();
             $sub_array[] = '<label class="switch"><input type="checkbox" class="checkbox" name="detallecheck[]" value="' . $row["usu_id"] . '"><div class="slider"></div></label>';
             $sub_array[] = $row["usu_nom"];
-            $sub_array[] = $row["usu_apep"];
-            $sub_array[] = $row["usu_apem"];
+            $sub_array[] = $row["usu_apellidos"];
             $sub_array[] = $row["usu_correo"];
             $data[] = $sub_array;
         }
@@ -419,9 +405,10 @@ switch ($_GET["op"]) {
         break;
 
     case "guardar_desde_excel":
+
+
         $usu_nom = $_POST["usu_nom"];
-        $usu_apep = $_POST["usu_apep"];
-        $usu_apem = $_POST["usu_apem"];
+        $usu_apellidos = $_POST["usu_apellidos"];
         $usu_correo = $_POST["usu_correo"];
         $usu_sex = $_POST["usu_sex"];
         $usu_telf = $_POST["usu_telf"];
@@ -432,7 +419,7 @@ switch ($_GET["op"]) {
         // Verificar si el usuario ya existe en la base de datos
         if (!$usuario->existe_usuario($usu_ci)) {
             // Si el usuario no existe, insertarlo
-            $usuario->insert_usuario($usu_nom, $usu_apep, $usu_apem, $usu_correo, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id);
+            $usuario->insert_usuario($usu_nom, $usu_apellidos, $usu_correo, $usu_sex, $usu_telf, $rol_id, $usu_ci, $aclevel_id);
         } else {
             //   echo "El usuario ya existe en la base de datos.";
         }
@@ -443,7 +430,7 @@ switch ($_GET["op"]) {
         if (is_array($datos) == true and count($datos) > 0) {
             $html = " <option label='Seleccione'></option>";
             foreach ($datos as $row) {
-                $html .= "<option value='" . $row['usu_id'] . "'>" . $row['abreviature'] . " " . $row['usu_nom'] . " " . $row['usu_apep'] . " " . $row['usu_apem'] . "</option>";
+                $html .= "<option value='" . $row['usu_id'] . "'>" . $row['abreviature'] . " " . $row['usu_nom'] . " " . $row['usu_apellidos']  . "</option>";
             }
             echo $html;
         }

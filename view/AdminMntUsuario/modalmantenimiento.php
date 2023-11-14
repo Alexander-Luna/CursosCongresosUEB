@@ -18,17 +18,11 @@
 
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="form-control-label">Apellido Paterno: <span class="tx-danger">*</span></label>
-                            <input class="form-control" id="usu_apep" type="text" name="usu_apep" required />
+                            <label class="form-control-label">Apellidos: <span class="tx-danger">*</span></label>
+                            <input class="form-control" id="usu_apellidos" type="text" name="usu_apellidos" required />
                         </div>
                     </div>
 
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label class="form-control-label">Apellido Materno: <span class="tx-danger">*</span></label>
-                            <input class="form-control" id="usu_apem" type="text" name="usu_apem" required />
-                        </div>
-                    </div>
 
                     <div class="col-lg-12">
                         <div class="form-group">

@@ -2,7 +2,7 @@
 /* Llamamos al archivo de conexion.php */
 require_once("../../config/conexion.php");
 if (isset($_SESSION["usu_id"])) {
-?>
+  ?>
   <!DOCTYPE html>
   <html lang="es">
 
@@ -36,18 +36,20 @@ if (isset($_SESSION["usu_id"])) {
 
           <div class="form-layout">
             <div class="row">
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Eventos: <span class="tx-danger">*</span></label>
-                  <select class="form-control select2" style="width:100%" name="even_id" id="even_id">
-                    <option label="Seleccione"></option>
 
+              <div class="col-lg-4">
+                <label class="form-control-label">Eventos: <span class="tx-danger">*</span></label>
+                <div class="form-floating">
+                  <select class="form-control" style="width:100%" name="even_id" id="even_id">
+                    <option selected>Seleccione</option>
                   </select>
                 </div>
               </div>
+
               <div class="col-lg-4">
                 <label class="form-control-label">&nbsp;</label>
-                <button class="btn btn-outline-primary form-control" id="add_button" onclick="nuevo()"><i class="fa fa-plus-square mg-r-10"></i> Agregar Usuarios</button>
+                <button class="btn btn-outline-primary form-control" id="add_button" onclick="nuevo()"><i
+                    class="fa fa-plus-square mg-r-10"></i> Agregar Usuarios</button>
               </div>
             </div>
           </div>
@@ -82,7 +84,7 @@ if (isset($_SESSION["usu_id"])) {
   </body>
 
   </html>
-<?php
+  <?php
 } else {
   /* Si no a iniciado sesion se redireccionada a la ventana principal */
   header("Location:" . Conectar::ruta() . "view/404/");

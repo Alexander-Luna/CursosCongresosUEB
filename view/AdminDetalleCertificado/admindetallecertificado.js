@@ -291,7 +291,7 @@ function descargarCertificado(evento, usuario, fechaInicio, fechaFin, nHoras) {
     });
 
     // Agregar la imagen del certificado
-   // pdf.addImage(imagen);
+    // pdf.addImage(imagen);
 
     // Guardar el PDF
     pdf.saveAs("certificado.pdf");
@@ -305,45 +305,32 @@ let ExcelToJSON = function () {
             let workbook = XLSX.read(data, {
                 type: 'binary'
             });
-            //TODO: Recorrido a todas las pestañas
             workbook.SheetNames.forEach(function (sheetName) {
-                // Here is your object
                 let XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
                 let json_object = JSON.stringify(XL_row_object);
                 UserList = JSON.parse(json_object);
-
-                // console.log(UserList)
                 for (i = 0; i < UserList.length; i++) {
-
                     let columns = Object.values(UserList[i])
-
                     $.post("../../controller/usuario.php?op=guardar_desde_excel", {
                         usu_nom: columns[0],
-                        usu_apep: columns[1],
-                        usu_apem: columns[2],
-                        usu_correo: columns[3],
-                        usu_pass: columns[4],
-                        usu_ci: columns[4],
-                        usu_sex: columns[5],
-                        usu_telf: columns[6],
+                        usu_apellidos: columns[1],
+                        usu_correo: columns[2],
+                        usu_ci: columns[3],
+                        usu_sex: columns[4],
+                        usu_telf: columns[5],
                         rol_id: '1',
-                        aclevel_id: assignAclevelId(columns[7])
-
+                        aclevel_id: assignAclevelId(columns[6])
                     }, function (data) {
 
                     });
                     $.post("../../controller/evento.php?op=guardar_desde_excel", {
-                        usu_ci: columns[4],
+                        usu_ci: columns[3],
                         even_id: even_id
                     }, function (data) {
 
                     });
                 }
-
-                /* TODO:Despues de subir la informacion limpiar inputfile */
                 document.getElementById("upload").value = null;
-
-                /* TODO: Actualizar Datatable JS */
                 $('#detalle_data').DataTable().ajax.reload();
                 $('#modalplantilla').modal('hide');
             })
@@ -358,13 +345,12 @@ let ExcelToJSON = function () {
 function assignAclevelId(aclevel) {
     if (aclevel === "Estudiante") {
         return 1;
-    } else if (aclevel === "Maestria") {
+    } else if (aclevel === "Maestría") {
         return 2;
     } else if (aclevel === "Doctorado") {
         return 3;
     } else {
-        // Puedes manejar otros casos si es necesario
-        return null; // Otra acción por defecto o un valor específico
+        return null;
     }
 }
 function handleFileSelect(evt) {

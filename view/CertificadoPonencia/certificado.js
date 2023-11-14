@@ -38,7 +38,7 @@ $(document).ready(function () {
             ctx.font = '30px Micky';
             academicLevelName = response.aclevel_abreviature;
             // Continúa con el código que necesita el nombre del nivel académico
-            ctx.fillText(academicLevelName + ' ' + data.usu_nom + ' ' + data.usu_apep + ' ' + data.usu_apem, x, 300);
+            ctx.fillText(academicLevelName + ' ' + data.usu_nom + ' ' + data.usu_apellidos, x, 300);
         });
 
 
