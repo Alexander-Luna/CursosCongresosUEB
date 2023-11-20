@@ -19,21 +19,21 @@ async function guardaryeditar(e) {
             method: 'POST',
             body: formData
         }).then(response => response.json())
-            .then(data => {
-                // Reload the data table to reflect the updated information
-                $('#carrera_data').DataTable().ajax.reload();
+        {
+            // Reload the data table to reflect the updated information
+            $('#carrera_data').DataTable().ajax.reload();
 
-                // Hide the maintenance modal
-                $('#modalmantenimiento').modal('hide');
+            // Hide the maintenance modal
+            $('#modalmantenimiento').modal('hide');
 
-                // Display a success message using SweetAlert
-                Swal.fire({
-                    title: 'Correcto!',
-                    text: 'Se Registro Correctamente',
-                    icon: 'success',
-                    confirmButtonText: 'Aceptar'
-                });
+            // Display a success message using SweetAlert
+            Swal.fire({
+                title: 'Correcto!',
+                text: 'Se Registro Correctamente',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
             });
+        };
     } catch (error) {
         console.error('Error:', error);
     }

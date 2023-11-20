@@ -8,8 +8,10 @@
 - [X] Arreglar El certificado para que se muestre de manera adecuada.
 - [] Desde el lado del usuario común no se puede usar los seleclist en la ruta "Perfil" en firefox en Chrome y Brave OK.
 - [] Agregar Botón de Descarga de Certificados Masivo.
-- [] Agregar Facultad Y carrera a los usuarios.
-- [] Agregar desde Excel usuarios a eventos.
+- [X] Agregar Facultad Y carrera a los usuarios.
+
+
+- [X] Agregar desde Excel usuarios a eventos.
 
 # Generar Fuentes con TCPDF
 esto desde la carpeta de TCPDF
