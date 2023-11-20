@@ -116,10 +116,6 @@ function combo_evento() {
     });
 }
 
-function certificado(curd_id) {
-    console.log(curd_id);
-    window.open('../Certificado/index.php?curd_id=' + curd_id + '', '_blank');
-}
 
 function nuevo() {
     if ($('#even_id').val() == '') {
@@ -220,19 +216,13 @@ function registrardetalle() {
             contentType: false,
             processData: false,
             success: function (data) {
-                data = JSON.parse(data);
-
-                data.forEach(e => {
-                    e.forEach(i => {
-                        console.log(i['curd_id']);
-                        $.ajax({
-                            type: "POST",
-                            url: "../../controller/evento.php?op=generar_qr",
-                            data: { curd_id: i['curd_id'] },
-                            dataType: "json"
-                        });
-                    });
-                });
+                console.log(data+"ENTRAAA");
+                Swal.fire({
+                    title: 'Correcto!',
+                    text: 'Usuarios Agregados Correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                })
             }
         });
 
@@ -269,32 +259,14 @@ function descargaMasiva() {
             confirmButtonText: 'Aceptar'
         })
     } else {
-        descargarCertificado("SEMINARIO 1", "ALEXANDER LUNA", "2023-12-12", "2024-01-01", "50");
+        // descargarCertificado("SEMINARIO 1", "ALEXANDER LUNA", "2023-12-12", "2024-01-01", "50");
     }
 }
 
-function descargarCertificado(evento, usuario, fechaInicio, fechaFin, nHoras) {
-    // Obtener la imagen del certificado
-    //const imagen = `https://www.example.com/imagenes/certificados/${evento}.jpg`;
 
-    // Crear un objeto PDF
-    const pdf = new PDF();
-
-    // Agregar el encabezado del PDF
-    pdf.addHeader({
-        título: "Certificado de finalización",
-        subtítulo: `Evento: ${evento}`,
-        usuario: usuario,
-        fechaInicio: fechaInicio,
-        fechaFin: fechaFin,
-        nHoras: nHoras,
-    });
-
-    // Agregar la imagen del certificado
-    // pdf.addImage(imagen);
-
-    // Guardar el PDF
-    pdf.saveAs("certificado.pdf");
+function certificado(curd_id) {
+    console.log(curd_id);
+    window.open('../Certificado/index.php?curd_id=' + curd_id + '', '_blank');
 }
 let ExcelToJSON = function () {
     this.parseExcel = function (file) {

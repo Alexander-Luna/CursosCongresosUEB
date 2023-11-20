@@ -143,6 +143,9 @@ class Ponente extends Conectar
         tm_ponente.ponen_titulo,
         tm_ponente.usu_id,
         tm_ponente.est,
+        event_type.name AS tevento,
+        
+        tm_evento.eventype_id,
         tm_evento.even_id,
         tm_evento.cur_nom,
         tm_evento.cur_img,
@@ -155,6 +158,7 @@ class Ponente extends Conectar
         tm_evento.est_asistencia,
         tm_usuario.usu_id,
         modality.name AS mname,
+        tm_dependencias.cat_nom,
         tm_usuario.usu_nom,
         tm_usuario.usu_apellidos,
         tm_usuario.usu_ci,
@@ -163,6 +167,8 @@ class Ponente extends Conectar
         tm_usuario ON tm_usuario.usu_id = tm_ponente.usu_id INNER JOIN
         tm_evento ON tm_evento.even_id = tm_ponente.even_id 
         INNER JOIN modality ON tm_evento.modality_id = modality.modality_id 
+        INNER JOIN event_type ON event_type.eventype_id = event_type.eventype_id
+        INNER JOIN tm_dependencias ON tm_evento.cat_id = tm_dependencias.cat_id
         WHERE 
         tm_ponente.ponen_id = ? AND tm_ponente.est=1";
         $sql = $conectar->prepare($sql);
@@ -181,4 +187,3 @@ class Ponente extends Conectar
         return $resultado = $sql->fetchAll();
     }
 }
-?>

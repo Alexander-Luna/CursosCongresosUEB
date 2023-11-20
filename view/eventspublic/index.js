@@ -1,18 +1,21 @@
 //Carusel
-const data = [
-    {
-        src: "assets/agenda.png",
-        alt: "Agenda",
-    },
-    {
-        src: "assets/simonbolivar.png",
-        alt: "Simon Bolivar",
-    },
-    {
-        src: "assets/sesinsolemne.png",
-        alt: "Sesion Solemne",
-    },
-];
+
+function sliders() {
+    $.post("../../controller/evento.php?op=slider", function (data) {
+        let eventos = JSON.parse(data);
+        if (eventos.length > 0) {
+            let sliderData = eventos.map(function (evento) {
+                return {
+                    src: evento.src,
+                    alt: evento.alt
+                };
+            });
+            const data = sliderData;
+            console.log(data);
+        }
+    });
+}
+sliders();
 
 let slide = 0;
 let autoSlideInterval = null;

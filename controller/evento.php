@@ -8,7 +8,7 @@ $evento = new Evento();
 
 /*TODO: Opcion de solicitud de controller */
 switch ($_GET["op"]) {
-    /*TODO: Guardar y editar cuando se tenga el ID */
+        /*TODO: Guardar y editar cuando se tenga el ID */
     case "guardaryeditar":
         if (empty($_POST["even_id"])) {
             $evento->insert_evento($_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["modality_id"], $_POST["nhours"], $_POST["eventype_id"]);
@@ -16,7 +16,29 @@ switch ($_GET["op"]) {
             $evento->update_evento($_POST["even_id"], $_POST["cat_id"], $_POST["cur_nom"], $_POST["cur_descrip"], $_POST["cur_fechini"], $_POST["cur_fechfin"], $_POST["modality_id"], $_POST["nhours"], $_POST["eventype_id"]);
         }
         break;
-    /*TODO: Creando Json segun el ID */
+    case "update_coordenadas":
+        $evento->insert_coordenadas(
+            $_POST["even_id"],
+            $_POST["xqr"],
+            $_POST["yqr"],
+            $_POST["xci"],
+            $_POST["yci"],
+            $_POST["xnombres"],
+            $_POST["ynombres"],
+            $_POST["xcurso"],
+            $_POST["ycurso"],
+            $_POST["xfacultad"],
+            $_POST["yfacultad"],
+            $_POST["xdescripcion"],
+            $_POST["ydescripcion"],
+            $_POST["midesc"],
+            $_POST["mddesc"],
+            $_POST["mieven"],
+            $_POST["mdeven"]
+        );
+
+        break;
+        /*TODO: Creando Json segun el ID */
     case "mostrar":
         $datos = $evento->get_evento_id($_POST["even_id"]);
         if (is_array($datos) == true and count($datos) <> 0) {
@@ -35,6 +57,50 @@ switch ($_GET["op"]) {
             }
             echo json_encode($output);
         }
+    case "mostrar_coordenadas":
+        $datos = $evento->get_coordenadas_id($_POST["even_id"]);
+        if (is_array($datos) == true and count($datos) <> 0) {
+            foreach ($datos as $row) {
+                $output["mieven"] = $row["mieven"];
+                $output["mdeven"] = $row["mdeven"];
+                $output["midesc"] = $row["midesc"];
+                $output["mddesc"] = $row["mddesc"];
+                $output["xqr"] = $row["xqr"];
+                $output["yqr"] = $row["yqr"];
+                $output["xnombres"] = $row["xnombres"];
+                $output["ynombres"] = $row["ynombres"];
+                $output["xfacultad"] = $row["xfacultad"];
+                $output["yfacultad"] = $row["yfacultad"];
+                $output["xcedula"] = $row["xcedula"];
+                $output["ycedula"] = $row["ycedula"];
+                $output["xdescripcion"] = $row["xdescripcion"];
+                $output["ydescripcion"] = $row["ydescripcion"];
+                $output["xcurso"] = $row["xcurso"];
+                $output["ycurso"] = $row["ycurso"];
+            }
+            echo json_encode($output);
+        }
+        break;
+    case "asignar_coordenadas":
+        $coordenadas = json_decode($_POST['coordenadas']);
+
+
+        $mieven = $coordenadas['mieven'];
+        $mdeven = $coordenadas['mdeven'];
+        $midesc = $coordenadas['midesc'];
+        $mddesc = $coordenadas['mddesc'];
+        $xCurso = $coordenadas['xcurso'];
+        $xCedula = $coordenadas['xcedula'];
+        $xNombres = $coordenadas['xnombres'];
+        $xdescripcion = $coordenadas['xdescripcion'];
+        $xFacultad = $coordenadas['xfacultad'];
+        $xQR = $coordenadas['xqr'];
+        $yCurso = $coordenadas['ycurso'];
+        $yCedula = $coordenadas['ycedula'];
+        $yNombres = $coordenadas['ynombres'];
+        $ydescripcion = $coordenadas['ydescripcion'];
+        $yFacultad = $coordenadas['yfacultad'];
+        $yQR = $coordenadas['yqr'];
         break;
     case "guardar_desde_excel":
         $usu_ci = $_POST["usu_ci"];
@@ -47,8 +113,9 @@ switch ($_GET["op"]) {
         }
         break;
     case "insert_evento_usuario":
-        /*TODO: Array de usuario separado por comas */
+
         $datos = explode(',', $_POST['usu_id']);
+
         /*TODO: Registrar tantos usuarios vengan de la vista */
         $data = array();
         foreach ($datos as $row) {
@@ -61,7 +128,7 @@ switch ($_GET["op"]) {
         echo json_encode($data);
         break;
 
-    /*TODO: Creando Json segun el ID */
+        /*TODO: Creando Json segun el ID */
     case "modalidad":
         $datos = $evento->get_modalidad_id($_POST["modality_id"]);
         if (is_array($datos) == true and count($datos) <> 0) {
@@ -75,11 +142,11 @@ switch ($_GET["op"]) {
         break;
 
 
-    /*TODO: Eliminar segun ID */
+        /*TODO: Eliminar segun ID */
     case "eliminar":
         $evento->delete_evento($_POST["even_id"]);
         break;
-    /*TODO:  Listar toda la informacion segun formato de datatable */
+        /*TODO:  Listar toda la informacion segun formato de datatable */
     case "listar":
         $datos = $evento->get_evento();
         $data = array();
@@ -102,6 +169,7 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["cur_fechini"];
             $sub_array[] = $row["cur_fechfin"];
             $sub_array[] = '<button type="button" onClick="imagen(' . $row["even_id"] . ",'portada'" . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-info btn-icon"><div><i class="fa fa-image"></i></div></button>';
+            $sub_array[] = '<button type="button" onClick="coordenadas(' . $row["even_id"] . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="icon ion-arrow-resize"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="imagen(' . $row["even_id"] . ",'certificado'" . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-success btn-icon"><div><i class="fa fa-file"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="editar(' . $row["even_id"] . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-warning btn-icon"><div><i class="fa fa-edit"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["even_id"] . ');"  id="' . $row["even_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
@@ -113,7 +181,6 @@ switch ($_GET["op"]) {
             $sub_array[] = '<span class="wd-0p hidden-column">' . $modality['name'] . '</span>';
 
             $data[] = $sub_array;
-
         }
 
         $results = array(
@@ -124,7 +191,7 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
-    /*TODO:  Listar toda la informacion segun formato de datatable */
+        /*TODO:  Listar toda la informacion segun formato de datatable */
     case "combo":
         $datos = $evento->get_evento();
         if (is_array($datos) == true and count($datos) > 0) {
@@ -135,11 +202,26 @@ switch ($_GET["op"]) {
             echo $html;
         }
         break;
+    case "slider":
+        $datos = $evento->get_evento_slider();
+        if (is_array($datos) && count($datos) > 0) {
+            $data = [];
+
+            foreach ($datos as $row) {
+                $data[] = [
+                    'src' => $row['portada_img'], // Cambia a 'portada_img' si es la ruta correcta
+                    'alt' => $row['cur_nom'],
+                ];
+            }
+
+            echo json_encode($data);
+        }
+        break;
 
     case "eliminar_evento_usuario":
         $evento->delete_evento_usuario($_POST["curd_id"]);
         break;
-    /*TODO: Insetar detalle de evento usuario */
+        /*TODO: Insetar detalle de evento usuario */
 
 
     case "generar_qr":
@@ -155,11 +237,11 @@ switch ($_GET["op"]) {
     case "update_portada_evento":
         $evento->update_portada_evento($_POST["curx_idx"], $_POST["cur_img"]);
         break;
-    /*TODO: Guardar y editar cuando se tenga el ID */
+        /*TODO: Guardar y editar cuando se tenga el ID */
     case "asistencia":
         $evento->insert_asistencia($_POST["curd_id"]);
         break;
-    /*TODO: Guardar y editar cuando se tenga el ID */
+        /*TODO: Guardar y editar cuando se tenga el ID */
     case "habilitarAsistencia":
         $evento->habilitar_asistencia($_POST["even_id"], $_POST["est_asistencia"]);
         break;
@@ -185,6 +267,4 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
-
 }
-?>

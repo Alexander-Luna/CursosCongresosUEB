@@ -10,3 +10,7 @@
 - [] Agregar Botón de Descarga de Certificados Masivo.
 - [] Agregar Facultad Y carrera a los usuarios.
 - [] Agregar desde Excel usuarios a eventos.
+
+# Generar Fuentes con TCPDF
+esto desde la carpeta de TCPDF
+php tools/tcpdf_addfont.php -i balladeer.ttf -t TrueTypeUnicode -e UTF-8 -f 32 -o fonts

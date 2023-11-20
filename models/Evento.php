@@ -148,6 +148,30 @@ class Evento extends Conectar
         $sql->execute();
         return $resultado = $sql->fetch(PDO::FETCH_ASSOC); // Utiliza fetch para obtener un solo resultado
     }
+    public function get_evento_slider()
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        
+        $sql = "SELECT
+                tm_evento.even_id,
+                tm_evento.cur_nom,
+                tm_evento.cur_fechini,
+                tm_evento.cur_fechfin,
+                tm_evento.fech_crea,
+                tm_evento.portada_img
+                FROM tm_evento
+                WHERE tm_evento.est = 1
+                AND tm_evento.cur_img IS NOT NULL
+                ORDER BY tm_evento.fech_crea DESC
+                LIMIT 3";
+    
+        $sql = $conectar->prepare($sql);
+        $sql->execute();
+        
+        return $resultado = $sql->fetchAll();
+    }
+    
     public function get_evento()
     {
         $conectar = parent::conexion();
@@ -194,7 +218,16 @@ class Evento extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-
+    public function get_coordenadas_id($even_id)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT * FROM tm_coordenadas WHERE even_id = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $even_id);
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
+    }
     public function delete_evento_usuario($curd_id)
     {
         $conectar = parent::conexion();
@@ -226,6 +259,102 @@ class Evento extends Conectar
         $sql1->execute();
         return $resultado = $sql1->fetch(pdo::FETCH_ASSOC);
     }
+    public function insert_coordenadas($even_id, $xqr, $yqr, $xci, $yci, $xnombres, $ynombres, $xcurso, $ycurso, $xfacultad, $yfacultad, $xdescripcion, $ydescripcion, $midesc, $mddesc, $mieven, $mdeven)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+
+        // Verificar si el even_id ya existe en la base de datos
+        $checkSql = "SELECT COUNT(*) as count FROM tm_coordenadas WHERE even_id = ?";
+        $checkStmt = $conectar->prepare($checkSql);
+        $checkStmt->bindValue(1, $even_id);
+        $checkStmt->execute();
+        $result = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+        // La sentencia SQL para la inserción o actualización
+        if ($result['count'] == 0) {
+            $sql = "INSERT INTO tm_coordenadas (
+                even_id, xqr, yqr, xnombres, ynombres, xcurso, ycurso, xfacultad, yfacultad,  xdescripcion, ydescripcion, xcedula, ycedula,midesc,mddesc,mieven,mdeven, fech_crea
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+        } else {
+            $sql = "UPDATE tm_coordenadas SET
+                xqr = ?,
+                yqr = ?,
+                xnombres = ?,
+                ynombres = ?,
+                xcurso = ?,
+                ycurso = ?,
+                xfacultad = ?,
+                yfacultad = ?,
+                xdescripcion = ?,
+                ydescripcion = ?,
+                xcedula = ?,
+                ycedula = ?,
+                midesc = ?,
+                mddesc = ?,
+                mieven = ?,
+                mdeven = ?,
+                fech_crea = NOW()
+            WHERE even_id = ?";
+        }
+
+        // Preparar la sentencia
+
+
+        // Si es una actualización, también vincula el even_id al final
+        $sqladd = $conectar->prepare($sql);
+        if ($result['count'] > 0) {
+            $sqladd->bindValue(1, $xqr);
+            $sqladd->bindValue(2, $yqr);
+            $sqladd->bindValue(3, $xnombres);
+            $sqladd->bindValue(4, $ynombres);
+            $sqladd->bindValue(5, $xcurso);
+            $sqladd->bindValue(6, $ycurso);
+            $sqladd->bindValue(7, $xfacultad);
+            $sqladd->bindValue(8, $yfacultad);
+            $sqladd->bindValue(9, $xdescripcion);
+            $sqladd->bindValue(10, $ydescripcion);
+            $sqladd->bindValue(11, $xci);
+            $sqladd->bindValue(12, $yci);
+            $sqladd->bindValue(13, $midesc);
+            $sqladd->bindValue(14, $mddesc);
+            $sqladd->bindValue(15, $mieven);
+            $sqladd->bindValue(16, $mdeven);
+            $sqladd->bindValue(17, $even_id);
+        } else {
+            $sqladd->bindValue(1, $even_id);
+            $sqladd->bindValue(2, $xqr);
+            $sqladd->bindValue(3, $yqr);
+            $sqladd->bindValue(4, $xnombres);
+            $sqladd->bindValue(5, $ynombres);
+            $sqladd->bindValue(6, $xcurso);
+            $sqladd->bindValue(7, $ycurso);
+            $sqladd->bindValue(8, $xfacultad);
+            $sqladd->bindValue(9, $yfacultad);
+            $sqladd->bindValue(10, $xdescripcion);
+            $sqladd->bindValue(11, $ydescripcion);
+            $sqladd->bindValue(12, $xci);
+            $sqladd->bindValue(13, $yci);
+            $sqladd->bindValue(14, $midesc);
+            $sqladd->bindValue(15, $mddesc);
+            $sqladd->bindValue(16, $mieven);
+            $sqladd->bindValue(17, $mdeven);
+        }
+
+        // Ejecutar la sentencia
+        $sqladd->execute();
+
+        // Obtener el ID de las coordenadas
+        $sql1 = "SELECT last_insert_id() as 'coordenadas_id'";
+        $sql1 = $conectar->prepare($sql1);
+        $sql1->execute();
+
+        // Devolver el resultado
+        return $resultado = $sql1->fetch(PDO::FETCH_ASSOC);
+    }
+
+
     public function insert_evento_usuario_excel($even_id, $usu_ci)
     {
         $conectar = parent::conexion();
@@ -355,4 +484,3 @@ class Evento extends Conectar
         return $resultado['count'] > 0;
     }
 }
-?>

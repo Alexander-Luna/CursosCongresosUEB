@@ -9,7 +9,7 @@ $usuario = new Usuario();
 /*TODO: Opcion de solicitud de controller */
 switch ($_GET["op"]) {
 
-    /*TODO: MicroServicio para poder mostrar el listado de eventos de un usuario con certificado */
+        /*TODO: MicroServicio para poder mostrar el listado de eventos de un usuario con certificado */
     case "listar_eventos":
         $datos = $usuario->get_eventos_x_usuario($_POST["usu_id"]);
         $data = array();
@@ -55,7 +55,7 @@ switch ($_GET["op"]) {
             } else if ($row["ponen_type"] == '2') {
                 $sub_array[] = 'Conferencia Magistral';
             }
-            $sub_array[] = '<button type="button" onClick="certificado(' . $row["ponen_id"] . ');"  id="' . $row["ponen_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
+            $sub_array[] = '<button type="button" onClick="CertificadoPonencia(' . $row["ponen_id"] . ');"  id="' . $row["ponen_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
             $data[] = $sub_array;
         }
 
@@ -68,7 +68,7 @@ switch ($_GET["op"]) {
         echo json_encode($results);
 
         break;
-    /*TODO: MicroServicio para poder mostrar el listado de eventos de un usuario con certificado */
+        /*TODO: MicroServicio para poder mostrar el listado de eventos de un usuario con certificado */
     case "listar_eventos_top10":
         $datos = $usuario->get_eventos_x_usuario_top10($_POST["usu_id"]);
         $data = array();
@@ -101,7 +101,7 @@ switch ($_GET["op"]) {
 
         break;
 
-    /*TODO: Microservicio para mostar informacion del certificado con el curd_id */
+        /*TODO: Microservicio para mostar informacion del certificado con el curd_id */
     case "mostrar_evento_detalle":
         $datos = $usuario->get_evento_x_id_detalle($_POST["curd_id"]);
         if (is_array($datos) == true and count($datos) <> 0) {
@@ -125,7 +125,7 @@ switch ($_GET["op"]) {
         }
         break;
 
-    /*TODO: Total de Eventos por usuario para el dashboard */
+        /*TODO: Total de Eventos por usuario para el dashboard */
     case "total":
         $datos = $usuario->get_total_eventos_x_usuario($_POST["usu_id"]);
         if (is_array($datos) == true and count($datos) > 0) {
@@ -135,7 +135,7 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
-    /*TODO: Total de Eventos por usuario para el dashboard */
+        /*TODO: Total de Eventos por usuario para el dashboard */
     case "totalusuarios":
         $datos = $usuario->get_total_usuarios();
         if (is_array($datos) == true and count($datos) > 0) {
@@ -145,7 +145,7 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
-    /*TODO: Mostrar informacion del usuario en la vista perfil */
+        /*TODO: Mostrar informacion del usuario en la vista perfil */
     case "mostrar":
         $datos = $usuario->get_usuario_x_id($_POST["usu_id"]);
         if (is_array($datos) == true and count($datos) <> 0) {
@@ -167,7 +167,7 @@ switch ($_GET["op"]) {
         }
         break;
 
-    /*TODO: Mostrar informacion segun ci del usuario registrado */
+        /*TODO: Mostrar informacion segun ci del usuario registrado */
     case "consulta_ci":
         $datos = $usuario->get_usuario_x_ci($_POST["usu_ci"]);
         if (is_array($datos) == true and count($datos) <> 0) {
@@ -188,7 +188,7 @@ switch ($_GET["op"]) {
             echo json_encode($output);
         }
         break;
-    /*TODO: Actualizar datos de perfil */
+        /*TODO: Actualizar datos de perfil */
     case "update_perfil":
         if ($_POST["usu_facultad"] == 7) {
             $_POST["usu_carrera"] = null;
@@ -208,7 +208,7 @@ switch ($_GET["op"]) {
             $_POST["usu_otracarrera"]
         );
         break;
-    /*TODO: Guardar y editar cuando se tenga el ID */
+        /*TODO: Guardar y editar cuando se tenga el ID */
     case "guardaryeditar":
         if (empty($_POST["usu_id"])) {
             $usuario->insert_usuario($_POST["usu_nom"], $_POST["usu_apellidos"], $_POST["usu_correo"], $_POST["usu_sex"], $_POST["usu_telf"], $_POST["rol_id"], $_POST["usu_ci"], $_POST["aclevel_id"]);
@@ -243,11 +243,11 @@ switch ($_GET["op"]) {
             echo "Faltan datos necesarios";
         }
         break;
-    /*TODO: Eliminar segun ID */
+        /*TODO: Eliminar segun ID */
     case "eliminar":
         $usuario->delete_usuario($_POST["usu_id"]);
         break;
-    /*TODO:  Listar toda la informacion segun formato de datatable */
+        /*TODO:  Listar toda la informacion segun formato de datatable */
     case "listar":
         $datos = $usuario->get_usuario();
         $data = array();
@@ -311,7 +311,7 @@ switch ($_GET["op"]) {
         // Devuelve los datos como un array JSON
         echo json_encode($data);
         break;
-    /*TODO: Listar todos los usuarios pertenecientes a un evento */
+        /*TODO: Listar todos los usuarios pertenecientes a un evento */
     case "listar_eventos_usuario":
         $datos = $usuario->get_eventos_usuario_x_id($_POST["even_id"]);
         $data = array();
@@ -327,8 +327,7 @@ switch ($_GET["op"]) {
             if (isset($row["nhours"])) {
                 $sub_array[] = $row["nhours"];
             } else {
-                // Si 'nhours' no está definido, puedes asignar un valor predeterminado o manejarlo según tus necesidades.
-                $sub_array[] = 'Valor Predeterminado'; // Reemplaza 'Valor Predeterminado' con lo que necesites.
+                $sub_array[] = '0'; // Reemplaza 'Valor Predeterminado' con lo que necesites.
             }
             $sub_array[] = '<button type="button" onClick="certificado(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-primary btn-icon"><div><i class="fa fa-id-card-o"></i></div></button>';
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["curd_id"] . ');"  id="' . $row["curd_id"] . '" class="btn btn-outline-danger btn-icon"><div><i class="fa fa-close"></i></div></button>';
@@ -424,7 +423,7 @@ switch ($_GET["op"]) {
             //   echo "El usuario ya existe en la base de datos.";
         }
         break;
-    /*TODO:  Listar toda la informacion segun formato de datatable */
+        /*TODO:  Listar toda la informacion segun formato de datatable */
     case "combo":
         $datos = $usuario->get_usuario();
         if (is_array($datos) == true and count($datos) > 0) {
@@ -435,5 +434,4 @@ switch ($_GET["op"]) {
             echo $html;
         }
         break;
-
 }

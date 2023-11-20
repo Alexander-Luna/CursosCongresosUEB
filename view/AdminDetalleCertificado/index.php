@@ -2,7 +2,7 @@
 /* Llamamos al archivo de conexion.php */
 require_once("../../config/conexion.php");
 if (isset($_SESSION["usu_id"])) {
-  ?>
+?>
   <!DOCTYPE html>
   <html lang="es">
 
@@ -47,19 +47,19 @@ if (isset($_SESSION["usu_id"])) {
               </div>
               <div class="col-lg-2">
                 <label class="form-control-label">&nbsp;</label>
-                <button class="btn btn-outline-primary form-control" id="add_button" onclick="nuevo()"><i
-                    class="fa fa-plus-square mg-r-10"></i> Agregar Usuarios</button>
+                <button class="btn btn-outline-primary form-control" id="add_button" onclick="nuevo()"><i class="fa fa-plus-square mg-r-10"></i> Agregar Usuarios</button>
               </div>
               <div class="col-lg-2">
                 <label class="form-control-label">&nbsp;</label>
-                <button class="btn btn-outline-success form-control" id="add_button1" onclick="nuevoExcel()"><i
-                    class="icon ion-android-upload"></i> Subir Usuarios</button>
+                <button class="btn btn-outline-success form-control" id="add_button1" onclick="nuevoExcel()"><i class="icon ion-android-upload"></i> Subir Usuarios</button>
               </div>
+              <!--
               <div class="col-lg-2">
                 <label class="form-control-label">&nbsp;</label>
                 <button class="btn btn-outline-danger form-control" id="add_button2" onclick="descargaMasiva()">
                   <i class="icon ion-android-download"></i> Certificados</button>
               </div>
+-->
             </div>
 
           </div>
@@ -107,7 +107,7 @@ if (isset($_SESSION["usu_id"])) {
   </body>
 
   </html>
-  <?php
+<?php
 } else {
   /* Si no a iniciado sesion se redireccionada a la ventana principal */
   header("Location:" . Conectar::ruta() . "view/404/");

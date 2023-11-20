@@ -42,20 +42,20 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="styles/eventos.css">
-    <script src="scripts/index.js" defer></script>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/eventos.css">
+    <script src="index.js" defer></script>
 </head>
 
 <body>
     <header>
         <nav class="nav">
             <div class="logo_container">
-                <img id="logo" src="assets/logo_ueb.png" alt="Logo">
+                <img id="logo" src="../../assets/logo_ueb.png" alt="Logo">
             </div>
             <ul class="nav_ul">
-                <li><a class="nav_li" href="index.php">Inicio</a></li>
-                <li><a class="nav_li" href="eventos.php">Eventos</a></li>
+                <li><a class="nav_li" href="../index.php">Inicio</a></li>
+                <li><a class="nav_li" href="../eventspublic">Eventos</a></li>
                 <li><i class="fa-solid fa-user"></i><a class="nav_li" href="login.php"> Login</a></li>
                 <!-- <li><a class="nav_li" href="registro.php">Registrarse</a></li> -->
             </ul>
@@ -67,7 +67,7 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <?php
             // Asumiendo que $eventos es un array de resultados
             foreach ($eventos as $evento) {
-                ?>
+            ?>
                 <div class="cardE">
                     <div class="cardE-image">
                         <img src="<?php echo $evento['portada_img']; ?>" alt="<?php echo $evento['nombre_evento']; ?>">
@@ -90,7 +90,7 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
                     </div>
                 </div>
-                <?php
+            <?php
             }
             ?>
         </div>
@@ -132,8 +132,7 @@ $eventos = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <a href="https.twitter.com" target="_blank" rel="noreferrer">
                         <i class="fa-brands fa-twitter"></i>
                     </a>
-                    <a href="https://www.youtube.com/channel/UCml4cc2U6oWm7jG9iayK3UA/videos" target="_blank"
-                        rel="noreferrer">
+                    <a href="https://www.youtube.com/channel/UCml4cc2U6oWm7jG9iayK3UA/videos" target="_blank" rel="noreferrer">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
                     <a href="https://whatsapp.com" target="_blank" rel="noreferrer">

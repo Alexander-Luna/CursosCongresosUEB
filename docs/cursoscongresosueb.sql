@@ -2,10 +2,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "-05:00";
-
-DROP DATABASE IF EXISTS cursoscongresosueb;
-CREATE DATABASE cursoscongresosueb;
-USE cursoscongresosueb;
 CREATE TABLE `td_evento_usuario` (
   `curd_id` int(11) NOT NULL,
   `even_id` int(11) NOT NULL,
@@ -14,6 +10,30 @@ CREATE TABLE `td_evento_usuario` (
   `est_aprueba` int(11) NOT NULL,
   `est` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE `tm_coordenadas` (
+  `coordenadas_id` int(11) NOT NULL AUTO_INCREMENT,
+  `even_id` int(11) NOT NULL,
+  `xqr` int(11) DEFAULT NULL,
+  `xcurso` int(11) DEFAULT NULL,
+  `xcedula` int(11) DEFAULT NULL,
+  `xnombres` int(11) DEFAULT NULL,
+  `xdescripcion` int(11) DEFAULT NULL,
+  `xfacultad` int(11) DEFAULT NULL,
+  `yqr` int(11) DEFAULT NULL,
+  `midesc` int(11) DEFAULT NULL,
+  `mddesc` int(11) DEFAULT NULL,
+  `mieven` int(11) DEFAULT NULL,
+  `mdeven` int(11) DEFAULT NULL,
+  `ycurso` int(11) DEFAULT NULL,
+  `ycedula` int(11) DEFAULT NULL,
+  `ynombres` int(11) DEFAULT NULL,
+  `ydescripcion` int(11) DEFAULT NULL,
+  `yfacultad` int(11) DEFAULT NULL,
+  `fech_crea` datetime DEFAULT NULL,
+  PRIMARY KEY (`coordenadas_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 CREATE TABLE `td_evento_usuario_dias` (
   `asistencia_id` int(11) NOT NULL AUTO_INCREMENT,
   `curd_id` int(11) NOT NULL,
@@ -114,9 +134,9 @@ FOREIGN KEY (`eventype_id`)
 REFERENCES `event_type`(`eventype_id`);
 
 INSERT INTO `tm_evento` (`even_id`, `cat_id`, `cur_nom`, `cur_descrip`, `cur_fechini`, `cur_fechfin`, `cur_img`, `fech_crea`, `modality_id`, `nhours`, `portada_img`, `eventype_id`,`est`, `est_asistencia`) VALUES
-(1, 1, 'CURSO DE HTML5', 'Occaecat Lorem velit qui magna dolore culpa qui. Aliqua nostrud nisi cillum sunt consequat irure commodo qui reprehenderit in in quis. Esse pariatur amet esse sint tempor fugiat laborum consectetur exercitation anim in voluptate sunt est. Sint amet elit et id qui nisi qui. Incididunt et pariatur nostrud do dolore duis consequat non eu velit labore.', '2023-04-01', '2023-04-30', '../../public/2.png', '2023-04-26 20:32:32','2','50', '../../public/1616601522.png',1, 1,0),
-(3, 2, 'PHP', 'Laborum consequat laboris incididunt ipsum ea irure enim consectetur. Mollit non in ex ut culpa elit commodo id nostrud magna voluptate amet. Aute duis ea duis nulla. Ad ipsum id reprehenderit fugiat do commodo excepteur labore ex. Tempor ex consectetur proident anim minim id ex laboris elit. Laborum do aliquip duis veniam tempor esse nisi eiusmod id elit tempor.', '2023-04-01', '2023-04-30',  '../../public/3.png', '2023-04-26 20:32:32','3','85', '../../public/1616601522.png',2, 1,0),
-(4, 1, 'LARAVEL y MYSQL', 'Aliqua magna eu minim irure aliqua esse esse irure irure cupidatat ex magna. Laborum pariatur velit adipisicing nisi id ex esse nisi mollit magna nostrud quis minim. Aliquip excepteur pariatur duis qui irure mollit in deserunt velit est excepteur enim reprehenderit excepteur.', '2023-04-01', '2023-04-30',  '../../public/4.png', '2023-04-26 20:32:32','1','120', '../../public/1616601522.png', 3,1,0),
+(1, 1, 'CURSO DE HTML5', 'Occaecat Lorem velit qui magna dolore culpa qui. Aliqua nostrud nisi cillum sunt consequat irure commodo qui reprehenderit in in quis. Esse pariatur amet esse sint tempor fugiat laborum consectetur exercitation anim in voluptate sunt est. Sint amet elit et id qui nisi qui. Incididunt et pariatur nostrud do dolore duis consequat non eu velit labore.', '2023-04-01', '2023-04-30', '../../public/2.png', '2023-11-26 20:32:32','2','50', '../../public/slider_riesgos.png',1, 1,0),
+(3, 2, 'PHP', 'Laborum consequat laboris incididunt ipsum ea irure enim consectetur. Mollit non in ex ut culpa elit commodo id nostrud magna voluptate amet. Aute duis ea duis nulla. Ad ipsum id reprehenderit fugiat do commodo excepteur labore ex. Tempor ex consectetur proident anim minim id ex laboris elit. Laborum do aliquip duis veniam tempor esse nisi eiusmod id elit tempor.', '2023-04-01', '2023-04-30',  '../../public/3.png', '2023-11-26 20:32:32','3','85', '../../public/slider_pedagogia.png',2, 1,0),
+(4, 1, 'LARAVEL y MYSQL', 'Aliqua magna eu minim irure aliqua esse esse irure irure cupidatat ex magna. Laborum pariatur velit adipisicing nisi id ex esse nisi mollit magna nostrud quis minim. Aliquip excepteur pariatur duis qui irure mollit in deserunt velit est excepteur enim reprehenderit excepteur.', '2023-04-01', '2023-04-30',  '../../public/4.png', '2023-11-26 20:32:32','1','120', '../../public/slider_convocatoria.png', 3,1,0),
 (5, 2, 'IV Congreso Académico Internacional (CAI IV – 2023 ) y III Congreso Internacional de Posgrado y Educación Continua (CIPEC III, 2023)', 'La Universidad Estatal de Bolívar en este año tiene el honor de planificar y presentar el IV Congreso Académico Internacional (CAI IV – 2023 ) y III Congreso Internacional de Posgrado y Educación Continua (CIPEC III, 2023), como un espacio reflexión, intercambio de experiencias y divulgación de trabajos de investigación científica y académica en los campos de la “Transformación digital e interculturalidad en la educación superior: Retos y oportunidades para la inclusión y el desarrollo regional".En este año el congreso se realizará en un formato hibrido (Presencial / Virtual) que pretende promover la investigación y difusión de los avances científicos en el área educativa, renovar y construir propuestas pedagógicas que contribuyan a seguir generando mejoras en los procesos de formación. ', '2023-10-25', '2023-10-27', '../../public/5.png', '2023-10-20 20:32:32','1','85', '../../public/1616601522.png', 1,1,1),
 (7, 1, 'ESTUDIO DE MERCADO 1', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
 (8, 1, 'ESTUDIO DE MERCADO 2', 'CURSO de MERCADO', '2023-08-22', '2023-09-22', '../../public/5.png', '2023-08-22 14:54:50',1,55, '../../public/1616601522.png', 2,1,1),
@@ -315,4 +335,7 @@ ALTER TABLE `tm_ponente` ADD CONSTRAINT `fk_ponente`
 FOREIGN KEY (`even_id`)
 REFERENCES `tm_evento`(`even_id`);
 
+ALTER TABLE `tm_coordenadas` ADD CONSTRAINT `fk_coordenadas`
+FOREIGN KEY (`even_id`)
+REFERENCES `tm_evento`(`even_id`);
 COMMIT;

@@ -279,21 +279,31 @@ class Usuario extends Conectar
         parent::set_names();
         $sql = "SELECT 
                 td_evento_usuario.curd_id,
+
                 tm_evento.even_id,
                 tm_evento.cur_nom,
                 tm_evento.cur_descrip,
                 tm_evento.cur_fechini,
                 tm_evento.cur_fechfin,
                 tm_evento.modality_id,
+                modality.name as modalidad,
+                tm_evento.cat_id,
+                tm_evento.eventype_id,
+                event_type.name AS tevento,
                 tm_evento.nhours,
                 tm_evento.cur_img,
+                tm_dependencias.cat_nom,
                 tm_usuario.usu_id,
+                tm_usuario.usu_ci,
                 tm_usuario.usu_nom,
                 tm_usuario.usu_apellidos,
                 tm_usuario.aclevel_id
                 FROM td_evento_usuario INNER JOIN 
                 tm_evento ON td_evento_usuario.even_id = tm_evento.even_id INNER JOIN
-                tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id 
+                tm_usuario ON td_evento_usuario.usu_id = tm_usuario.usu_id  INNER JOIN
+                tm_dependencias ON tm_evento.cat_id = tm_dependencias.cat_id INNER JOIN
+                event_type ON tm_evento.eventype_id = event_type.eventype_id INNER JOIN
+                modality ON tm_evento.modality_id = modality.modality_id
                 WHERE 
                 td_evento_usuario.curd_id = ?";
         $sql = $conectar->prepare($sql);
@@ -490,5 +500,4 @@ class Usuario extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-
 }

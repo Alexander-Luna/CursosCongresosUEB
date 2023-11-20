@@ -96,11 +96,6 @@ function combo_evento() {
     });
 }
 
-function certificado(curd_id) {
-    console.log(curd_id);
-    window.open('../Certificado/index.php?curd_id=' + curd_id + '', '_blank');
-}
-
 function nuevo() {
     if ($('#even_id').val() == '') {
         Swal.fire({
@@ -206,17 +201,6 @@ function registrardetalle() {
             success: function (data) {
                 data = JSON.parse(data);
 
-                data.forEach(e => {
-                    e.forEach(i => {
-                        console.log(i['curd_id']);
-                        $.ajax({
-                            type: "POST",
-                            url: "../../controller/evento.php?op=generar_qr",
-                            data: { curd_id: i['curd_id'] },
-                            dataType: "json"
-                        });
-                    });
-                });
             }
         });
 
@@ -250,7 +234,7 @@ function Aprueba(curd_id) {
         },
         error: function (e) {
             alert('Error al registrar la asistencia ' + e);
-            
+
         }
     });
 

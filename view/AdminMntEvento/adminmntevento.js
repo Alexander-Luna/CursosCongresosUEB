@@ -161,6 +161,13 @@ function ponente(even_id) {
     // Abre la URL en una nueva ventana o pestaña del navegador
     window.location.href = url;
 }
+function coordenadas(even_id) {
+    // Define la URL que deseas abrir
+    let url = '../../view/AdminEditCertificado/?even_id=' + even_id;
+
+    // Abre la URL en una nueva ventana o pestaña del navegador
+    window.location.href = url;
+}
 
 function nuevo() {
     $('#lbltitulo').html('Nuevo Registro');

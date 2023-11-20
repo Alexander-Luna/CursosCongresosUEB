@@ -1,4 +1,8 @@
 var usu_id = $('#usu_idx').val();
+function CertificadoPonencia(ponen_id) {
+    console.log(ponen_id);
+    window.open('../Certificado/index.php?ponen_id=' + ponen_id + '', '_blank');
+}
 
 $(document).ready(function () {
 
@@ -49,7 +53,3 @@ $(document).ready(function () {
 
 });
 
-function certificado(ponen_id) {
-    console.log(ponen_id);
-    window.open('../CertificadoPonencia/index.php?ponen_id=' + ponen_id + '', '_blank');
-}

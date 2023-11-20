@@ -50,6 +50,7 @@ if (isset($_SESSION["usu_id"])) {
                 <th class="wd-15p">Fecha Inicio</th>
                 <th class="wd-15p">Fecha Fin</th>
                 <th class="wd-5p">Portada</th>
+                <th class="wd-5p">Configurar</th>
                 <th class="wd-5p">Certificado</th>
                 <th class="wd-5p">Editar</th>
                 <th class="wd-5p">Eliminar</th>

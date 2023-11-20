@@ -2,7 +2,8 @@
 /* Llamamos al archivo de conexion.php */
 require_once("../../config/conexion.php");
 if (isset($_SESSION["usu_id"])) {
-  ?>
+ 
+?>
   <!DOCTYPE html>
   <html lang="es">
 
@@ -44,7 +45,7 @@ if (isset($_SESSION["usu_id"])) {
           </div>
           <div class="col-sm-6 col-xl-3">
             <a href="../UsuPonencia/" class="br-menu-link">
-              <div class="bg-info rounded overflow-hidden"> <!-- Usa la clase de Bootstrap para el color de fondo -->
+              <div class="bg-info rounded overflow-hidden">
                 <div class="pd-25 d-flex align-items-center">
                   <i class="icon ion-university tx-60 lh-0 tx-white op-7"></i>
                   <div class="mg-l-20">
@@ -57,7 +58,7 @@ if (isset($_SESSION["usu_id"])) {
           </div>
           <?php
           if ($_SESSION["rol_id"] == 2) {
-            ?>
+          ?>
             <div class="col-sm-6 col-xl-3">
               <a href="../AdminMntUsuario/" class="br-menu-link">
                 <div class="bg-success bg-gradient rounded overflow-hidden">
@@ -87,9 +88,7 @@ if (isset($_SESSION["usu_id"])) {
                 </div>
               </a>
             </div>
-
-
-            <?php
+          <?php
           } ?>
 
 
@@ -133,12 +132,15 @@ if (isset($_SESSION["usu_id"])) {
 
       </div>
     </div>
-    <?php require_once("../html/MainJs.php"); ?>
+    <?php require_once("../html/MainJs.php");
+
+    ?>
     <script type="text/javascript" src="usuhome.js"></script>
+  
   </body>
 
   </html>
-  <?php
+<?php
 } else {
   /* Si no a iniciado sesion se redireccionada a la ventana principal */
   header("Location:" . Conectar::ruta() . "view/404/");

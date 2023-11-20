@@ -73,6 +73,7 @@ function certificado(curd_id) {
     console.log(curd_id);
     window.open('../Certificado/index.php?curd_id=' + curd_id + '', '_blank');
 }
+
 let asistenciaRegistrada = false;
 function FuncionAsistencia(curd_id) {
     // Verificar si la asistencia ya se ha registrado
