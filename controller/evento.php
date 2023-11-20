@@ -202,6 +202,42 @@ switch ($_GET["op"]) {
             echo $html;
         }
         break;
+    case "cardevento":
+        $datos = $evento->get_evento_card();
+        if (is_array($datos) == true and count($datos) > 0) {
+            $html = "";
+            foreach ($datos as $row) {
+                if ($row['portada_img']=='') {
+                    $row['portada_img']='../../public/img/img11.jpg';
+                }
+
+                $html .= '
+                    <div class="cardE">
+                    <div class="cardE-image">
+                    <img class="cardE-image" src="' . $row['portada_img'] . '" alt="' . $row['nombre_evento'] . '">
+                    </div>
+                    <div class="category">
+                    <h3 class="cardE__title">
+                    ' . $row['nombre_evento'] . '
+                    </h3>
+                    </div>
+                    <div class="heading">
+                    <p class="cardE__content">Dependencia:
+                    ' . $row['dependencia'] . '
+                    </p>
+                    <p class="cardE__content">Fecha de Inicio:
+                    ' . $row['fecha_inicio'] . '
+                    </p>
+                    <p class="cardE__content">Fecha de Finalización:
+                    ' . $row['fecha_fin'] . '
+                    </p>
+                    </div>
+                    </div>
+                    </div>';
+            }
+            echo $html;
+        }
+        break;
     case "slider":
         $datos = $evento->get_evento_slider();
         if (is_array($datos) && count($datos) > 0) {

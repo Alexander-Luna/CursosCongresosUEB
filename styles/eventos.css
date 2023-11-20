@@ -30,23 +30,18 @@
     padding: 10px 20px;
 }
 
-.cardE-image {
-    background-color: rgb(236, 236, 236);
-    width: 100%;
-    max-height: 200px;
-    border-radius: 6px 6px 0 0;
-}
 
 .cardE-image img {
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
+    margin: 0;
     border-radius: 6px 6px 0 0;
 }
 .cardE__title{
     font-size: 1rem;
     font-weight: 600;
-    color: rgb(6, 51, 133);
+    color: rgb(0, 81, 232);
     padding: 10px 7px 0;
 }
 

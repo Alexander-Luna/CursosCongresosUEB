@@ -2,7 +2,7 @@
 /* Llamamos al archivo de conexion.php */
 require_once("../../config/conexion.php");
 if (isset($_SESSION["usu_id"])) {
-  ?>
+?>
   <!DOCTYPE html>
   <html lang="es">
 
@@ -34,11 +34,9 @@ if (isset($_SESSION["usu_id"])) {
           <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Usuario</h6>
           <p class="mg-b-30 tx-gray-600">Listado de Usuario</p>
 
-          <button class="btn btn-outline-primary" id="add_button" onclick="nuevo()"><i
-              class="fa fa-plus-square mg-r-10"></i> Nuevo Registro</button>
+          <button class="btn btn-outline-primary" id="add_button" onclick="nuevo()"><i class="fa fa-plus-square mg-r-10"></i> Nuevo Registro</button>
 
-          <button class="btn btn-outline-primary" id="btnplantilla" onclick="nuevaplantilla()"><i
-              class="fa fa-gear mg-r-10"></i> Subir Plantilla</button>
+          <button class="btn btn-outline-primary" id="btnplantilla" onclick="nuevaplantilla()"><i class="fa fa-gear mg-r-10"></i> Subir Plantilla</button>
 
           <p></p>
 
@@ -77,7 +75,7 @@ if (isset($_SESSION["usu_id"])) {
   </body>
 
   </html>
-  <?php
+<?php
 } else {
   /* Si no a iniciado sesion se redireccionada a la ventana principal */
   header("Location:" . Conectar::ruta() . "view/404/");

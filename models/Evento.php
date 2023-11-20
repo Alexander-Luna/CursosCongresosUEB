@@ -152,7 +152,7 @@ class Evento extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        
+
         $sql = "SELECT
                 tm_evento.even_id,
                 tm_evento.cur_nom,
@@ -165,13 +165,13 @@ class Evento extends Conectar
                 AND tm_evento.cur_img IS NOT NULL
                 ORDER BY tm_evento.fech_crea DESC
                 LIMIT 3";
-    
+
         $sql = $conectar->prepare($sql);
         $sql->execute();
-        
+
         return $resultado = $sql->fetchAll();
     }
-    
+
     public function get_evento()
     {
         $conectar = parent::conexion();
@@ -192,6 +192,27 @@ class Evento extends Conectar
                 tm_dependencias.cat_id  
                 FROM tm_evento
                 INNER JOIN tm_dependencias on tm_evento.cat_id = tm_dependencias.cat_id 
+                WHERE tm_evento.est = 1";
+        $sql = $conectar->prepare($sql);
+
+        $sql->execute();
+        return $resultado = $sql->fetchAll();
+    }
+
+    public function get_evento_card()
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+        $sql = "SELECT
+                    tm_evento.even_id,
+                    tm_dependencias.cat_id,
+                    tm_dependencias.cat_nom AS dependencia,
+                    tm_evento.cur_nom AS nombre_evento,
+                    tm_evento.portada_img,
+                    tm_evento.cur_fechini AS fecha_inicio,
+                    tm_evento.cur_fechfin AS fecha_fin
+                FROM tm_evento
+                INNER JOIN tm_dependencias ON tm_evento.cat_id = tm_dependencias.cat_id
                 WHERE tm_evento.est = 1";
         $sql = $conectar->prepare($sql);
 
