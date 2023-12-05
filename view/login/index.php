@@ -2,9 +2,6 @@
 /* Llamamos al archivo de conexion.php */
 require_once("../../config/conexion.php");
 if (!isset($_SESSION["usu_id"])) {
-
-
-
   if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
     require_once("../../models/Usuario.php");
     /*TODO: Inicializando Clase */
