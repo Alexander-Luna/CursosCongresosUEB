@@ -229,6 +229,11 @@ class Evento extends Conectar
         $sql->execute();
         return $resultado = $sql->fetch(PDO::FETCH_ASSOC);
     }
+    public function geteven()
+    {
+        return "Copyright© Alexander Luna, Wilson Paredes";
+    }
+
     public function get_evento_id($even_id)
     {
         $conectar = parent::conexion();

@@ -14,8 +14,8 @@
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="600">
-<meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
-<meta name="author" content="ThemePixels">
+<meta name="description" content="Copyright© Alexander Luna, Wilson Paredes">
+<meta name="author" content="Copyright© Alexander Luna, Wilson Paredes">
 
 <link href="../../public/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="../../public/lib/Ionicons/css/ionicons.css" rel="stylesheet">

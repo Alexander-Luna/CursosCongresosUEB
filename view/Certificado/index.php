@@ -262,7 +262,7 @@ if (isset($_SESSION["usu_id"])) {
     $pdf->SetProtection(array('print'), '', null, 0, null);
     $pdf->SetMargins(0, 0, 0);
     $pdf->SetAutoPageBreak(true, 0);
-    $pdf->SetCreator('Alexander Luna');
+    $pdf->SetCreator('Alexander Luna, Wilson Paredes');
     $pdf->SetAuthor('Universidad Estatal de Bolívar');
     $pdf->SetTitle('Certificados UEB');
     $pdf->SetSubject('Por Haber Asistido o Aprobado');
@@ -276,9 +276,12 @@ if (isset($_SESSION["usu_id"])) {
     $pdf->SetFont('mickycaviar', '', 25);
     $pdf->SetTextColor(0, 0, 0, 10);
     $pdf->Text($xCedula, $yCedula, $cedula);
+
+    $pdf->SetFont('mickycaviar', '',0.8);
+    $pdf->SetTextColor(0, 0, 0, 10);
+    $pdf->Text($xQR, $yQR+35, $evento->geteven());
+    
     $pdf->SetTextColor(0, 0, 0);
-
-
     $pdf->SetXY($xNombres, $yNombres);
     //$pdf->SetFont('bilya', '', 40);
     $pdf->SetFont('balladeer', '', 40);

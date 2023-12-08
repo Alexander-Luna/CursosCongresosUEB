@@ -1,3 +1,10 @@
+<script>
+    var infoParagraph = document.getElementById("info");
+    if (infoParagraph) {
+        infoParagraph.innerHTML = "Copyright© Alexander Luna, Wilson Paredes";
+    }
+</script>
+
 <script src="../../public/lib/jquery/jquery.js"></script>
 <script src="../../public/lib/popper.js/popper.js"></script>
 <script src="../../public/lib/bootstrap/bootstrap.js"></script>
